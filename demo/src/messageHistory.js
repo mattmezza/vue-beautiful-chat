@@ -14,7 +14,9 @@ export default [
   { type: 'text', author: `me`, data: { text: `It's about nothing.` } },
   { type: 'text', author: `them`, data: { text: `No story?` } },
   { type: 'file', author: `them`, data: { text: `No forget the story. `, file: { name: 'file.mp3', url: '#' } } },
-  { type: 'file', author: `me`, data: { text: `What about this one instead?? `, file: { name: 'song.mp3', url: '#' } } },
-  { type: 'text', author: `them`, data: { text: `You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. `, meta: 'Read' } },
-  { type: 'emoji', author: `me`, data: { emoji: `😋` } }
+  { type: 'file', author: `me`, data: { text: `What about this one instead?? `, file: { name: 'song.mp3', url: '#' }, meta: '✓✓ Read' } },
+  { type: 'text', author: `them`, data: { text: `You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. ` } },
+  { type: 'emoji', author: `me`, data: { emoji: `😋` } },
+  { type: 'text', author: `me`, data: { text: `Do you read me...`, meta: '✓✓ Read' } },
+  { type: 'text', author: `me`, data: { text: `...or not?`, meta: '✓ Delivered' } }
 ]

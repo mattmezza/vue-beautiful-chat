@@ -53,5 +53,8 @@
   },
   "bugs": {
     "url": "https://github.com/mattmezza/vue-beautiful-chat/issues"
+  },
+  "dependencies": {
+    "emoji-js": "^3.4.0"
   }
 }

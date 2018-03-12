@@ -63,7 +63,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .sc-chat-window {
   width: 370px;
   height: calc(100% - 120px);
@@ -86,14 +86,6 @@ export default {
   opacity: 0;
   visibility: hidden;
   bottom: 90px;
-}
-
-.sc-message-list {
-  height: 80%;
-  overflow-y: auto;
-  background-color: white;
-  background-size: 100%;
-  padding: 40px 0px;
 }
 
 .sc-message--me {

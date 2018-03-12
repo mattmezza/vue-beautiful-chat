@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div class="sc-launcher" :class="{opened: isOpen}" @click="toggle">
-      <!-- <MessageCount count={this.props.newMessagesCount} isOpen={isOpen} /> -->
+    <div class="sc-launcher" :class="{opened: isOpen}" @click.prevent="isOpen ? close() : open()">
+      <div v-if="newMessagesCount > 0 && !isOpen" class="sc-new-messsages-count">
+        {{newMessagesCount}}
+      </div>
       <img class="sc-open-icon" src="./assets/close-icon.png" />
       <img class="sc-closed-icon" src="./assets/logo-no-bg.svg" />
     </div>
@@ -10,7 +12,7 @@
       :onUserInputSubmit="onMessageWasSent"
       :agentProfile="agentProfile"
       :isOpen="isOpen"
-      :onClose="toggle"
+      :onClose="close"
       :showEmoji="showEmoji"
       :showFile="showFile"
     />
@@ -21,42 +23,50 @@ import ChatWindow from './ChatWindow.vue'
 
 export default {
   props: {
-    'showEmoji': {
+    showEmoji: {
       type: Boolean,
       default: false
     },
-    'showFile': {
+    isOpen: {
       type: Boolean,
-      default: false
-    },
-    'agentProfile': {
-      type: Object,
       required: true
     },
-    'onMessageWasSent': {
+    open: {
       type: Function,
       required: true
     },
-    'messageList': {
+    close: {
+      type: Function,
+      required: true
+    },
+    showFile: {
+      type: Boolean,
+      default: false
+    },
+    agentProfile: {
+      type: Object,
+      required: true
+    },
+    onMessageWasSent: {
+      type: Function,
+      required: true
+    },
+    messageList: {
       type: Array,
       default: () => []
+    },
+    newMessagesCount: {
+      type: Number,
+      default: () => 0
+    }
+  },
+  data () {
+    return {
+      
     }
   },
   components: {
     ChatWindow
-  },
-  data () {
-    return {
-      isOpen: true
-    }
-  },
-  computed: {
-
-  },
-  methods: {
-    toggle () {
-      this.isOpen = !this.isOpen
-    }
   }
 }
 </script>
@@ -73,6 +83,7 @@ export default {
   border-radius: 50%;
   box-shadow: none;
   transition: box-shadow 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .sc-launcher:before {

@@ -1,109 +1,114 @@
 <template>
-<div id="app">
-  <beautiful-chat :agentProfile="agentProfile" :onMessageWasSent="handleMessageSent" :messageList="messageList" />
-</div>
+  <div>
+    <Header />
+    <beautiful-chat
+      :agentProfile="agentProfile"
+      :onMessageWasSent="onMessageWasSent"
+      :messageList="messageList"
+      :newMessagesCount="newMessagesCount"
+      :isOpen="isChatOpen"
+      :close="closeChat"
+      :open="openChat"
+      :showEmoji="true"
+      :showFile="true" />
+      <p class="text-center"><a href="#" @click.prevent="openChat()">Open the chat window</a></p>
+    <TestArea :onMessage="handleMessageFromTextArea" />
+    <Footer />
+  </div>
 </template>
 
 <script>
 import messageHistory from './messageHistory'
+import Header from './Header.vue'
+import Footer from './Footer.vue'
+import TestArea from './TestArea.vue'
 
 export default {
   name: 'app',
-  components: {},
+  components: {
+    Header, Footer, TestArea
+  },
   data() {
     return {
       agentProfile: {
-        teamName: 'Prova',
+        teamName: 'Vue Beautiful Chat',
         imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
       },
-      messageList: messageHistory
+      messageList: messageHistory,
+      newMessagesCount: 0,
+      isChatOpen: false
     }
   },
   methods: {
-    handleMessageSent (msg) {
-      console.log(msg)
+    handleMessageFromTextArea (text) {
+      if (text.length > 0) {
+        this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
+        this.messageList.push({author: 'them', type: 'text', data: { text }})
+      }
+    },
+    onMessageWasSent (msg) {
+      this.messageList.push(msg)
+    },
+    openChat () {
+      this.isChatOpen = true
+      this.newMessagesCount = 0
+    },
+    closeChat () {
+      this.isChatOpen = false
     }
-  },
+  }
 }
 </script>
 
-<style lang="scss">
+<style>
 body {
+  padding: 0px;
+  margin: 0px;
+}
+
+* {
+  font-family: Avenir Next, Helvetica Neue, Helvetica,sans-serif;
+}
+
+.demo-description {
+  max-width: 500px;
+}
+
+.demo-description img {
+  max-width: 500px;
+}
+
+.demo-test-area {
+  width: 300px;
+  box-sizing: border-box;
+}
+
+.demo-test-area--text {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  resize: none;
+  font-family: Avenir Next, Helvetica Neue, Helvetica,sans-serif;
+  background: #fafbfc;
+  color: #8da2b5;
+  border: 1px solid #dde5ed;
+  font-size: 16px;
+  padding: 16px 15px 14px;
   margin: 0;
-  padding: 50px;
-  cursor: default;
-  box-sizing: border-box;
-}
-pre {
-  color: #595959;
-  background-color: #f3f3f3;
-  border: 1px solid #eee;
-}
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-h1,
-h2 {
-  font-weight: normal;
-  a {
-    font-size: 12px;
-  }
-}
-a {
-  color: inherit;
-}
-button.btn {
+  border-radius: 6px;
   outline: none;
-  background: white;
-  border: 0;
-  padding: 6px 18px;
-  cursor: pointer;
-  border-radius: 3px;
-  background: white;
-  color: #4db3ff;
-  border: 1px solid #4db3ff;
-  min-width: 90px;
-  margin-bottom: 2px;
-  margin-top: 4px;
-  &:hover {
-    color: #20a0ff;
-    border: 1px solid #20a0ff;
-  }
-  &.green {
-    $color: #50C9BA;
-    color: $color;
-    border: 1px solid $color;
-    &:hover {
-      color: mix($color, black, 95%);
-      border: 1px solid mix($color, black, 95%);
-    }
-  }
-  &.red {
-    $color: #F21368;
-    color: $color;
-    border: 1px solid $color;
-    &:hover {
-      color: mix($color, black, 95%);
-      border: 1px solid mix($color, black, 95%);
-    }
-  }
+  height: 150px;
+  margin-bottom: 10px;
 }
-.example-modal-content {
-  height: 100%;
-  box-sizing: border-box;
-  padding: 10px;
-  font-size: 13px;
-  overflow: auto;
+
+.demo-monster-img {
+  width: 400px;
+  display: block;
+  margin: 60px auto;
 }
-.vue-dialog button {
-  letter-spacing: 1px;
-}
-@media (max-width:600px)  {
-  body {
-    padding: 10px;
-  }
+
+.text-center {
+  text-align: center;
 }
 </style>

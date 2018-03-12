@@ -6,7 +6,7 @@
         :onBlur="_handlePickerBlur"
       />
       <button
-        onClick={this._openPicker.bind(this)}
+        @click.prevent="_openPicker"
         class="sc-user-input--emoji-icon-wrapper"
       >
         <svg
@@ -64,7 +64,6 @@ export default {
   },
   methods: {
     _openPicker (e) {
-      e.preventDefault();
       this.isActive = !this.isActive
     },
     _handlePickerBlur () {
@@ -75,5 +74,34 @@ export default {
 </script>
 
 <style scoped>
+.sc-user-input--emoji-icon-wrapper {
+  background: none;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  outline: none;
+}
 
+.sc-user-input--emoji-icon-wrapper:focus {
+  outline: none;
+}
+
+.sc-user-input--emoji-icon {
+  height: 18px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.sc-user-input--emoji-icon path, .sc-user-input--emoji-icon circle {
+  fill: rgba(86, 88, 103, 0.3);
+}
+
+.sc-user-input--emoji-icon-wrapper:focus .sc-user-input--emoji-icon path,
+.sc-user-input--emoji-icon-wrapper:focus .sc-user-input--emoji-icon circle,
+.sc-user-input--emoji-icon.active path,
+.sc-user-input--emoji-icon.active circle,
+.sc-user-input--emoji-icon:hover path,
+.sc-user-input--emoji-icon:hover circle {
+  fill: rgba(86, 88, 103, 1);
+}
 </style>

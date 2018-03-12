@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-message--text">{{data.text}}<p v-if="data.meta" class='sc-message--meta'>{{data.meta}}</p></div>
+  <div class="sc-message--emoji">{{data.emoji}}</div>
 </template>
 
 <script>
@@ -14,5 +14,7 @@ export default {
 </script>
 
 <style scoped>
-
+.sc-message--emoji {
+  font-size: 40px;
+}
 </style>

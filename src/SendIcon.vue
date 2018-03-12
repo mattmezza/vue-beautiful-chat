@@ -1,7 +1,5 @@
 <template>
   <button
-      @focus="onFocus"
-      @blur="onBlur"
       @click.prevent="onClick"
       class="sc-user-input--send-icon-wrapper"
     >
@@ -28,14 +26,6 @@
 <script>
 export default {
   props: {
-    onFocus: {
-      type: Function,
-      required: true
-    },
-    onBlur: {
-      type: Function,
-      required: true
-    },
     onClick: {
       type: Function,
       required: true
@@ -45,5 +35,31 @@ export default {
 </script>
 
 <style scoped>
+.sc-user-input--send-icon-wrapper {
+  background: none;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  outline: none;
+}
 
+.sc-user-input--send-icon-wrapper:focus {
+  outline: none;
+}
+
+.sc-user-input--send-icon {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  align-self: center;
+  outline: none;
+}
+
+.sc-user-input--send-icon path {
+  fill: rgba(86, 88, 103, 0.3);
+}
+
+.sc-user-input--send-icon:hover path {
+  fill: rgba(86, 88, 103, 1);
+}
 </style>
