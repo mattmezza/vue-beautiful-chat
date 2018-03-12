@@ -78,8 +78,8 @@ export default {
         this._submitText(event)
       }
     },
-    _submitText(event) {
-      const text = this.$refs.userInput.textContent;
+    _submitText (event) {
+      const text = this.$refs.userInput.textContent
       const file = this.file
       if (file) {
         if (text && text.length > 0) {
@@ -87,7 +87,7 @@ export default {
             author: 'me',
             type: 'file',
             data: { text, file }
-          });
+          })
           this.file = null
           this.$refs.userInput.innerHTML = ''
         } else {
@@ -95,7 +95,7 @@ export default {
             author: 'me',
             type: 'file',
             data: { file }
-          });
+          })
           this.file = null
         }
       } else {
@@ -104,19 +104,19 @@ export default {
             author: 'me',
             type: 'text',
             data: { text }
-          });
-          this.$refs.userInput.innerHTML = '';
+          })
+          this.$refs.userInput.innerHTML = ''
         }
       }
     },
-    _handleEmojiPicked(emoji) {
+    _handleEmojiPicked (emoji) {
       this.onSubmit({
         author: 'me',
         type: 'emoji',
         data: { emoji }
-      });
+      })
     },
-    _handleFileSubmit(file) {
+    _handleFileSubmit (file) {
       this.file = file
     }
   }

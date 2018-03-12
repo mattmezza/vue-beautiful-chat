@@ -54,7 +54,7 @@ export default {
     window.requestAnimationFrame(() => {
       elem.style.transition = 'opacity 350ms'
       elem.style.opacity = 1
-    });
+    })
     this.$refs.domNode.focus()
     this.emojiConvertor.init_env()
   }
