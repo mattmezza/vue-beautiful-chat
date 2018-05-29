@@ -76,6 +76,7 @@ export default {
     handleKey (event) {
       if (event.keyCode === 13 && !event.shiftKey) {
         this._submitText(event)
+        event.preventDefault();
       }
     },
     _submitText (event) {
