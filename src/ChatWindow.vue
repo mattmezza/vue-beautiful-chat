@@ -8,6 +8,7 @@
     <MessageList
       :messages="messageList"
       :imageUrl="agentProfile.imageUrl"
+      :chatImageUrl="agentProfile.imageUrl"
     />
     <UserInput :showEmoji="showEmoji" :onSubmit="onUserInputSubmit" :showFile="showFile" />
   </div>

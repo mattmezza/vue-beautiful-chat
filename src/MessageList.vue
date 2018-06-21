@@ -1,10 +1,11 @@
 <template>
   <div class="sc-message-list" ref="scrollList">
-    <Message v-for="(message, idx) in messages" :message="message" :key="idx" />
+    <Message v-for="(message, idx) in messages" :message="message" :chatImageUrl="chatImageUrl" :key="idx" />
   </div>
 </template>
 <script>
 import Message from './Message.vue'
+import chatIcon from './assets/chat-icon.svg'
 
 export default {
   components: {
@@ -14,6 +15,10 @@ export default {
     messages: {
       type: Array,
       required: true
+    },
+    chatImageUrl: {
+      type: String,
+      default: chatIcon
     }
   },
   methods: {
