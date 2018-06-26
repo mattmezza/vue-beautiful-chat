@@ -13,7 +13,7 @@
         @blur="setInputActive(false)"
         @keydown="handleKey"
         contentEditable="true"
-        placeholder="Write a reply..."
+        :placeholder="placeholder"
         class="sc-user-input--text"
         ref="userInput"
       >
@@ -58,6 +58,10 @@ export default {
     onSubmit: {
       type: Function,
       required: true
+    },
+    placeholder: {
+      type: String,
+      default: "Write a reply"
     }
   },
   data () {

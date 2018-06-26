@@ -15,6 +15,7 @@
       :onClose="close"
       :showEmoji="showEmoji"
       :showFile="showFile"
+      :placeholder="placeholder"
     />
   </div>
 </template>
@@ -58,6 +59,10 @@ export default {
     newMessagesCount: {
       type: Number,
       default: () => 0
+    },
+    placeholder: {
+      type: String,
+      default: "Write a reply"
     }
   },
   data () {

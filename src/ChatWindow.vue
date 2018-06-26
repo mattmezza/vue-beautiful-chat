@@ -8,8 +8,9 @@
     <MessageList
       :messages="messageList"
       :imageUrl="agentProfile.imageUrl"
+      :chatImageUrl="agentProfile.imageUrl"
     />
-    <UserInput :showEmoji="showEmoji" :onSubmit="onUserInputSubmit" :showFile="showFile" />
+    <UserInput :showEmoji="showEmoji" :onSubmit="onUserInputSubmit" :showFile="showFile" :placeholder="placeholder"/>
   </div>
 </template>
 
@@ -52,6 +53,10 @@ export default {
     'isOpen': {
       type: Boolean,
       default: () => false
+    },
+    placeholder: {
+      type: String,
+      default: "Write a reply"
     }
   },
   data () {

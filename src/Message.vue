@@ -2,7 +2,7 @@
   <div class="sc-message">
     <div class="sc-message--content" :class="{sent: message.author === 'me', received: message.author !== 'me'}">
       <div class="sc-message--avatar" :style="{
-        backgroundImage: `url(${this.chatIcon})`
+        backgroundImage: `url(${chatImageUrl})`
       }"></div><TextMessage v-if="message.type === 'text'" :data="message.data" />
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
       <FileMessage v-else-if="message.type === 'file'" :data="message.data" />
@@ -19,7 +19,7 @@ import chatIcon from './assets/chat-icon.svg'
 export default {
   data () {
     return {
-      chatIcon
+      
     }
   },
   components: {
@@ -31,6 +31,10 @@ export default {
     message: {
       type: Object,
       required: true
+    },
+    chatImageUrl: {
+      type: String,
+      default: chatIcon
     }
   }
 }
