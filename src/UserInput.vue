@@ -61,7 +61,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: "Write a reply"
+      default: 'Write a reply'
     }
   },
   data () {
@@ -80,7 +80,7 @@ export default {
     handleKey (event) {
       if (event.keyCode === 13 && !event.shiftKey) {
         this._submitText(event)
-        event.preventDefault();
+        event.preventDefault()
       }
     },
     _submitText (event) {

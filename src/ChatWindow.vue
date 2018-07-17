@@ -9,6 +9,7 @@
       :messages="messageList"
       :imageUrl="agentProfile.imageUrl"
       :chatImageUrl="agentProfile.imageUrl"
+      :showTypingIndicator="showTypingIndicator"
     />
     <UserInput :showEmoji="showEmoji" :onSubmit="onUserInputSubmit" :showFile="showFile" :placeholder="placeholder"/>
   </div>
@@ -56,7 +57,11 @@ export default {
     },
     placeholder: {
       type: String,
-      default: "Write a reply"
+      default: 'Write a reply'
+    },
+    showTypingIndicator: {
+      type: Boolean,
+      default: () => false
     }
   },
   data () {
