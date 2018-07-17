@@ -6,6 +6,7 @@
       }"></div><TextMessage v-if="message.type === 'text'" :data="message.data" />
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
       <FileMessage v-else-if="message.type === 'file'" :data="message.data" />
+      <TypingMessage v-else-if="message.type === 'typing'" />
     </div>
   </div>
 </template>
@@ -14,18 +15,20 @@
 import TextMessage from './TextMessage.vue'
 import FileMessage from './FileMessage.vue'
 import EmojiMessage from './EmojiMessage.vue'
+import TypingMessage from './TypingMessage.vue'
 import chatIcon from './assets/chat-icon.svg'
 
 export default {
   data () {
     return {
-      
+
     }
   },
   components: {
     TextMessage,
     FileMessage,
-    EmojiMessage
+    EmojiMessage,
+    TypingMessage
   },
   props: {
     message: {

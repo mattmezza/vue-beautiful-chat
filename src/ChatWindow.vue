@@ -6,7 +6,7 @@
       :onClose="onClose"
     />
     <MessageList
-      :messages="messageList"
+      :messages="messages"
       :imageUrl="agentProfile.imageUrl"
       :chatImageUrl="agentProfile.imageUrl"
     />
@@ -56,12 +56,28 @@ export default {
     },
     placeholder: {
       type: String,
-      default: "Write a reply"
+      default: 'Write a reply'
+    },
+    showTypingIndicator: {
+      type: Boolean,
+      default: () => false
     }
   },
   data () {
     return {
 
+    }
+  },
+  computed: {
+    messages () {
+      let messages = this.messageList
+      if (this.showTypingIndicator) {
+        messages.push({
+          author: 'them',
+          type: 'typing'
+        })
+      }
+      return messages
     }
   },
   methods: {

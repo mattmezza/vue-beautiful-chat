@@ -16,6 +16,7 @@
       :showEmoji="showEmoji"
       :showFile="showFile"
       :placeholder="placeholder"
+      :showTypingIndicator="showTypingIndicator"
     />
   </div>
 </template>
@@ -62,7 +63,11 @@ export default {
     },
     placeholder: {
       type: String,
-      default: "Write a reply"
+      default: 'Write a reply'
+    },
+    showTypingIndicator: {
+      type: Boolean,
+      default: () => true
     }
   },
   data () {
