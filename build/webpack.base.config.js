@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 //  "build:client": "cross-env NODE_ENV=production webpack --config ./build/webpack.client.config.js --progress --hide-modules",
 
@@ -22,13 +23,6 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: [
-          'url-loader?limit=10000',
-          'img-loader'
-        ]
       }
     ]
   },
@@ -39,6 +33,9 @@ module.exports = {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-    new UglifyJSPlugin()
+    new UglifyJSPlugin(),
+    new CopyWebpackPlugin([
+      { from: 'public/*', to: '', flatten: true },
+    ])
   ]
 }

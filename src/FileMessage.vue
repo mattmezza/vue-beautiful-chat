@@ -2,7 +2,7 @@
   <div class='sc-message--file' :style="messageColors">
     <div class='sc-message--file-icon'>
       <a :href="data.file.url || '#'" target='_blank'>
-        <img src="./assets/file.svg" alt='generic file icon' height="60" />
+        <img :src="baseUrl + 'file.svg'" alt='generic file icon' height="60" />
       </a>
     </div>
     <div class='sc-message--file-name' :style="messageColors">
@@ -15,6 +15,10 @@
 <script>
 export default {
   props: {
+    baseUrl: {
+      type: String,
+      required: true,
+    },
     data: {
       type: Object,
       required: true

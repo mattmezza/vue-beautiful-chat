@@ -1,9 +1,9 @@
 <template>
   <div>
     <div v-if="file" class='file-container' :style="{backgroundColor: colors.userInput.text, color: colors.userInput.bg}">
-      <span class='icon-file-message'><img src="./assets/file.svg" alt='genericFileIcon' height="15" /></span>
+      <span class='icon-file-message'><img :src="baseUrl + 'file.svg'" alt='genericFileIcon' height="15" /></span>
       {{file.name}}
-      <span class='delete-file-message' @click="cancelFile()" ><img src="./assets/close.svg" alt='close icon' height="10" title='Remove the file' /></span>
+      <span class='delete-file-message' @click="cancelFile()" ><img :src="baseUrl + 'close.svg'" alt='close icon' height="10" title='Remove the file' /></span>
     </div>
     <form class="sc-user-input" :class="{active: inputActive}" :style="{background: colors.userInput.bg}">
       <div
@@ -48,6 +48,10 @@ export default {
     SendIcon
   },
   props: {
+    baseUrl: {
+      type: String,
+      required: true,
+    },
     showEmoji: {
       type: Boolean,
       default: () => false

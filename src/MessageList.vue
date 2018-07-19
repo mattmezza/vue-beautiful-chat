@@ -1,25 +1,30 @@
 <template>
   <div class="sc-message-list" ref="scrollList" :style="{backgroundColor: colors.messageList.bg}">
-    <Message v-for="(message, idx) in messages" :message="message" :chatImageUrl="chatImageUrl" :key="idx" :colors="colors" />
-    <Message v-show="showTypingIndicator" :message="{author: 'them', type: 'typing'}" :chatImageUrl="chatImageUrl" :colors="colors" />
+    <Message v-for="(message, idx) in messages" :message="message" :chatImageUrl="chatImageUrl" :key="idx" :baseUrl="baseUrl" :colors="colors" />
+    <Message v-show="showTypingIndicator" :message="{author: 'them', type: 'typing'}" :chatImageUrl="chatImageUrl" :colors="colors" :key="idx" />
   </div>
 </template>
 <script>
 import Message from './Message.vue'
-import chatIcon from './assets/chat-icon.svg'
 
 export default {
   components: {
     Message
   },
   props: {
+    baseUrl: {
+      type: String,
+      required: true,
+    },
     messages: {
       type: Array,
       required: true
     },
     chatImageUrl: {
       type: String,
-      default: chatIcon
+      default() {
+        return this.baseUrl + 'chat-icon.svg'
+      }
     },
     showTypingIndicator: {
       type: Boolean,
