@@ -34,11 +34,12 @@ export default {
     }
   },
   methods: {
-    _handleSubmit () {
+    _handleSubmit() {
       this.onMessage(this.$refs.textArea.value)
       this.$refs.textArea.value = ''
+      this.onTyping('')
     },
-    _handleTyping () {
+    _handleTyping() {
       this.onTyping(this.$refs.textArea.value)
     }
   }
@@ -60,7 +61,7 @@ export default {
   color: #516996;
   font-weight: 600;
   font-size: 28px;
- }
+}
 
 .demo-test-area--title-sub {
   color: #4e8cff;
@@ -81,9 +82,8 @@ export default {
   color: #516996;
 }
 
-
 .demo-test-area--button {
-  font-family: Avenir Next, Helvetica Neue, Helvetica,sans-serif;
+  font-family: Avenir Next, Helvetica Neue, Helvetica, sans-serif;
   font-weight: 400;
   margin-top: 20px;
   user-select: none;

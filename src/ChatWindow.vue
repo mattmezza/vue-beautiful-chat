@@ -27,31 +27,31 @@ export default {
     UserInput
   },
   props: {
-    'showEmoji': {
+    showEmoji: {
       type: Boolean,
       default: false
     },
-    'showFile': {
+    showFile: {
       type: Boolean,
       default: false
     },
-    'agentProfile': {
+    agentProfile: {
       type: Object,
       required: true
     },
-    'onUserInputSubmit': {
+    onUserInputSubmit: {
       type: Function,
       required: true
     },
-    'onClose': {
+    onClose: {
       type: Function,
       required: true
     },
-    'messageList': {
+    messageList: {
       type: Array,
       default: () => []
     },
-    'isOpen': {
+    isOpen: {
       type: Boolean,
       default: () => false
     },
@@ -64,25 +64,17 @@ export default {
       default: () => false
     }
   },
-  data () {
-    return {
-
-    }
+  data() {
+    return {}
   },
   computed: {
-    messages () {
+    messages() {
       let messages = this.messageList
-      if (this.showTypingIndicator) {
-        messages.push({
-          author: 'them',
-          type: 'typing'
-        })
-      }
+
       return messages
     }
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 <style scoped>
@@ -101,7 +93,7 @@ export default {
   justify-content: space-between;
   transition: 0.3s ease-in-out;
   border-radius: 10px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .sc-chat-window.closed {

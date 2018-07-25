@@ -1,7 +1,7 @@
 <template>
   <div class="sc-message-list" ref="scrollList">
     <Message v-for="(message, idx) in messages" :message="message" :chatImageUrl="chatImageUrl" :key="idx" />
-    <Message v-if="showTypingIndicator" :message="{author: 'them', type: 'typing'}" :chatImageUrl="chatImageUrl" :key="idx" />
+    <Message v-show="showTypingIndicator" :message="{author: 'them', type: 'typing'}" :chatImageUrl="chatImageUrl" :key="idx" />
   </div>
 </template>
 <script>
