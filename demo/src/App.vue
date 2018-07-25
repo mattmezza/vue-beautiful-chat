@@ -10,9 +10,10 @@
       :close="closeChat"
       :open="openChat"
       :showEmoji="true"
-      :showFile="true" />
+      :showFile="true"
+      :showTypingIndicator="showTypingIndicator" />
       <p class="text-center"><a href="#" @click.prevent="openChat()">Open the chat window</a></p>
-    <TestArea :onMessage="handleMessageFromTextArea" />
+    <TestArea :onMessage="handleMessageFromTextArea" :onTyping="handleTyping" />
     <Footer />
   </div>
 </template>
@@ -36,7 +37,8 @@ export default {
       },
       messageList: messageHistory,
       newMessagesCount: 0,
-      isChatOpen: false
+      isChatOpen: false,
+      showTypingIndicator: false
     }
   },
   methods: {
@@ -45,6 +47,9 @@ export default {
         this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
         this.messageList.push({author: 'them', type: 'text', data: { text }})
       }
+    },
+    handleTyping (text) {
+      this.showTypingIndicator = text.length > 0;
     },
     onMessageWasSent (msg) {
       this.messageList.push(msg)

@@ -4,7 +4,7 @@
       <div class="demo-test-area--title-main">vue-beautiful-chat demo</div>
       <div class="demo-test-area--title-sub">by <a href="https://matteo.merola.co">mattmezza</a></div>
     </div>
-    <form class="demo-test-area" @submit.prevent="_handleSubmit">
+    <form class="demo-test-area" @submit.prevent="_handleSubmit" @keyup="_handleTyping">
       <div class="demo-test-area--preamble">Test the chat window by sending a message:</div>
       <textarea ref="textArea" class="demo-test-area--text" placeholder="Write a test message...." />
       <button class="demo-test-area--button"> Send Message! </button>
@@ -27,12 +27,19 @@ export default {
     onMessage: {
       type: Function,
       required: true
+    },
+    onTyping: {
+      type: Function,
+      required: true
     }
   },
   methods: {
     _handleSubmit () {
       this.onMessage(this.$refs.textArea.value)
       this.$refs.textArea.value = ''
+    },
+    _handleTyping () {
+      this.onTyping(this.$refs.textArea.value)
     }
   }
 }
