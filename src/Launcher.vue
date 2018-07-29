@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sc-launcher" :class="{opened: isOpen}" @click.prevent="isOpen ? close() : open()">
+    <div class="sc-launcher" :class="{opened: isOpen}" @click.prevent="isOpen ? close() : open()" :style="{backgroundColor: colors.launcher.bg}">
       <div v-if="newMessagesCount > 0 && !isOpen" class="sc-new-messsages-count">
         {{newMessagesCount}}
       </div>
@@ -17,6 +17,7 @@
       :showFile="showFile"
       :placeholder="placeholder"
       :showTypingIndicator="showTypingIndicator"
+      :colors="colors"
     />
   </div>
 </template>
@@ -68,6 +69,49 @@ export default {
     showTypingIndicator: {
       type: Boolean,
       default: () => true
+    },
+    colors: {
+      type: Object,
+      required: false,
+      validator: c => 
+        'header' in c
+        && 'bg' in c.header && 'text' in c.header
+        && 'launcher' in c
+        && 'bg' in c.launcher
+        && 'messageList' in c
+        && 'bg' in c.messageList
+        && 'sentMessage' in c
+        && 'bg' in c.sentMessage && 'text' in c.sentMessage
+        && 'receivedMessage' in c
+        && 'bg' in c.receivedMessage && 'text' in c.receivedMessage
+        && 'userInput' in c
+        && 'bg' in c.userInput && 'text' in c.userInput,
+      default: function () {
+        return {
+          header: {
+            bg: '#4e8cff',
+            text: '#ffffff'
+          },
+          launcher: {
+            bg: '#4e8cff'
+          },
+          messageList: {
+            bg: '#ffffff'
+          },
+          sentMessage: {
+            bg: '#4e8cff',
+            text: '#ffffff'
+          },
+          receivedMessage: {
+            bg: '#f4f7f9',
+            text: '#ffffff'
+          },
+          userInput: {
+            bg: '#f4f7f9',
+            text: '#565867'
+          }
+        }
+      }
     }
   },
   data () {
@@ -84,7 +128,6 @@ export default {
 .sc-launcher {
   width: 60px;
   height: 60px;
-  background-color: #4e8cff;
   background-position: center;
   background-repeat: no-repeat;
   position: fixed;

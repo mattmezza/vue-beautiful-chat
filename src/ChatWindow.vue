@@ -4,14 +4,21 @@
       :teamName="agentProfile.teamName"
       :imageUrl="agentProfile.imageUrl"
       :onClose="onClose"
+      :colors="colors"
     />
     <MessageList
       :messages="messages"
       :imageUrl="agentProfile.imageUrl"
       :chatImageUrl="agentProfile.imageUrl"
       :showTypingIndicator="showTypingIndicator"
+      :colors="colors"
     />
-    <UserInput :showEmoji="showEmoji" :onSubmit="onUserInputSubmit" :showFile="showFile" :placeholder="placeholder"/>
+    <UserInput
+      :showEmoji="showEmoji"
+      :onSubmit="onUserInputSubmit"
+      :showFile="showFile"
+      :placeholder="placeholder"
+      :colors="colors" />
   </div>
 </template>
 
@@ -62,6 +69,10 @@ export default {
     showTypingIndicator: {
       type: Boolean,
       default: () => false
+    },
+    colors: {
+      type: Object,
+      required: true
     }
   },
   data() {

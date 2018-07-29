@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div v-if="file" class='file-container' >
+    <div v-if="file" class='file-container' :style="{backgroundColor: colors.userInput.text, color: colors.userInput.bg}">
       <span class='icon-file-message'><img src="./assets/file.svg" alt='genericFileIcon' height="15" /></span>
       {{file.name}}
       <span class='delete-file-message' @click="cancelFile()" ><img src="./assets/close.svg" alt='close icon' height="10" title='Remove the file' /></span>
     </div>
-    <form class="sc-user-input" :class="{active: inputActive}">
+    <form class="sc-user-input" :class="{active: inputActive}" :style="{background: colors.userInput.bg}">
       <div
         role="button"
         tabIndex="0"
@@ -16,6 +16,7 @@
         :placeholder="placeholder"
         class="sc-user-input--text"
         ref="userInput"
+        :style="{color: colors.userInput.text}"
       >
       </div>
       <div class="sc-user-input--buttons">
@@ -62,6 +63,10 @@ export default {
     placeholder: {
       type: String,
       default: 'Write a reply'
+    },
+    colors: {
+      type: Object,
+      required: true
     }
   },
   data () {

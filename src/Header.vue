@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-header">
+  <div class="sc-header" :style="{background: colors.header.bg, color: colors.header.text}">
     <img class="sc-header--img" :src="imageUrl" alt="" />
     <div class="sc-header--team-name"> {{teamName}} </div>
     <div class="sc-header--close-button" @click="onClose">
@@ -20,17 +20,19 @@ export default {
     onClose: {
       type: Function,
       required: true
+    },
+    colors: {
+      type: Object,
+      required: true
     }
   }
 }
 </script>
 <style scoped>
 .sc-header {
-  background: #4e8cff;
   min-height: 75px;
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
-  color: white;
   padding: 10px;
   box-shadow: 0 1px 4px rgba(0,0,0,.2);
   position: relative;
@@ -54,7 +56,7 @@ export default {
 }
 
 .sc-header--team-name:hover {
-  background: #4882ed;
+  box-shadow: 0px 2px 5px rgba(0.2, 0.2, 0.5, .1);
 }
 
 .sc-header--close-button {
@@ -68,7 +70,7 @@ export default {
 }
 
 .sc-header--close-button:hover {
-  background: #4882ed;
+  box-shadow: 0px 2px 5px rgba(0.2, 0.2, 0.5, .1);
 }
 
 .sc-header--close-button img {

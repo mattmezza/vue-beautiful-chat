@@ -1,14 +1,14 @@
 <template>
-  <div class='sc-message--file'>
+  <div class='sc-message--file' :style="messageColors">
     <div class='sc-message--file-icon'>
       <a :href="data.file.url || '#'" target='_blank'>
         <img src="./assets/file.svg" alt='generic file icon' height="60" />
       </a>
     </div>
-    <div class='sc-message--file-name'>
+    <div class='sc-message--file-name' :style="messageColors">
       <a :href="data.file.url ? data.file.url : '#'" target='_blank'>{{data.file.name || ''}}</a>
     </div>
-    <div class="sc-message--file-text">{{data.text}}<p v-if="data.meta" class='sc-message--meta'>{{data.meta}}</p></div>
+    <div class="sc-message--file-text" :style="messageColors">{{data.text}}<p v-if="data.meta" class='sc-message--meta' :style="messageColors">{{data.meta}}</p></div>
   </div>
 </template>
 
@@ -16,6 +16,10 @@
 export default {
   props: {
     data: {
+      type: Object,
+      required: true
+    },
+    messageColors: {
       type: Object,
       required: true
     }
@@ -26,7 +30,6 @@ export default {
 <style scoped>
 .sc-message--file {
   border-radius: 6px;
-  background-color: #4e8cff;
   font-weight: 300;
   font-size: 14px;
   line-height: 1.4;
@@ -35,8 +38,6 @@ export default {
 }
 
 .sc-message--content.sent .sc-message--file {
-  color: white;
-  background-color: #4e8cff;
   word-wrap: break-word;
 }
 

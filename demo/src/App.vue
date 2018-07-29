@@ -11,8 +11,14 @@
       :open="openChat"
       :showEmoji="true"
       :showFile="true"
-      :showTypingIndicator="showTypingIndicator" />
+      :showTypingIndicator="showTypingIndicator"
+      :colors="colors" />
       <p class="text-center"><a href="#" @click.prevent="openChat()">Open the chat window</a></p>
+      <p class="text-center">
+        <a href="#" @click.prevent="setColor('red')">Red</a>
+        <a href="#" @click.prevent="setColor('green')">Green</a>
+        <a href="#" @click.prevent="setColor('blue')">Blue</a>
+      </p>
     <TestArea :onMessage="handleMessageFromTextArea" :onTyping="handleTyping" />
     <Footer />
   </div>
@@ -38,8 +44,109 @@ export default {
       messageList: messageHistory,
       newMessagesCount: 0,
       isChatOpen: false,
-      showTypingIndicator: false
+      showTypingIndicator: false,
+      colors: {
+        header: {
+          bg: '#4e8cff',
+          text: '#ffffff'
+        },
+        launcher: {
+          bg: '#4e8cff'
+        },
+        messageList: {
+          bg: '#ffffff'
+        },
+        sentMessage: {
+          bg: '#4e8cff',
+          text: '#ffffff'
+        },
+        receivedMessage: {
+          bg: '#f4f7f9',
+          text: '#ffffff'
+        },
+        userInput: {
+          bg: '#f4f7f9',
+          text: '#565867'
+        }
+      },
+      availableColors: {
+        red: {
+          header: {
+            bg: '#ff0000',
+            text: '#fff'
+          },
+          launcher: {
+            bg: '#ff0000'
+          },
+          messageList: {
+            bg: '#fff'
+          },
+          sentMessage: {
+            bg: '#ff0000',
+            text: '#fff'
+          },
+          receivedMessage: {
+            bg: '#f4f7f9',
+            text: '#fff'
+          },
+          userInput: {
+            bg: '#f4f7f9',
+            text: '#565867'
+          }
+        },
+        green: {
+          header: {
+            bg: '#00ff00',
+            text: '#fff'
+          },
+          launcher: {
+            bg: '#00ff00'
+          },
+          messageList: {
+            bg: '#fff'
+          },
+          sentMessage: {
+            bg: '#00ff00',
+            text: '#fff'
+          },
+          receivedMessage: {
+            bg: '#f4f7f9',
+            text: '#ffffff'
+          },
+          userInput: {
+            bg: '#f4f7f9',
+            text: '#565867'
+          }
+        },
+        blue: {
+          header: {
+            bg: '#4e8cff',
+            text: '#ffffff'
+          },
+          launcher: {
+            bg: '#4e8cff'
+          },
+          messageList: {
+            bg: '#ffffff'
+          },
+          sentMessage: {
+            bg: '#4e8cff',
+            text: '#ffffff'
+          },
+          receivedMessage: {
+            bg: '#f4f7f9',
+            text: '#ffffff'
+          },
+          userInput: {
+            bg: '#f4f7f9',
+            text: '#565867'
+          }
+        }
+      }
     }
+  },
+  mounted() {
+    this.setColor('blue')
   },
   methods: {
     handleMessageFromTextArea (text) {
@@ -60,6 +167,9 @@ export default {
     },
     closeChat () {
       this.isChatOpen = false
+    },
+    setColor (color) {
+      this.colors = this.availableColors[color]
     }
   }
 }

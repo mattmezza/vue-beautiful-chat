@@ -3,10 +3,11 @@
     <div class="sc-message--content" :class="{sent: message.author === 'me', received: message.author !== 'me'}">
       <div class="sc-message--avatar" :style="{
         backgroundImage: `url(${chatImageUrl})`
-      }"></div><TextMessage v-if="message.type === 'text'" :data="message.data" />
+      }"></div>
+      <TextMessage v-if="message.type === 'text'" :data="message.data" :messageColors="determineMessageColors()" />
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
-      <FileMessage v-else-if="message.type === 'file'" :data="message.data" />
-      <TypingMessage v-else-if="message.type === 'typing'" />
+      <FileMessage v-else-if="message.type === 'file'" :data="message.data" :messageColors="determineMessageColors()" />
+      <TypingMessage v-else-if="message.type === 'typing'" :messageColors="determineMessageColors()" />
     </div>
   </div>
 </template>
@@ -38,6 +39,27 @@ export default {
     chatImageUrl: {
       type: String,
       default: chatIcon
+    },
+    colors: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    sentColorsStyle() {
+      return {
+        color: this.colors.sentMessage.text,
+        backgroundColor: this.colors.sentMessage.bg
+      }
+    },
+    receivedColorsStyle() {
+      return {
+        color: this.colors.receivedMessage.text,
+        backgroundColor: this.colors.receivedMessage.bg
+      }
+    },
+    determineMessageColors() {
+      return this.message.author === 'me' ? this.sentColorsStyle() : this.receivedColorsStyle()
     }
   }
 }
