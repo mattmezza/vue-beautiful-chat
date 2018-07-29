@@ -111,6 +111,8 @@ Launcher props:
 | messageList | [message] | An array of message objects to be rendered as a conversation. |
 | showEmoji | Boolean | A bool indicating whether or not to show the emoji button
 | showFile | Boolean | A bool indicating whether or not to show the file chooser button
+| showTypingIndicator | Boolean | A bool indicating whether or not to show the `typing` indicator
+| colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
 
 
 ### Message Objects
@@ -167,6 +169,50 @@ Message objects are rendered differently depending on their type. Currently, onl
 - discuss the changes with the maintainer
 - boom! your changes are added to the main repo
 - a release is created almost once per week 😉
+
+</p>
+</details>
+
+<details><summary>How can I customize the colors?</summary>
+<p>
+
+- When initializing the component, pass an object specifying the colors used:
+
+```javascript
+
+let redColors = {
+  header: {
+    bg: '#D32F2F',
+    text: '#fff'
+  },
+  launcher: {
+    bg: '#D32F2F'
+  },
+  messageList: {
+    bg: '#fff'
+  },
+  sentMessage: {
+    bg: '#F44336',
+    text: '#fff'
+  },
+  receivedMessage: {
+    bg: '#eaeaea',
+    text: '#222222'
+  },
+  userInput: {
+    bg: '#fff',
+    text: '#212121'
+  }
+}
+
+<beautiful-chat
+      ...
+      :colors="redColors" />
+```
+
+This is the red variant. Please check [this file](https://github.com/mattmezza/vue-beautiful-chat/tree/master/demo/src/colors.js) for the list of variants shown in the demo page online.
+
+Please note that you need to pass an Object containing each one of the color properties otherwise the validation will fail.
 
 </p>
 </details>
