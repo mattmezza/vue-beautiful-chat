@@ -1,6 +1,6 @@
 {
   "name": "vue-beautiful-chat",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A simple and beautiful Vue chat component backend agnostic.",
   "main": "./src/index.js",
   "repository": "https://github.com/mattmezza/vue-beautiful-chat.git",
