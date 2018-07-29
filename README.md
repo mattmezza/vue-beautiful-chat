@@ -11,6 +11,8 @@
   <img alt="" src="https://img.shields.io/github/stars/mattmezza/vue-beautiful-chat.svg?style=social&label=Star" />
 </a>
 
+Go to [FAQ](#faq) ⬇️
+
 ![gif](https://media.giphy.com/media/3ohs4wE4DqXw84xAMo/giphy.gif)
 
 ## Features
@@ -142,3 +144,29 @@ Message objects are rendered differently depending on their type. Currently, onl
 }
 
 ```
+### FAQ
+
+<details><summary>How to get the demo working?</summary>
+<p>
+
+- `cd vue-beautiful-chat`
+- `yarn watch` # this starts the compiler so everytime you edit files they get compiled
+- `cd demo`
+- `yarn dev` # this starts a web server on localhost:8080 so the demo shows up - it also watches for the demo files changes
+
+</p>
+</details>
+
+<details><summary>How can I add a feature or fix a bug?</summary>
+<p>
+
+- Fork the repository
+- Fix/add your changes
+- `yarn build` on the root to have the library compiled with your latest changes
+- create a pull request describing what you did
+- discuss the changes with the maintainer
+- boom! your changes are added to the main repo
+- a release is created almost once per week 😉
+
+</p>
+</details>
