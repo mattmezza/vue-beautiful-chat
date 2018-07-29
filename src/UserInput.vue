@@ -22,13 +22,13 @@
       <div class="sc-user-input--buttons">
         <div class="sc-user-input--button"></div>
         <div v-if="showEmoji" class="sc-user-input--button">
-          <EmojiIcon :onEmojiPicked="_handleEmojiPicked" />
+          <EmojiIcon :onEmojiPicked="_handleEmojiPicked" :color="colors.userInput.text" />
         </div>
         <div v-if="showFile" class="sc-user-input--button">
-          <FileIcons :onChange="_handleFileSubmit" />
+          <FileIcons :onChange="_handleFileSubmit" :color="colors.userInput.text" />
         </div>
         <div class="sc-user-input--button">
-          <SendIcon :onClick="_submitText" />
+          <SendIcon :onClick="_submitText" :color="colors.userInput.text" />
         </div>
       </div>
     </form>
@@ -171,7 +171,8 @@ export default {
 .sc-user-input--text:empty:before {
   content: attr(placeholder);
   display: block; /* For Firefox */
-  color: rgba(86, 88, 103, 0.3);
+  /* color: rgba(86, 88, 103, 0.3); */
+  filter: contrast(15%);
   outline: none;
 }
 

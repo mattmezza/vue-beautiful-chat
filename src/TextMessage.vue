@@ -1,9 +1,5 @@
 <template>
-  <div class="sc-message--text" :style="messageColors">
-    {{data.text}}
-    <p v-if="data.meta" class='sc-message--meta' :style="{color: messageColors.color}">
-      {{data.meta}}
-    </p>
+  <div class="sc-message--text" :style="messageColors">{{data.text}}<p v-if="data.meta" class='sc-message--meta' :style="{color: messageColors.color}">{{data.meta}}</p>
   </div>
 </template>
 

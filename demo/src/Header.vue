@@ -1,8 +1,8 @@
 <template>
-  <div class="demo-header">
+  <div class="demo-header" :style="{color: linkColor}">
     <div class="demo-header--title">vue-beautiful-chat</div>
     <div class="demo-header--links">
-      <a href="https://github.com/mattmezza/vue-beautiful-chat">GitHub</a><iframe
+      <a href="https://github.com/mattmezza/vue-beautiful-chat" :style="{color: linkColor}">GitHub</a><iframe
         src="https://ghbtns.com/github-btn.html?user=mattmezza&repo=vue-beautiful-chat&type=star&count=true"
         frameborder="0"
         scrolling="0"
@@ -14,7 +14,21 @@
 
 <script>
 export default {
-  
+  props: {
+    colors: {
+      type: Object,
+      required: true
+    },
+    chosenColor: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    linkColor() {
+      return this.chosenColor === 'dark' ? this.colors.sentMessage.text : this.colors.launcher.bg
+    }
+  }
 }
 </script>
 
@@ -49,6 +63,6 @@ export default {
 }
 
 .demo-header--links a:hover {
-  color: #4983ee;
+  filter: contrast(15%);
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Header />
+  <div :style="{background: backgroundColor}">
+    <Header :colors="colors" :chosenColor="chosenColor" />
     <beautiful-chat
       :agentProfile="agentProfile"
       :onMessageWasSent="onMessageWasSent"
@@ -13,14 +13,18 @@
       :showFile="true"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors" />
-      <p class="text-center"><a href="#" @click.prevent="openChat()">Open the chat window</a></p>
-      <p class="text-center">
-        <a href="#" @click.prevent="setColor('red')">Red</a>
-        <a href="#" @click.prevent="setColor('green')">Green</a>
-        <a href="#" @click.prevent="setColor('blue')">Blue</a>
+      <p class="text-center toggle">
+        <a v-if="!isChatOpen" :style="{color: linkColor}" href="#" @click.prevent="openChat()">Open the chat window</a>
+        <a v-else :style="{color: linkColor}" href="#" @click.prevent="closeChat()">Close the chat window</a>
       </p>
-    <TestArea :onMessage="handleMessageFromTextArea" :onTyping="handleTyping" />
-    <Footer />
+      <p class="text-center colors">
+        <a :style="{background: availableColors.blue.launcher.bg}" href="#" @click.prevent="setColor('blue')">Blue</a>
+        <a :style="{background: availableColors.red.launcher.bg}" href="#" @click.prevent="setColor('red')">Red</a>
+        <a :style="{background: availableColors.green.launcher.bg}" href="#" @click.prevent="setColor('green')">Green</a>
+        <a :style="{background: availableColors.dark.launcher.bg}" href="#" @click.prevent="setColor('dark')">Dark</a>
+      </p>
+    <TestArea :onMessage="handleMessageFromTextArea" :onTyping="handleTyping" :colors="colors" :chosenColor="chosenColor" />
+    <Footer :colors="colors" :chosenColor="chosenColor" />
   </div>
 </template>
 
@@ -29,6 +33,7 @@ import messageHistory from './messageHistory'
 import Header from './Header.vue'
 import Footer from './Footer.vue'
 import TestArea from './TestArea.vue'
+import availableColors from './colors'
 
 export default {
   name: 'app',
@@ -45,107 +50,12 @@ export default {
       newMessagesCount: 0,
       isChatOpen: false,
       showTypingIndicator: false,
-      colors: {
-        header: {
-          bg: '#4e8cff',
-          text: '#ffffff'
-        },
-        launcher: {
-          bg: '#4e8cff'
-        },
-        messageList: {
-          bg: '#ffffff'
-        },
-        sentMessage: {
-          bg: '#4e8cff',
-          text: '#ffffff'
-        },
-        receivedMessage: {
-          bg: '#f4f7f9',
-          text: '#ffffff'
-        },
-        userInput: {
-          bg: '#f4f7f9',
-          text: '#565867'
-        }
-      },
-      availableColors: {
-        red: {
-          header: {
-            bg: '#ff0000',
-            text: '#fff'
-          },
-          launcher: {
-            bg: '#ff0000'
-          },
-          messageList: {
-            bg: '#fff'
-          },
-          sentMessage: {
-            bg: '#ff0000',
-            text: '#fff'
-          },
-          receivedMessage: {
-            bg: '#f4f7f9',
-            text: '#fff'
-          },
-          userInput: {
-            bg: '#f4f7f9',
-            text: '#565867'
-          }
-        },
-        green: {
-          header: {
-            bg: '#00ff00',
-            text: '#fff'
-          },
-          launcher: {
-            bg: '#00ff00'
-          },
-          messageList: {
-            bg: '#fff'
-          },
-          sentMessage: {
-            bg: '#00ff00',
-            text: '#fff'
-          },
-          receivedMessage: {
-            bg: '#f4f7f9',
-            text: '#ffffff'
-          },
-          userInput: {
-            bg: '#f4f7f9',
-            text: '#565867'
-          }
-        },
-        blue: {
-          header: {
-            bg: '#4e8cff',
-            text: '#ffffff'
-          },
-          launcher: {
-            bg: '#4e8cff'
-          },
-          messageList: {
-            bg: '#ffffff'
-          },
-          sentMessage: {
-            bg: '#4e8cff',
-            text: '#ffffff'
-          },
-          receivedMessage: {
-            bg: '#f4f7f9',
-            text: '#ffffff'
-          },
-          userInput: {
-            bg: '#f4f7f9',
-            text: '#565867'
-          }
-        }
-      }
+      colors: null,
+      availableColors,
+      chosenColor: null
     }
   },
-  mounted() {
+  created() {
     this.setColor('blue')
   },
   methods: {
@@ -170,6 +80,15 @@ export default {
     },
     setColor (color) {
       this.colors = this.availableColors[color]
+      this.chosenColor = color
+    }
+  },
+  computed: {
+    linkColor() {
+      return this.chosenColor === 'dark' ? this.colors.sentMessage.text : this.colors.launcher.bg
+    },
+    backgroundColor() {
+      return this.chosenColor === 'dark' ? this.colors.messageList.bg : '#fff'
     }
   }
 }
@@ -225,5 +144,16 @@ body {
 
 .text-center {
   text-align: center;
+}
+
+.colors a {
+  color: #fff;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.toggle a {
+  text-decoration: none;
 }
 </style>

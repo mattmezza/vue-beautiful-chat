@@ -1,21 +1,21 @@
 <template>
-  <div class="demo-test-area--wrapper">
+  <div class="demo-test-area--wrapper" :style="{color: textColor}">
     <div class="demo-test-area--title">
-      <div class="demo-test-area--title-main">vue-beautiful-chat demo</div>
-      <div class="demo-test-area--title-sub">by <a href="https://matteo.merola.co">mattmezza</a></div>
+      <div class="demo-test-area--title-main" :style="{color: linkColor}">vue-beautiful-chat demo</div>
+      <div class="demo-test-area--title-sub">by <a :style="{color: linkColor}" href="https://matteo.merola.co">mattmezza</a></div>
     </div>
     <form class="demo-test-area" @submit.prevent="_handleSubmit" @keyup="_handleTyping">
       <div class="demo-test-area--preamble">Test the chat window by sending a message:</div>
-      <textarea ref="textArea" class="demo-test-area--text" placeholder="Write a test message...." />
-      <button class="demo-test-area--button"> Send Message! </button>
+      <textarea ref="textArea" class="demo-test-area--text" placeholder="Write a test message...." :style="textareaStyle" />
+      <button class="demo-test-area--button" :style="{background: ctaColor, color: colors.sentMessage.text}"> Send Message! </button>
     </form>
     <p class="demo-test-area--info">
-      <a href="https://github.com/mattmezza/vue-beautiful-chat">vue-beautiful-chat</a> is a chat window that allows you to build and add custom live chat to your sites. It includes only the vue chat widget. There is no backend, and no communication system baked in.
+      <a :style="{color: linkColor}" href="https://github.com/mattmezza/vue-beautiful-chat">vue-beautiful-chat</a> is a chat window that allows you to build and add custom live chat to your sites. It includes only the vue chat widget. There is no backend, and no communication system baked in.
       <br />
-      It is based on <a href="https://github.com/kingofthestack/react-live-chat">react-chat-window</a> and adds some features to it, like optional emoji and file messages.
+      It is based on <a :style="{color: linkColor}" href="https://github.com/kingofthestack/react-live-chat">react-chat-window</a> and adds some features to it, like optional emoji and file messages.
       <br />
       <br />
-      For instructions on how to use it click <a href="https://github.com/mattmezza/vue-beautiful-chat">here</a>.
+      For instructions on how to use it click <a :style="{color: linkColor}" href="https://github.com/mattmezza/vue-beautiful-chat">here</a>.
       <br />
       <br />
     </p>
@@ -31,6 +31,14 @@ export default {
     onTyping: {
       type: Function,
       required: true
+    },
+    colors: {
+      type: Object,
+      required: true
+    },
+    chosenColor: {
+      type: String,
+      required: true
     }
   },
   methods: {
@@ -41,6 +49,26 @@ export default {
     },
     _handleTyping() {
       this.onTyping(this.$refs.textArea.value)
+    }
+  },
+  computed: {
+    linkColor() {
+      return this.chosenColor === 'dark' ? this.colors.sentMessage.text : this.colors.launcher.bg
+    },
+    backgroundColor() {
+      return this.chosenColor === 'dark' ? this.colors.messageList.bg : '#fff'
+    },
+    textColor() {
+      return this.chosenColor === 'dark' ? '#eee' : '#222'
+    },
+    ctaColor() {
+      return this.chosenColor === 'dark' ? this.colors.userInput.bg : this.colors.launcher.bg
+    },
+    textareaStyle() {
+      return {
+        background: this.chosenColor === 'dark' ? this.colors.messageList.bg : '#fff',
+        color: this.chosenColor === 'dark' ? this.colors.sentMessage.text : '#222'
+      }
     }
   }
 }
@@ -58,13 +86,11 @@ export default {
 }
 
 .demo-test-area--title-main {
-  color: #516996;
   font-weight: 600;
   font-size: 28px;
 }
 
 .demo-test-area--title-sub {
-  color: #4e8cff;
   padding-top: 10px;
   font-size: small;
 }
@@ -79,7 +105,7 @@ export default {
 
 .demo-test-area--preamble {
   padding: 20px 0px;
-  color: #516996;
+  text-align: center;
 }
 
 .demo-test-area--button {
@@ -110,7 +136,6 @@ export default {
 .demo-test-area--info {
   margin: auto;
   margin-top: 40px;
-  color: #516996;
   font-weight: 200;
   width: 550px;
 }
