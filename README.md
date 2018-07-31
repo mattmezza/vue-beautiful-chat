@@ -71,14 +71,14 @@ export default {
     }
   },
   methods: {
-    sendMessage (msg) {
+    sendMessage (message) {
       if (text.length > 0) {
         this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
-        this.messageList.push(msg)
+        this.onMessageWasSent(message)
       }
     },
-    onMessageWasSent (msg) {
-      this.messageList.push(msg)
+    onMessageWasSent (message) {
+      this.messageList = { ...this.messageList, message }
     },
     openChat () {
       this.isChatOpen = true
