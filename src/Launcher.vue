@@ -4,10 +4,11 @@
       <div v-if="newMessagesCount > 0 && !isOpen" class="sc-new-messsages-count">
         {{newMessagesCount}}
       </div>
-      <img class="sc-open-icon" src="./assets/close-icon.png" />
-      <img class="sc-closed-icon" src="./assets/logo-no-bg.svg" />
+      <img class="sc-open-icon" :src="baseUrl + 'close-icon.png'" />
+      <img class="sc-closed-icon" :src="baseUrl + 'logo-no-bg.svg'" />
     </div>
     <ChatWindow
+      :baseUrl="baseUrl"
       :messageList="messageList"
       :onUserInputSubmit="onMessageWasSent"
       :agentProfile="agentProfile"
@@ -26,6 +27,10 @@ import ChatWindow from './ChatWindow.vue'
 
 export default {
   props: {
+    baseUrl: {
+      type: String,
+      default: '',
+    },
     showEmoji: {
       type: Boolean,
       default: false

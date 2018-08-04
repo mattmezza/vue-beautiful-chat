@@ -6,7 +6,7 @@
       }"></div>
       <TextMessage v-if="message.type === 'text'" :data="message.data" :messageColors="determineMessageColors()" />
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
-      <FileMessage v-else-if="message.type === 'file'" :data="message.data" :messageColors="determineMessageColors()" />
+      <FileMessage v-else-if="message.type === 'file'" :data="message.data" :baseUrl="baseUrl" :messageColors="determineMessageColors()" />
       <TypingMessage v-else-if="message.type === 'typing'" :messageColors="determineMessageColors()" />
     </div>
   </div>
@@ -17,7 +17,6 @@ import TextMessage from './TextMessage.vue'
 import FileMessage from './FileMessage.vue'
 import EmojiMessage from './EmojiMessage.vue'
 import TypingMessage from './TypingMessage.vue'
-import chatIcon from './assets/chat-icon.svg'
 
 export default {
   data () {
@@ -32,13 +31,17 @@ export default {
     TypingMessage
   },
   props: {
+    baseUrl: {
+      type: String,
+      required: true,
+    },
     message: {
       type: Object,
       required: true
     },
     chatImageUrl: {
       type: String,
-      default: chatIcon
+      required: true
     },
     colors: {
       type: Object,

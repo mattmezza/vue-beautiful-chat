@@ -108,6 +108,7 @@ Launcher props:
 | *isOpen | Boolean | The bool indicating whether or not the chat window should be open. |
 | *open | Function | The function passed to the component that mutates the above mentioned bool toggle for opening the chat |
 | *close | Function | The function passed to the component that mutates the above mentioned bool toggle for closing the chat |
+| baseUrl | String | The base URL for images. |
 | messageList | [message] | An array of message objects to be rendered as a conversation. |
 | showEmoji | Boolean | A bool indicating whether or not to show the emoji button
 | showFile | Boolean | A bool indicating whether or not to show the file chooser button

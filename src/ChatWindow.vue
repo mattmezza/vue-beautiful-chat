@@ -1,12 +1,14 @@
 <template>
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
+      :baseUrl="baseUrl"
       :teamName="agentProfile.teamName"
       :imageUrl="agentProfile.imageUrl"
       :onClose="onClose"
       :colors="colors"
     />
     <MessageList
+      :baseUrl="baseUrl"
       :messages="messages"
       :imageUrl="agentProfile.imageUrl"
       :chatImageUrl="agentProfile.imageUrl"
@@ -14,11 +16,13 @@
       :colors="colors"
     />
     <UserInput
+      :baseUrl="baseUrl"
       :showEmoji="showEmoji"
       :onSubmit="onUserInputSubmit"
       :showFile="showFile"
       :placeholder="placeholder"
-      :colors="colors" />
+      :colors="colors"
+    />
   </div>
 </template>
 
@@ -34,6 +38,10 @@ export default {
     UserInput
   },
   props: {
+    baseUrl: {
+      type: String,
+      required: true,
+    },
     showEmoji: {
       type: Boolean,
       default: false

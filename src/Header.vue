@@ -3,13 +3,17 @@
     <img class="sc-header--img" :src="imageUrl" alt="" />
     <div class="sc-header--team-name"> {{teamName}} </div>
     <div class="sc-header--close-button" @click="onClose">
-      <img src="./assets/close-icon.png" alt="" />
+      <img :src="baseUrl + 'close-icon.png'" alt="" />
     </div>
   </div>
 </template>
 <script>
 export default {
   props: {
+    baseUrl: {
+      type: String,
+      required: true
+    },
     imageUrl: {
       type: String,
       required: true
