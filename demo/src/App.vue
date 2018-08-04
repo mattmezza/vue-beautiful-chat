@@ -12,7 +12,8 @@
       :showEmoji="true"
       :showFile="true"
       :showTypingIndicator="showTypingIndicator"
-      :colors="colors" />
+      :colors="colors"
+      :alwaysScrollToBottom="alwaysScrollToBottom" />
       <p class="text-center toggle">
         <a v-if="!isChatOpen" :style="{color: linkColor}" href="#" @click.prevent="openChat()">Open the chat window</a>
         <a v-else :style="{color: linkColor}" href="#" @click.prevent="closeChat()">Close the chat window</a>
@@ -52,7 +53,8 @@ export default {
       showTypingIndicator: false,
       colors: null,
       availableColors,
-      chosenColor: null
+      chosenColor: null,
+      alwaysScrollToBottom: false
     }
   },
   created() {

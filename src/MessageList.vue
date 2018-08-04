@@ -28,18 +28,26 @@ export default {
     colors: {
       type: Object,
       required: true
+    },
+    alwaysScrollToBottom: {
+      type: Boolean,
+      required: true
     }
   },
   methods: {
     _scrollDown () {
       this.$refs.scrollList.scrollTop = this.$refs.scrollList.scrollHeight
+    },
+    shouldScrollToBottom() {
+      return this.alwaysScrollToBottom || (this.$refs.scrollList.scrollTop > this.$refs.scrollList.scrollHeight - 300)
     }
   },
   mounted () {
     this._scrollDown()
   },
   updated () {
-    this.$nextTick(this._scrollDown())
+    if (this.shouldScrollToBottom())
+      this.$nextTick(this._scrollDown())
   }
 }
 </script>
