@@ -71,7 +71,7 @@ export default {
       this.showTypingIndicator = text.length > 0;
     },
     onMessageWasSent (message) {
-      this.messageList = { ...this.messageList, message }
+      this.messageList = [ ...this.messageList, message ]
     },
     openChat () {
       this.isChatOpen = true
