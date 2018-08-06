@@ -24,7 +24,7 @@
         <a :style="{background: availableColors.green.launcher.bg}" href="#" @click.prevent="setColor('green')">Green</a>
         <a :style="{background: availableColors.dark.launcher.bg}" href="#" @click.prevent="setColor('dark')">Dark</a>
       </p>
-    <TestArea :onMessage="handleMessageFromTextArea" :onTyping="handleTyping" :colors="colors" :chosenColor="chosenColor" />
+    <TestArea :onMessage="sendMessage" :onTyping="handleTyping" :colors="colors" :chosenColor="chosenColor" />
     <Footer :colors="colors" :chosenColor="chosenColor" />
   </div>
 </template>
@@ -61,17 +61,17 @@ export default {
     this.setColor('blue')
   },
   methods: {
-    handleMessageFromTextArea (text) {
+    sendMessage (text) {
       if (text.length > 0) {
         this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
-        this.messageList.push({author: 'them', type: 'text', data: { text }})
+        this.onMessageWasSent({ author: 'them', type: 'text', data: { text } })
       }
     },
     handleTyping (text) {
       this.showTypingIndicator = text.length > 0;
     },
-    onMessageWasSent (msg) {
-      this.messageList.push(msg)
+    onMessageWasSent (message) {
+      this.messageList = { ...this.messageList, message }
     },
     openChat () {
       this.isChatOpen = true
