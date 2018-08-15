@@ -73,8 +73,8 @@ export default {
 </script>
 <style>
 .sc-message {
-  width: 300px;
-  margin: auto;
+  width: calc( 100% - 32px);
+  margin: auto 16px;
   padding-bottom: 10px;
   display: flex;
 }
@@ -122,7 +122,7 @@ export default {
 }
 
 .sc-message--text {
-  padding: 17px 20px;
+  padding: 10px;
   border-radius: 6px;
   font-weight: 300;
   font-size: 14px;

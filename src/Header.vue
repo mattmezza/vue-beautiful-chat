@@ -30,7 +30,7 @@ export default {
 </script>
 <style scoped>
 .sc-header {
-  min-height: 75px;
+  height: 60px;
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
   padding: 10px;
@@ -51,13 +51,9 @@ export default {
   padding: 10px;
   flex: 1;
   user-select: none;
-  cursor: pointer;
   border-radius: 5px;
 }
 
-.sc-header--team-name:hover {
-  box-shadow: 0px 2px 5px rgba(0.2, 0.2, 0.5, .1);
-}
 
 .sc-header--close-button {
   width: 40px;
