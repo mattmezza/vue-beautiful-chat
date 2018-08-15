@@ -170,6 +170,7 @@ export default {
 
 .sc-user-input--text:empty:before {
   content: attr(placeholder);
+  text-align: left;
   display: block; /* For Firefox */
   /* color: rgba(86, 88, 103, 0.3); */
   filter: contrast(15%);
