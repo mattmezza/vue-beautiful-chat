@@ -39,7 +39,7 @@ export default {
       this.$refs.scrollList.scrollTop = this.$refs.scrollList.scrollHeight
     },
     shouldScrollToBottom() {
-      return this.alwaysScrollToBottom || (this.$refs.scrollList.scrollTop > this.$refs.scrollList.scrollHeight - 300)
+      return this.alwaysScrollToBottom || (this.$refs.scrollList.scrollTop > this.$refs.scrollList.scrollHeight - 600)
     }
   },
   mounted () {
