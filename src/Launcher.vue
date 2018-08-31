@@ -11,6 +11,9 @@
       :messageList="messageList"
       :onUserInputSubmit="onMessageWasSent"
       :agentProfile="agentProfile"
+      :agentProfiles="agentProfiles"
+      :title="title"
+      :titleImageUrl="titleImageUrl"
       :isOpen="isOpen"
       :onClose="close"
       :showEmoji="showEmoji"
@@ -48,8 +51,19 @@ export default {
       default: false
     },
     agentProfile: {
-      type: Object,
-      required: true
+      type: Object
+    },
+    agentProfiles: {
+      type: Array,
+      default: () => []
+    },
+    title: {
+      type: String,
+      default: () => ''
+    },
+    titleImageUrl: {
+      type: String,
+      default: () => ''
     },
     onMessageWasSent: {
       type: Function,

@@ -1,6 +1,6 @@
 <template>
   <div class="sc-message-list" ref="scrollList" :style="{backgroundColor: colors.messageList.bg}">
-    <Message v-for="(message, idx) in messages" :message="message" :chatImageUrl="chatImageUrl" :key="idx" :colors="colors" />
+    <Message v-for="(message, idx) in messages" :message="message" :chatImageUrl="chatImageUrlFor(message.author)" :authorName="authorName(message.author)" :key="idx" :colors="colors" />
     <Message v-show="showTypingIndicator" :message="{author: 'them', type: 'typing'}" :chatImageUrl="chatImageUrl" :colors="colors" />
   </div>
 </template>
@@ -13,6 +13,14 @@ export default {
     Message
   },
   props: {
+    agentProfiles: {
+      type: Array,
+      default: () => []
+    },
+    teamName: {
+      type: String,
+      default: ''
+    },
     messages: {
       type: Array,
       required: true
@@ -40,6 +48,18 @@ export default {
     },
     shouldScrollToBottom() {
       return this.alwaysScrollToBottom || (this.$refs.scrollList.scrollTop > this.$refs.scrollList.scrollHeight - 600)
+    },
+    chatImageUrlFor(author) {
+      if (this.agentProfiles && this.agentProfiles.some(profile => profile.id === author)) {
+        return this.agentProfiles.find(profile => profile.id === author).imageUrl
+      }
+      return this.chatImageUrl
+    },
+    authorName(author) {
+      if (this.agentProfiles && this.agentProfiles.some(profile => profile.id === author)) {
+        return this.agentProfiles.find(profile => profile.id === author).teamName
+      }
+      return this.teamName
     }
   },
   mounted () {
