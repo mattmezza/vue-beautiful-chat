@@ -78,7 +78,7 @@ export default {
       }
     },
     onMessageWasSent (message) {
-      this.messageList = { ...this.messageList, message }
+      this.messageList = [...this.messageList, message]
     },
     openChat () {
       this.isChatOpen = true
