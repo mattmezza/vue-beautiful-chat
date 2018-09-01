@@ -1,17 +1,18 @@
 <template>
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
-      :teamName="agentProfile.teamName"
-      :imageUrl="agentProfile.imageUrl"
+      :teamName="headerText"
+      :imageUrl="headerImage"
       :onClose="onClose"
       :colors="colors"
     />
     <MessageList
       :messages="messages"
-      :imageUrl="agentProfile.imageUrl"
-      :chatImageUrl="agentProfile.imageUrl"
+      :chatImageUrl="titleImageUrl"
+      :agentProfiles="agentProfiles"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
+      :teamName="agentProfile ? agentProfile.teamName : ''"
       :alwaysScrollToBottom="alwaysScrollToBottom"
     />
     <UserInput
@@ -43,9 +44,21 @@ export default {
       type: Boolean,
       default: false
     },
+    /* Either agentProfile or agentProfiles is required */
     agentProfile: {
-      type: Object,
-      required: true
+      type: Object
+    },
+    agentProfiles: {
+      type: Array,
+      default: () => []
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    titleImageUrl: {
+      type: String,
+      default: ''
     },
     onUserInputSubmit: {
       type: Function,
@@ -88,6 +101,23 @@ export default {
       let messages = this.messageList
 
       return messages
+    },
+    headerText() {
+      if (this.title) {
+        return this.title
+      }
+      if (this.agentProfile && this.agentProfile.teamName) {
+        return this.agentProfile.teamName
+      }
+      return "Chat"
+    },
+    headerImage() {
+      if (this.titleImageUrl) {
+        return this.titleImageUrl
+      }
+      if (this.agentProfile && this.agentProfile.imageUrl) {
+        return this.agentProfile.imageUrl
+      }
     }
   },
   methods: {}

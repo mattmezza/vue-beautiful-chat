@@ -2,10 +2,10 @@
   <div class="sc-message">
     <div class="sc-message--content" :class="{
         sent: message.author === 'me',
-        received: message.author === 'them',
+        received: message.author !== 'me' && message.type !== 'system',
         system: message.type === 'system'
       }">
-      <div v-if="message.type !== 'system'" class="sc-message--avatar" :style="{
+      <div v-if="message.type !== 'system'" :title="authorName" class="sc-message--avatar" :style="{
         backgroundImage: `url(${chatImageUrl})`
       }"></div>
       <TextMessage v-if="message.type === 'text'" :data="message.data" :messageColors="determineMessageColors()" />
@@ -50,6 +50,9 @@ export default {
     colors: {
       type: Object,
       required: true
+    },
+    authorName: {
+      type: String
     }
   },
   methods: {
@@ -97,7 +100,6 @@ export default {
 }
 
 .sc-message--avatar {
-  background-image: url(https://d13yacurqjgara.cloudfront.net/assets/avatar-default-aa2eab7684294781f93bc99ad394a0eb3249c5768c21390163c9f55ea8ef83a4.gif);
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center;
