@@ -54,6 +54,7 @@
     "url": "https://github.com/mattmezza/vue-beautiful-chat/issues"
   },
   "dependencies": {
+    "autolinker": "^1.7.1",
     "babel-preset-env": "^1.6.1",
     "emoji-js": "^3.4.0"
   }

@@ -442,6 +442,10 @@ atob@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.1.tgz#ae2d5a729477f289d60dd7f96a6314a22dd6c22a"
 
+autolinker@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/autolinker/-/autolinker-1.7.1.tgz#36397dd0c09c369433142677b5247ed4c9d2d705"
+
 autoprefixer@^6.3.1:
   version "6.7.7"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-6.7.7.tgz#1dbd1c835658e35ce3f9984099db00585c782014"
