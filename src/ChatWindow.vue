@@ -5,8 +5,14 @@
       :imageUrl="titleImageUrl"
       :onClose="onClose"
       :colors="colors"
+      @userList="handleUserListToggle"
+    />
+    <UserList 
+      v-if="showUserList"
+      :participants="participants"
     />
     <MessageList
+      v-if="!showUserList"
       :messages="messages"
       :participants="participants"
       :showTypingIndicator="showTypingIndicator"
@@ -14,6 +20,7 @@
       :alwaysScrollToBottom="alwaysScrollToBottom"
     />
     <UserInput
+      v-if="!showUserList"
       :showEmoji="showEmoji"
       :onSubmit="onUserInputSubmit"
       :showFile="showFile"
@@ -26,12 +33,14 @@
 import Header from './Header.vue'
 import MessageList from './MessageList.vue'
 import UserInput from './UserInput.vue'
+import UserList from './UserList.vue'
 
 export default {
   components: {
     Header,
     MessageList,
-    UserInput
+    UserInput,
+    UserList
   },
   props: {
     showEmoji: {
@@ -88,7 +97,9 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      showUserList: false
+    }
   },
   computed: {
     messages() {
@@ -97,7 +108,11 @@ export default {
       return messages
     }
   },
-  methods: {}
+  methods: {
+    handleUserListToggle(showUserList) {
+      this.showUserList = showUserList
+    }
+  }
 }
 </script>
 <style scoped>
