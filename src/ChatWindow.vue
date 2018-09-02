@@ -84,8 +84,8 @@ export default {
       default: 'Write a reply'
     },
     showTypingIndicator: {
-      type: Boolean,
-      default: () => false
+      type: String,
+      required: true
     },
     colors: {
       type: Object,

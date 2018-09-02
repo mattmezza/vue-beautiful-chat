@@ -50,7 +50,7 @@ export default {
       messageList: messageHistory,
       newMessagesCount: 0,
       isChatOpen: false,
-      showTypingIndicator: false,
+      showTypingIndicator: '',
       colors: null,
       availableColors,
       chosenColor: null,
@@ -68,7 +68,7 @@ export default {
       }
     },
     handleTyping (text) {
-      this.showTypingIndicator = text.length > 0;
+      this.showTypingIndicator = text.length > 0 ? this.participants[this.participants.length - 1].id : '';
     },
     onMessageWasSent (message) {
       this.messageList = [ ...this.messageList, message ]
