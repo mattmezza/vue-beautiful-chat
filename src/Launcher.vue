@@ -10,8 +10,7 @@
     <ChatWindow
       :messageList="messageList"
       :onUserInputSubmit="onMessageWasSent"
-      :agentProfile="agentProfile"
-      :agentProfiles="agentProfiles"
+      :participants="participants"
       :title="title"
       :titleImageUrl="titleImageUrl"
       :isOpen="isOpen"
@@ -50,16 +49,13 @@ export default {
       type: Boolean,
       default: false
     },
-    agentProfile: {
-      type: Object
-    },
-    agentProfiles: {
+    participants: {
       type: Array,
-      default: () => []
+      required: true
     },
     title: {
       type: String,
-      default: () => ''
+      default: () => 'Chat'
     },
     titleImageUrl: {
       type: String,

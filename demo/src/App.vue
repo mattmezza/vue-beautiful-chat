@@ -2,7 +2,9 @@
   <div :style="{background: backgroundColor}">
     <Header :colors="colors" :chosenColor="chosenColor" />
     <beautiful-chat
-      :agentProfile="agentProfile"
+      :participants="participants"
+      :titleImageUrl="titleImageUrl"
+      :title="title"
       :onMessageWasSent="onMessageWasSent"
       :messageList="messageList"
       :newMessagesCount="newMessagesCount"
@@ -43,10 +45,17 @@ export default {
   },
   data() {
     return {
-      agentProfile: {
-        teamName: 'Vue Beautiful Chat',
+      participants: [{
+        id: 'support1',
+        name: 'Support Agent 1',
         imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
-      },
+      }, {
+        id: 'support2',
+        name: 'Support Agent 2',
+        imageUrl: 'https://telegram.org/favicon.ico?3'
+      }],
+      title: 'Vue Beautilful Chat',
+      titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
       messageList: messageHistory,
       newMessagesCount: 0,
       isChatOpen: false,

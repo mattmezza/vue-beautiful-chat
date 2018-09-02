@@ -1,21 +1,26 @@
 <template>
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
-      :teamName="headerText"
-      :imageUrl="headerImage"
+      :title="title"
+      :imageUrl="titleImageUrl"
       :onClose="onClose"
       :colors="colors"
+      @userList="handleUserListToggle"
+    />
+    <UserList 
+      v-if="showUserList"
+      :participants="participants"
     />
     <MessageList
+      v-if="!showUserList"
       :messages="messages"
-      :chatImageUrl="titleImageUrl"
-      :agentProfiles="agentProfiles"
+      :participants="participants"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
-      :teamName="agentProfile ? agentProfile.teamName : ''"
       :alwaysScrollToBottom="alwaysScrollToBottom"
     />
     <UserInput
+      v-if="!showUserList"
       :showEmoji="showEmoji"
       :onSubmit="onUserInputSubmit"
       :showFile="showFile"
@@ -28,12 +33,14 @@
 import Header from './Header.vue'
 import MessageList from './MessageList.vue'
 import UserInput from './UserInput.vue'
+import UserList from './UserList.vue'
 
 export default {
   components: {
     Header,
     MessageList,
-    UserInput
+    UserInput,
+    UserList
   },
   props: {
     showEmoji: {
@@ -44,17 +51,13 @@ export default {
       type: Boolean,
       default: false
     },
-    /* Either agentProfile or agentProfiles is required */
-    agentProfile: {
-      type: Object
-    },
-    agentProfiles: {
+    participants: {
       type: Array,
-      default: () => []
+      required: true
     },
     title: {
       type: String,
-      default: ''
+      required: true
     },
     titleImageUrl: {
       type: String,
@@ -94,33 +97,22 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      showUserList: false
+    }
   },
   computed: {
     messages() {
       let messages = this.messageList
 
       return messages
-    },
-    headerText() {
-      if (this.title) {
-        return this.title
-      }
-      if (this.agentProfile && this.agentProfile.teamName) {
-        return this.agentProfile.teamName
-      }
-      return "Chat"
-    },
-    headerImage() {
-      if (this.titleImageUrl) {
-        return this.titleImageUrl
-      }
-      if (this.agentProfile && this.agentProfile.imageUrl) {
-        return this.agentProfile.imageUrl
-      }
     }
   },
-  methods: {}
+  methods: {
+    handleUserListToggle(showUserList) {
+      this.showUserList = showUserList
+    }
+  }
 }
 </script>
 <style scoped>
