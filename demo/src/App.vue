@@ -4,7 +4,6 @@
     <beautiful-chat
       :participants="participants"
       :titleImageUrl="titleImageUrl"
-      :title="title"
       :onMessageWasSent="onMessageWasSent"
       :messageList="messageList"
       :newMessagesCount="newMessagesCount"
@@ -33,6 +32,7 @@
 
 <script>
 import messageHistory from './messageHistory'
+import chatParticipants from './chatProfiles'
 import Header from './Header.vue'
 import Footer from './Footer.vue'
 import TestArea from './TestArea.vue'
@@ -45,16 +45,7 @@ export default {
   },
   data() {
     return {
-      participants: [{
-        id: 'mattmezza',
-        name: 'Matteo',
-        imageUrl: 'https://avatars3.githubusercontent.com/u/1915989?s=460&v=4'
-      }, {
-        id: 'support',
-        name: 'Support Agent',
-        imageUrl: 'https://matteo.merola.co/static/mattmezza.png'
-      }],
-      title: 'Vue Beautilful Chat',
+      participants: chatParticipants,
       titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
       messageList: messageHistory,
       newMessagesCount: 0,
