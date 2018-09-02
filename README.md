@@ -44,7 +44,9 @@ Vue.use(Chat)
 <template>
   <div>
     <beautiful-chat
-      :agentProfile="agentProfile"
+      :participants="[agentProfile]"
+      :title="Support Chat"
+      :titleImageUrl="https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png"
       :onMessageWasSent="onMessageWasSent"
       :messageList="messageList"
       :newMessagesCount="newMessagesCount"
@@ -62,7 +64,8 @@ export default {
   data() {
     return {
       agentProfile: {
-        teamName: 'Vue Beautiful Chat',
+        id: 'support',
+        name: 'Support Agent',
         imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
       },
       messageList: [],
@@ -103,7 +106,7 @@ Launcher props:
 
 |prop | type   | description |
 |-----|--------|---------------|
-| *agentProfile | object | Represents your product or service's customer service agent. Fields: teamName, imageUrl|
+| *participants | [agentProfile] | Represents your product or service's customer service agents. Fields for each agent: id, name, imageUrl|
 | *onMessageWasSent | function(message) | Called when a message a message is sent with a message object as an argument. |
 | *isOpen | Boolean | The bool indicating whether or not the chat window should be open. |
 | *open | Function | The function passed to the component that mutates the above mentioned bool toggle for opening the chat |
@@ -117,11 +120,11 @@ Launcher props:
 
 ### Message Objects
 
-Message objects are rendered differently depending on their type. Currently, only text, emoji and file types are supported. Each message object has an `author` field which can have the value 'me' or 'them'.
+Message objects are rendered differently depending on their type. Currently, only text, emoji and file types are supported. Each message object has an `author` field which can have the value 'me' or the id of the corresponding agent.
 
 ``` javascript
 {
-  author: 'them',
+  author: 'support',
   type: 'text',
   data: {
     text: 'some text'
