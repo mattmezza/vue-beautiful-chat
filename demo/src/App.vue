@@ -46,13 +46,13 @@ export default {
   data() {
     return {
       participants: [{
-        id: 'support1',
-        name: 'Support Agent 1',
-        imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
+        id: 'mattmezza',
+        name: 'Matteo',
+        imageUrl: 'https://avatars3.githubusercontent.com/u/1915989?s=460&v=4'
       }, {
-        id: 'support2',
-        name: 'Support Agent 2',
-        imageUrl: 'https://telegram.org/favicon.ico?3'
+        id: 'support',
+        name: 'Support Agent',
+        imageUrl: 'https://matteo.merola.co/static/mattmezza.png'
       }],
       title: 'Vue Beautilful Chat',
       titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
@@ -73,7 +73,7 @@ export default {
     sendMessage (text) {
       if (text.length > 0) {
         this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
-        this.onMessageWasSent({ author: 'them', type: 'text', data: { text } })
+        this.onMessageWasSent({ author: 'support', type: 'text', data: { text } })
       }
     },
     handleTyping (text) {
