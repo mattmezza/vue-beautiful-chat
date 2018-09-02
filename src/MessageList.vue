@@ -1,7 +1,7 @@
 <template>
   <div class="sc-message-list" ref="scrollList" :style="{backgroundColor: colors.messageList.bg}">
-    <Message v-for="(message, idx) in messages" :message="message" :chatImageUrl="chatImageUrlFor(message.author)" :authorName="authorName(message.author)" :key="idx" :colors="colors" />
-    <Message v-show="showTypingIndicator" :message="{author: 'them', type: 'typing'}" :chatImageUrl="chatImageUrl" :colors="colors" />
+    <Message v-for="(message, idx) in messages" :message="message" :chatImageUrl="chatImageUrl(message.author)" :authorName="authorName(message.author)" :key="idx" :colors="colors" />
+    <Message v-show="showTypingIndicator" :message="{author: 'them', type: 'typing'}" :chatImageUrl="defaultChatIcon" :colors="colors" />
   </div>
 </template>
 <script>
@@ -13,21 +13,13 @@ export default {
     Message
   },
   props: {
-    agentProfiles: {
+    participants: {
       type: Array,
-      default: () => []
-    },
-    teamName: {
-      type: String,
-      default: ''
+      required: true
     },
     messages: {
       type: Array,
       required: true
-    },
-    chatImageUrl: {
-      type: String,
-      default: chatIcon
     },
     showTypingIndicator: {
       type: Boolean,
@@ -49,17 +41,22 @@ export default {
     shouldScrollToBottom() {
       return this.alwaysScrollToBottom || (this.$refs.scrollList.scrollTop > this.$refs.scrollList.scrollHeight - 600)
     },
-    chatImageUrlFor(author) {
-      if (this.agentProfiles && this.agentProfiles.some(profile => profile.id === author)) {
-        return this.agentProfiles.find(profile => profile.id === author).imageUrl
-      }
-      return this.chatImageUrl
+    profile(author) {
+      const profile = this.participants.find(profile => profile.id === author)
+
+      // A profile may not be found for system messages or messages by 'me'
+      return profile || {imageUrl: '', name: ''}
+    },
+    chatImageUrl(author) {
+      return this.profile(author).imageUrl
     },
     authorName(author) {
-      if (this.agentProfiles && this.agentProfiles.some(profile => profile.id === author)) {
-        return this.agentProfiles.find(profile => profile.id === author).teamName
-      }
-      return this.teamName
+      return this.profile(author).name
+    }
+  },
+  computed: {
+    defaultChatIcon() {
+      return chatIcon
     }
   },
   mounted () {

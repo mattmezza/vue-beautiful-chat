@@ -1,18 +1,16 @@
 <template>
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
-      :teamName="headerText"
-      :imageUrl="headerImage"
+      :title="title"
+      :imageUrl="titleImageUrl"
       :onClose="onClose"
       :colors="colors"
     />
     <MessageList
       :messages="messages"
-      :chatImageUrl="titleImageUrl"
-      :agentProfiles="agentProfiles"
+      :participants="participants"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
-      :teamName="agentProfile ? agentProfile.teamName : ''"
       :alwaysScrollToBottom="alwaysScrollToBottom"
     />
     <UserInput
@@ -44,17 +42,13 @@ export default {
       type: Boolean,
       default: false
     },
-    /* Either agentProfile or agentProfiles is required */
-    agentProfile: {
-      type: Object
-    },
-    agentProfiles: {
+    participants: {
       type: Array,
-      default: () => []
+      required: true
     },
     title: {
       type: String,
-      default: ''
+      required: true
     },
     titleImageUrl: {
       type: String,
@@ -101,23 +95,6 @@ export default {
       let messages = this.messageList
 
       return messages
-    },
-    headerText() {
-      if (this.title) {
-        return this.title
-      }
-      if (this.agentProfile && this.agentProfile.teamName) {
-        return this.agentProfile.teamName
-      }
-      return "Chat"
-    },
-    headerImage() {
-      if (this.titleImageUrl) {
-        return this.titleImageUrl
-      }
-      if (this.agentProfile && this.agentProfile.imageUrl) {
-        return this.agentProfile.imageUrl
-      }
     }
   },
   methods: {}

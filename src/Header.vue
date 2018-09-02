@@ -1,7 +1,7 @@
 <template>
   <div class="sc-header" :style="{background: colors.header.bg, color: colors.header.text}">
     <img class="sc-header--img" :src="imageUrl" alt="" v-if="imageUrl" />
-    <div class="sc-header--team-name"> {{teamName}} </div>
+    <div class="sc-header--title"> {{title}} </div>
     <div class="sc-header--close-button" @click="onClose">
       <img src="./assets/close-icon.png" alt="" />
     </div>
@@ -13,9 +13,9 @@ export default {
   props: {
     imageUrl: {
       type: String,
-      default: ''
+      required: true
     },
-    teamName: {
+    title: {
       type: String
     },
     onClose: {
@@ -47,7 +47,7 @@ export default {
   padding: 10px;
 }
 
-.sc-header--team-name {
+.sc-header--title {
   align-self: center;
   padding: 10px;
   flex: 1;
@@ -56,7 +56,7 @@ export default {
   border-radius: 5px;
 }
 
-.sc-header--team-name:hover {
+.sc-header--title:hover {
   box-shadow: 0px 2px 5px rgba(0.2, 0.2, 0.5, .1);
 }
 
