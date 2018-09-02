@@ -1,20 +1,26 @@
 <template>
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
-      :teamName="agentProfile.teamName"
-      :imageUrl="agentProfile.imageUrl"
+      :title="title"
+      :imageUrl="titleImageUrl"
       :onClose="onClose"
       :colors="colors"
+      @userList="handleUserListToggle"
+    />
+    <UserList 
+      v-if="showUserList"
+      :participants="participants"
     />
     <MessageList
+      v-if="!showUserList"
       :messages="messages"
-      :imageUrl="agentProfile.imageUrl"
-      :chatImageUrl="agentProfile.imageUrl"
+      :participants="participants"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
     />
     <UserInput
+      v-if="!showUserList"
       :showEmoji="showEmoji"
       :onSubmit="onUserInputSubmit"
       :showFile="showFile"
@@ -27,12 +33,14 @@
 import Header from './Header.vue'
 import MessageList from './MessageList.vue'
 import UserInput from './UserInput.vue'
+import UserList from './UserList.vue'
 
 export default {
   components: {
     Header,
     MessageList,
-    UserInput
+    UserInput,
+    UserList
   },
   props: {
     showEmoji: {
@@ -43,9 +51,17 @@ export default {
       type: Boolean,
       default: false
     },
-    agentProfile: {
-      type: Object,
+    participants: {
+      type: Array,
       required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    titleImageUrl: {
+      type: String,
+      default: ''
     },
     onUserInputSubmit: {
       type: Function,
@@ -81,7 +97,9 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      showUserList: false
+    }
   },
   computed: {
     messages() {
@@ -90,7 +108,11 @@ export default {
       return messages
     }
   },
-  methods: {}
+  methods: {
+    handleUserListToggle(showUserList) {
+      this.showUserList = showUserList
+    }
+  }
 }
 </script>
 <style scoped>
