@@ -132,7 +132,7 @@ export default {
   computed: {
     chatWindowTitle() {
       if (this.title !== '') {
-        return title
+        return this.title
       }
 
       if (this.participants.length > 1) {
