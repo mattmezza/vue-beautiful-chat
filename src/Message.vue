@@ -7,7 +7,7 @@
       }">
       <div v-if="message.type !== 'system'" class="sc-message--avatar" :style="{
         backgroundImage: `url(${chatImageUrl})`
-      }"></div>
+      }" v-tooltip="message.author"></div>
       <TextMessage v-if="message.type === 'text'" :data="message.data" :messageColors="determineMessageColors()" />
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
       <FileMessage v-else-if="message.type === 'file'" :data="message.data" :messageColors="determineMessageColors()" />
