@@ -48,7 +48,8 @@
     "build:ssr": "webpack --config ./build/webpack.ssr.config.js --progress --hide-modules",
     "lint": "eslint --fix --ext .js,.vue src",
     "build": "npm run build:client && npm run build:ssr",
-    "watch": "webpack --config ./build/webpack.client.config.js --progress --hide-modules --watch"
+    "watch": "webpack --config ./build/webpack.client.config.js --progress --hide-modules --watch",
+    "prepublishOnly": "npm run build"
   },
   "bugs": {
     "url": "https://github.com/mattmezza/vue-beautiful-chat/issues"
