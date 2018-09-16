@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import escapeGoat from 'escape-goat'
 import Autolinker from 'autolinker'
 
 export default {
@@ -19,7 +20,7 @@ export default {
   },
   computed: {
     messageText() {
-      return Autolinker.link(this.data.text, {
+      return Autolinker.link(escapeGoat.escape(this.data.text), {
         className: 'chatLink',
         truncate: { length: 50, location: 'smart' }
       })
