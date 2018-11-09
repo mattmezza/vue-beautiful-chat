@@ -85,6 +85,9 @@ export default {
       type: String,
       default: 'Write a reply'
     },
+    onTyping: {
+      type: Function
+    },
     showTypingIndicator: {
       type: String,
       required: true
