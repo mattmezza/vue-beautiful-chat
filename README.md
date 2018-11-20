@@ -56,7 +56,8 @@ Vue.use(Chat)
       :showFile="true"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
-      :alwaysScrollToBottom="alwaysScrollToBottom" />
+      :alwaysScrollToBottom="alwaysScrollToBottom"
+      :messageStyling="messageStyling" />
   </div>
 </template>
 ```
@@ -110,6 +111,7 @@ export default {
         }
       }, // specifies the color scheme for the component
       alwaysScrollToBottom: false // when set to true always scrolls the chat to the bottom when new events are in (new message, user starts typing...)
+      messageStyling: true // enables *bold* /emph/ _underline_ and such (more info at github.com/mattezza/msgdown)
     }
   },
   methods: {
@@ -158,6 +160,7 @@ Launcher props:
 | showFile | Boolean | A bool indicating whether or not to show the file chooser button
 | showTypingIndicator | Boolean | A bool indicating whether or not to show the `typing` indicator
 | colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
+| messageStyling | Boolean | A bool indicating whether or not to enable `msgdown` support for message formatting in chat. [See here](#faq)
 
 
 ### Message Objects
@@ -258,6 +261,13 @@ let redColors = {
 This is the red variant. Please check [this file](https://github.com/mattmezza/vue-beautiful-chat/tree/master/demo/src/colors.js) for the list of variants shown in the demo page online.
 
 Please note that you need to pass an Object containing each one of the color properties otherwise the validation will fail.
+
+</p>
+</details>
+<details><summary>How can I add message formatting?</summary>
+<p>
+
+Good news, message formatting is already added for you. You can enable it by setting `messageStyling` to `true` and you will be using the [msgdown](https://github.com/mattmezza/msgdown) library. You can enable/disable the formatting support at any time, or you can let users do it whenever they prefer.
 
 </p>
 </details>
