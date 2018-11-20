@@ -8,7 +8,7 @@
 <script>
 import escapeGoat from 'escape-goat'
 import Autolinker from 'autolinker'
-const fmt = require('./messageFormatter')
+const fmt = require('msgdown')
 
 export default {
   props: {
