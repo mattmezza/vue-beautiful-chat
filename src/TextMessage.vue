@@ -19,11 +19,17 @@ export default {
     messageColors: {
       type: Object,
       required: true
+    },
+    messageStyling: {
+      type: Boolean,
+      required: true
     }
   },
   computed: {
     messageText() {
-      return Autolinker.link(fmt(escapeGoat.escape(this.data.text)), {
+      const escaped = escapeGoat.escape(this.data.text)
+
+      return Autolinker.link(this.messageStyling ? fmt(escaped) : escaped, {
         className: 'chatLink',
         truncate: { length: 50, location: 'smart' }
       })

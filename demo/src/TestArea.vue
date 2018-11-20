@@ -5,7 +5,9 @@
       <div class="demo-test-area--title-sub">by <a :style="{color: linkColor}" href="https://matteo.merola.co">mattmezza</a></div>
     </div>
     <form class="demo-test-area" @submit.prevent="_handleSubmit" @keyup="_handleTyping">
-      <div class="demo-test-area--preamble">Test the chat window by sending a message:</div>
+      <div class="demo-test-area--preamble">
+        <p>Test the chat window by sending a message:</p>
+      </div>
       <textarea ref="textArea" class="demo-test-area--text" placeholder="Write a test message...." :style="textareaStyle" />
       <button class="demo-test-area--button" :style="{background: ctaColor, color: colors.sentMessage.text}"> Send Message! </button>
     </form>
@@ -38,6 +40,10 @@ export default {
     },
     chosenColor: {
       type: String,
+      required: true
+    },
+    messageStyling: {
+      type: Boolean,
       required: true
     }
   },

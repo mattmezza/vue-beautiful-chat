@@ -21,6 +21,7 @@
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
+      :messageStyling="messageStyling"
     />
   </div>
 </template>
@@ -125,6 +126,10 @@ export default {
       }
     },
     alwaysScrollToBottom: {
+      type: Boolean,
+      default: () => false
+    },
+    messageStyling: {
       type: Boolean,
       default: () => false
     }

@@ -14,7 +14,8 @@
       :showFile="true"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
-      :alwaysScrollToBottom="alwaysScrollToBottom" />
+      :alwaysScrollToBottom="alwaysScrollToBottom"
+      :messageStyling="messageStyling" />
       <p class="text-center toggle">
         <a v-if="!isChatOpen" :style="{color: linkColor}" href="#" @click.prevent="openChat()">Open the chat window</a>
         <a v-else :style="{color: linkColor}" href="#" @click.prevent="closeChat()">Close the chat window</a>
@@ -24,8 +25,10 @@
         <a :style="{background: availableColors.red.launcher.bg}" href="#" @click.prevent="setColor('red')">Red</a>
         <a :style="{background: availableColors.green.launcher.bg}" href="#" @click.prevent="setColor('green')">Green</a>
         <a :style="{background: availableColors.dark.launcher.bg}" href="#" @click.prevent="setColor('dark')">Dark</a>
-      </p>
-    <TestArea :onMessage="sendMessage" :onTyping="handleTyping" :colors="colors" :chosenColor="chosenColor" />
+      </p> 
+      <v-dialog />
+      <p class="text-center messageStyling"><label>Message styling enabled? <input type="checkbox" @change="messageStylingToggled" checked></label><a href="#" @click.prevent="showStylingInfo()">info</a></p>  
+    <TestArea :onMessage="sendMessage" :onTyping="handleTyping" :colors="colors" :chosenColor="chosenColor" :messageStyling="messageStyling" />
     <Footer :colors="colors" :chosenColor="chosenColor" />
   </div>
 </template>
@@ -54,7 +57,8 @@ export default {
       colors: null,
       availableColors,
       chosenColor: null,
-      alwaysScrollToBottom: false
+      alwaysScrollToBottom: false,
+      messageStyling: true,
     }
   },
   created() {
@@ -83,6 +87,15 @@ export default {
     setColor (color) {
       this.colors = this.availableColors[color]
       this.chosenColor = color
+    },
+    showStylingInfo() {
+      this.$modal.show('dialog', {
+        title: 'Info',
+        text: 'You can use *word* to <strong>boldify</strong>, /word/ to <em>emphasize</em>, _word_ to <u>underline</u>, `code` to <code>write = code;</code>, ~this~ to <del>delete</del> and ^sup^ or ¡sub¡ to write <sup>sup</sup> and <sub>sub</sub>'
+      })
+    },
+    messageStylingToggled(e) {
+      this.messageStyling = e.target.checked
     }
   },
   computed: {
@@ -158,4 +171,9 @@ body {
 .toggle a {
   text-decoration: none;
 }
+
+.messageStyling {
+  font-size: small;
+}
+
 </style>

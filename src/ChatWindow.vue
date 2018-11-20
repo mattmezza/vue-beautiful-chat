@@ -18,6 +18,7 @@
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
+      :messageStyling="messageStyling"
     />
     <UserInput
       v-if="!showUserList"
@@ -92,6 +93,10 @@ export default {
       required: true
     },
     alwaysScrollToBottom: {
+      type: Boolean,
+      required: true
+    },
+    messageStyling: {
       type: Boolean,
       required: true
     }
