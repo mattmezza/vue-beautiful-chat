@@ -24,6 +24,7 @@
       v-if="!showUserList"
       :showEmoji="showEmoji"
       :onSubmit="onUserInputSubmit"
+      :suggestions="getSuggestions()"
       :showFile="showFile"
       :placeholder="placeholder"
       :colors="colors" />
@@ -116,6 +117,9 @@ export default {
   methods: {
     handleUserListToggle(showUserList) {
       this.showUserList = showUserList
+    },
+    getSuggestions(){
+      return this.messages.length > 0 ? this.messages[this.messages.length - 1].suggestions : []
     }
   }
 }

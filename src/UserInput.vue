@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Suggestions :suggestions="suggestions" v-on:sendSuggestion="_submitSuggestion" :colors="colors.sentMessage"/>
     <div v-if="file" class='file-container' :style="{backgroundColor: colors.userInput.text, color: colors.userInput.bg}">
       <span class='icon-file-message'><img src="./assets/file.svg" alt='genericFileIcon' height="15" /></span>
       {{file.name}}
@@ -40,17 +41,23 @@
 import EmojiIcon from './EmojiIcon.vue'
 import FileIcons from './FileIcons.vue'
 import SendIcon from './SendIcon.vue'
+import Suggestions from './Suggestions.vue'
 
 export default {
   components: {
     EmojiIcon,
     FileIcons,
-    SendIcon
+    SendIcon,
+    Suggestions
   },
   props: {
     showEmoji: {
       type: Boolean,
       default: () => false
+    },
+    suggestions: {
+      type: Array,
+      default: () => []
     },
     showFile: {
       type: Boolean,
@@ -87,6 +94,9 @@ export default {
         this._submitText(event)
         event.preventDefault()
       }
+    },
+    _submitSuggestion(suggestion) {
+      this.onSubmit({author: 'me', type: 'text', data: { text: suggestion }})
     },
     _submitText (event) {
       const text = this.$refs.userInput.textContent
@@ -143,7 +153,7 @@ export default {
   background-color: #f4f7f9;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  transition: background-color .2s ease,box-shadow .2s ease;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .sc-user-input--text {
@@ -248,5 +258,4 @@ export default {
 .icon-file-message {
   margin-right: 5px;
 }
-
 </style>
