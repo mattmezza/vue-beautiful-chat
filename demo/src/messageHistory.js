@@ -20,5 +20,6 @@ export default [
   { type: 'emoji', author: `me`, data: { emoji: `😋` } },
   { type: 'text', author: `me`, data: { text: `Do you read me...`, meta: '✓✓ Read' } },
   { type: 'text', author: `me`, data: { text: `...or not?`, meta: '✓ Delivered' } },
-  { type: 'system', data: { text: 'User changed security key', meta: '04-08-2018 15:57' } }
+  { type: 'system', data: { text: 'User changed security key', meta: '04-08-2018 15:57' } },
+  { type: 'text', author: `support`, data: { text: `What about suggestions?` }, suggestions: ["Looks good!", "It's OK.", "Uhh.. Do I really have to say something?", "This suggestion is way too long for css purpose. Let's make it long... Longer, and more and more.. Never ending."] }
 ]
