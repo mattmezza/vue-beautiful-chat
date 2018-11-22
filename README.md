@@ -194,6 +194,23 @@ Message objects are rendered differently depending on their type. Currently, onl
 }
 
 ```
+
+
+#### Quick replies
+
+When sending a message, you can provide a set of sentences that will be displayed in the user chat as quick replies. Adding in the message object a `suggestions` field with the value an array of strings will trigger this functionality
+
+```javascript
+{
+  author: 'support',
+  type: 'text',
+  data: {
+    text: 'some text'
+  },
+  suggestions: ['some quick reply', ..., 'another one']
+}
+```
+
 ### FAQ
 
 <details><summary>How to get the demo working?</summary>
