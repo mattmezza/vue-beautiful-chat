@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Suggestions :suggestions="suggestions" v-on:sendSuggestion="_submitSuggestion" :colors="colors.sentMessage"/>
+    <Suggestions :suggestions="suggestions" v-on:sendSuggestion="_submitSuggestion" :colors="colors"/>
     <div v-if="file" class='file-container' :style="{backgroundColor: colors.userInput.text, color: colors.userInput.bg}">
       <span class='icon-file-message'><img src="./assets/file.svg" alt='genericFileIcon' height="15" /></span>
       {{file.name}}
