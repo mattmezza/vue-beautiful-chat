@@ -1,5 +1,4 @@
 <template>
-  <label htmlFor='file-input' >
     <button
       class="sc-user-input--file-icon-wrapper"
       type='button'
@@ -19,7 +18,6 @@
       </svg>
     </button>
     <input type='file' id='file-input' @change="_handleChange" @click="_handleClick" />
-  </label>
 </template>
 
 <script>
