@@ -22,6 +22,7 @@
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
+      @scrollToTop="$emit('scrollToTop')"
     />
   </div>
 </template>
