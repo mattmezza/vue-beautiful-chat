@@ -146,7 +146,7 @@ export default {
         return this.title
       }
 
-      if (this.participants.length > 1) {
+      if (this.participants.length > 2) {
         return 'You, ' + this.participants[0].name + ' & others'
       } else {
         return 'You & ' + this.participants[0].name
