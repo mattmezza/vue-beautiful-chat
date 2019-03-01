@@ -1,13 +1,12 @@
 <template>
   <div class="sc-message-list" ref="scrollList" :style="{backgroundColor: colors.messageList.bg}">
     <template v-if="loading">
-      <ContentLoader>
-        <rect x="0" y="0" rx="3" ry="3" width="250" height="10" />
-        <rect x="20" y="20" rx="3" ry="3" width="220" height="10" />
-        <rect x="20" y="40" rx="3" ry="3" width="170" height="10" />
-        <rect x="0" y="60" rx="3" ry="3" width="250" height="10" />
-        <rect x="20" y="80" rx="3" ry="3" width="200" height="10" />
-        <rect x="20" y="100" rx="3" ry="3" width="80" height="10" />
+      <ContentLoader
+        :height="245"
+        :width="370"
+      >
+        <rect x="130" y="0" rx="10" ry="10" width="200" height="120" />
+        <rect x="40" y="135" rx="10" ry="10" width="200" height="100" />
       </ContentLoader>
     </template>
     <template v-else>
