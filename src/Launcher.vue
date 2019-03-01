@@ -22,6 +22,7 @@
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
+      :loading="loading"
     />
   </div>
 </template>
@@ -81,6 +82,11 @@ export default {
     showTypingIndicator: {
       type: String,
       default: () => ''
+    },
+    loading: {
+      type: Boolean,
+      default: true,
+      required: true
     },
     colors: {
       type: Object,

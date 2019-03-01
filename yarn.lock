@@ -599,6 +599,10 @@ babel-helper-replace-supers@^6.24.1:
     babel-traverse "^6.24.1"
     babel-types "^6.24.1"
 
+babel-helper-vue-jsx-merge-props@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-2.0.3.tgz#22aebd3b33902328e513293a8e4992b384f9f1b6"
+
 babel-helpers@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-helpers/-/babel-helpers-6.24.1.tgz#3471de9caec388e5c850e597e58a26ddf37602b2"
@@ -7274,6 +7278,12 @@ vm-browserify@0.0.4:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
+
+vue-content-loader@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/vue-content-loader/-/vue-content-loader-0.2.1.tgz#0eb332e2a72643d57fb209d72d6526573b191f5a"
+  dependencies:
+    babel-helper-vue-jsx-merge-props "^2.0.3"
 
 vue-hot-reload-api@^2.2.0, vue-hot-reload-api@^2.3.0:
   version "2.3.0"

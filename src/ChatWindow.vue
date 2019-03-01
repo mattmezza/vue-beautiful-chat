@@ -19,6 +19,7 @@
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
+      :loading="loading"
     />
     <UserInput
       v-if="!showUserList"
@@ -100,7 +101,12 @@ export default {
     messageStyling: {
       type: Boolean,
       required: true
-    }
+    },
+    loading: {
+      type: Boolean,
+      default: true,
+      required: true
+    },
   },
   data() {
     return {

@@ -15,7 +15,9 @@
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
-      :messageStyling="messageStyling" />
+      :messageStyling="messageStyling"
+      :loading="loading"
+    />
       <p class="text-center toggle">
         <a v-if="!isChatOpen" :style="{color: linkColor}" href="#" @click.prevent="openChat()">Open the chat window</a>
         <a v-else :style="{color: linkColor}" href="#" @click.prevent="closeChat()">Close the chat window</a>
@@ -48,6 +50,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       participants: chatParticipants,
       titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
       messageList: messageHistory,
@@ -76,6 +79,7 @@ export default {
     },
     onMessageWasSent (message) {
       this.messageList = [ ...this.messageList, message ]
+      setTimeout(() => { this.loading = false }, 2000);
     },
     openChat () {
       this.isChatOpen = true
