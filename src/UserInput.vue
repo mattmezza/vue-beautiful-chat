@@ -94,6 +94,8 @@ export default {
         this._submitText(event)
         event.preventDefault()
       }
+
+      this.$emit('isTyping')
     },
     _submitSuggestion(suggestion) {
       this.onSubmit({author: 'me', type: 'text', data: { text: suggestion }})
