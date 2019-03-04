@@ -27,7 +27,8 @@
       :suggestions="getSuggestions()"
       :showFile="showFile"
       :placeholder="placeholder"
-      :colors="colors" />
+      :colors="colors"
+      @typing="$emit('typing')" />
   </div>
 </template>
 
@@ -84,9 +85,6 @@ export default {
     placeholder: {
       type: String,
       default: 'Write a reply'
-    },
-    onTyping: {
-      type: Function
     },
     showTypingIndicator: {
       type: String,

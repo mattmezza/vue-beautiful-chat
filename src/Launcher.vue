@@ -18,11 +18,11 @@
       :showEmoji="showEmoji"
       :showFile="showFile"
       :placeholder="placeholder"
-      :onTyping="onTyping"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
+      @typing="$emit('typing')"
     />
   </div>
 </template>
@@ -78,9 +78,6 @@ export default {
     placeholder: {
       type: String,
       default: 'Write a reply'
-    },
-    onTyping: {
-      type: Function
     },
     showTypingIndicator: {
       type: String,

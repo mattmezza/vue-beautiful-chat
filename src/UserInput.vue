@@ -67,9 +67,6 @@ export default {
       type: Function,
       required: true
     },
-    onTyping: {
-      type: Function
-    },
     placeholder: {
       type: String,
       default: 'Write a reply'
@@ -97,7 +94,7 @@ export default {
         this._submitText(event)
         event.preventDefault()
       }
-      this.onTyping()
+      this.$emit('typing')
     },
     _submitSuggestion(suggestion) {
       this.onSubmit({author: 'me', type: 'text', data: { text: suggestion }})
