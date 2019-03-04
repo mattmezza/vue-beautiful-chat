@@ -22,7 +22,7 @@
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
-      @isTyping="$emit('isTyping')"
+      @onType="$emit('onType')"
     />
   </div>
 </template>

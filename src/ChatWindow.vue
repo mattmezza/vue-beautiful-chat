@@ -27,7 +27,7 @@
       :suggestions="getSuggestions()"
       :showFile="showFile"
       :placeholder="placeholder"
-      @isTyping="$emit('isTyping')"
+      @onType="$emit('onType')"
       :colors="colors" />
   </div>
 </template>

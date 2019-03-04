@@ -57,7 +57,8 @@ Vue.use(Chat)
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
-      :messageStyling="messageStyling" />
+      :messageStyling="messageStyling"
+      @onType="handleOnType" />
   </div>
 </template>
 ```
@@ -133,6 +134,9 @@ export default {
     closeChat () {
       // called when the user clicks on the botton to close the chat
       this.isChatOpen = false
+    },
+    handleOnType () {
+      console.log('Emit typing event')
     }
   }
 }
@@ -162,6 +166,11 @@ Launcher props:
 | colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
 | messageStyling | Boolean | A bool indicating whether or not to enable `msgdown` support for message formatting in chat. [See here](#faq)
 
+Launcher events:
+
+|event | params   | description |
+|-----|--------|---------------|
+| onType | undefined | Fires when user types on the message input |
 
 ### Message Objects
 

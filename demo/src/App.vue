@@ -19,7 +19,7 @@
       :showFile="true"
       :showTypingIndicator="showTypingIndicator"
       :titleImageUrl="titleImageUrl"
-      @isTyping="isTyping"
+      @onType="handleOnType"
     />
     <p class="text-center toggle">
       <a
@@ -163,8 +163,8 @@ export default {
     messageStylingToggled(e) {
       this.messageStyling = e.target.checked
     },
-    isTyping() {
-      this.$root.$emit('isTyping')
+    handleOnType() {
+      this.$root.$emit('onType')
       this.userIsTyping = true
     }
   },

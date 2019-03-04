@@ -84,7 +84,7 @@ export default {
     }
   },
   mounted() {
-    this.$root.$on('isTyping', () => {
+    this.$root.$on('onType', () => {
       this.userIsTyping = true
       setTimeout(() => {
         this.userIsTyping = false
