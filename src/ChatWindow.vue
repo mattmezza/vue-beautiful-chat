@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
+  <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen, fullscren: isFullscreens}">
     <Header
       :title="title"
       :imageUrl="titleImageUrl"
@@ -81,6 +81,10 @@ export default {
       type: Boolean,
       default: () => false
     },
+    isFullscreen: {
+      type: Boolean,
+      default: () => false
+    },
     placeholder: {
       type: String,
       default: 'Write a reply'
@@ -147,6 +151,13 @@ export default {
   opacity: 0;
   visibility: hidden;
   bottom: 90px;
+}
+
+.sc-chat-window.fullscreen {
+  width: 80%;
+}
+.sc-chat-window.fullscreen .sc-message {
+  width: 95%;
 }
 
 .sc-message--me {
