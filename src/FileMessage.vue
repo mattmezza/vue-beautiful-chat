@@ -1,9 +1,7 @@
 <template>
   <div class='sc-message--file' :style="messageColors">
     <div class='sc-message--file-icon'>
-      <a :href="data.file.url || '#'" target='_blank'>
-        <img src="./assets/file.svg" alt='generic file icon' height="60" />
-      </a>
+      <img :src="data.file.url" class="sc-image">
     </div>
     <div class='sc-message--file-name' :style="messageColors">
       <a :href="data.file.url ? data.file.url : '#'" target='_blank'>{{data.file.name || ''}}</a>
@@ -49,8 +47,9 @@ export default {
   margin-bottom: 0px;
 }
 
-.sc-message--file-icon:hover {
-  opacity: 0.7;
+.sc-image {
+  max-width: 100%;
+  min-width: 100%;
 }
 
 .sc-message--file-text {
