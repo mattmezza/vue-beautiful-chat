@@ -58,7 +58,6 @@ Vue.use(Chat)
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
-      @scrollToTop="handleScrollToTop" />
       @onType="handleOnType" />
   </div>
 </template>
