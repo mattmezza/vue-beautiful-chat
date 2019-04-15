@@ -23,6 +23,7 @@
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
       @scrollToTop="$emit('scrollToTop')"
+      @typing="$emit('typing')"
     />
   </div>
 </template>
