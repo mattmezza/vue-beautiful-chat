@@ -28,7 +28,8 @@
       :suggestions="getSuggestions()"
       :showFile="showFile"
       :placeholder="placeholder"
-      :colors="colors" />
+      :colors="colors"
+      @typing="$emit('typing')" />
   </div>
 </template>
 
