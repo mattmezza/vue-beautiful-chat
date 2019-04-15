@@ -1,35 +1,87 @@
 <template>
   <div :style="{background: backgroundColor}">
-    <Header :colors="colors" :chosenColor="chosenColor" />
+    <Header
+      :chosenColor="chosenColor"
+      :colors="colors"
+    />
     <beautiful-chat
-      :participants="participants"
-      :titleImageUrl="titleImageUrl"
-      :onMessageWasSent="onMessageWasSent"
-      :messageList="messageList"
-      :newMessagesCount="newMessagesCount"
-      :isOpen="isChatOpen"
+      :alwaysScrollToBottom="alwaysScrollToBottom"
       :close="closeChat"
+      :colors="colors"
+      :isOpen="isChatOpen"
+      :messageList="messageList"
+      :messageStyling="messageStyling"
+      :newMessagesCount="newMessagesCount"
+      :onMessageWasSent="onMessageWasSent"
       :open="openChat"
+      :participants="participants"
       :showEmoji="true"
       :showFile="true"
       :showTypingIndicator="showTypingIndicator"
+      :titleImageUrl="titleImageUrl"
+      @onType="handleOnType"
+    />
+    <p class="text-center toggle">
+      <a
+        :style="{color: linkColor}"
+        @click.prevent="openChat()"
+        href="#"
+        v-if="!isChatOpen"
+      >Open the chat window</a>
+      <a
+        :style="{color: linkColor}"
+        @click.prevent="closeChat()"
+        href="#"
+        v-else
+      >Close the chat window</a>
+    </p>
+    <p class="text-center colors">
+      <a
+        :style="{background: availableColors.blue.launcher.bg}"
+        @click.prevent="setColor('blue')"
+        href="#"
+      >Blue</a>
+      <a
+        :style="{background: availableColors.red.launcher.bg}"
+        @click.prevent="setColor('red')"
+        href="#"
+      >Red</a>
+      <a
+        :style="{background: availableColors.green.launcher.bg}"
+        @click.prevent="setColor('green')"
+        href="#"
+      >Green</a>
+      <a
+        :style="{background: availableColors.dark.launcher.bg}"
+        @click.prevent="setColor('dark')"
+        href="#"
+      >Dark</a>
+    </p>
+    <v-dialog/>
+    <p class="text-center messageStyling">
+      <label>Message styling enabled?
+        <input
+          @change="messageStylingToggled"
+          checked
+          type="checkbox"
+        >
+      </label>
+      <a
+        @click.prevent="showStylingInfo()"
+        href="#"
+      >info</a>
+    </p>
+    <TestArea
+      :chosenColor="chosenColor"
       :colors="colors"
-      :alwaysScrollToBottom="alwaysScrollToBottom"
-      :messageStyling="messageStyling" />
-      <p class="text-center toggle">
-        <a v-if="!isChatOpen" :style="{color: linkColor}" href="#" @click.prevent="openChat()">Open the chat window</a>
-        <a v-else :style="{color: linkColor}" href="#" @click.prevent="closeChat()">Close the chat window</a>
-      </p>
-      <p class="text-center colors">
-        <a :style="{background: availableColors.blue.launcher.bg}" href="#" @click.prevent="setColor('blue')">Blue</a>
-        <a :style="{background: availableColors.red.launcher.bg}" href="#" @click.prevent="setColor('red')">Red</a>
-        <a :style="{background: availableColors.green.launcher.bg}" href="#" @click.prevent="setColor('green')">Green</a>
-        <a :style="{background: availableColors.dark.launcher.bg}" href="#" @click.prevent="setColor('dark')">Dark</a>
-      </p> 
-      <v-dialog />
-      <p class="text-center messageStyling"><label>Message styling enabled? <input type="checkbox" @change="messageStylingToggled" checked></label><a href="#" @click.prevent="showStylingInfo()">info</a></p>  
-    <TestArea :onMessage="sendMessage" :onTyping="handleTyping" :colors="colors" :chosenColor="chosenColor" :messageStyling="messageStyling" />
-    <Footer :colors="colors" :chosenColor="chosenColor" />
+      :messageStyling="messageStyling"
+      :onMessage="sendMessage"
+      :onTyping="handleTyping"
+    />
+    <Footer
+      :chosenColor="chosenColor"
+      :colors="colors"
+    />
   </div>
 </template>
 
@@ -44,12 +96,15 @@ import availableColors from './colors'
 export default {
   name: 'app',
   components: {
-    Header, Footer, TestArea
+    Header,
+    Footer,
+    TestArea
   },
   data() {
     return {
       participants: chatParticipants,
-      titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
+      titleImageUrl:
+        'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
       messageList: messageHistory,
       newMessagesCount: 0,
       isChatOpen: false,
@@ -59,48 +114,65 @@ export default {
       chosenColor: null,
       alwaysScrollToBottom: false,
       messageStyling: true,
+      userIsTyping: false
     }
   },
   created() {
     this.setColor('blue')
   },
   methods: {
-    sendMessage (text) {
+    sendMessage(text) {
       if (text.length > 0) {
-        this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
-        this.onMessageWasSent({ author: 'support', type: 'text', data: { text } })
+        this.newMessagesCount = this.isChatOpen
+          ? this.newMessagesCount
+          : this.newMessagesCount + 1
+        this.onMessageWasSent({
+          author: 'support',
+          type: 'text',
+          data: { text }
+        })
       }
     },
-    handleTyping (text) {
-      this.showTypingIndicator = text.length > 0 ? this.participants[this.participants.length - 1].id : '';
+    handleTyping(text) {
+      this.showTypingIndicator =
+        text.length > 0
+          ? this.participants[this.participants.length - 1].id
+          : ''
     },
-    onMessageWasSent (message) {
-      this.messageList = [ ...this.messageList, message ]
+    onMessageWasSent(message) {
+      this.messageList = [...this.messageList, message]
     },
-    openChat () {
+    openChat() {
       this.isChatOpen = true
       this.newMessagesCount = 0
     },
-    closeChat () {
+    closeChat() {
       this.isChatOpen = false
     },
-    setColor (color) {
+    setColor(color) {
       this.colors = this.availableColors[color]
       this.chosenColor = color
     },
     showStylingInfo() {
       this.$modal.show('dialog', {
         title: 'Info',
-        text: 'You can use *word* to <strong>boldify</strong>, /word/ to <em>emphasize</em>, _word_ to <u>underline</u>, `code` to <code>write = code;</code>, ~this~ to <del>delete</del> and ^sup^ or ¡sub¡ to write <sup>sup</sup> and <sub>sub</sub>'
+        text:
+          'You can use *word* to <strong>boldify</strong>, /word/ to <em>emphasize</em>, _word_ to <u>underline</u>, `code` to <code>write = code;</code>, ~this~ to <del>delete</del> and ^sup^ or ¡sub¡ to write <sup>sup</sup> and <sub>sub</sub>'
       })
     },
     messageStylingToggled(e) {
       this.messageStyling = e.target.checked
+    },
+    handleOnType() {
+      this.$root.$emit('onType')
+      this.userIsTyping = true
     }
   },
   computed: {
     linkColor() {
-      return this.chosenColor === 'dark' ? this.colors.sentMessage.text : this.colors.launcher.bg
+      return this.chosenColor === 'dark'
+        ? this.colors.sentMessage.text
+        : this.colors.launcher.bg
     },
     backgroundColor() {
       return this.chosenColor === 'dark' ? this.colors.messageList.bg : '#fff'
@@ -116,7 +188,7 @@ body {
 }
 
 * {
-  font-family: Avenir Next, Helvetica Neue, Helvetica,sans-serif;
+  font-family: Avenir Next, Helvetica Neue, Helvetica, sans-serif;
 }
 
 .demo-description {
@@ -138,7 +210,7 @@ body {
   margin: 0px;
   padding: 0px;
   resize: none;
-  font-family: Avenir Next, Helvetica Neue, Helvetica,sans-serif;
+  font-family: Avenir Next, Helvetica Neue, Helvetica, sans-serif;
   background: #fafbfc;
   color: #8da2b5;
   border: 1px solid #dde5ed;
@@ -175,5 +247,4 @@ body {
 .messageStyling {
   font-size: small;
 }
-
 </style>

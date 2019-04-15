@@ -59,6 +59,7 @@ Vue.use(Chat)
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
       @scrollToTop="handleScrollToTop" />
+      @onType="handleOnType" />
   </div>
 </template>
 ```
@@ -138,9 +139,10 @@ export default {
     handleScrollToTop () {
       // called when the user scrolls message list to top
       // leverage pagination for loading another page of messages
+  	},
+    handleOnType () {
+      console.log('Emit typing event')
     }
-
-  }
 }
 ```
 
@@ -168,6 +170,11 @@ Launcher props:
 | colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
 | messageStyling | Boolean | A bool indicating whether or not to enable `msgdown` support for message formatting in chat. [See here](#faq)
 
+Launcher events:
+
+|event | params   | description |
+|-----|--------|---------------|
+| onType | undefined | Fires when user types on the message input |
 
 ### Message Objects
 

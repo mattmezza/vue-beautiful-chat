@@ -7,6 +7,7 @@
     <form class="demo-test-area" @submit.prevent="_handleSubmit" @keyup="_handleTyping">
       <div class="demo-test-area--preamble">
         <p>Test the chat window by sending a message:</p>
+        <p v-if="userIsTyping">User is typing...</p>
       </div>
       <textarea ref="textArea" class="demo-test-area--text" placeholder="Write a test message...." :style="textareaStyle" />
       <button class="demo-test-area--button" :style="{background: ctaColor, color: colors.sentMessage.text}"> Send Message! </button>
@@ -47,6 +48,11 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      userIsTyping: false
+    }
+  },
   methods: {
     _handleSubmit() {
       this.onMessage(this.$refs.textArea.value)
@@ -76,6 +82,14 @@ export default {
         color: this.chosenColor === 'dark' ? this.colors.sentMessage.text : '#222'
       }
     }
+  },
+  mounted() {
+    this.$root.$on('onType', () => {
+      this.userIsTyping = true
+      setTimeout(() => {
+        this.userIsTyping = false
+      }, 3000);
+    })
   }
 }
 </script>
