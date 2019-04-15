@@ -19,6 +19,7 @@
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
+      @scrollToTop="$emit('scrollToTop')"
     />
     <UserInput
       v-if="!showUserList"
