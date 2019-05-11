@@ -4338,10 +4338,10 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-msgdown@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/msgdown/-/msgdown-1.0.1.tgz#e8ca16742b4c07128c4e65faed0e2391b860c66c"
-  integrity sha512-HggmydnF6WHSmSN7yx92ygWnTVEOnaUbP8bplzDagQW2Inq6ftPUDo6BJdP3C4porU3/gxULlhl+nnYlSnb82g==
+msgdown@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/msgdown/-/msgdown-1.0.2.tgz#0ef8328a2851609672047cf6ba737d73860155b9"
+  integrity sha512-KY0nYCeFfG34umrpWPPRLQTh0apC6RdsnAaKZIG9A38HZ3RfVxamgvYwuxA1Z1o/wk6ycR/JmZI5ZKFpMO7AFA==
 
 multicast-dns-service-types@^1.1.0:
   version "1.1.0"
