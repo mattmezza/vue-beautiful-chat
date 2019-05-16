@@ -51,6 +51,7 @@ Vue.use(Chat)
       :newMessagesCount="newMessagesCount"
       :isOpen="isChatOpen"
       :close="closeChat"
+      :Icons="Icons"
       :open="openChat"
       :showEmoji="true"
       :showFile="true"
@@ -63,10 +64,38 @@ Vue.use(Chat)
 </template>
 ```
 ```javascript
+import CloseIcon from 'vue-beautiful-chat/src/assets/close-icon.png'
+import OpenIcon from 'vue-beautiful-chat/src/assets/logo-no-bg.svg'
+import FileIcon from 'vue-beautiful-chat/src/assets/file.svg'
+import CloseIconSvg from 'vue-beautiful-chat/src/assets/close.svg'
+
 export default {
   name: 'app',
   data() {
     return {
+    
+      Icons:{
+              Open:{
+                img: OpenIcon,
+                name: 'default',
+
+              },
+              Close:{
+                 img: CloseIcon,
+                 name: 'default',
+
+               },
+              File:{
+                 img: FileIcon,
+                 name: 'default',
+
+               },
+               CloseSvg:{
+               img: CloseIconSvg,
+               name: 'default',
+
+             },
+          },
       participants: [
         {
           id: 'user1',
