@@ -3,14 +3,31 @@
     <img class="sc-header--img" :src="imageUrl" alt="" v-if="imageUrl" />
     <div class="sc-header--title" @click="toggleUserList"> {{title}} </div>
     <div class="sc-header--close-button" @click="onClose">
-      <img src="./assets/close-icon.png" alt="" />
+      <img :src="Icons.Close.img" :alt="Icons.Close.name" />
     </div>
   </div>
 </template>
 <script>
 
+
+import CloseIcon from './assets/close-icon.png'
+
 export default {
   props: {
+    Icons:{
+
+      type: Object,
+
+      default: function () {
+        return {
+            Close:{
+               img: CloseIcon,
+               name: 'default',
+
+             },
+        }
+      }
+    },
     imageUrl: {
       type: String,
       required: true
