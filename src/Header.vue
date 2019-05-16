@@ -2,7 +2,7 @@
   <div class="sc-header" :style="{background: colors.header.bg, color: colors.header.text}">
     <img class="sc-header--img" :src="imageUrl" alt="" v-if="imageUrl" />
     <div v-if="!disableUserListToggle" class="sc-header--title enabled" @click="toggleUserList"> {{title}} </div>
-    <div v-else class="sc-header--title" @click="toggleUserList"> {{title}} </div>
+    <div v-else class="sc-header--title"> {{title}} </div>
     <div class="sc-header--close-button" @click="onClose">
       <img src="./assets/close-icon.png" alt="" />
     </div>
