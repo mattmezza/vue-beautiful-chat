@@ -1,7 +1,8 @@
 <template>
   <div class="sc-header" :style="{background: colors.header.bg, color: colors.header.text}">
     <img class="sc-header--img" :src="imageUrl" alt="" v-if="imageUrl" />
-    <div class="sc-header--title" @click="toggleUserList"> {{title}} </div>
+    <div v-if="!disableUserListToggle" class="sc-header--title enabled" @click="toggleUserList"> {{title}} </div>
+    <div v-else class="sc-header--title" @click="toggleUserList"> {{title}} </div>
     <div class="sc-header--close-button" @click="onClose">
       <img src="./assets/close-icon.png" alt="" />
     </div>
@@ -25,6 +26,10 @@ export default {
     colors: {
       type: Object,
       required: true
+    },
+    disableUserListToggle: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -63,11 +68,14 @@ export default {
   padding: 10px;
   flex: 1;
   user-select: none;
+}
+
+.sc-header--title.enabled {
   cursor: pointer;
   border-radius: 5px;
 }
 
-.sc-header--title:hover {
+.sc-header--title.enabled:hover {
   box-shadow: 0px 2px 5px rgba(0.2, 0.2, 0.5, .1);
 }
 

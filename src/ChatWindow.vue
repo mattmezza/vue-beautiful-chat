@@ -5,6 +5,7 @@
       :imageUrl="titleImageUrl"
       :onClose="onClose"
       :colors="colors"
+      :disableUserListToggle="disableUserListToggle"
       @userList="handleUserListToggle"
     />
     <UserList 
@@ -102,6 +103,10 @@ export default {
     messageStyling: {
       type: Boolean,
       required: true
+    },
+    disableUserListToggle: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
