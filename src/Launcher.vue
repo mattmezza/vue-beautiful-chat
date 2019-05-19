@@ -4,8 +4,8 @@
       <div v-if="newMessagesCount > 0 && !isOpen" class="sc-new-messsages-count">
         {{newMessagesCount}}
       </div>
-      <img class="sc-open-icon" src="./assets/close-icon.png" />
-      <img class="sc-closed-icon" src="./assets/logo-no-bg.svg" />
+      <img class="sc-open-icon" :src="Icons.Open.img"  :alt="Icons.Open.name" />
+      <img class="sc-closed-icon" :src="Icons.Close.img"  :alt="Icons.Close.name" />
     </div>
     <ChatWindow
       :messageList="messageList"
@@ -31,8 +31,31 @@
 <script>
 import ChatWindow from './ChatWindow.vue'
 
+import CloseIcon from './assets/close-icon.png'
+import OpenIcon from './assets/logo-no-bg.svg'
+
 export default {
   props: {
+    Icons:{
+
+      type: Object,
+      required: false,
+      default: function () {
+        return {
+
+            Open:{
+              img: OpenIcon,
+              name: 'default',
+
+            },
+            Close:{
+               img: CloseIcon,
+               name: 'default',
+
+             },
+        }
+      }
+    },
     showEmoji: {
       type: Boolean,
       default: false
@@ -90,17 +113,21 @@ export default {
       required: false,
       validator: c => 
         'header' in c
-        && 'bg' in c.header && 'text' in c.header
+        && 'bg' in c.header 
+        && 'text' in c.header
         && 'launcher' in c
         && 'bg' in c.launcher
         && 'messageList' in c
         && 'bg' in c.messageList
         && 'sentMessage' in c
-        && 'bg' in c.sentMessage && 'text' in c.sentMessage
+        && 'bg' in c.sentMessage 
+        && 'text' in c.sentMessage
         && 'receivedMessage' in c
-        && 'bg' in c.receivedMessage && 'text' in c.receivedMessage
+        && 'bg' in c.receivedMessage 
+        && 'text' in c.receivedMessage
         && 'userInput' in c
-        && 'bg' in c.userInput && 'text' in c.userInput,
+        && 'bg' in c.userInput 
+        && 'text' in c.userInput,
       default: function () {
         return {
           header: {
