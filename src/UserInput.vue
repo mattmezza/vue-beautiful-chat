@@ -2,9 +2,9 @@
   <div>
     <Suggestions :suggestions="suggestions" v-on:sendSuggestion="_submitSuggestion" :colors="colors"/>
     <div v-if="file" class='file-container' :style="{backgroundColor: colors.userInput.text, color: colors.userInput.bg}">
-      <span class='icon-file-message'><img src="./assets/file.svg" alt='genericFileIcon' height="15" /></span>
+      <span class='icon-file-message'><img :src="Icons.File.img"  :alt="Icons.File.name" height="15" /></span>
       {{file.name}}
-      <span class='delete-file-message' @click="cancelFile()" ><img src="./assets/close.svg" alt='close icon' height="10" title='Remove the file' /></span>
+      <span class='delete-file-message' @click="cancelFile()" ><img :src="Icons.CloseSvg.img"  :alt="Icons.CloseSvg.name" height="10" title='Remove the file' /></span>
     </div>
     <form class="sc-user-input" :class="{active: inputActive}" :style="{background: colors.userInput.bg}">
       <div
@@ -42,6 +42,8 @@ import EmojiIcon from './EmojiIcon.vue'
 import FileIcons from './FileIcons.vue'
 import SendIcon from './SendIcon.vue'
 import Suggestions from './Suggestions.vue'
+import FileIcon from './assets/file.svg'
+import CloseIconSvg from './assets/close.svg'
 
 export default {
   components: {
@@ -51,6 +53,25 @@ export default {
     Suggestions
   },
   props: {
+    Icons:{
+
+      type: Object,
+      required: false,
+      default: function () {
+        return {
+            File:{
+               img: FileIcon,
+               name: 'default',
+
+             },
+            CloseSvg:{
+               img: CloseIconSvg,
+               name: 'default',
+
+             },
+        }
+      }
+    },
     showEmoji: {
       type: Boolean,
       default: () => false
@@ -79,6 +100,7 @@ export default {
   data () {
     return {
       file: null,
+      emoji: null,
       inputActive: false
     }
   },
@@ -102,40 +124,63 @@ export default {
     _submitText (event) {
       const text = this.$refs.userInput.textContent
       const file = this.file
-      if (file) {
-        if (text && text.length > 0) {
-          this.onSubmit({
-            author: 'me',
-            type: 'file',
-            data: { text, file }
-          })
-          this.file = null
-          this.$refs.userInput.innerHTML = ''
-        } else {
-          this.onSubmit({
-            author: 'me',
-            type: 'file',
-            data: { file }
-          })
-          this.file = null
+      const emoji = this.emoji
+      // console.log({rrr:'rrr'})
+        if (!text && !file && !emoji) {
+
+            return
         }
-      } else {
-        if (text && text.length > 0) {
           this.onSubmit({
             author: 'me',
-            type: 'text',
-            data: { text }
+            type: 'any',
+            data: { text, file, emoji }
           })
+
+          this.file = null
+          this.emoji = null
           this.$refs.userInput.innerHTML = ''
-        }
-      }
+
+      // if (file) {
+      //   if (text && text.length > 0) {
+      //     this.onSubmit({
+      //       author: 'me',
+      //       type: 'file',
+      //       data: { text, file }
+      //     })
+      //     this.file = null
+      //     this.$refs.userInput.innerHTML = ''
+      //   } else {
+      //     this.onSubmit({
+      //       author: 'me',
+      //       type: 'file',
+      //       data: { file }
+      //     })
+      //     this.file = null
+      //   }
+      // } else {
+      //   if (text && text.length > 0) {
+      //     this.onSubmit({
+      //       author: 'me',
+      //       type: 'text',
+      //       data: { text }
+      //     })
+      //     this.$refs.userInput.innerHTML = ''
+      //   }
+      // }
     },
     _handleEmojiPicked (emoji) {
-      this.onSubmit({
-        author: 'me',
-        type: 'emoji',
-        data: { emoji }
-      })
+
+      const text = this.$refs.userInput.textContent
+
+      if (!text || !text.length > 0) {
+        console.log({emoji:emoji})
+        
+        this.$refs.userInput.textContent = emoji
+        this.emoji = emoji
+      }
+      
+      const Newtext = text+emoji
+      this.$refs.userInput.textContent = Newtext
     },
     _handleFileSubmit (file) {
       this.file = file

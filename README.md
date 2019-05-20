@@ -124,6 +124,23 @@ export default {
     },
     onMessageWasSent (message) {
       // called when the user sends a message
+       var bb = this
+      if (message.data.file) {
+
+               
+                var e = message.data.file;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+
+                    message.data.file.url = e.currentTarget.result
+                    bb.messageList = [ ...bb.messageList, message ]
+
+                };
+                  reader.readAsDataURL(e);
+                  return
+
+
+      }
       this.messageList = [ ...this.messageList, message ]
     },
     openChat () {

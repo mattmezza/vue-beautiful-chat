@@ -1,5 +1,7 @@
 import Launcher from './Launcher.vue'
 import VTooltip from 'v-tooltip'
+import 'viewerjs/dist/viewer.css'
+import Viewer from 'v-viewer'
 
 const defaultComponentName = 'beautiful-chat'
 
@@ -29,6 +31,7 @@ const Plugin = {
      */
     Vue.component(this.componentName, Launcher)
     Vue.use(VTooltip)
+    Vue.use(Viewer)
   }
 }
 
