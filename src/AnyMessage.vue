@@ -10,7 +10,7 @@
 
     <div class="sc-message--emoji" v-if="data.emoji">{{data.emoji}}</div>
     
-    <div class="sc-message--file-text" :style="messageColors" v-if="!data.emoji">{{data.text}}<p v-if="data.meta" class='sc-message--meta' :style="messageColors">{{data.meta}}</p></div>
+    <div class="sc-message--file-text" :style="messageColors" v-if="!data.emoji && data.text">{{data.text}}<p v-if="data.meta" class='sc-message--meta' :style="messageColors">{{data.meta}}</p></div>
   </div>
 
   </div>
