@@ -4,7 +4,7 @@
     <div v-if="!disableUserListToggle" class="sc-header--title enabled" @click="toggleUserList"> {{title}} </div>
     <div v-else class="sc-header--title"> {{title}} </div>
     <div class="sc-header--close-button" @click="onClose">
-      <img :src="Icons.Close.img" :alt="Icons.Close.name" />
+      <img :src="icons.close.img" :alt="icons.close.name" />
     </div>
   </div>
 </template>
@@ -15,17 +15,14 @@ import CloseIcon from './assets/close-icon.png'
 
 export default {
   props: {
-    Icons:{
-
+    icons:{
       type: Object,
-
       default: function () {
         return {
-            Close:{
-               img: CloseIcon,
-               name: 'default',
-
-             },
+          close:{
+            img: CloseIcon,
+            name: 'default',
+          },
         }
       }
     },
