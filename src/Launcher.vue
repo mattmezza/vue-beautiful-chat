@@ -4,8 +4,8 @@
       <div v-if="newMessagesCount > 0 && !isOpen" class="sc-new-messsages-count">
         {{newMessagesCount}}
       </div>
-      <img class="sc-open-icon" :src="Icons.Open.img"  :alt="Icons.Open.name" />
-      <img class="sc-closed-icon" :src="Icons.Close.img"  :alt="Icons.Close.name" />
+      <img class="sc-open-icon" :src="icons.open.img"  :alt="icons.open.name" />
+      <img class="sc-closed-icon" :src="icons.close.img"  :alt="icons.close.name" />
     </div>
     <ChatWindow
       :messageList="messageList"
@@ -36,23 +36,19 @@ import OpenIcon from './assets/logo-no-bg.svg'
 
 export default {
   props: {
-    Icons:{
-
+    icons:{
       type: Object,
       required: false,
       default: function () {
         return {
-
-            Open:{
+            open: {
               img: OpenIcon,
               name: 'default',
-
             },
-            Close:{
-               img: CloseIcon,
-               name: 'default',
-
-             },
+            close: {
+              img: CloseIcon,
+              name: 'default',
+            },
         }
       }
     },
