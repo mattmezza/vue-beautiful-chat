@@ -50,6 +50,7 @@ Vue.use(Chat)
       :messageList="messageList"
       :newMessagesCount="newMessagesCount"
       :isOpen="isChatOpen"
+      :acceptMemi="acceptMemi"
       :close="closeChat"
       :Icons="Icons"
       :open="openChat"
@@ -109,6 +110,7 @@ export default {
         }
       ], // the list of all the participant of the conversation. `name` is the user name, `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
       titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
+      acceptMemi:'any', // mime type to allow user to attached e:g '.pdf,.txt,.csv,.docx,audio/*,video/*,image/*' 
       messageList: [
           { type: 'text', author: `me`, data: { text: `Say yes!` } },
           { type: 'text', author: `user1`, data: { text: `No.` } }
@@ -153,19 +155,17 @@ export default {
     },
     onMessageWasSent (message) {
       // called when the user sends a message
-       var bb = this
+       var $this = this
       if (message.data.file) {
-
-               
-                var e = message.data.file;
+                var filedata = message.data.file;
                 var reader = new FileReader();
-                reader.onload = function (e) {
+                reader.onload = function (filedata) {
 
-                    message.data.file.url = e.currentTarget.result
-                    bb.messageList = [ ...bb.messageList, message ]
+                    message.data.file.url = filedata.currentTarget.result
+                    $this.messageList = [ ...$this.messageList, message ]
 
                 };
-                  reader.readAsDataURL(e);
+                  reader.readAsDataURL(filedata);
                   return
 
 

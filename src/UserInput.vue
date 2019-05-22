@@ -26,7 +26,7 @@
           <EmojiIcon :onEmojiPicked="_handleEmojiPicked" :color="colors.userInput.text" />
         </div>
         <div v-if="showFile" class="sc-user-input--button">
-          <FileIcons :onChange="_handleFileSubmit" :color="colors.userInput.text" />
+          <FileIcons :onChange="_handleFileSubmit" :color="colors.userInput.text" :acceptMemi="acceptMemi" />
         </div>
         <div class="sc-user-input--button">
           <SendIcon :onClick="_submitText" :color="colors.userInput.text" />
@@ -71,6 +71,11 @@ export default {
              },
         }
       }
+    },
+    acceptMemi: {
+      type: String,
+      required: true,
+      default: () => 'any'
     },
     showEmoji: {
       type: Boolean,

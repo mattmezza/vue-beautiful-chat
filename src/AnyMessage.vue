@@ -2,7 +2,21 @@
   <div>
   <div class='sc-message--file' :style="messageColors">
     <div class='sc-message--file-icon' v-if="data.file && data.file.url">
-      <img :src="data.file.url" class="sc-image" v-viewer>
+      <img :src="data.file.url" class="sc-image" v-viewer v-if="data.file.type.match('image/')">
+
+      <audio controls v-if="data.file.type.match('audio/')">
+            <source :src="data.file.url" :type="data.file.type">
+      </audio>
+
+      <video width="400" height="200" controls v-if="data.file.type.match('video/')">
+            <source :src="data.file.url" :type="data.file.type">
+      </video>
+
+        <object width="400" height="200" :data="data.file.url" v-if="data.file.type.match('application/') || data.file.type.match('text/')" :type="data.file.type">
+          alt : <a :href="data.file.url"></a>
+        </object>
+
+
     </div>
     <div class='sc-message--file-name' :style="messageColors" v-if="data.file && data.file.url">
       <a :href="data.file.url ? data.file.url : '#'" target='_blank'>{{data.file.name || ''}}</a>
@@ -112,5 +126,9 @@ export default {
 
 .sc-message--emoji {
   font-size: 40px;
+}
+
+audio {
+    height: 40px !important;
 }
 </style>

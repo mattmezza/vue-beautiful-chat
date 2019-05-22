@@ -15,6 +15,7 @@
       :titleImageUrl="titleImageUrl"
       :isOpen="isOpen"
       :onClose="close"
+      :acceptMemi="acceptMemi"
       :showEmoji="showEmoji"
       :showFile="showFile"
       :placeholder="placeholder"
@@ -55,6 +56,11 @@ export default {
              },
         }
       }
+    },
+    acceptMemi: {
+      type: String,
+      required: true,
+      default: () => 'any'
     },
     showEmoji: {
       type: Boolean,

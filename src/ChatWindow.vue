@@ -26,6 +26,7 @@
       v-if="!showUserList"
       :showEmoji="showEmoji"
       :onSubmit="onUserInputSubmit"
+      :acceptMemi="acceptMemi"
       :suggestions="getSuggestions()"
       :showFile="showFile"
       :placeholder="placeholder"
@@ -51,6 +52,11 @@ export default {
     showEmoji: {
       type: Boolean,
       default: false
+    },
+    acceptMemi: {
+      type: String,
+      required: true,
+      default: () => 'any'
     },
     showFile: {
       type: Boolean,
