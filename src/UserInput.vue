@@ -2,9 +2,9 @@
   <div>
     <Suggestions :suggestions="suggestions" v-on:sendSuggestion="_submitSuggestion" :colors="colors"/>
     <div v-if="file" class='file-container' :style="{backgroundColor: colors.userInput.text, color: colors.userInput.bg}">
-      <span class='icon-file-message'><img :src="Icons.File.img"  :alt="Icons.File.name" height="15" /></span>
+      <span class='icon-file-message'><img :src="icons.file.img"  :alt="icons.file.name" height="15" /></span>
       {{file.name}}
-      <span class='delete-file-message' @click="cancelFile()" ><img :src="Icons.CloseSvg.img"  :alt="Icons.CloseSvg.name" height="10" title='Remove the file' /></span>
+      <span class='delete-file-message' @click="cancelFile()" ><img :src="icons.closeSvg.img"  :alt="icons.closeSvg.name" height="10" title='Remove the file' /></span>
     </div>
     <form class="sc-user-input" :class="{active: inputActive}" :style="{background: colors.userInput.bg}">
       <div
@@ -53,22 +53,19 @@ export default {
     Suggestions
   },
   props: {
-    Icons:{
-
+    icons:{
       type: Object,
       required: false,
       default: function () {
         return {
-            File:{
-               img: FileIcon,
-               name: 'default',
-
-             },
-            CloseSvg:{
-               img: CloseIconSvg,
-               name: 'default',
-
-             },
+          file:{
+            img: FileIcon,
+            name: 'default',
+          },
+          closeSvg:{
+            img: CloseIconSvg,
+            name: 'default',
+          },
         }
       }
     },
