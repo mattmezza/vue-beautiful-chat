@@ -4,7 +4,7 @@
       :chosenColor="chosenColor"
       :colors="colors"
     />
-    <beautiful-chat
+    <beautiful-chat 
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :close="closeChat"
       :colors="colors"
@@ -20,7 +20,16 @@
       :showTypingIndicator="showTypingIndicator"
       :titleImageUrl="titleImageUrl"
       @onType="handleOnType"
-    />
+    >
+      <template v-slot:header>
+        🤔 Good chat with {{participants.map(m=>m.name).join(' & ')}}
+      </template>
+      <template v-slot:text-message-body="{ message }">
+        <small style="background:red" v-if="message.meta">{{message.meta}}</small>{{message.text}}
+      </template>
+      <template v-slot:system-message-body="{ message }">[System]: {{message.text}}</template>
+      <template v-slot:user-avatar="{ message, user }"><div style="border-radius:50%; color: pink; font-size: 15px; line-height:25px; text-align:center;background: tomato; width: 25px !important; height: 25px !important; min-width: 30px;min-height: 30px;margin: 5px; font-weight:bold" v-if="message.type === 'text' && user && user.name">{{user.name.toUpperCase()[0]}}</div></template>
+    </beautiful-chat>
     <p class="text-center toggle">
       <a
         :style="{color: linkColor}"

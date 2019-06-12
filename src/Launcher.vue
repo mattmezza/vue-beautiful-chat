@@ -25,7 +25,24 @@
       :disableUserListToggle="disableUserListToggle"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
-    />
+    >
+      <template v-slot:header>
+        <slot name="header">
+        </slot>
+      </template>
+      <template v-slot:user-avatar="scopedProps">
+        <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message">
+        </slot>
+      </template>
+      <template v-slot:text-message-body="scopedProps">
+        <slot name="text-message-body" :message="scopedProps.message">
+        </slot>
+      </template>
+      <template v-slot:system-message-body="scopedProps">
+        <slot name="system-message-body" :message="scopedProps.message">
+        </slot>
+      </template>
+    </ChatWindow>
   </div>
 </template>
 <script>

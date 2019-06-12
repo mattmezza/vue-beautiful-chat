@@ -1,7 +1,16 @@
 <template>
   <div class="sc-message-list" ref="scrollList" :style="{backgroundColor: colors.messageList.bg}" @scroll="handleScroll">
-    <Message v-for="(message, idx) in messages" :message="message" :chatImageUrl="chatImageUrl(message.author)" :authorName="authorName(message.author)" :key="idx" :colors="colors" :messageStyling="messageStyling" />
-    <Message v-show="showTypingIndicator !== ''" :message="{author: showTypingIndicator, type: 'typing'}" :chatImageUrl="chatImageUrl(showTypingIndicator)" :colors="colors" :messageStyling="messageStyling" />
+    <Message v-for="(message, idx) in messages" :message="message" :user="profile(message.author)" :key="idx" :colors="colors" :messageStyling="messageStyling" >
+      <template v-slot:user-avatar="scopedProps">
+        <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message">
+        </slot>
+        </template>
+      <template v-slot:text-message-body="scopedProps">
+        <slot name="text-message-body" :message="scopedProps.message">
+        </slot>
+        </template>
+    </Message>
+    <Message v-show="showTypingIndicator !== ''" :message="{author: showTypingIndicator, type: 'typing'}" :user="{}" :colors="colors" :messageStyling="messageStyling" />
   </div>
 </template>
 <script>
@@ -55,12 +64,6 @@ export default {
 
       // A profile may not be found for system messages or messages by 'me'
       return profile || {imageUrl: '', name: ''}
-    },
-    chatImageUrl(author) {
-      return this.profile(author).imageUrl
-    },
-    authorName(author) {
-      return this.profile(author).name
     }
   },
   computed: {

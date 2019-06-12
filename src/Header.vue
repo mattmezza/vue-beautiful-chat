@@ -1,11 +1,13 @@
 <template>
   <div class="sc-header" :style="{background: colors.header.bg, color: colors.header.text}">
-    <img class="sc-header--img" :src="imageUrl" alt="" v-if="imageUrl" />
-    <div v-if="!disableUserListToggle" class="sc-header--title enabled" @click="toggleUserList"> {{title}} </div>
-    <div v-else class="sc-header--title"> {{title}} </div>
-    <div class="sc-header--close-button" @click="onClose">
-      <img :src="icons.close.img" :alt="icons.close.name" />
-    </div>
+    <slot>
+      <img class="sc-header--img" :src="imageUrl" alt="" v-if="imageUrl" />
+      <div v-if="!disableUserListToggle" class="sc-header--title enabled" @click="toggleUserList"> {{title}} </div>
+      <div v-else class="sc-header--title"> {{title}} </div>
+    </slot>
+      <div class="sc-header--close-button" @click="onClose">
+        <img :src="icons.close.img" :alt="icons.close.name" />
+      </div>
   </div>
 </template>
 <script>
@@ -101,6 +103,7 @@ export default {
   box-sizing: border-box;
   cursor: pointer;
   border-radius: 5px;
+  margin-left: auto;
 }
 
 .sc-header--close-button:hover {

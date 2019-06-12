@@ -199,6 +199,14 @@ Launcher events:
 |-----|--------|---------------|
 | onType | undefined | Fires when user types on the message input |
 
+Launcher slots:
+| slot | props | example | description |
+|------|-------|---------|-------------|
+| header | | `<template v-slot:header> 🤔 Good chat between {{participants.map(m=>m.name).join(' & ')}} </template>` | Replacing default header |
+| user-avatar | `message`, `user` | `<template v-slot:user-avatar="{ message, user }"><div style="border-radius:50%; color: pink; font-size: 15px; line-height:25px; text-align:center;background: tomato; width: 25px !important; height: 25px !important; min-width: 30px;min-height: 30px;margin: 5px; font-weight:bold" v-if="message.type === 'text' && user && user.name">{{user.name.toUpperCase()[0]}}</div></template>` | Replacing user avatar |
+| text-message-body | `message` | `<template v-slot:text-message-body="{ message }"><small style="background:red" v-if="message.meta">{{message.meta}}</small>{{message.text}}</template>` | Change markdown for text message |
+| system-message-body | `message` | `<template v-slot:system-message-body="{ message }">[System]: {{message.text}}</template>` | Change markdown for system message |
+
 ### Message Objects
 
 Message objects are rendered differently depending on their type. Currently, only text, emoji and file types are supported. Each message object has an `author` field which can have the value 'me' or the id of the corresponding agent.
