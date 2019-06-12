@@ -240,7 +240,7 @@ Params: `message`
 
 **system-message-body**
 
-Change markdown for text message.
+Change markdown for system message.
 Params: `message`
 
 ``` html
