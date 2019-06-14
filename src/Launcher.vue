@@ -24,6 +24,7 @@
       :messageStyling="messageStyling"
       :disableUserListToggle="disableUserListToggle"
       @scrollToTop="$emit('scrollToTop')"
+      @messageClick="$emit('messageClick', $event)"
       @onType="$emit('onType')"
     />
   </div>

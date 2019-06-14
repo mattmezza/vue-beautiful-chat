@@ -1,6 +1,6 @@
 <template>
   <div class="sc-message">
-    <div class="sc-message--content" :class="{
+    <div @click="$emit('click', message)" class="sc-message--content" :class="{
         sent: message.author === 'me',
         received: message.author !== 'me' && message.type !== 'system',
         system: message.type === 'system'

@@ -21,6 +21,7 @@
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
       @scrollToTop="$emit('scrollToTop')"
+      @messageClick="$emit('messageClick', $event)"
     />
     <UserInput
       v-if="!showUserList"

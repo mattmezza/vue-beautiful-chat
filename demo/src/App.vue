@@ -20,6 +20,7 @@
       :showTypingIndicator="showTypingIndicator"
       :titleImageUrl="titleImageUrl"
       @onType="handleOnType"
+      @messageClick="messageClick"
     />
     <p class="text-center toggle">
       <a
@@ -166,6 +167,9 @@ export default {
     handleOnType() {
       this.$root.$emit('onType')
       this.userIsTyping = true
+    },
+    messageClick(message){
+      alert('Message with text "' + message.data.text +'" was clicked');
     }
   },
   computed: {
