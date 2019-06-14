@@ -20,6 +20,7 @@
       :showTypingIndicator="showTypingIndicator"
       :titleImageUrl="titleImageUrl"
       @onType="handleOnType"
+      @edit="editMessage"
     />
     <p class="text-center toggle">
       <a
@@ -166,6 +167,11 @@ export default {
     handleOnType() {
       this.$root.$emit('onType')
       this.userIsTyping = true
+    },
+    editMessage(message){
+      const m = this.messageList.find(m=>m.id === message.id);
+      m.isEdited = true;
+      m.data.text = message.data.text;
     }
   },
   computed: {

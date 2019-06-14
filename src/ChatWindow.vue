@@ -30,6 +30,7 @@
       :showFile="showFile"
       :placeholder="placeholder"
       @onType="$emit('onType')"
+      @edit="$emit('edit', $event)"
       :colors="colors" />
   </div>
 </template>
