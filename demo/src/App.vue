@@ -130,7 +130,7 @@ export default {
         this.onMessageWasSent({
           author: 'support',
           type: 'text',
-          id: Math.random()
+          id: Math.random(),
           data: { text }
         })
       }
