@@ -60,6 +60,7 @@ Vue.use(Chat)
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
       @onType="handleOnType" />
+      @messageClick="messageClick"
   </div>
 </template>
 ```
@@ -165,6 +166,9 @@ export default {
   	},
     handleOnType () {
       console.log('Emit typing event')
+    },
+    messageClick(message){
+      alert('Message with text "' + message.data.text +'" was clicked');
     }
 }
 ```
@@ -198,6 +202,7 @@ Launcher events:
 |event | params   | description |
 |-----|--------|---------------|
 | onType | undefined | Fires when user types on the message input |
+| messageClick | undefined | Fires when user clicks the message |
 
 ### Message Objects
 
