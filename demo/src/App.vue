@@ -142,7 +142,7 @@ export default {
           : ''
     },
     onMessageWasSent(message) {
-      this.messageList = [...this.messageList, message]
+      this.messageList = [...this.messageList, Object.assign({}, message, {id: Math.random()})]
     },
     openChat() {
       this.isChatOpen = true

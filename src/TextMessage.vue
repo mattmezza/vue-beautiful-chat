@@ -45,11 +45,6 @@ export default {
     messageStyling: {
       type: Boolean,
       required: true
-    },
-    isEditing: {
-      type: Boolean,
-      required: false,
-      default: false
     }
   },
   computed: {
