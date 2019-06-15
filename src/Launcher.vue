@@ -25,6 +25,7 @@
       :disableUserListToggle="disableUserListToggle"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
+      @edit="$emit('edit', $event)"
     />
   </div>
 </template>

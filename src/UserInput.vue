@@ -4,7 +4,7 @@
     <div v-if="file" class='file-container' :style="{backgroundColor: colors.userInput.text, color: colors.userInput.bg}">
       <span class='icon-file-message'><img :src="icons.file.img"  :alt="icons.file.name" height="15" /></span>
       {{file.name}}
-      <span class='delete-file-message' @click="cancelFile()" ><img :src="icons.closeSvg.img"  :alt="icons.closeSvg.name" height="10" title='Remove the file' /></span>
+      <span class='delete-file-message' @click="cancelFile()"><img :src="icons.closeSvg.img" :alt="icons.closeSvg.name" height="10" title='Remove the file' /></span>
     </div>
     <form class="sc-user-input" :class="{active: inputActive}" :style="{background: colors.userInput.bg}">
       <div
@@ -22,14 +22,24 @@
       </div>
       <div class="sc-user-input--buttons">
         <div class="sc-user-input--button"></div>
-        <div v-if="showEmoji" class="sc-user-input--button">
+        <div v-if="showEmoji && !isEditing" class="sc-user-input--button">
           <EmojiIcon :onEmojiPicked="_handleEmojiPicked" :color="colors.userInput.text" />
         </div>
-        <div v-if="showFile" class="sc-user-input--button">
+        <div v-if="showFile && !isEditing" class="sc-user-input--button">
           <FileIcons :onChange="_handleFileSubmit" :color="colors.userInput.text" />
         </div>
+        <div v-if="isEditing" class="sc-user-input--button">
+          <user-input-button @click.native.prevent="_editFinish" :color="colors.userInput.text" tooltip="cancel">
+            <icon-cross />
+          </user-input-button>
+        </div>
         <div class="sc-user-input--button">
-          <SendIcon :onClick="_submitText" :color="colors.userInput.text" />
+          <user-input-button @click.native.prevent="_editText" v-if="isEditing" :color="colors.userInput.text" tooltip="edit">
+            <icon-ok />
+          </user-input-button>
+          <user-input-button @click.native.prevent="_submitText" v-else="isEditing" :color="colors.userInput.text" tooltip="send">
+            <icon-send />
+          </user-input-button>
         </div>
       </div>
     </form>
@@ -38,19 +48,26 @@
 
 
 <script>
-import EmojiIcon from './EmojiIcon.vue'
-import FileIcons from './FileIcons.vue'
-import SendIcon from './SendIcon.vue'
+import EmojiIcon from './icons/EmojiIcon.vue'
+import FileIcons from './icons/FileIcons.vue'
+import UserInputButton from './UserInputButton.vue'
 import Suggestions from './Suggestions.vue'
 import FileIcon from './assets/file.svg'
 import CloseIconSvg from './assets/close.svg'
+import store from "./store/"
+import IconCross from "./components/icons/IconCross.vue";
+import IconOk from "./components/icons/IconOk.vue";
+import IconSend from "./components/icons/IconSend.vue";
 
 export default {
   components: {
     EmojiIcon,
     FileIcons,
-    SendIcon,
-    Suggestions
+    UserInputButton,
+    Suggestions,
+    IconCross,
+    IconOk,
+    IconSend
   },
   props: {
     icons:{
@@ -97,7 +114,8 @@ export default {
   data () {
     return {
       file: null,
-      inputActive: false
+      inputActive: false,
+      store
     }
   },
   methods: {
@@ -109,9 +127,20 @@ export default {
     },
     handleKey (event) {
       if (event.keyCode === 13 && !event.shiftKey) {
-        this._submitText(event)
+        if (!this.isEditing){
+          this._submitText(event);
+        }
+        else{
+          this._editText(event);
+        }
+        this._editFinish();
         event.preventDefault()
       }
+      else if (event.keyCode === 27) {
+        this._editFinish();
+        event.preventDefault();
+      }
+
       this.$emit('onType')
     },
     _submitSuggestion(suggestion) {
@@ -121,31 +150,46 @@ export default {
       const text = this.$refs.userInput.textContent
       const file = this.file
       if (file) {
-        if (text && text.length > 0) {
-          this.onSubmit({
-            author: 'me',
-            type: 'file',
-            data: { text, file }
-          })
-          this.file = null
-          this.$refs.userInput.innerHTML = ''
-        } else {
-          this.onSubmit({
-            author: 'me',
-            type: 'file',
-            data: { file }
-          })
-          this.file = null
-        }
+        this._submitTextWhenFile(event, text, file)
       } else {
         if (text && text.length > 0) {
           this.onSubmit({
             author: 'me',
             type: 'text',
             data: { text }
-          })
+          });
           this.$refs.userInput.innerHTML = ''
         }
+      }
+    },
+    _submitTextWhenFile(event, text, file) {
+      if (text && text.length > 0) {  
+        this.onSubmit({
+          author: 'me',
+          type: 'file',
+          data: { text, file }
+        })
+        this.file = null
+        this.$refs.userInput.innerHTML = ''
+      } else {
+        this.onSubmit({
+          author: 'me',
+          type: 'file',
+          data: { file }
+        })
+        this.file = null
+      }
+    },
+    _editText (event) {
+      const text = this.$refs.userInput.textContent;
+      if (text && text.length) {
+        this.$emit('edit', {
+          author: 'me',
+          type: 'text',
+          id: store.editMessage.id,
+          data: { text }
+        });
+        this._editFinish();
       }
     },
     _handleEmojiPicked (emoji) {
@@ -157,6 +201,27 @@ export default {
     },
     _handleFileSubmit (file) {
       this.file = file
+    },
+    _editFinish(){
+      this.store.editMessage = null;
+    }
+  },
+  watch: {
+    editMessageId(m){
+      if (store.editMessage != null && store.editMessage != undefined){
+        this.$refs.userInput.focus();
+        this.$refs.userInput.textContent = store.editMessage.data.text;
+      } else {
+        this.$refs.userInput.textContent = '';
+      }
+    }
+  },
+  computed: {
+    editMessageId() {
+      return this.isEditing && store.editMessage.id;
+    },
+    isEditing() {
+      return store.editMessage && store.editMessage.id
     }
   }
 }

@@ -20,6 +20,7 @@
       :showTypingIndicator="showTypingIndicator"
       :titleImageUrl="titleImageUrl"
       @onType="handleOnType"
+      @edit="editMessage"
     />
     <p class="text-center toggle">
       <a
@@ -129,6 +130,7 @@ export default {
         this.onMessageWasSent({
           author: 'support',
           type: 'text',
+          id: Math.random(),
           data: { text }
         })
       }
@@ -140,7 +142,7 @@ export default {
           : ''
     },
     onMessageWasSent(message) {
-      this.messageList = [...this.messageList, message]
+      this.messageList = [...this.messageList, Object.assign({}, message, {id: Math.random()})]
     },
     openChat() {
       this.isChatOpen = true
@@ -166,6 +168,11 @@ export default {
     handleOnType() {
       this.$root.$emit('onType')
       this.userIsTyping = true
+    },
+    editMessage(message){
+      const m = this.messageList.find(m=>m.id === message.id);
+      m.isEdited = true;
+      m.data.text = message.data.text;
     }
   },
   computed: {
