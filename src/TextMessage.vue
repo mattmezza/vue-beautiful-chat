@@ -28,7 +28,7 @@ import store from "./store/"
 const fmt = require('msgdown')
 
 export default {
-  data(){
+  data() {
     return {
       store
     }
@@ -64,7 +64,7 @@ export default {
     }
   },
   methods:{
-    edit(){
+    edit() {
       this.store.editMessage = this.message;
     }
   },
