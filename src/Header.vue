@@ -10,7 +10,6 @@
 </template>
 <script>
 
-
 import CloseIcon from './assets/close-icon.png'
 
 export default {
@@ -82,6 +81,7 @@ export default {
   padding: 10px;
   flex: 1;
   user-select: none;
+  font-size: 20px;
 }
 
 .sc-header--title.enabled {

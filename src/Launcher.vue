@@ -26,6 +26,7 @@
       @scrollToTop="$emit('scrollToTop')"
       @messageClick="$emit('messageClick', $event)"
       @onType="$emit('onType')"
+      @edit="$emit('edit', $event)"
     />
   </div>
 </template>

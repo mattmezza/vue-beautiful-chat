@@ -21,6 +21,7 @@
       :titleImageUrl="titleImageUrl"
       @onType="handleOnType"
       @messageClick="messageClick"
+      @edit="editMessage"
     />
     <p class="text-center toggle">
       <a
@@ -130,6 +131,7 @@ export default {
         this.onMessageWasSent({
           author: 'support',
           type: 'text',
+          id: Math.random(),
           data: { text }
         })
       }
@@ -141,7 +143,7 @@ export default {
           : ''
     },
     onMessageWasSent(message) {
-      this.messageList = [...this.messageList, message]
+      this.messageList = [...this.messageList, Object.assign({}, message, {id: Math.random()})]
     },
     openChat() {
       this.isChatOpen = true
@@ -170,6 +172,11 @@ export default {
     },
     messageClick(message){
       alert('Message with text "' + message.data.text +'" was clicked');
+    },
+    editMessage(message){
+      const m = this.messageList.find(m=>m.id === message.id);
+      m.isEdited = true;
+      m.data.text = message.data.text;
     }
   },
   computed: {

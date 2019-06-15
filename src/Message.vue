@@ -8,7 +8,7 @@
       <div v-if="message.type !== 'system'" :title="authorName" class="sc-message--avatar" :style="{
         backgroundImage: `url(${chatImageUrl})`
       }" v-tooltip="authorName"></div>
-      <TextMessage v-if="message.type === 'text'" :data="message.data" :messageColors="determineMessageColors()" :messageStyling="messageStyling" />
+      <TextMessage v-if="message.type === 'text'" :message="message" :messageColors="determineMessageColors()" :messageStyling="messageStyling" />
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
       <FileMessage v-else-if="message.type === 'file'" :data="message.data" :messageColors="determineMessageColors()" />
       <TypingMessage v-else-if="message.type === 'typing'" :messageColors="determineMessageColors()" />
@@ -24,6 +24,7 @@ import EmojiMessage from './EmojiMessage.vue'
 import TypingMessage from './TypingMessage.vue'
 import SystemMessage from './SystemMessage.vue'
 import chatIcon from './assets/chat-icon.svg'
+import store from "./store/";
 
 export default {
   data () {
@@ -84,6 +85,12 @@ export default {
   margin: auto;
   padding-bottom: 10px;
   display: flex;
+  .sc-message--edited{
+    opacity: 0.7;
+    word-wrap: normal;
+    font-size: xx-small;
+    text-align: center;
+  }
 }
 
 .sc-message--content {
@@ -133,8 +140,39 @@ export default {
   font-weight: 300;
   font-size: 14px;
   line-height: 1.4;
-  white-space: pre-wrap;
-  -webkit-font-smoothing: subpixel-antialiased
+  position: relative;
+  -webkit-font-smoothing: subpixel-antialiased;
+  .sc-message--text-body{
+    .sc-message--text-content{
+      white-space: pre-wrap;
+    }
+  }
+  &:hover .sc-message--toolbox{
+    left: -20px;
+    opacity: 1;
+  }
+  .sc-message--toolbox{
+    transition: left 0.2s ease-out 0s;
+    white-space: normal;
+    opacity: 0;
+    position: absolute;
+    left: 0px;
+    width: 25px;
+    top: 0;
+    button {
+      background: none;
+      border: none;
+      padding: 0px;
+      margin: 0px;
+      outline: none;
+      width:100%;
+      text-align: center;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 }
 .sc-message--content.sent .sc-message--text {
   color: white;
