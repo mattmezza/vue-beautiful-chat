@@ -203,24 +203,22 @@ export default {
       this.store.editMessage = null;
     }
   },
-  watch:{
+  watch: {
     editMessageId(m){
       if (store.editMessage != null && store.editMessage != undefined){
         this.$refs.userInput.focus();
         this.$refs.userInput.textContent = store.editMessage.data.text;
-      }
-      else{
+      } else {
         this.$refs.userInput.textContent = '';
       }
     }
   },
-  computed:{
-    editMessageId(){
+  computed: {
+    editMessageId() {
       return this.isEditing && store.editMessage.id;
     },
-    isEditing(){
-      return store.editMessage && store.editMessage.id != null && 
-      store.editMessage.id != undefined;
+    isEditing() {
+      return store.editMessage && store.editMessage.id
     }
   }
 }
