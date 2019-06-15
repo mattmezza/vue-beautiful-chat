@@ -150,31 +150,34 @@ export default {
       const text = this.$refs.userInput.textContent
       const file = this.file
       if (file) {
-        if (text && text.length > 0) {
-          this.onSubmit({
-            author: 'me',
-            type: 'file',
-            data: { text, file }
-          })
-          this.file = null
-          this.$refs.userInput.innerHTML = ''
-        } else {
-          this.onSubmit({
-            author: 'me',
-            type: 'file',
-            data: { file }
-          })
-          this.file = null
-        }
+        this._submitTextWhenFile(event, text, file)
       } else {
         if (text && text.length > 0) {
-        this.onSubmit({
+          this.onSubmit({
             author: 'me',
             type: 'text',
             data: { text }
           });
           this.$refs.userInput.innerHTML = ''
         }
+      }
+    },
+    _submitTextWhenFile(event, text, file) {
+      if (text && text.length > 0) {  
+        this.onSubmit({
+          author: 'me',
+          type: 'file',
+          data: { text, file }
+        })
+        this.file = null
+        this.$refs.userInput.innerHTML = ''
+      } else {
+        this.onSubmit({
+          author: 'me',
+          type: 'file',
+          data: { file }
+        })
+        this.file = null
       }
     },
     _editText (event) {
