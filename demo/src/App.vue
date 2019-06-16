@@ -4,7 +4,7 @@
       :chosenColor="chosenColor"
       :colors="colors"
     />
-    <beautiful-chat
+    <beautiful-chat 
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :close="closeChat"
       :colors="colors"
@@ -21,7 +21,21 @@
       :titleImageUrl="titleImageUrl"
       @onType="handleOnType"
       @edit="editMessage"
-    />
+    >
+      <template v-slot:text-message-toolbox="scopedProps">
+        <button v-if="!scopedProps.me && scopedProps.message.type==='text'" @click.prevent="like(scopedProps.message.id)">
+          👍
+        </button>
+      </template>
+      <template v-slot:text-message-body="scopedProps"> 
+        <p class="sc-message--text-content" v-html="scopedProps.messageText"></p>
+        <p v-if="scopedProps.message.data.meta" class='sc-message--meta' :style="{color: scopedProps.messageColors.color}">{{scopedProps.message.data.meta}}</p>
+        <p v-if="scopedProps.message.isEdited || scopedProps.message.liked" class='sc-message--edited'>
+          <template v-if="scopedProps.message.isEdited">🔧</template>
+          <template v-if="scopedProps.message.liked">👍</template>
+        </p>
+      </template>
+    </beautiful-chat>
     <p class="text-center toggle">
       <a
         :style="{color: linkColor}"
@@ -173,6 +187,12 @@ export default {
       const m = this.messageList.find(m=>m.id === message.id);
       m.isEdited = true;
       m.data.text = message.data.text;
+    },
+    like(id){
+      const m = this.messageList.findIndex(m => m.id === id);
+      var msg = this.messageList[m];
+      msg.liked = !msg.liked;
+      this.$set(this.messageList, m, msg);
     }
   },
   computed: {
@@ -184,6 +204,9 @@ export default {
     backgroundColor() {
       return this.chosenColor === 'dark' ? this.colors.messageList.bg : '#fff'
     }
+  },
+  mounted(){
+    this.messageList.forEach(x=>x.liked = false);
   }
 }
 </script>

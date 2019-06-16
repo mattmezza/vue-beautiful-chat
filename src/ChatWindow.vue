@@ -7,7 +7,12 @@
       :colors="colors"
       :disableUserListToggle="disableUserListToggle"
       @userList="handleUserListToggle"
-    />
+    >
+      <template>
+        <slot name="header">
+        </slot>
+      </template>
+    </Header>
     <UserList 
       v-if="showUserList"
       :participants="participants"
@@ -21,7 +26,24 @@
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
       @scrollToTop="$emit('scrollToTop')"
-    />
+    >
+      <template v-slot:user-avatar="scopedProps">
+        <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message">
+        </slot>
+      </template>
+      <template v-slot:text-message-body="scopedProps">
+        <slot name="text-message-body" :message="scopedProps.message" :messageText="scopedProps.messageText" :messageColors="scopedProps.messageColors" :me="scopedProps.me">
+        </slot>
+      </template>
+      <template v-slot:system-message-body="scopedProps">
+        <slot name="system-message-body" :message="scopedProps.message">
+        </slot>
+      </template>
+      <template v-slot:text-message-toolbox="scopedProps">
+        <slot name="text-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
+        </slot>
+      </template>
+    </MessageList>
     <UserInput
       v-if="!showUserList"
       :showEmoji="showEmoji"
