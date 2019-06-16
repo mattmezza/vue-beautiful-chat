@@ -4,8 +4,8 @@
       <div v-if="newMessagesCount > 0 && !isOpen" class="sc-new-messsages-count">
         {{newMessagesCount}}
       </div>
-      <img class="sc-open-icon" :src="icons.open.img"  :alt="icons.open.name" />
-      <img class="sc-closed-icon" :src="icons.close.img"  :alt="icons.close.name" />
+      <img v-if="isOpen" class="sc-closed-icon" :src="icons.close.img"  :alt="icons.close.name" />
+      <img v-else class="sc-open-icon" :src="icons.open.img"  :alt="icons.open.name" />
     </div>
     <ChatWindow
       :messageList="messageList"
@@ -32,7 +32,7 @@
 <script>
 import ChatWindow from './ChatWindow.vue'
 
-import CloseIcon from './assets/close-icon.png'
+import CloseIcon from './assets/close-icon-b.png'
 import OpenIcon from './assets/logo-no-bg.svg'
 
 export default {
@@ -229,7 +229,7 @@ export default {
 .sc-launcher .sc-open-icon {
   padding: 20px;
   box-sizing: border-box;
-  opacity: 0;
+  opacity: 1;
 }
 
 .sc-launcher.opened .sc-open-icon {
@@ -239,7 +239,7 @@ export default {
 
 .sc-launcher.opened .sc-closed-icon {
   transform: rotate(-90deg);
-  opacity: 0;
+  opacity: 1;
 }
 
 .sc-launcher.opened:before {
