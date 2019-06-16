@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import Chat from 'plugin'
+import Chat from './../../dist/index'
 import vmodal from 'vue-js-modal'
 
 Vue.use(vmodal , { dialog: true })

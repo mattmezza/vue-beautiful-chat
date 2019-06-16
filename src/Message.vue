@@ -5,7 +5,6 @@
         received: message.author !== 'me' && message.type !== 'system',
         system: message.type === 'system'
       }">
-
       <slot 
         name="user-avatar"
         :message="message" 
@@ -15,9 +14,15 @@
           }" v-tooltip="authorName"></div>
       </slot>
 
-      <TextMessage v-if="message.type === 'text'" :data="message.data" :messageColors="determineMessageColors()" :messageStyling="messageStyling">
-          <slot name="text-message-body" :message="message.data">
-          </slot>
+      <TextMessage v-if="message.type === 'text'" :message="message" :messageColors="determineMessageColors()" :messageStyling="messageStyling">
+          <template v-slot:default="scopedProps">
+            <slot name="text-message-body" :message="scopedProps.message" :messageText="scopedProps.messageText" :messageColors="scopedProps.messageColors" :me="scopedProps.me">
+            </slot>
+          </template>
+          <template v-slot:text-message-toolbox="scopedProps">
+            <slot name="text-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
+            </slot>
+          </template>
       </TextMessage>
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
       <FileMessage v-else-if="message.type === 'file'" :data="message.data" :messageColors="determineMessageColors()" />
@@ -37,6 +42,7 @@ import EmojiMessage from './messages/EmojiMessage.vue'
 import TypingMessage from './messages/TypingMessage.vue'
 import SystemMessage from './messages/SystemMessage.vue'
 import chatIcon from './assets/chat-icon.svg'
+import store from "./store/";
 
 export default {
   data () {
@@ -102,6 +108,12 @@ export default {
   margin: auto;
   padding-bottom: 10px;
   display: flex;
+  .sc-message--edited{
+    opacity: 0.7;
+    word-wrap: normal;
+    font-size: xx-small;
+    text-align: center;
+  }
 }
 
 .sc-message--content {
@@ -151,8 +163,39 @@ export default {
   font-weight: 300;
   font-size: 14px;
   line-height: 1.4;
-  white-space: pre-wrap;
-  -webkit-font-smoothing: subpixel-antialiased
+  position: relative;
+  -webkit-font-smoothing: subpixel-antialiased;
+  .sc-message--text-body{
+    .sc-message--text-content{
+      white-space: pre-wrap;
+    }
+  }
+  &:hover .sc-message--toolbox{
+    left: -20px;
+    opacity: 1;
+  }
+  .sc-message--toolbox{
+    transition: left 0.2s ease-out 0s;
+    white-space: normal;
+    opacity: 0;
+    position: absolute;
+    left: 0px;
+    width: 25px;
+    top: 0;
+    button {
+      background: none;
+      border: none;
+      padding: 0px;
+      margin: 0px;
+      outline: none;
+      width:100%;
+      text-align: center;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 }
 .sc-message--content.sent .sc-message--text {
   color: white;

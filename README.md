@@ -59,7 +59,8 @@ Vue.use(Chat)
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
-      @onType="handleOnType" />
+      @onType="handleOnType"
+      @edit="editMessage" />
   </div>
 </template>
 ```
@@ -165,6 +166,11 @@ export default {
   	},
     handleOnType () {
       console.log('Emit typing event')
+    },
+    editMessage(message){
+      const m = this.messageList.find(m=>m.id === message.id);
+      m.isEdited = true;
+      m.data.text = message.data.text;
     }
 }
 ```
@@ -173,11 +179,11 @@ For more detailed examples see the demo folder.
 
 ## Components
 
-# Launcher
+### Launcher
 
 `Launcher` is the only component needed to use vue-beautiful-chat. It will react dynamically to changes in messages. All new messages must be added via a change in props as shown in the example.
 
-Launcher props:
+#### Props
 
 |prop | type   | description |
 |-----|--------|---------------|
@@ -193,15 +199,16 @@ Launcher props:
 | colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
 | messageStyling | Boolean | A bool indicating whether or not to enable `msgdown` support for message formatting in chat. [See here](#faq)
 
-Launcher events:
+#### Events
 
 |event | params   | description |
 |-----|--------|---------------|
 | onType | undefined | Fires when user types on the message input |
+| edit | `message` | Fires after user edited message |
 
-Launcher slots:
+#### Slots
 
-**header**
+##### header
 
 Replacing default header.
 
@@ -211,7 +218,7 @@ Replacing default header.
 </template>
 ```
 
-**user-avatar**
+##### user-avatar
 
 Replacing user avatar.
 Params: `message`, `user`
@@ -224,7 +231,7 @@ Params: `message`, `user`
 </template>
 ```
 
-**text-message-body**
+##### text-message-body
 
 Change markdown for text message.
 Params: `message`
@@ -238,7 +245,7 @@ Params: `message`
 </template>
 ```
 
-**system-message-body**
+##### system-message-body
 
 Change markdown for system message.
 Params: `message`
@@ -257,14 +264,19 @@ Message objects are rendered differently depending on their type. Currently, onl
 {
   author: 'support',
   type: 'text',
+  id: 1, // or text '1'
+  isEdited: false,
   data: {
-    text: 'some text'
+    text: 'some text',
+    meta: '06-16-2019 12:43'
   }
 }
 
 {
   author: 'me',
   type: 'emoji',
+  id: 1, // or text '1'
+  isEdited: false,
   data: {
     code: 'someCode'
   }
@@ -273,6 +285,8 @@ Message objects are rendered differently depending on their type. Currently, onl
 {
   author: 'me',
   type: 'file',
+  id: 1, // or text '1'
+  isEdited: false,
   data: {
     name: 'file.mp3',
     url: 'https:123.rf/file.mp3'
@@ -290,8 +304,10 @@ When sending a message, you can provide a set of sentences that will be displaye
 {
   author: 'support',
   type: 'text',
+  id: 1, // or text '1'
   data: {
-    text: 'some text'
+    text: 'some text',
+    meta: '06-16-2019 12:43'
   },
   suggestions: ['some quick reply', ..., 'another one']
 }

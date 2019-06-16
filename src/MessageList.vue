@@ -4,11 +4,15 @@
       <template v-slot:user-avatar="scopedProps">
         <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message">
         </slot>
-        </template>
+      </template>
       <template v-slot:text-message-body="scopedProps">
-        <slot name="text-message-body" :message="scopedProps.message">
+        <slot name="text-message-body" :message="scopedProps.message" :messageText="scopedProps.messageText" :messageColors="scopedProps.messageColors" :me="scopedProps.me">
         </slot>
-        </template>
+      </template>
+      <template v-slot:text-message-toolbox="scopedProps">
+        <slot name="text-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
+        </slot>
+      </template>
     </Message>
     <Message v-show="showTypingIndicator !== ''" :message="{author: showTypingIndicator, type: 'typing'}" :user="{}" :colors="colors" :messageStyling="messageStyling" />
   </div>
