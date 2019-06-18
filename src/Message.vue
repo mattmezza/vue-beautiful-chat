@@ -14,7 +14,12 @@
           }" v-tooltip="authorName"></div>
       </slot>
 
-      <TextMessage v-if="message.type === 'text'" :message="message" :messageColors="determineMessageColors()" :messageStyling="messageStyling">
+      <TextMessage 
+        v-if="message.type === 'text'" 
+        :message="message" 
+        :messageColors="determineMessageColors()" 
+        :messageStyling="messageStyling"
+        @remove="$emit('remove')">
           <template v-slot:default="scopedProps">
             <slot name="text-message-body" :message="scopedProps.message" :messageText="scopedProps.messageText" :messageColors="scopedProps.messageColors" :me="scopedProps.me">
             </slot>

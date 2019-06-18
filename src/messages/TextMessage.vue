@@ -2,9 +2,14 @@
   <div class="sc-message--text" :style="messageColors">
     <template>
       <div class="sc-message--toolbox" :style="{background: messageColors.backgroundColor}">
-        <button v-if="me" @click="edit" :disabled="isEditing">
-          <icon-base :color="isEditing? 'black': 'white'" width="10" icon-name="edit">
+        <button v-if="me && message.id != null && message.id != undefined" @click="edit" :disabled="isEditing">
+          <icon-base :color="isEditing? 'black': messageColors.color" width="10" icon-name="edit">
             <icon-edit />
+          </icon-base>
+        </button>
+        <button v-if="me && message.id != null && message.id != undefined" @click="$emit('remove')">
+          <icon-base :color="messageColors.color" width="10" icon-name="remove">
+            <icon-cross />
           </icon-base>
         </button>
         <slot name="text-message-toolbox" :message="message" :me="me">
@@ -26,6 +31,7 @@
 <script>
 import IconBase from './../components/IconBase.vue'
 import IconEdit from './../components/icons/IconEdit.vue'
+import IconCross from './../components/icons/IconCross.vue'
 import escapeGoat from 'escape-goat'
 import Autolinker from 'autolinker'
 import store from "./../store/"
@@ -74,6 +80,7 @@ export default {
   },
   components:{
     IconBase,
+    IconCross,
     IconEdit
   }
 }

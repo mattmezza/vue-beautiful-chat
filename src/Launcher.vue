@@ -26,6 +26,7 @@
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
+      @remove="$emit('remove', $event)"
     >
       <template v-slot:header>
         <slot name="header">

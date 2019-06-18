@@ -21,6 +21,7 @@
       :titleImageUrl="titleImageUrl"
       @onType="handleOnType"
       @edit="editMessage"
+      @remove="removeMessage"
     >
       <template v-slot:text-message-toolbox="scopedProps">
         <button v-if="!scopedProps.me && scopedProps.message.type==='text'" @click.prevent="like(scopedProps.message.id)">
@@ -184,9 +185,16 @@ export default {
       this.userIsTyping = true
     },
     editMessage(message){
-      const m = this.messageList.find(m=>m.id === message.id);
+      const m = this.messageList.find(m => m.id === message.id);
       m.isEdited = true;
       m.data.text = message.data.text;
+    },
+    removeMessage(message){
+      if (confirm('Delete?')){
+        const m = this.messageList.find(m => m.id === message.id);
+        m.type = 'system';
+        m.data.text = 'This message has been removed';
+      }
     },
     like(id){
       const m = this.messageList.findIndex(m => m.id === id);
