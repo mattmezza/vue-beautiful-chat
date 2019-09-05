@@ -268,6 +268,7 @@ export default {
   /* color: rgba(86, 88, 103, 0.3); */
   filter: contrast(15%);
   outline: none;
+  cursor: text;
 }
 
 .sc-user-input--buttons {
