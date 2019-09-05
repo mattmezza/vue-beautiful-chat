@@ -288,9 +288,11 @@ Message objects are rendered differently depending on their type. Currently, onl
   id: 1, // or text '1'
   isEdited: false,
   data: {
-    name: 'file.mp3',
-    url: 'https:123.rf/file.mp3'
-  }
+	file: {
+		name: 'file.mp3',
+		url: 'https:123.rf/file.mp3'
+	  }
+	}
 }
 
 ```
