@@ -18,6 +18,7 @@
         class="sc-user-input--text"
         ref="userInput"
         :style="{color: colors.userInput.text}"
+        @focusUserInput="focusUserInput()"
       >
       </div>
       <div class="sc-user-input--buttons">
@@ -143,6 +144,11 @@ export default {
 
       this.$emit('onType')
     },
+    focusUserInput() {
+      this.$nextTick(() => {
+        this.$refs.userInput.focus();
+      })
+    },
     _submitSuggestion(suggestion) {
       this.onSubmit({author: 'me', type: 'text', data: { text: suggestion }})
     },
@@ -223,6 +229,11 @@ export default {
     isEditing() {
       return store.editMessage && store.editMessage.id
     }
+  },
+  mounted() {
+    this.$root.$on('focusUserInput', () => {
+      this.focusUserInput()
+    })
   }
 }
 </script>
