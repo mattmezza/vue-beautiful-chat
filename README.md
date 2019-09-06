@@ -60,7 +60,9 @@ Vue.use(Chat)
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
       @onType="handleOnType"
-      @edit="editMessage" />
+      @edit="editMessage"
+      :authorId="'me'"
+      />
   </div>
 </template>
 ```
@@ -198,6 +200,7 @@ For more detailed examples see the demo folder.
 | showTypingIndicator | Boolean | A bool indicating whether or not to show the `typing` indicator
 | colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
 | messageStyling | Boolean | A bool indicating whether or not to enable `msgdown` support for message formatting in chat. [See here](#faq)
+| authorId | String | Current user id used to compare message authors.
 
 #### Events
 
