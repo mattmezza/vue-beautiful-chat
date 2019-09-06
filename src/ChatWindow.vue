@@ -20,6 +20,7 @@
     <MessageList
       v-if="!showUserList"
       :messages="messages"
+      :authorId="authorId"
       :participants="participants"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
@@ -131,6 +132,10 @@ export default {
     disableUserListToggle: {
       type: Boolean,
       default: false
+    },
+    authorId: {
+      type: String,
+      required: false
     }
   },
   data() {

@@ -1,8 +1,8 @@
 <template>
   <div class="sc-message">
     <div class="sc-message--content" :class="{
-        sent: message.author === 'me',
-        received: message.author !== 'me' && message.type !== 'system',
+        sent: message.author === authorId,
+        received: message.author !== authorId && message.type !== 'system',
         system: message.type === 'system'
       }">
       <slot 
@@ -19,7 +19,9 @@
         :message="message" 
         :messageColors="determineMessageColors()" 
         :messageStyling="messageStyling"
-        @remove="$emit('remove')">
+        @remove="$emit('remove')"
+        :authorId="authorId"
+        >
           <template v-slot:default="scopedProps">
             <slot name="text-message-body" :message="scopedProps.message" :messageText="scopedProps.messageText" :messageColors="scopedProps.messageColors" :me="scopedProps.me">
             </slot>
@@ -78,6 +80,10 @@ export default {
     user: {
       type: Object,
       required: true
+    },
+    authorId: {
+      type: String,
+      required: false
     }
   },
   methods: {
@@ -94,7 +100,7 @@ export default {
       }
     },
     determineMessageColors() {
-      return this.message.author === 'me' ? this.sentColorsStyle() : this.receivedColorsStyle()
+      return this.message.author === this.authorId ? this.sentColorsStyle() : this.receivedColorsStyle()
     }
   },
   computed:{

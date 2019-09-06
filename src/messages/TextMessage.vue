@@ -55,6 +55,10 @@ export default {
     messageStyling: {
       type: Boolean,
       required: true
+    },
+    authorId: {
+      type: String,
+      required: true
     }
   },
   computed: {
@@ -67,7 +71,7 @@ export default {
       })
     },
     me(){
-      return this.message.author === 'me';
+      return this.message.author === this.authorId;
     },
     isEditing() {
       return (store.editMessage && store.editMessage.id) == this.message.id;

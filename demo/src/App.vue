@@ -22,6 +22,7 @@
       @onType="handleOnType"
       @edit="editMessage"
       @remove="removeMessage"
+      :authorId="'me'"
     >
       <template v-slot:text-message-toolbox="scopedProps">
         <button v-if="!scopedProps.me && scopedProps.message.type==='text'" @click.prevent="like(scopedProps.message.id)">

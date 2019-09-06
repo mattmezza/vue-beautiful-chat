@@ -27,6 +27,7 @@
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
       @remove="$emit('remove', $event)"
+      :authorId="authorId"
     >
       <template v-slot:header>
         <slot name="header">
@@ -185,6 +186,10 @@ export default {
     disableUserListToggle: {
       type: Boolean,
       default: false
+    },
+    authorId: {
+      type: String,
+      required: true
     }
   },
   computed: {
