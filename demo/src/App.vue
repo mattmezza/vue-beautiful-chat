@@ -32,7 +32,7 @@
         <p class="sc-message--text-content" v-html="scopedProps.messageText"></p>
         <p v-if="scopedProps.message.data.meta" class='sc-message--meta' :style="{color: scopedProps.messageColors.color}">{{scopedProps.message.data.meta}}</p>
         <p v-if="scopedProps.message.isEdited || scopedProps.message.liked" class='sc-message--edited'>
-          <template v-if="scopedProps.message.isEdited">🔧</template>
+          <template v-if="scopedProps.message.isEdited">✎</template>
           <template v-if="scopedProps.message.liked">👍</template>
         </p>
       </template>
@@ -128,7 +128,7 @@ export default {
       colors: null,
       availableColors,
       chosenColor: null,
-      alwaysScrollToBottom: false,
+      alwaysScrollToBottom: true,
       messageStyling: true,
       userIsTyping: false
     }
