@@ -13,7 +13,7 @@
         </slot>
       </template>
     </Header>
-    <UserList 
+    <UserList
       v-if="showUserList"
       :participants="participants"
     />
@@ -110,7 +110,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Write a reply'
+      default: 'Write a message...'
     },
     showTypingIndicator: {
       type: String,
@@ -176,7 +176,7 @@ export default {
 
 .sc-chat-window.closed {
   opacity: 0;
-  visibility: hidden;
+  display: none;
   bottom: 90px;
 }
 

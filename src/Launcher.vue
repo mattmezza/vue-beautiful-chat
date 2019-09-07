@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="sc-launcher" :class="{opened: isOpen}" @click.prevent="isOpen ? close() : open()" :style="{backgroundColor: colors.launcher.bg}">
+    <div class="sc-launcher" :class="{opened: isOpen}" @click.prevent="isOpen ? close() : openAndFocus()" :style="{backgroundColor: colors.launcher.bg}">
       <div v-if="newMessagesCount > 0 && !isOpen" class="sc-new-messsages-count">
         {{newMessagesCount}}
       </div>
@@ -121,7 +121,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Write a reply'
+      default: 'Write a message...'
     },
     showTypingIndicator: {
       type: String,
@@ -185,6 +185,12 @@ export default {
     disableUserListToggle: {
       type: Boolean,
       default: false
+    },
+  },
+  methods: {
+    openAndFocus() {
+      this.open();
+      this.$root.$emit('focusUserInput');
     }
   },
   computed: {

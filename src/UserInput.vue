@@ -18,6 +18,7 @@
         class="sc-user-input--text"
         ref="userInput"
         :style="{color: colors.userInput.text}"
+        @focusUserInput="focusUserInput()"
       >
       </div>
       <div class="sc-user-input--buttons">
@@ -34,10 +35,10 @@
           </user-input-button>
         </div>
         <div class="sc-user-input--button">
-          <user-input-button @click.native.prevent="_editText" v-if="isEditing" :color="colors.userInput.text" tooltip="edit">
+          <user-input-button @click.native.prevent="_editText" v-if="isEditing" :color="colors.userInput.text" tooltip="Edit">
             <icon-ok />
           </user-input-button>
-          <user-input-button @click.native.prevent="_submitText" v-else="isEditing" :color="colors.userInput.text" tooltip="send">
+          <user-input-button @click.native.prevent="_submitText" v-else :color="colors.userInput.text" tooltip="Send">
             <icon-send />
           </user-input-button>
         </div>
@@ -104,7 +105,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Write a reply'
+      default: 'Write something...'
     },
     colors: {
       type: Object,
@@ -142,6 +143,11 @@ export default {
       }
 
       this.$emit('onType')
+    },
+    focusUserInput() {
+      this.$nextTick(() => {
+        this.$refs.userInput.focus();
+      })
     },
     _submitSuggestion(suggestion) {
       this.onSubmit({author: 'me', type: 'text', data: { text: suggestion }})
@@ -223,6 +229,11 @@ export default {
     isEditing() {
       return store.editMessage && store.editMessage.id
     }
+  },
+  mounted() {
+    this.$root.$on('focusUserInput', () => {
+      this.focusUserInput()
+    })
   }
 }
 </script>
