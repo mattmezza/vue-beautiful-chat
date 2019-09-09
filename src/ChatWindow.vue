@@ -169,15 +169,29 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: 0.3s ease-in-out;
   border-radius: 10px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  animation: fadeIn;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
 }
 
 .sc-chat-window.closed {
   opacity: 0;
   display: none;
   bottom: 90px;
+}
+
+@keyframes fadeIn {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  100% {
+    display: flex;
+    opacity: 1;
+  }
 }
 
 .sc-message--me {
