@@ -1,6 +1,7 @@
 <template>
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
+      :showCloseButton="showCloseButton"
       :title="title"
       :imageUrl="titleImageUrl"
       :onClose="onClose"
@@ -75,6 +76,10 @@ export default {
     showEmoji: {
       type: Boolean,
       default: false
+    },
+    showCloseButton: {
+      type: Boolean,
+      default: true
     },
     showFile: {
       type: Boolean,

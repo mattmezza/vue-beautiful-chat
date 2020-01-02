@@ -5,7 +5,7 @@
       <div v-if="!disableUserListToggle" class="sc-header--title enabled" @click="toggleUserList"> {{title}} </div>
       <div v-else class="sc-header--title"> {{title}} </div>
     </slot>
-      <div class="sc-header--close-button" @click="onClose">
+      <div v-if="showCloseButton" class="sc-header--close-button" @click="onClose">
         <img :src="icons.close.img" :alt="icons.close.name" />
       </div>
   </div>
@@ -43,6 +43,10 @@ export default {
       required: true
     },
     disableUserListToggle: {
+      type: Boolean,
+      default: false
+    },
+    showCloseButton: {
       type: Boolean,
       default: false
     }
