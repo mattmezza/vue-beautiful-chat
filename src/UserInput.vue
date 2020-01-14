@@ -288,6 +288,7 @@ export default {
   right: 30px;
   height: 100%;
   display: flex;
+  justify-content: flex-end;
 }
 
 .sc-user-input--button:first-of-type {
