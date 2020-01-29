@@ -152,6 +152,20 @@ export default {
     _submitSuggestion(suggestion) {
       this.onSubmit({author: 'me', type: 'text', data: { text: suggestion }})
     },
+    _checkSubmitSuccess (success) {
+      if (Promise !== undefined) {
+        Promise.resolve(success).then(function (wasSuccessful) {
+          if (wasSuccessful === undefined || wasSuccessful) {
+            this.file = null
+            this.$refs.userInput.innerHTML = '';
+          }
+        }.bind(this));
+
+      } else {
+        this.file = null
+        this.$refs.userInput.innerHTML = '';
+      }
+    },
     _submitText (event) {
       const text = this.$refs.userInput.textContent
       const file = this.file
@@ -159,31 +173,27 @@ export default {
         this._submitTextWhenFile(event, text, file)
       } else {
         if (text && text.length > 0) {
-          this.onSubmit({
+          this._checkSubmitSuccess(this.onSubmit({
             author: 'me',
             type: 'text',
             data: { text }
-          });
-          this.$refs.userInput.innerHTML = ''
+          }));
         }
       }
     },
     _submitTextWhenFile(event, text, file) {
-      if (text && text.length > 0) {  
-        this.onSubmit({
+      if (text && text.length > 0) {
+        this._checkSubmitSuccess(this.onSubmit({
           author: 'me',
           type: 'file',
           data: { text, file }
-        })
-        this.file = null
-        this.$refs.userInput.innerHTML = ''
+        }))
       } else {
-        this.onSubmit({
+        this._checkSubmitSuccess(this.onSubmit({
           author: 'me',
           type: 'file',
           data: { file }
-        })
-        this.file = null
+        }))
       }
     },
     _editText (event) {
@@ -199,11 +209,11 @@ export default {
       }
     },
     _handleEmojiPicked (emoji) {
-      this.onSubmit({
+      this._checkSubmitSuccess(this.onSubmit({
         author: 'me',
         type: 'emoji',
         data: { emoji }
-      })
+      }))
     },
     _handleFileSubmit (file) {
       this.file = file
