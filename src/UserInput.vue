@@ -127,7 +127,6 @@ export default {
       const text = this.$refs.userInput.textContent
       const file = this.file
       const emoji = this.emoji
-      // console.log({rrr:'rrr'})
         if (!text && !file && !emoji) {
 
             return
@@ -141,34 +140,6 @@ export default {
           this.file = null
           this.emoji = null
           this.$refs.userInput.innerHTML = ''
-
-      // if (file) {
-      //   if (text && text.length > 0) {
-      //     this.onSubmit({
-      //       author: 'me',
-      //       type: 'file',
-      //       data: { text, file }
-      //     })
-      //     this.file = null
-      //     this.$refs.userInput.innerHTML = ''
-      //   } else {
-      //     this.onSubmit({
-      //       author: 'me',
-      //       type: 'file',
-      //       data: { file }
-      //     })
-      //     this.file = null
-      //   }
-      // } else {
-      //   if (text && text.length > 0) {
-      //     this.onSubmit({
-      //       author: 'me',
-      //       type: 'text',
-      //       data: { text }
-      //     })
-      //     this.$refs.userInput.innerHTML = ''
-      //   }
-      // }
     },
     _handleEmojiPicked (emoji) {
 
