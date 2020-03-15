@@ -1,10 +1,10 @@
 <template>
-  <div class="user-list">
+  <div class="user-list" :style="{ background: userListColor.userList.bg }">
     <table class="" style="padding-top: 5px">
       <tbody>
         <tr v-for="user in participants" :key="user.id">
             <td style="text-align: center;"><img :src="user.imageUrl" class="img-msg"/></td>
-            <td class="user-element">{{user.name}}</td>
+            <td class="user-element" :style="{ color: userListColor.userList.text}">{{user.name}} lol </td>
         </tr>
       </tbody>
   </table>
@@ -16,6 +16,22 @@ export default {
     participants: {
       type: Array,
       required: true
+    },
+    colors: {
+      type: Object
+    }
+  },
+  computed: {
+    userListColor() {
+      if (!this.colors || !this.colors.hasOwnProperty('userList')) {
+        return {
+          userList: {
+            bg: '#FFFFFF',
+            text: '#000000'
+          }
+        };
+      }
+      return this.colors;
     }
   }
 }
