@@ -58,8 +58,8 @@ Vue.use(Chat)
       :showEdition="true"
       :showDeletion="true"
       :showTypingIndicator="showTypingIndicator"
-	  :showLauncher="true"
-	  :showCloseButton="true"
+      :showLauncher="true"
+      :showCloseButton="true"
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
@@ -167,7 +167,7 @@ export default {
     handleScrollToTop () {
       // called when the user scrolls message list to top
       // leverage pagination for loading another page of messages
-  	},
+    },
     handleOnType () {
       console.log('Emit typing event')
     },
@@ -201,7 +201,7 @@ For more detailed examples see the demo folder.
 | showFile | Boolean | A bool indicating whether or not to show the file chooser button
 | showDeletion | Boolean | A bool indicating whether or not to show the edit button for a message
 | showEdition | Boolean | A bool indicating whether or not to show the delete button for a message
-| showTypingIndicator | Boolean | A bool indicating whether or not to show the `typing` indicator
+| showTypingIndicator | String | A string that can be set to a user's participant.id to show `typing` indicator for them
 | colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
 | messageStyling | Boolean | A bool indicating whether or not to enable `msgdown` support for message formatting in chat. [See here](#faq)
 
@@ -294,11 +294,11 @@ Message objects are rendered differently depending on their type. Currently, onl
   id: 1, // or text '1'
   isEdited: false,
   data: {
-	file: {
-		name: 'file.mp3',
-		url: 'https:123.rf/file.mp3'
-	  }
-	}
+    file: {
+      name: 'file.mp3',
+      url: 'https:123.rf/file.mp3'
+    }
+  }
 }
 
 ```
