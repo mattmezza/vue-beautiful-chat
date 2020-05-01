@@ -5,19 +5,19 @@
         received: message.author !== 'me' && message.type !== 'system',
         system: message.type === 'system'
       }">
-      <slot 
+      <slot
         name="user-avatar"
-        :message="message" 
+        :message="message"
         :user="user">
-          <div v-if="message.type !== 'system'" :title="authorName" class="sc-message--avatar" :style="{
+          <div v-if="message.type !== 'system' && authorName && authorName !== 'me'" :title="authorName" class="sc-message--avatar" :style="{
             backgroundImage: `url(${chatImageUrl})`
           }" v-tooltip="authorName"></div>
       </slot>
 
-      <TextMessage 
-        v-if="message.type === 'text'" 
-        :message="message" 
-        :messageColors="determineMessageColors()" 
+      <TextMessage
+        v-if="message.type === 'text'"
+        :message="message"
+        :messageColors="messageColors"
         :messageStyling="messageStyling"
         @remove="$emit('remove')">
           <template v-slot:default="scopedProps">
@@ -30,9 +30,9 @@
           </template>
       </TextMessage>
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
-      <FileMessage v-else-if="message.type === 'file'" :data="message.data" :messageColors="determineMessageColors()" />
-      <TypingMessage v-else-if="message.type === 'typing'" :messageColors="determineMessageColors()" />
-      <SystemMessage v-else-if="message.type === 'system'" :data="message.data" :messageColors="determineMessageColors()">
+      <FileMessage v-else-if="message.type === 'file'" :data="message.data" :messageColors="messageColors" />
+      <TypingMessage v-else-if="message.type === 'typing'" :messageColors="messageColors" />
+      <SystemMessage v-else-if="message.type === 'system'" :data="message.data" :messageColors="messageColors">
           <slot name="system-message-body" :message="message.data">
           </slot>
       </SystemMessage>
@@ -50,11 +50,6 @@ import chatIcon from './assets/chat-icon.svg'
 import store from "./store/";
 
 export default {
-  data () {
-    return {
-
-    }
-  },
   components: {
     TextMessage,
     FileMessage,
@@ -80,12 +75,15 @@ export default {
       required: true
     }
   },
-  methods: {
-    sentColorsStyle() {
-      return {
-        color: this.colors.sentMessage.text,
-        backgroundColor: this.colors.sentMessage.bg
-      }
+  computed:{
+    authorName(){
+      return this.user && this.user.name;
+    },
+    chatImageUrl(){
+      return (this.user && this.user.imageUrl) || chatIcon;
+    },
+    messageColors() {
+      return this.message.author === 'me' ? this.sentColorsStyle : this.receivedColorsStyle
     },
     receivedColorsStyle() {
       return {
@@ -93,16 +91,11 @@ export default {
         backgroundColor: this.colors.receivedMessage.bg
       }
     },
-    determineMessageColors() {
-      return this.message.author === 'me' ? this.sentColorsStyle() : this.receivedColorsStyle()
-    }
-  },
-  computed:{
-    authorName(){
-      return this.user && this.user.name;
-    },
-    chatImageUrl(){
-      return (this.user && this.user.imageUrl) || this.chatIcon;
+    sentColorsStyle() {
+      return {
+        color: this.colors.sentMessage.text,
+        backgroundColor: this.colors.sentMessage.bg
+      }
     }
   }
 }

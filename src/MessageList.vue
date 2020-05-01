@@ -14,7 +14,7 @@
         </slot>
       </template>
     </Message>
-    <Message v-show="showTypingIndicator !== ''" :message="{author: showTypingIndicator, type: 'typing'}" :user="{}" :colors="colors" :messageStyling="messageStyling" />
+    <Message v-show="showTypingIndicator !== ''" :message="{author: showTypingIndicator, type: 'typing'}" :user="profile(showTypingIndicator)" :colors="colors" :messageStyling="messageStyling" />
   </div>
 </template>
 <script>
