@@ -113,11 +113,12 @@ export default {
   margin: auto;
   padding-bottom: 10px;
   display: flex;
+  text-align: left;
   .sc-message--edited{
     opacity: 0.7;
     word-wrap: normal;
     font-size: xx-small;
-    text-align: center;
+    text-align: left;
   }
 }
 
@@ -153,7 +154,7 @@ export default {
   font-size: xx-small;
   margin-bottom: 0px;
   color: white;
-  text-align: center;
+  text-align: right;
 }
 
 @media (max-width: 450px) {

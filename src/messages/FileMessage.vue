@@ -1,7 +1,7 @@
 <template>
   <div class='sc-message--file' :style="messageColors">
     <div class='sc-message--file-icon'>
-      <a :href="data.file.url ? data.file.url : '#'"><img v-if="data.file.type" :src="data.file.type.includes('image') ? data.file.url : url('../assets/Icon-doc.svg')" class="sc-image"></a>
+      <a :href="data.file.url ? data.file.url : '#'"><img v-if="data.file.type" :src="data.file.type.includes('image') ? data.file.url : require('vue-beautiful-chat/src/assets/Icon-doc.svg')" class="sc-image"></a>
     </div>
     <div class='sc-message--file-name' :style="messageColors">
       <a :href="data.file.url ? data.file.url : '#'" target='_blank'>{{data.file.name || ''}}</a>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     data: {
