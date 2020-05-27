@@ -28,6 +28,16 @@ export default {
     getNonImageFileIcon (contentType) {
       let fileExtension = mime.extension(contentType);
       try {
+        switch (fileExtension) {
+          case 'docx':
+            fileExtension = 'doc'
+            break
+          case 'mpga':
+            fileExtension = 'mp3'
+            break
+          default:
+            break
+        }
         return require('vue-beautiful-chat/src/assets/file_icons/' + fileExtension + '.svg')
       } catch (e) {
         return require('vue-beautiful-chat/src/assets/file_icons/file.svg')
