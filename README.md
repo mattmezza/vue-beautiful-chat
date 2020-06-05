@@ -55,6 +55,8 @@ Vue.use(Chat)
       :open="openChat"
       :showEmoji="true"
       :showFile="true"
+      :showEdition="true"
+      :showDeletion="true"
       :showTypingIndicator="showTypingIndicator"
 	  :showLauncher="true"
 	  :showCloseButton="true"
@@ -197,6 +199,8 @@ For more detailed examples see the demo folder.
 | messageList | [message] | An array of message objects to be rendered as a conversation. |
 | showEmoji | Boolean | A bool indicating whether or not to show the emoji button
 | showFile | Boolean | A bool indicating whether or not to show the file chooser button
+| showDeletion | Boolean | A bool indicating whether or not to show the edit button for a message
+| showEdition | Boolean | A bool indicating whether or not to show the delete button for a message
 | showTypingIndicator | Boolean | A bool indicating whether or not to show the `typing` indicator
 | colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
 | messageStyling | Boolean | A bool indicating whether or not to enable `msgdown` support for message formatting in chat. [See here](#faq)
@@ -215,8 +219,8 @@ For more detailed examples see the demo folder.
 Replacing default header.
 
 ``` html
-<template v-slot:header> 
-  🤔 Good chat between {{participants.map(m=>m.name).join(' & ')}} 
+<template v-slot:header>
+  🤔 Good chat between {{participants.map(m=>m.name).join(' & ')}}
 </template>
 ```
 
@@ -395,5 +399,5 @@ Good news, message formatting is already added for you. You can enable it by set
 </p>
 </details>
 
- # Join the team 
+ # Join the team
  Do you want to collaborate? Join the project at https://crowdforge.io/projects/581
