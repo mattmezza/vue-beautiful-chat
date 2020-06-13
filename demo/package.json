@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules && cp index.html dist/",
     "gh:publish": "yarn run build && gh-pages -d dist"
   },
@@ -21,7 +21,7 @@
     "gh-pages": "^1.1.0",
     "node-sass": "^4.5.0",
     "sass-loader": "^7.1.0",
-	"serialize-javascript": "^2.1.1",
+    "serialize-javascript": "^2.1.1",
     "terser-webpack-plugin": "^1.2.3",
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.10",
