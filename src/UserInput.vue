@@ -232,7 +232,9 @@ export default {
   },
   mounted() {
     this.$root.$on('focusUserInput', () => {
-      this.focusUserInput()
+      if (this.$refs.userInput) {
+        this.focusUserInput()
+      }
     })
   }
 }
