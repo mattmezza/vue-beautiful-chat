@@ -1,26 +1,35 @@
 <template>
-    <div class="sc-suggestions-row" :style="{background: colors.messageList.bg}">
-        <button class="sc-suggestions-element" v-for="(suggestion, idx) in suggestions" v-on:click="$emit('sendSuggestion', suggestion)" 
-        :style="{borderColor: colors.sentMessage.bg, color: colors.sentMessage.bg}" :key="idx">{{suggestion}}</button>
-    </div>
+  <div class="sc-suggestions-row" :style="{background: colors.messageList.bg}">
+    <button
+      v-for="(suggestion, idx) in suggestions"
+      :key="idx"
+      class="sc-suggestions-element"
+      :style="{
+        borderColor: colors.sentMessage.bg,
+        color: colors.sentMessage.bg
+      }"
+      @click="$emit('sendSuggestion', suggestion)"
+    >
+      {{ suggestion }}
+    </button>
+  </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-        }
+  props: {
+    suggestions: {
+      type: Array,
+      default: () => []
     },
-    props: {
-        suggestions: {
-            type: Array,
-            default: () => []
-        },
-        colors: {
-            type: Object,
-            required: true
-        }
+    colors: {
+      type: Object,
+      required: true
     }
+  },
+  data() {
+    return {}
+  }
 }
 </script>
 

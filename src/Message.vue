@@ -1,42 +1,62 @@
 <template>
   <div class="sc-message">
-    <div class="sc-message--content" :class="{
+    <div
+      class="sc-message--content"
+      :class="{
         sent: message.author === 'me',
         received: message.author !== 'me' && message.type !== 'system',
         system: message.type === 'system'
-      }">
-      <slot
-        name="user-avatar"
-        :message="message"
-        :user="user">
-          <div v-if="message.type !== 'system' && authorName && authorName !== 'me'" :title="authorName" class="sc-message--avatar" :style="{
+      }"
+    >
+      <slot name="user-avatar" :message="message" :user="user">
+        <div
+          v-if="message.type !== 'system' && authorName && authorName !== 'me'"
+          v-tooltip="authorName"
+          :title="authorName"
+          class="sc-message--avatar"
+          :style="{
             backgroundImage: `url(${chatImageUrl})`
-          }" v-tooltip="authorName"></div>
+          }"
+        ></div>
       </slot>
 
       <TextMessage
         v-if="message.type === 'text'"
         :message="message"
-        :messageColors="messageColors"
-        :messageStyling="messageStyling"
-        :showEdition="showEdition"
-        :showDeletion="showDeletion"
-        @remove="$emit('remove')">
-          <template v-slot:default="scopedProps">
-            <slot name="text-message-body" :message="scopedProps.message" :messageText="scopedProps.messageText" :messageColors="scopedProps.messageColors" :me="scopedProps.me">
-            </slot>
-          </template>
-          <template v-slot:text-message-toolbox="scopedProps">
-            <slot name="text-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
-            </slot>
-          </template>
+        :message-colors="messageColors"
+        :message-styling="messageStyling"
+        :show-edition="showEdition"
+        :show-deletion="showDeletion"
+        @remove="$emit('remove')"
+      >
+        <template v-slot:default="scopedProps">
+          <slot
+            name="text-message-body"
+            :message="scopedProps.message"
+            :messageText="scopedProps.messageText"
+            :messageColors="scopedProps.messageColors"
+            :me="scopedProps.me"
+          >
+          </slot>
+        </template>
+        <template v-slot:text-message-toolbox="scopedProps">
+          <slot name="text-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
+          </slot>
+        </template>
       </TextMessage>
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
-      <FileMessage v-else-if="message.type === 'file'" :data="message.data" :messageColors="messageColors" />
-      <TypingMessage v-else-if="message.type === 'typing'" :messageColors="messageColors" />
-      <SystemMessage v-else-if="message.type === 'system'" :data="message.data" :messageColors="messageColors">
-          <slot name="system-message-body" :message="message.data">
-          </slot>
+      <FileMessage
+        v-else-if="message.type === 'file'"
+        :data="message.data"
+        :message-colors="messageColors"
+      />
+      <TypingMessage v-else-if="message.type === 'typing'" :message-colors="messageColors" />
+      <SystemMessage
+        v-else-if="message.type === 'system'"
+        :data="message.data"
+        :message-colors="messageColors"
+      >
+        <slot name="system-message-body" :message="message.data"> </slot>
       </SystemMessage>
     </div>
   </div>
@@ -49,7 +69,7 @@ import EmojiMessage from './messages/EmojiMessage.vue'
 import TypingMessage from './messages/TypingMessage.vue'
 import SystemMessage from './messages/SystemMessage.vue'
 import chatIcon from './assets/chat-icon.svg'
-import store from "./store/";
+import store from './store/'
 
 export default {
   components: {
@@ -85,12 +105,12 @@ export default {
       required: true
     }
   },
-  computed:{
-    authorName(){
-      return this.user && this.user.name;
+  computed: {
+    authorName() {
+      return this.user && this.user.name
     },
-    chatImageUrl(){
-      return (this.user && this.user.imageUrl) || chatIcon;
+    chatImageUrl() {
+      return (this.user && this.user.imageUrl) || chatIcon
     },
     messageColors() {
       return this.message.author === 'me' ? this.sentColorsStyle : this.receivedColorsStyle
@@ -110,13 +130,14 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 .sc-message {
   width: 300px;
   margin: auto;
   padding-bottom: 10px;
   display: flex;
-  .sc-message--edited{
+  .sc-message--edited {
     opacity: 0.7;
     word-wrap: normal;
     font-size: xx-small;
@@ -173,16 +194,16 @@ export default {
   line-height: 1.4;
   position: relative;
   -webkit-font-smoothing: subpixel-antialiased;
-  .sc-message--text-body{
-    .sc-message--text-content{
+  .sc-message--text-body {
+    .sc-message--text-content {
       white-space: pre-wrap;
     }
   }
-  &:hover .sc-message--toolbox{
+  &:hover .sc-message--toolbox {
     left: -20px;
     opacity: 1;
   }
-  .sc-message--toolbox{
+  .sc-message--toolbox {
     transition: left 0.2s ease-out 0s;
     white-space: normal;
     opacity: 0;
@@ -196,7 +217,7 @@ export default {
       padding: 0px;
       margin: 0px;
       outline: none;
-      width:100%;
+      width: 100%;
       text-align: center;
       cursor: pointer;
       &:focus {
@@ -240,7 +261,7 @@ export default {
     border-color: black;
     z-index: 1;
   }
-  &[x-placement^="top"] {
+  &[x-placement^='top'] {
     margin-bottom: 5px;
     .tooltip-arrow {
       border-width: 5px 5px 0 5px;
@@ -253,7 +274,7 @@ export default {
       margin-bottom: 0;
     }
   }
-  &[x-placement^="bottom"] {
+  &[x-placement^='bottom'] {
     margin-top: 5px;
     .tooltip-arrow {
       border-width: 0 5px 5px 5px;
@@ -266,7 +287,7 @@ export default {
       margin-bottom: 0;
     }
   }
-  &[x-placement^="right"] {
+  &[x-placement^='right'] {
     margin-left: 5px;
     .tooltip-arrow {
       border-width: 5px 5px 5px 0;
@@ -279,7 +300,7 @@ export default {
       margin-right: 0;
     }
   }
-  &[x-placement^="left"] {
+  &[x-placement^='left'] {
     margin-right: 5px;
     .tooltip-arrow {
       border-width: 5px 0 5px 5px;
@@ -295,21 +316,21 @@ export default {
   &[aria-hidden='true'] {
     visibility: hidden;
     opacity: 0;
-    transition: opacity .15s, visibility .15s;
+    transition: opacity 0.15s, visibility 0.15s;
   }
   &[aria-hidden='false'] {
     visibility: visible;
     opacity: 1;
-    transition: opacity .15s;
+    transition: opacity 0.15s;
   }
   &.info {
-    $color: rgba(#004499, .9);
+    $color: rgba(#004499, 0.9);
     .tooltip-inner {
       background: $color;
       color: white;
       padding: 24px;
       border-radius: 5px;
-      box-shadow: 0 5px 30px rgba(black, .1);
+      box-shadow: 0 5px 30px rgba(black, 0.1);
     }
     .tooltip-arrow {
       border-color: $color;
@@ -322,7 +343,7 @@ export default {
       color: black;
       padding: 24px;
       border-radius: 5px;
-      box-shadow: 0 5px 30px rgba(black, .1);
+      box-shadow: 0 5px 30px rgba(black, 0.1);
     }
     .popover-arrow {
       border-color: $color;

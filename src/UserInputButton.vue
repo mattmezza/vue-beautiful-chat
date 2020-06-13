@@ -1,28 +1,27 @@
 <template>
   <button class="sc-user-input--button-icon-wrapper">
-      <icon-base :color="color" width="20" height="20" :icon-name="tooltip">
-        <slot />
-      </icon-base>
-    </button>
+    <IconBase :color="color" width="20" height="20" :icon-name="tooltip">
+      <slot />
+    </IconBase>
+  </button>
 </template>
 
 <script>
-import IconBase from "./components/IconBase.vue";
+import IconBase from './components/IconBase.vue'
 
 export default {
+  components: {
+    IconBase
+  },
   props: {
     color: {
       type: String,
       required: true
     },
     tooltip: {
-        type: String,
-        required: false,
-        default: ''
+      type: String,
+      default: ''
     }
-  },
-  components:{
-    IconBase
   }
 }
 </script>
