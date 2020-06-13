@@ -16,6 +16,7 @@
     </Header>
     <UserList
       v-if="showUserList"
+      :colors="colors"
       :participants="participants"
     />
     <MessageList
