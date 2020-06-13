@@ -40,6 +40,9 @@
           <template v-if="scopedProps.message.liked">👍</template>
         </p>
       </template>
+      <template v-slot:system-message-body="{ message }">
+        [System]: {{message.text}}
+      </template>
     </beautiful-chat>
     <p class="text-center toggle">
       <a
