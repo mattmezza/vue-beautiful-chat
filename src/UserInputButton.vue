@@ -35,18 +35,5 @@ export default {
   margin: 0px;
   outline: none;
   cursor: pointer;
-  &:focus{
-    outline: none;
-  }
-  svg {
-    height: 20px;
-    width: 20px;
-    cursor: pointer;
-    align-self: center;
-    outline: none;
-    &:hover path{
-      filter: contrast(15%);
-    }
-  }
 }
 </style>
