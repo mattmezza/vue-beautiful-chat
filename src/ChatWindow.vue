@@ -25,6 +25,8 @@
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
+      :showEdition="showEdition"
+      :showDeletion="showDeletion"
       :messageStyling="messageStyling"
       @scrollToTop="$emit('scrollToTop')"
       @remove="$emit('remove', $event)"
@@ -136,6 +138,14 @@ export default {
     disableUserListToggle: {
       type: Boolean,
       default: false
+    },
+    showEdition: {
+      type: Boolean,
+      required: true
+    },
+    showDeletion: {
+      type: Boolean,
+      required: true
     }
   },
   data() {

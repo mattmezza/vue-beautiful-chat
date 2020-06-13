@@ -19,6 +19,8 @@
       :onClose="close"
       :showEmoji="showEmoji"
       :showFile="showFile"
+      :showEdition="showEdition"
+      :showDeletion="showDeletion"
       :placeholder="placeholder"
       :showTypingIndicator="showTypingIndicator"
       :colors="colors"
@@ -78,6 +80,14 @@ export default {
       }
     },
     showEmoji: {
+      type: Boolean,
+      default: false
+    },
+    showEdition: {
+      type: Boolean,
+      default: false
+    },
+    showDeletion: {
       type: Boolean,
       default: false
     },

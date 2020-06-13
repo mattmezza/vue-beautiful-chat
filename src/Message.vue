@@ -5,20 +5,22 @@
         received: message.author !== 'me' && message.type !== 'system',
         system: message.type === 'system'
       }">
-      <slot 
+      <slot
         name="user-avatar"
-        :message="message" 
+        :message="message"
         :user="user">
           <div v-if="message.type !== 'system'" :title="authorName" class="sc-message--avatar" :style="{
             backgroundImage: `url(${chatImageUrl})`
           }" v-tooltip="authorName"></div>
       </slot>
 
-      <TextMessage 
-        v-if="message.type === 'text'" 
-        :message="message" 
-        :messageColors="determineMessageColors()" 
+      <TextMessage
+        v-if="message.type === 'text'"
+        :message="message"
+        :messageColors="determineMessageColors()"
         :messageStyling="messageStyling"
+        :showEdition="showEdition"
+        :showDeletion="showDeletion"
         @remove="$emit('remove')">
           <template v-slot:default="scopedProps">
             <slot name="text-message-body" :message="scopedProps.message" :messageText="scopedProps.messageText" :messageColors="scopedProps.messageColors" :me="scopedProps.me">
@@ -77,6 +79,14 @@ export default {
     },
     user: {
       type: Object,
+      required: true
+    },
+    showEdition: {
+      type: Boolean,
+      required: true
+    },
+    showDeletion: {
+      type: Boolean,
       required: true
     }
   },

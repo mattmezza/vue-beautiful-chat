@@ -2,12 +2,12 @@
   <div class="sc-message--text" :style="messageColors">
     <template>
       <div class="sc-message--toolbox" :style="{background: messageColors.backgroundColor}">
-        <button v-if="me && message.id != null && message.id != undefined" @click="edit" :disabled="isEditing">
+        <button v-if="showEdition && me && message.id != null && message.id != undefined" @click="edit" :disabled="isEditing">
           <icon-base :color="isEditing? 'black': messageColors.color" width="10" icon-name="edit">
             <icon-edit />
           </icon-base>
         </button>
-        <button v-if="me && message.id != null && message.id != undefined" @click="$emit('remove')">
+        <button v-if="showDeletion && me && message.id != null && message.id != undefined" @click="$emit('remove')">
           <icon-base :color="messageColors.color" width="10" icon-name="remove">
             <icon-cross />
           </icon-base>
@@ -55,7 +55,15 @@ export default {
     messageStyling: {
       type: Boolean,
       required: true
-    }
+    },
+    showEdition: {
+      type: Boolean,
+      required: true
+    },
+    showDeletion: {
+      type: Boolean,
+      required: true
+    },
   },
   computed: {
     messageText() {

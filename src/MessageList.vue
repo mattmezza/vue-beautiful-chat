@@ -1,6 +1,6 @@
 <template>
   <div class="sc-message-list" ref="scrollList" :style="{backgroundColor: colors.messageList.bg}" @scroll="handleScroll">
-    <Message v-for="(message, idx) in messages" :message="message" :user="profile(message.author)" :key="idx" :colors="colors" :messageStyling="messageStyling" @remove="$emit('remove', message)">
+    <Message v-for="(message, idx) in messages" :message="message" :user="profile(message.author)" :key="idx" :colors="colors" :messageStyling="messageStyling" :showEdition="showEdition" :showDeletion="showDeletion" @remove="$emit('remove', message)">
       <template v-slot:user-avatar="scopedProps">
         <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message">
         </slot>
@@ -14,7 +14,7 @@
         </slot>
       </template>
     </Message>
-    <Message v-show="showTypingIndicator !== ''" :message="{author: showTypingIndicator, type: 'typing'}" :user="{}" :colors="colors" :messageStyling="messageStyling" />
+    <Message v-show="showTypingIndicator !== ''" :message="{author: showTypingIndicator, type: 'typing'}" :user="{}" :colors="colors" :messageStyling="messageStyling" :showEdition="showEdition" :showDeletion="showDeletion" />
   </div>
 </template>
 <script>
@@ -47,6 +47,14 @@ export default {
       required: true
     },
     messageStyling: {
+      type: Boolean,
+      required: true
+    },
+    showEdition: {
+      type: Boolean,
+      required: true
+    },
+    showDeletion: {
       type: Boolean,
       required: true
     }
