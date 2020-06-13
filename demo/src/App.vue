@@ -20,6 +20,8 @@
       :showEmoji="true"
       :showFile="true"
       :showTypingIndicator="showTypingIndicator"
+      :showEdition="true"
+      :showDeletion="true"
       :titleImageUrl="titleImageUrl"
       @onType="handleOnType"
       @edit="editMessage"
