@@ -326,10 +326,20 @@ When sending a message, you can provide a set of sentences that will be displaye
 <details><summary>How to get the demo working?</summary>
 <p>
 
-- `cd vue-beautiful-chat`
-- `yarn watch` # this starts the compiler so everytime you edit files they get compiled
-- `cd demo`
-- `yarn dev` # this starts a web server on localhost:8080 so the demo shows up - it also watches for the demo files changes
+```
+git clone git@github.com:mattmezza/vue-beautiful-chat.git
+cd vue-beautiful-chat
+yarn install  # this installs the package dependencies
+yarn watch  # this watches files to continuously compile them
+```
+
+Open a new shell in the same folder
+
+```
+cd demo
+yarn install # this installs the demo dependencies
+yarn dev # this starts the dev server at http://localhost:8080
+```
 
 </p>
 </details>
