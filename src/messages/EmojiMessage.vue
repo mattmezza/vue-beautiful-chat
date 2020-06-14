@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-message--emoji">{{data.emoji}}</div>
+  <div class="sc-message--emoji">{{ data.emoji }}</div>
 </template>
 
 <script>
