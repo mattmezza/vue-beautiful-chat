@@ -408,6 +408,3 @@ Good news, message formatting is already added for you. You can enable it by set
 
 </p>
 </details>
-
- # Join the team
- Do you want to collaborate? Join the project at https://crowdforge.io/projects/581
