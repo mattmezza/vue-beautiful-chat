@@ -20,6 +20,9 @@
       :showEmoji="true"
       :showFile="true"
       :showTypingIndicator="showTypingIndicator"
+      :showEdition="true"
+      :showDeletion="true"
+      :showConfirmationDeletion="true"
       :titleImageUrl="titleImageUrl"
       @onType="handleOnType"
       @edit="editMessage"
@@ -37,6 +40,9 @@
           <template v-if="scopedProps.message.isEdited">✎</template>
           <template v-if="scopedProps.message.liked">👍</template>
         </p>
+      </template>
+      <template v-slot:system-message-body="{ message }">
+        [System]: {{message.text}}
       </template>
     </beautiful-chat>
     <p class="text-center toggle">
