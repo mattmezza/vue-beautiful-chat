@@ -1,6 +1,7 @@
 <template>
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
+      v-if="showHeader"
       :show-close-button="showCloseButton"
       :title="title"
       :image-url="titleImageUrl"
@@ -87,6 +88,10 @@ export default {
     showFile: {
       type: Boolean,
       default: false
+    },
+    showHeader: {
+      type: Boolean,
+      default: true
     },
     participants: {
       type: Array,
