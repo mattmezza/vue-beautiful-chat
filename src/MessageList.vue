@@ -38,13 +38,15 @@
       </template>
     </Message>
     <Message
-      v-show="showTypingIndicator !== ''"
+      v-show="typingUserArray.length > 0"
       :message="{author: showTypingIndicator, type: 'typing'}"
       :user="profile(showTypingIndicator)"
       :colors="colors"
       :message-styling="messageStyling"
       :show-edition="showEdition"
       :show-deletion="showDeletion"
+      :typing-user-array="typingUserArray"
+      :participants="participants"
     />
   </div>
 </template>
@@ -68,6 +70,10 @@ export default {
     },
     showTypingIndicator: {
       type: String,
+      required: true
+    },
+    typingUserArray: {
+      type: Array,
       required: true
     },
     colors: {

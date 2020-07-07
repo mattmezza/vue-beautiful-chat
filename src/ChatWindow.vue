@@ -19,6 +19,7 @@
       :messages="messages"
       :participants="participants"
       :show-typing-indicator="showTypingIndicator"
+      :typing-user-array="typingUserArray"
       :colors="colors"
       :always-scroll-to-bottom="alwaysScrollToBottom"
       :show-edition="showEdition"
@@ -123,6 +124,10 @@ export default {
     showTypingIndicator: {
       type: String,
       required: true
+    },
+    typingUserArray: {
+        type: Array,
+        required: true
     },
     colors: {
       type: Object,

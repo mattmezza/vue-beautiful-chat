@@ -33,6 +33,7 @@
       :always-scroll-to-bottom="alwaysScrollToBottom"
       :message-styling="messageStyling"
       :disable-user-list-toggle="disableUserListToggle"
+      :typing-user-array="typingUserArray"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
@@ -216,6 +217,11 @@ export default {
     disableUserListToggle: {
       type: Boolean,
       default: false
+    },
+    typingUserArray: {
+      type: Array,
+      required: true,
+      default: () => []
     }
   },
   computed: {
