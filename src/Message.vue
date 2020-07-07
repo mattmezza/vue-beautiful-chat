@@ -17,7 +17,10 @@
           :style="{
             backgroundImage: `url(${chatImageUrl})`
           }"
-        ></div>
+        >
+          <div v-if="user.online" class="online-indicator">
+          </div>
+        </div>
       </slot>
 
       <TextMessage
@@ -171,6 +174,9 @@ export default {
   border-radius: 50%;
   align-self: center;
   margin-right: 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .sc-message--meta {

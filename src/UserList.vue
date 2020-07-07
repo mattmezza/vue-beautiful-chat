@@ -4,7 +4,11 @@
       <tbody>
         <tr v-for="user in participants" :key="user.id">
           <td style="text-align: center;">
-            <img :src="user.imageUrl" class="img-msg" />
+            <div class="img-container">
+              <img :src="user.imageUrl" class="img-msg" />
+              <div v-if="user.online" class="online-indicator">
+              </div>
+            </div>
           </td>
           <td class="user-element" :style="{color: userListColor.userList.text}">
             {{ user.name }}
@@ -48,10 +52,15 @@ export default {
   padding-left: 5px;
   padding-top: 8px;
 }
+.img-container {
+  display:flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-right: 5px;
+}
 .img-msg {
   border-radius: 50%;
   width: 50px;
-  margin-right: 5px;
 }
 .user-element {
   font-size: 20px;

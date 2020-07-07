@@ -235,3 +235,14 @@ export default {
   }
 }
 </style>
+<style>
+.online-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: #9dff00;
+    -webkit-box-shadow: 0px 0px 0px 2px rgba(112,112,112,1);
+    -moz-box-shadow: 0px 0px 0px 2px rgba(112,112,112,1);
+    box-shadow: 0px 0px 0px 2.5px rgba(112,112,112,1);
+}
+</style>
