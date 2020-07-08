@@ -154,7 +154,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Write a message...'
+      default: 'Eine Nachricht schreiben...'
     },
     showTypingIndicator: {
       type: String,
@@ -231,11 +231,11 @@ export default {
       }
 
       if (this.participants.length === 0) {
-        return 'You'
+        return 'Du'
       } else if (this.participants.length > 1) {
-        return 'You, ' + this.participants[0].name + ' & others'
+        return 'Du, ' + this.participants[0].name + ' & andere'
       } else {
-        return 'You & ' + this.participants[0].name
+        return 'Du & ' + this.participants[0].name
       }
     }
   },
