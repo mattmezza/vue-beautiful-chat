@@ -43,7 +43,7 @@ export default {
                         return value.id === this.typingUserArray[0]
                     })[0].name + ', ' + this.participants.filter(value => {
                         return value.id === this.typingUserArray[1]
-                    })[0].name + 'und ' + this.typingUserArray.length - 2 + ' weitere schreiben gerade ...';
+                    })[0].name + ' und ' + (this.typingUserArray.length - 2) + ' weitere schreiben gerade ...';
             }
         }
     }
