@@ -50,6 +50,11 @@
         :data="message.data"
         :message-colors="messageColors"
       />
+      <ImageMessage
+              v-else-if="message.type === 'image'"
+              :data="message.data"
+              :message-colors="messageColors"
+      />
       <TypingMessage v-else-if="message.type === 'typing'" :message-colors="messageColors" />
       <SystemMessage
         v-else-if="message.type === 'system'"
@@ -65,6 +70,7 @@
 <script>
 import TextMessage from './messages/TextMessage.vue'
 import FileMessage from './messages/FileMessage.vue'
+import ImageMessage from './messages/ImageMessage.vue'
 import EmojiMessage from './messages/EmojiMessage.vue'
 import TypingMessage from './messages/TypingMessage.vue'
 import SystemMessage from './messages/SystemMessage.vue'
@@ -75,6 +81,7 @@ export default {
   components: {
     TextMessage,
     FileMessage,
+    ImageMessage,
     EmojiMessage,
     TypingMessage,
     SystemMessage
