@@ -176,6 +176,7 @@ export default {
       m.isEdited = true;
       m.data.text = message.data.text;
     }
+  }
 }
 ```
 
