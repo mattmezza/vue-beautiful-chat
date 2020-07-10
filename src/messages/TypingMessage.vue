@@ -25,26 +25,28 @@ export default {
     },
     methods: {
         getTypingUserNameString() {
+            let name1 = '';
+            let name2 = '';
             switch (this.typingUserArray.length) {
                 case 0:
                     return '';
                 case 1:
-                    return this.participants.filter(value => {
-                        return value.id === this.typingUserArray[0]
-                    })[0].name + ' schreibt gerade ...';
+                    name1 = this.getUserName(0);
+                    return name1 + ' schreibt gerade ...';
                 case 2:
-                    return this.participants.filter(value => {
-                        return value.id === this.typingUserArray[0]
-                    })[0].name + ' und ' + this.participants.filter(value => {
-                        return value.id === this.typingUserArray[1]
-                    })[0].name + ' schreiben gerade ...';
+                    name1 = this.getUserName(0);
+                    name2 = this.getUserName(1);
+                    return name1 + ' und ' + name2 + ' schreiben gerade ...';
                 default:
-                    return this.participants.filter(value => {
-                        return value.id === this.typingUserArray[0]
-                    })[0].name + ', ' + this.participants.filter(value => {
-                        return value.id === this.typingUserArray[1]
-                    })[0].name + ' und ' + (this.typingUserArray.length - 2) + ' weitere schreiben gerade ...';
+                    name1 = this.getUserName(0);
+                    name2 = this.getUserName(1);
+                    return name1 + ' und ' + name2 + ' und ' + (this.typingUserArray.length - 2) + ' weitere schreiben gerade ...';
             }
+        },
+        getUserName(index) {
+            return this.participants.filter(value => {
+                return value.id === this.typingUserArray[index]
+            })[0].name
         }
     }
 }
