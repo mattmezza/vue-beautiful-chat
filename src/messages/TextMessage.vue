@@ -23,6 +23,7 @@
       </div>
     </template>
     <slot :message="message" :messageText="messageText" :messageColors="messageColors" :me="me">
+      <p v-if="!me" class="sc-message--text-content sc-message--text-author" v-html="'~' + authorName"></p>
       <p class="sc-message--text-content" v-html="messageText"></p>
       <p v-if="message.data.meta" class="sc-message--meta" :style="{color: messageColors.color}">
         {{ message.data.meta }}
@@ -71,6 +72,10 @@ export default {
     },
     showDeletion: {
       type: Boolean,
+      required: true
+    },
+    authorName: {
+      type: String,
       required: true
     }
   },

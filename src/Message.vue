@@ -18,8 +18,7 @@
             backgroundImage: `url(${chatImageUrl})`
           }"
         >
-          <div v-if="user.online" class="online-indicator">
-          </div>
+          <div v-if="user.online" class="online-indicator"></div>
         </div>
       </slot>
 
@@ -28,6 +27,7 @@
         :message="message"
         :message-colors="messageColors"
         :message-styling="messageStyling"
+        :author-name="authorName"
         :show-edition="showEdition"
         :show-deletion="showDeletion"
         @remove="$emit('remove')"
@@ -47,7 +47,12 @@
           </slot>
         </template>
       </TextMessage>
-      <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" :message-colors="messageColors"/>
+      <EmojiMessage
+        v-else-if="message.type === 'emoji'"
+        :data="message.data"
+        :author="message.author"
+        :author-name="authorName"
+      />
       <FileMessage
         v-else-if="message.type === 'file'"
         :data="message.data"
@@ -183,7 +188,17 @@ export default {
   font-size: xx-small;
   margin-bottom: 0px;
   color: white;
-  text-align: center;
+  text-align: right;
+}
+
+.sc-message--text-author {
+  margin-bottom: 0.2rem;
+  text-align: end;
+  font-size: 12px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (max-width: 450px) {
@@ -247,6 +262,8 @@ export default {
   color: #263238;
   background-color: #f4f7f9;
   margin-right: 40px;
+  word-wrap: break-word;
+  max-width: calc(100% - 120px);
 }
 
 .tooltip {

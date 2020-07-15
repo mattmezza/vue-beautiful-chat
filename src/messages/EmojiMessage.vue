@@ -1,7 +1,8 @@
 <template>
   <div>
+    <p v-if="!me" class="sc-message--text-content sc-message--text-author" v-html="'~' + authorName"></p>
     <div class="sc-message--emoji">{{ data.emoji }}</div>
-    <p v-if="data.meta" class="sc-message--meta" style="color:black">
+    <p v-if="data.meta" class="sc-message--meta" style="color: black;">
       {{ data.meta }}
     </p>
   </div>
@@ -14,9 +15,18 @@ export default {
       type: Object,
       required: true
     },
-    messageColors: {
-      type: Object,
+    author: {
+      type: String,
       required: true
+    },
+    authorName: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    me() {
+      return this.author === 'me'
     }
   }
 }
