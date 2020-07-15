@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="sc-message--emoji">{{ data.emoji }}</div>
-    <p v-if="data.meta" class="sc-message--meta" :style="{color: messageColors.color}">
+    <p v-if="data.meta" class="sc-message--meta" style="color:black">
       {{ data.meta }}
     </p>
   </div>
