@@ -47,7 +47,7 @@
           </slot>
         </template>
       </TextMessage>
-      <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
+      <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" :message-colors="messageColors"/>
       <FileMessage
         v-else-if="message.type === 'file'"
         :data="message.data"
