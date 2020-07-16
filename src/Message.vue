@@ -50,8 +50,9 @@
       <EmojiMessage
         v-else-if="message.type === 'emoji'"
         :data="message.data"
-        :author="message.author"
+        :author="message.author.toString()"
         :author-name="authorName"
+        :message-colors="messageColors"
       />
       <FileMessage
         v-else-if="message.type === 'file'"

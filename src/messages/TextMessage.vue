@@ -23,10 +23,14 @@
       </div>
     </template>
     <slot :message="message" :messageText="messageText" :messageColors="messageColors" :me="me">
-      <p v-if="!me" class="sc-message--text-content sc-message--text-author" v-html="'~' + authorName"></p>
+      <p
+        v-if="!me"
+        class="sc-message--text-content sc-message--text-author"
+        v-html="'~' + authorName"
+      ></p>
       <p class="sc-message--text-content" v-html="messageText"></p>
       <p v-if="message.data.meta" class="sc-message--meta" :style="{color: messageColors.color}">
-        {{ message.data.meta }}
+        {{ date }}
       </p>
       <p v-if="message.isEdited" class="sc-message--edited">
         <IconBase width="10" icon-name="edited">
@@ -98,11 +102,29 @@ export default {
     },
     isEditing() {
       return (store.editMessage && store.editMessage.id) == this.message.id
+    },
+    date() {
+      let fullDate = this.message.data.meta.split(' - ')
+      let parts = fullDate[0].split('.')
+      const timestamp = new Date(parts[2], parts[1] - 1, parts[0])
+      const now = new Date()
+      if (this.datesAreOnSameDay(now, timestamp)) {
+        return 'Heute | ' + fullDate[1]
+      } else {
+        return this.message.data.meta
+      }
     }
   },
   methods: {
     edit() {
       this.store.editMessage = this.message
+    },
+    datesAreOnSameDay(first, second) {
+      const sameDay =
+        first.getFullYear() === second.getFullYear() &&
+        first.getMonth() === second.getMonth() &&
+        first.getDate() === second.getDate()
+      return sameDay
     }
   }
 }
