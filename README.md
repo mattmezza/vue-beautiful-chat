@@ -55,9 +55,11 @@ Vue.use(Chat)
       :open="openChat"
       :showEmoji="true"
       :showFile="true"
+      :showEdition="true"
+      :showDeletion="true"
       :showTypingIndicator="showTypingIndicator"
-	  :showLauncher="true"
-	  :showCloseButton="true"
+      :showLauncher="true"
+      :showCloseButton="true"
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :messageStyling="messageStyling"
@@ -165,7 +167,7 @@ export default {
     handleScrollToTop () {
       // called when the user scrolls message list to top
       // leverage pagination for loading another page of messages
-  	},
+    },
     handleOnType () {
       console.log('Emit typing event')
     },
@@ -197,7 +199,9 @@ For more detailed examples see the demo folder.
 | messageList | [message] | An array of message objects to be rendered as a conversation. |
 | showEmoji | Boolean | A bool indicating whether or not to show the emoji button
 | showFile | Boolean | A bool indicating whether or not to show the file chooser button
-| showTypingIndicator | Boolean | A bool indicating whether or not to show the `typing` indicator
+| showDeletion | Boolean | A bool indicating whether or not to show the edit button for a message
+| showEdition | Boolean | A bool indicating whether or not to show the delete button for a message
+| showTypingIndicator | String | A string that can be set to a user's participant.id to show `typing` indicator for them
 | colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
 | messageStyling | Boolean | A bool indicating whether or not to enable `msgdown` support for message formatting in chat. [See here](#faq)
 
@@ -215,8 +219,8 @@ For more detailed examples see the demo folder.
 Replacing default header.
 
 ``` html
-<template v-slot:header> 
-  🤔 Good chat between {{participants.map(m=>m.name).join(' & ')}} 
+<template v-slot:header>
+  🤔 Good chat between {{participants.map(m=>m.name).join(' & ')}}
 </template>
 ```
 
@@ -290,11 +294,11 @@ Message objects are rendered differently depending on their type. Currently, onl
   id: 1, // or text '1'
   isEdited: false,
   data: {
-	file: {
-		name: 'file.mp3',
-		url: 'https:123.rf/file.mp3'
-	  }
-	}
+    file: {
+      name: 'file.mp3',
+      url: 'https:123.rf/file.mp3'
+    }
+  }
 }
 
 ```
@@ -322,10 +326,20 @@ When sending a message, you can provide a set of sentences that will be displaye
 <details><summary>How to get the demo working?</summary>
 <p>
 
-- `cd vue-beautiful-chat`
-- `yarn watch` # this starts the compiler so everytime you edit files they get compiled
-- `cd demo`
-- `yarn dev` # this starts a web server on localhost:8080 so the demo shows up - it also watches for the demo files changes
+```
+git clone git@github.com:mattmezza/vue-beautiful-chat.git
+cd vue-beautiful-chat
+yarn install  # this installs the package dependencies
+yarn watch  # this watches files to continuously compile them
+```
+
+Open a new shell in the same folder
+
+```
+cd demo
+yarn install # this installs the demo dependencies
+yarn dev # this starts the dev server at http://localhost:8080
+```
 
 </p>
 </details>
@@ -394,6 +408,3 @@ Good news, message formatting is already added for you. You can enable it by set
 
 </p>
 </details>
-
- # Join the team 
- Do you want to collaborate? Join the project at https://crowdforge.io/projects/581

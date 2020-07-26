@@ -1,7 +1,10 @@
 <template>
   <div class="sc-message--system" :style="messageColors">
     <slot :message="data">
-      {{data.text}}<p v-if="data.meta" class='sc-message--meta' :style="{color: messageColors.color}">{{data.meta}}</p>
+      {{ data.text }}
+      <p v-if="data.meta" class="sc-message--meta" :style="{color: messageColors.color}">
+        {{ data.meta }}
+      </p>
     </slot>
   </div>
 </template>
@@ -31,14 +34,14 @@ export default {
   white-space: pre-wrap;
   -webkit-font-smoothing: subpixel-antialiased;
   font-style: italic;
-  opacity: .55;
+  opacity: 0.55;
 }
 
 .sc-message--meta {
   font-size: xx-small;
   margin-bottom: 0px;
   margin-top: 5px;
-  opacity: .5;
+  opacity: 0.5;
   text-align: center;
 }
 </style>

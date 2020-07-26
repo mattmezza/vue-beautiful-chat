@@ -5,6 +5,7 @@
     <span></span>
   </div>
 </template>
+
 <script>
 export default {
   props: {
@@ -15,6 +16,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .sc-typing-indicator {
   text-align: center;
@@ -24,7 +26,7 @@ export default {
 
 .sc-typing-indicator span {
   display: inline-block;
-  background-color: #B6B5BA;
+  background-color: #b6b5ba;
   width: 10px;
   height: 10px;
   border-radius: 100%;
@@ -46,11 +48,11 @@ export default {
 @keyframes bob {
   10% {
     transform: translateY(-10px);
-    background-color: #9E9DA2;
+    background-color: #9e9da2;
   }
   50% {
     transform: translateY(0);
-    background-color: #B6B5BA;
+    background-color: #b6b5ba;
   }
 }
 </style>
