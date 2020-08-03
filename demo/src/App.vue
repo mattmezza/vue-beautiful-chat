@@ -24,13 +24,14 @@
       @onType="handleOnType"
       @edit="editMessage"
       @remove="removeMessage"
+      @download="downloadMessage"
     >
       <template v-slot:text-message-toolbox="scopedProps">
         <button v-if="!scopedProps.me && scopedProps.message.type==='text'" @click.prevent="like(scopedProps.message.id)">
           👍
         </button>
       </template>
-      <template v-slot:text-message-body="scopedProps"> 
+      <template v-slot:text-message-body="scopedProps">
         <p class="sc-message--text-content" v-html="scopedProps.messageText"></p>
         <p v-if="scopedProps.message.data.meta" class='sc-message--meta' :style="{color: scopedProps.messageColors.color}">{{scopedProps.message.data.meta}}</p>
         <p v-if="scopedProps.message.isEdited || scopedProps.message.liked" class='sc-message--edited'>
@@ -196,7 +197,10 @@ export default {
         const m = this.messageList.find(m => m.id === message.id);
         m.type = 'system';
         m.data.text = 'This message has been removed';
-      }
+      },
+    downloadMessage(message){
+      console.log("try to download Message")
+    }
     },
     like(id){
       const m = this.messageList.findIndex(m => m.id === id);

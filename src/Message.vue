@@ -30,7 +30,8 @@
           </template>
       </TextMessage>
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
-      <FileMessage v-else-if="message.type === 'file'" :data="message.data" :messageColors="determineMessageColors()" />
+      <FileMessage v-else-if="message.type === 'file' && message.data.file.mime" :data="message.data" :messageColors="determineMessageColors()" @download="$emit('download')"/>
+      <ImageMessage v-else-if="message.type === 'file' && message.data.file.url" :data="message.data" :messageColors="determineMessageColors()" />
       <TypingMessage v-else-if="message.type === 'typing'" :messageColors="determineMessageColors()" />
       <SystemMessage v-else-if="message.type === 'system'" :data="message.data" :messageColors="determineMessageColors()">
           <slot name="system-message-body" :message="message.data">
@@ -43,6 +44,7 @@
 <script>
 import TextMessage from './messages/TextMessage.vue'
 import FileMessage from './messages/FileMessage.vue'
+import ImageMessage from './messages/ImageMessage.vue'
 import EmojiMessage from './messages/EmojiMessage.vue'
 import TypingMessage from './messages/TypingMessage.vue'
 import SystemMessage from './messages/SystemMessage.vue'
@@ -150,7 +152,7 @@ export default {
 }
 
 .sc-message--meta {
-  font-size: xx-small;
+  font-size: x-small;
   margin-bottom: 0px;
   color: white;
   text-align: center;

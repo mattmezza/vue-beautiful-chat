@@ -1,6 +1,6 @@
 <template>
   <div class="sc-message-list" ref="scrollList" :style="{backgroundColor: colors.messageList.bg}" @scroll="handleScroll">
-    <Message v-for="(message, idx) in messages" :message="message" :user="profile(message.author)" :key="idx" :colors="colors" :messageStyling="messageStyling" @remove="$emit('remove', message)">
+    <Message v-for="(message, idx) in messages" :message="message" :user="profile(message.author)" :key="idx" :colors="colors" :messageStyling="messageStyling" @remove="$emit('remove', message)" @download="$emit('download', message)">
       <template v-slot:user-avatar="scopedProps">
         <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message">
         </slot>

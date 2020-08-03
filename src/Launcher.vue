@@ -29,6 +29,7 @@
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
       @remove="$emit('remove', $event)"
+      @download="$emit('download', $event)"
     >
       <template v-slot:header>
         <slot name="header">
