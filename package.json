@@ -2,7 +2,7 @@
   "name": "vue-beautiful-chat",
   "version": "2.4.1",
   "description": "A simple and beautiful Vue chat component backend agnostic.",
-  "main": "./src/index.js",
+  "main": "./dist/vue-beautiful-chat.umd.min.js",
   "repository": "https://github.com/mattmezza/vue-beautiful-chat.git",
   "author": "Matteo Merola <mattmezza@gmail.com>",
   "license": "MIT",
@@ -12,6 +12,9 @@
     "watch": "npm run build -- --watch",
     "prepublishOnly": "npm run build"
   },
+  "files": [
+    "dist/*"
+  ],
   "dependencies": {
     "autolinker": "^1.8.3",
     "emoji-js": "^3.4.0",
