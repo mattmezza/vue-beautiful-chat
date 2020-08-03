@@ -198,11 +198,9 @@ export default {
       m.data.text = message.data.text;
     },
     removeMessage(message){
-      if (confirm('Delete?')){
-        const m = this.messageList.find(m => m.id === message.id);
-        m.type = 'system';
-        m.data.text = 'This message has been removed';
-      }
+      const m = this.messageList.find(m => m.id === message.id);
+      m.type = 'system';
+      m.data.text = 'This message has been removed';
     },
     like(id){
       const m = this.messageList.findIndex(m => m.id === id);

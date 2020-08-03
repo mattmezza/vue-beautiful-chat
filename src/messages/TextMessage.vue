@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-message--text" :class="{'confirm-delete' : confirmDeletion}" :style="messageColors">
+  <div class="sc-message--text" :style="messageColors">
     <template>
       <div class="sc-message--toolbox" :style="{background: messageColors.backgroundColor}">
         <button v-if="showEdition && me && message.id" @click="edit" :disabled="isEditing">
@@ -8,28 +8,11 @@
           </IconBase>
         </button>
         <div v-if="showDeletion">
-          <div v-if="showConfirmationDeletion">
-            <div v-if="confirmDeletion"> <!-- is used only when you display the message before deleting message -->
-              <div class="message-deletion-confirmation" @mouseleave="refuseDelete">
-                <span>Confirm?</span>
-                <a :style="{color: messageColors.color}" href="javascript:void(0);" @click="$emit('remove')">Yes</a>
-              </div>
-            </div>
-            <div v-else>
-              <button v-if="me && message.id" @click="clickOnDelete">
-                <IconBase :style="{color: messageColors.color}" width="10" icon-name="remove">
-                  <IconCross />
-                </IconBase>
-              </button>
-            </div>
-          </div>
-          <div v-else>
-            <button v-if="showDeletion && me && message.id != null && message.id != undefined" @click="$emit('remove')">
-              <IconBase :color="messageColors.color" width="10" icon-name="remove">
-                <IconCross />
-              </IconBase>
-            </button>
-          </div>
+          <button v-if="me && message.id != null && message.id != undefined" @click="ifelse(showConfirmationDeletion, withConfirm('Do you really want to delete the message?', () => $emit('remove')), () => $emit('remove'))()">
+            <IconBase :color="messageColors.color" width="10" icon-name="remove">
+              <IconCross />
+            </IconBase>
+          </button>
         </div>
         <slot name="text-message-toolbox" :message="message" :me="me"> </slot>
       </div>
@@ -61,7 +44,6 @@ const fmt = require('msgdown')
 export default {
   data() {
     return {
-      confirmDeletion: false,
       store
     }
   },
@@ -89,7 +71,7 @@ export default {
     showConfirmationDeletion: {
       type: Boolean,
       required: true
-    }
+    },
   },
   computed: {
     messageText() {
@@ -111,17 +93,25 @@ export default {
     edit() {
       this.store.editMessage = this.message
     },
-    clickOnDelete() {
-      this.confirmDeletion = true
+    ifelse(cond, funcIf, funcElse) {
+      return () => {
+        if (funcIf && cond) funcIf()
+        else if (funcElse) funcElse()
+      }
     },
-    refuseDelete() {
-      this.confirmDeletion = false
+    withConfirm(msg, func) {
+      return () => {
+        if (confirm(msg)) {
+          console.log(func)
+          func()
+        }
+      }
     },
   },
   components:{
     IconBase,
     IconCross,
-    IconEdit
+    IconEdit,
   }
 }
 </script>
@@ -129,8 +119,5 @@ export default {
 <style scoped>
 a.chatLink {
   color: inherit !important;
-}
-.message-deletion-confirmation {
-  padding: 0px 5px;
 }
 </style>

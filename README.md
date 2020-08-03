@@ -57,7 +57,7 @@ Vue.use(Chat)
       :showFile="true"
       :showEdition="true"
       :showDeletion="true"
-      :showConfirmationDeletion="true"
+      :deletionConfirmation="true"
       :showTypingIndicator="showTypingIndicator"
       :showLauncher="true"
       :showCloseButton="true"
