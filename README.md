@@ -303,6 +303,20 @@ Message objects are rendered differently depending on their type. Currently, onl
   }
 }
 
+{
+  author: 'me',
+  type: 'image',
+  id: 1, // or text '1'
+  isEdited: false,
+  data: {
+    file: {
+      name: 'background-image.png',
+      url: 'https://picsum.photos/200'
+    }
+  }
+}
+
+
 ```
 
 
