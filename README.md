@@ -40,7 +40,7 @@ import Chat from 'vue-beautiful-chat'
 Vue.use(Chat)
 ```
 
-```html
+```vue
 <template>
   <div>
     <beautiful-chat
@@ -220,7 +220,7 @@ For more detailed examples see the demo folder.
 
 Replacing default header.
 
-``` html
+```vue
 <template v-slot:header>
   🤔 Good chat between {{participants.map(m=>m.name).join(' & ')}}
 </template>
@@ -231,7 +231,7 @@ Replacing default header.
 Replacing user avatar.
 Params: `message`, `user`
 
-``` html
+```vue
 <template v-slot:user-avatar="{ message, user }">
   <div style="border-radius:50%; color: pink; font-size: 15px; line-height:25px; text-align:center;background: tomato; width: 25px !important; height: 25px !important; min-width: 30px;min-height: 30px;margin: 5px; font-weight:bold" v-if="message.type === 'text' && user && user.name">
     {{user.name.toUpperCase()[0]}}
@@ -244,7 +244,7 @@ Params: `message`, `user`
 Change markdown for text message.
 Params: `message`
 
-``` html
+```vue
 <template v-slot:text-message-body="{ message }">
   <small style="background:red" v-if="message.meta">
     {{message.meta}}
@@ -258,7 +258,7 @@ Params: `message`
 Change markdown for system message.
 Params: `message`
 
-``` html
+```vue
 <template v-slot:system-message-body="{ message }">
   [System]: {{message.text}}
 </template>
@@ -268,7 +268,7 @@ Params: `message`
 
 Message objects are rendered differently depending on their type. Currently, only text, emoji and file types are supported. Each message object has an `author` field which can have the value 'me' or the id of the corresponding agent.
 
-``` javascript
+```javascript
 {
   author: 'support',
   type: 'text',
@@ -302,7 +302,6 @@ Message objects are rendered differently depending on their type. Currently, onl
     }
   }
 }
-
 ```
 
 
@@ -366,7 +365,6 @@ yarn dev # this starts the dev server at http://localhost:8080
 - When initializing the component, pass an object specifying the colors used:
 
 ```javascript
-
 let redColors = {
   header: {
     bg: '#D32F2F',
@@ -391,10 +389,12 @@ let redColors = {
     text: '#212121'
   }
 }
+```
 
+```vue
 <beautiful-chat
-      ...
-      :colors="redColors" />
+  ...
+  :colors="redColors" />
 ```
 
 This is the red variant. Please check [this file](https://github.com/mattmezza/vue-beautiful-chat/tree/master/demo/src/colors.js) for the list of variants shown in the demo page online.
