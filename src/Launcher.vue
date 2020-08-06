@@ -14,15 +14,11 @@
       <img v-else class="sc-open-icon" :src="icons.open.img" :alt="icons.open.name" />
     </div>
     <ChatWindow
-      :show-launcher="showLauncher"
-      :show-close-button="showCloseButton"
       :message-list="messageList"
       :on-user-input-submit="onMessageWasSent"
       :participants="participants"
       :title="chatWindowTitle"
-      :title-image-url="titleImageUrl"
       :is-open="isOpen"
-      :on-close="close"
       :show-emoji="showEmoji"
       :show-file="showFile"
       :show-edition="showEdition"
@@ -35,7 +31,7 @@
       :colors="colors"
       :always-scroll-to-bottom="alwaysScrollToBottom"
       :message-styling="messageStyling"
-      :disable-user-list-toggle="disableUserListToggle"
+      @close="close"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
@@ -69,6 +65,7 @@
 </template>
 
 <script>
+import store from './store/'
 import ChatWindow from './ChatWindow.vue'
 
 import CloseIcon from './assets/close-icon.png'
@@ -235,15 +232,23 @@ export default {
   },
   computed: {
     chatWindowTitle() {
-      if (this.title !== '') {
-        return this.title
-      }
-      if (this.participants.length === 0) {
-        return 'You'
-      } else if (this.participants.length > 1) {
-        return 'You, ' + this.participants[0].name + ' & others'
-      } else {
-        return 'You & ' + this.participants[0].name
+      if (this.title !== '') return this.title
+
+      if (this.participants.length === 0) return 'You'
+      if (this.participants.length > 1) return 'You, ' + this.participants[0].name + ' & others'
+
+      return 'You & ' + this.participants[0].name
+    }
+  },
+  watch: {
+    $props: {
+      deep: true,
+      immediate: true,
+      handler(props) {
+        // TODO: optimize
+        for (const prop in props) {
+          store.setState(prop, props[prop])
+        }
       }
     }
   },

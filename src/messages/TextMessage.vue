@@ -2,13 +2,22 @@
   <div class="sc-message--text" :style="messageColors">
     <template>
       <div class="sc-message--toolbox" :style="{background: messageColors.backgroundColor}">
-        <button v-if="showEdition && me && message.id" @click="edit" :disabled="isEditing">
-          <IconBase :color="isEditing? 'black': messageColors.color" width="10" icon-name="edit">
+        <button v-if="showEdition && me && message.id" :disabled="isEditing" @click="edit">
+          <IconBase :color="isEditing ? 'black' : messageColors.color" width="10" icon-name="edit">
             <IconEdit />
           </IconBase>
         </button>
         <div v-if="showDeletion">
-          <button v-if="me && message.id != null && message.id != undefined" @click="ifelse(showConfirmationDeletion, withConfirm(confirmationDeletionMessage, () => $emit('remove')), () => $emit('remove'))()">
+          <button
+            v-if="me && message.id != null && message.id != undefined"
+            @click="
+              ifelse(
+                showConfirmationDeletion,
+                withConfirm(confirmationDeletionMessage, () => $emit('remove')),
+                () => $emit('remove')
+              )()
+            "
+          >
             <IconBase :color="messageColors.color" width="10" icon-name="remove">
               <IconCross />
             </IconBase>
@@ -38,14 +47,15 @@ import IconEdit from './../components/icons/IconEdit.vue'
 import IconCross from './../components/icons/IconCross.vue'
 import escapeGoat from 'escape-goat'
 import Autolinker from 'autolinker'
-import store from './../store/'
+import store from '../store/'
+
 const fmt = require('msgdown')
 
 export default {
-  data() {
-    return {
-      store
-    }
+  components: {
+    IconBase,
+    IconCross,
+    IconEdit
   },
   props: {
     message: {
@@ -90,12 +100,12 @@ export default {
       return this.message.author === 'me'
     },
     isEditing() {
-      return (store.editMessage && store.editMessage.id) == this.message.id
+      return (store.state.editMessage && store.state.editMessage.id) === this.message.id
     }
   },
   methods: {
     edit() {
-      this.store.editMessage = this.message
+      store.setState('editMessage', this.message)
     },
     ifelse(cond, funcIf, funcElse) {
       return () => {
@@ -107,12 +117,7 @@ export default {
       return () => {
         if (confirm(msg)) func()
       }
-    },
-  },
-  components:{
-    IconBase,
-    IconCross,
-    IconEdit,
+    }
   }
 }
 </script>
