@@ -200,8 +200,8 @@ For more detailed examples see the demo folder.
 | messageList | [message] | An array of message objects to be rendered as a conversation. |
 | showEmoji | Boolean | A bool indicating whether or not to show the emoji button
 | showFile | Boolean | A bool indicating whether or not to show the file chooser button
-| showDeletion | Boolean | A bool indicating whether or not to show the edit button for a message
-| showEdition | Boolean | A bool indicating whether or not to show the delete button for a message
+| showDeletion | Boolean | A bool indicating whether or not to show the delete button for a message
+| showEdition | Boolean | A bool indicating whether or not to show the edit button for a message
 | showTypingIndicator | String | A string that can be set to a user's participant.id to show `typing` indicator for them
 | showHeader | Boolean | A bool indicating whether or not to show the header of chatwindow
 | colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
