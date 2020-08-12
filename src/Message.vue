@@ -110,7 +110,7 @@ export default {
       return this.user && this.user.name
     },
     chatImageUrl() {
-      return (this.user && this.user.imageUrl) || chatIcon
+      return (this.user && this.user.imageUrl) || chatIcon || ''
     },
     messageColors() {
       return this.message.author === 'me' ? this.sentColorsStyle : this.receivedColorsStyle
