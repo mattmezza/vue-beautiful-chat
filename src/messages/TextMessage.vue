@@ -131,6 +131,7 @@ a.chatLink {
   color: inherit !important;
 }
 .message-deletion-confirmation {
-  padding: 0px 5px;
+  padding: 0px 10px;
+
 }
 </style>
