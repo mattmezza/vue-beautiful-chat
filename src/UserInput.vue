@@ -140,6 +140,10 @@ export default {
     colors: {
       type: Object,
       required: true
+    },
+    doNotResetInputFlag: {
+      type: Boolean,
+      default: () => false
     }
   },
   data() {
@@ -211,14 +215,20 @@ export default {
           function (wasSuccessful) {
             if (wasSuccessful === undefined || wasSuccessful) {
               this.file = null
-              this.$refs.userInput.innerHTML = ''
+              this.resetInput()
             }
           }.bind(this)
         )
       } else {
         this.file = null
+        this.resetInput()
+      }
+    },
+    resetInput() {
+      if (!this.doNotResetInputFlag) {
         this.$refs.userInput.innerHTML = ''
       }
+      this.doNotResetInputFlag = false
     },
     _submitText(event) {
       const text = this.$refs.userInput.textContent
@@ -269,6 +279,8 @@ export default {
       }
     },
     _handleEmojiPicked(emoji) {
+      this.doNotResetInputFlag = true
+
       this._checkSubmitSuccess(
         this.onSubmit({
           author: 'me',
