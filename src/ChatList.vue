@@ -28,7 +28,7 @@ export default {
   props: {
     chatList: {
       type: Array,
-      required: true
+      required: false
     },
     colors: {
       type: Object,

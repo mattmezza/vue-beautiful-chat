@@ -153,7 +153,7 @@ export default {
     },
     chatList: {
       type: Array,
-      required: true
+      required: false
     },
     chatListTitle: {
       type: String,
