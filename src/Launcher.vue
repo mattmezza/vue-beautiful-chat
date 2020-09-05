@@ -7,16 +7,19 @@
       :style="{backgroundColor: colors.launcher.bg}"
       @click.prevent="isOpen ? close() : openAndFocus()"
     >
-      <div v-if="newMessagesCount > 0 && !isOpen" class="sc-new-messsages-count">
+      <div v-if="newMessagesCount > 0" class="sc-new-messsages-count">
         {{ newMessagesCount }}
       </div>
       <img v-if="isOpen" class="sc-closed-icon" :src="icons.close.img" :alt="icons.close.name" />
       <img v-else class="sc-open-icon" :src="icons.open.img" :alt="icons.open.name" />
     </div>
     <ChatWindow
+      :multiple-chats="multipleChats"
       :message-list="messageList"
       :on-user-input-submit="onMessageWasSent"
       :participants="participants"
+      :chatList="chatList"
+      :chat-list-title="chatListTitle"
       :title="chatWindowTitle"
       :is-open="isOpen"
       :show-emoji="showEmoji"
@@ -36,6 +39,7 @@
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
       @remove="$emit('remove', $event)"
+      v-on="$listeners"
     >
       <template v-slot:header>
         <slot name="header"> </slot>
@@ -131,6 +135,10 @@ export default {
       type: Boolean,
       default: true
     },
+    multipleChats: {
+      type: Boolean,
+      default: false
+    },
     showCloseButton: {
       type: Boolean,
       default: true
@@ -142,6 +150,14 @@ export default {
     participants: {
       type: Array,
       required: true
+    },
+    chatList: {
+      type: Array,
+      required: true
+    },
+    chatListTitle: {
+      type: String,
+      default: () => ''
     },
     title: {
       type: String,

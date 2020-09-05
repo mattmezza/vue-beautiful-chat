@@ -37,7 +37,6 @@
         @focus="setInputActive(true)"
         @blur="setInputActive(false)"
         @keydown="handleKey"
-        @focusUserInput="focusUserInput()"
       ></div>
       <div class="sc-user-input--buttons">
         <div class="sc-user-input--button"></div>
@@ -167,6 +166,7 @@ export default {
     }
   },
   mounted() {
+    this.focusUserInput()
     this.$root.$on('focusUserInput', () => {
       if (this.$refs.userInput) {
         this.focusUserInput()

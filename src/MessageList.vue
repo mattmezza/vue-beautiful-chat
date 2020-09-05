@@ -109,9 +109,11 @@ export default {
     }
   },
   mounted() {
+    this.onMessageListMountedUpdated()
     this.$nextTick(this._scrollDown())
   },
   updated() {
+    this.onMessageListMountedUpdated()
     if (this.shouldScrollToBottom()) this.$nextTick(this._scrollDown())
   },
   methods: {
@@ -133,6 +135,9 @@ export default {
 
       // A profile may not be found for system messages or messages by 'me'
       return profile || {imageUrl: '', name: ''}
+    },
+    onMessageListMountedUpdated() {
+      this.$emit("messageListMountedUpdated")
     }
   }
 }

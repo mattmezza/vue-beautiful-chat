@@ -2,18 +2,23 @@
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
       v-if="showHeader"
-      :title="title"
-      :colors="colors"
+      :show-chat-list-button="multipleChats && !showingChatList"
+      :title="showingChatList ? chatListTitle : title"
+      :image-url="titleImageUrl"
       @close="$emit('close')"
-      @userList="handleUserListToggle"
+      :colors="colors"
+      :disable-user-list-toggle="disableUserListToggle || showingChatList"
+      @toggleUserListMessageList="handleToggleUserListMessageList"
+      @showChatList="handleShowChatList"
     >
       <template>
         <slot name="header"> </slot>
       </template>
     </Header>
-    <UserList v-if="showUserList" :colors="colors" :participants="participants" />
+    <UserList v-if="showingUserList" :colors="colors" :participants="participants" />
+    <ChatList v-if="showingChatList" :colors="colors" :chatList="chatList" @showMessageList="handleShowMessageList" v-on="$listeners"/>
     <MessageList
-      v-if="!showUserList"
+      v-if="showingMessageList"
       :messages="messages"
       :participants="participants"
       :show-typing-indicator="showTypingIndicator"
@@ -26,6 +31,7 @@
       :message-styling="messageStyling"
       @scrollToTop="$emit('scrollToTop')"
       @remove="$emit('remove', $event)"
+      v-on="$listeners"
     >
       <template v-slot:user-avatar="scopedProps">
         <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message"> </slot>
@@ -49,7 +55,7 @@
       </template>
     </MessageList>
     <UserInput
-      v-if="!showUserList"
+      v-if="showingMessageList"
       :show-emoji="showEmoji"
       :on-submit="onUserInputSubmit"
       :suggestions="getSuggestions()"
@@ -67,16 +73,28 @@ import Header from './Header.vue'
 import MessageList from './MessageList.vue'
 import UserInput from './UserInput.vue'
 import UserList from './UserList.vue'
+import ChatList from './ChatList.vue'
+
+const uiState = {
+    MESSAGE_LIST: 'message-list',
+    USER_LIST: 'user-list',
+    CHAT_LIST: 'chat-list'
+}
 
 export default {
   components: {
     Header,
     MessageList,
     UserInput,
-    UserList
+    UserList,
+    ChatList
   },
   props: {
     showEmoji: {
+      type: Boolean,
+      default: false
+    },
+    multipleChats: {
       type: Boolean,
       default: false
     },
@@ -91,6 +109,14 @@ export default {
     participants: {
       type: Array,
       required: true
+    },
+    chatList: {
+      type: Array,
+      required: true
+    },
+    chatListTitle: {
+      type: String,
+      default: 'Chats'
     },
     title: {
       type: String,
@@ -147,7 +173,12 @@ export default {
   },
   data() {
     return {
-      showUserList: false
+      state: this.initialState()
+    }
+  },
+  watch: {
+    multipleChats: function(newMultipleChats) {
+      this.state = this.initialState()
     }
   },
   computed: {
@@ -155,14 +186,32 @@ export default {
       let messages = this.messageList
 
       return messages
+    },
+    showingUserList() {
+      return this.state == uiState.USER_LIST
+    },
+    showingChatList() {
+      return this.state == uiState.CHAT_LIST
+    },
+    showingMessageList() {
+      return this.state == uiState.MESSAGE_LIST
     }
   },
   methods: {
-    handleUserListToggle(showUserList) {
-      this.showUserList = showUserList
+    handleToggleUserListMessageList() {
+      this.state = (this.state == uiState.USER_LIST) ? uiState.MESSAGE_LIST : uiState.USER_LIST
+    },
+    handleShowChatList() {
+      this.state = uiState.CHAT_LIST
+    },
+    handleShowMessageList() {
+      this.state = uiState.MESSAGE_LIST
     },
     getSuggestions() {
       return this.messages.length > 0 ? this.messages[this.messages.length - 1].suggestions : []
+    },
+    initialState() {
+      return this.multipleChats ? uiState.CHAT_LIST : uiState.MESSAGE_LIST
     }
   }
 }
