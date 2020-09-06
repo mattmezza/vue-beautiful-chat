@@ -18,8 +18,6 @@
       :message-list="messageList"
       :on-user-input-submit="onMessageWasSent"
       :participants="participants"
-      :chatList="chatList"
-      :chat-list-title="chatListTitle"
       :title="chatWindowTitle"
       :is-open="isOpen"
       :show-emoji="showEmoji"
@@ -35,6 +33,9 @@
       :always-scroll-to-bottom="alwaysScrollToBottom"
       :message-styling="messageStyling"
       @close="close"
+      :multiple-chats-enabled="multipleChatsEnabled"
+      :chat-list="chatList"
+      :chat-list-title="chatListTitle"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
@@ -135,10 +136,6 @@ export default {
       type: Boolean,
       default: true
     },
-    multipleChats: {
-      type: Boolean,
-      default: false
-    },
     showCloseButton: {
       type: Boolean,
       default: true
@@ -150,14 +147,6 @@ export default {
     participants: {
       type: Array,
       required: true
-    },
-    chatList: {
-      type: Array,
-      required: false
-    },
-    chatListTitle: {
-      type: String,
-      default: () => ''
     },
     title: {
       type: String,
@@ -244,6 +233,18 @@ export default {
     disableUserListToggle: {
       type: Boolean,
       default: false
+    },
+    multipleChatsEnabled: {
+      type: Boolean,
+      default: false
+    },
+    chatList: {
+      type: Array,
+      required: false
+    },
+    chatListTitle: {
+      type: String,
+      default: () => ''
     }
   },
   computed: {

@@ -2,7 +2,7 @@
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
       v-if="showHeader"
-      :show-chat-list-button="multipleChats && !showingChatList"
+      :show-chat-list-button="multipleChatsEnabled && !showingChatList"
       :title="showingChatList ? chatListTitle : title"
       :image-url="titleImageUrl"
       @close="$emit('close')"
@@ -94,7 +94,7 @@ export default {
       type: Boolean,
       default: false
     },
-    multipleChats: {
+    multipleChatsEnabled: {
       type: Boolean,
       default: false
     },
@@ -177,7 +177,7 @@ export default {
     }
   },
   watch: {
-    multipleChats: function(newMultipleChats) {
+    multipleChatsEnabled: function(newMultipleChatsEnabled) {
       this.state = this.initialState()
     }
   },
@@ -211,7 +211,7 @@ export default {
       return this.messages.length > 0 ? this.messages[this.messages.length - 1].suggestions : []
     },
     initialState() {
-      return this.multipleChats ? uiState.CHAT_LIST : uiState.MESSAGE_LIST
+      return this.multipleChatsEnabled ? uiState.CHAT_LIST : uiState.MESSAGE_LIST
     }
   }
 }
