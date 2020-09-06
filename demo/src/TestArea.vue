@@ -7,6 +7,16 @@
     <form class="demo-test-area" @submit.prevent="_handleSubmit" @keyup="_handleTyping">
       <div class="demo-test-area--preamble">
         <p>Test the chat window by sending a message:</p>
+        <p class="text-center messageStyling">
+          Multiple chat groups?
+          <input :checked="multipleChatsEnabled" type="checkbox" @change.prevent="_multipleChatsEnabledChanged">
+        </p>
+        <p v-if="multipleChatsEnabled">
+          To:
+          <select name="chat" id="id" v-model="chatID">
+            <option v-for="chat in chatList" :key="chat.id" :value="chat.id">{{ chat.name }}</option>
+          </select>
+        </p>
         <p v-if="userIsTyping">User is typing...</p>
       </div>
       <textarea ref="textArea" class="demo-test-area--text" placeholder="Write a test message...." :style="textareaStyle" />
@@ -46,21 +56,34 @@ export default {
     messageStyling: {
       type: Boolean,
       required: true
+    },
+    chatList: {
+      type: Array,
+      required: true
+    },
+    multipleChatsEnabled: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
     return {
-      userIsTyping: false
+      userIsTyping: false,
+      chatID: this.chatList[0].id
     }
   },
   methods: {
     _handleSubmit() {
-      this.onMessage(this.$refs.textArea.value)
+      this.onMessage(this.$refs.textArea.value, this.chatID)
       this.$refs.textArea.value = ''
-      this.onTyping('')
+      this.onTyping('', this.chatID)
     },
     _handleTyping() {
-      this.onTyping(this.$refs.textArea.value)
+      this.onTyping(this.$refs.textArea.value, this.chatID)
+    },
+    _multipleChatsEnabledChanged(e) {
+      this.chatID = this.chatList[0].id
+      this.$emit("multipleChatsEnabledChange", e.srcElement.checked)
     }
   },
   computed: {
