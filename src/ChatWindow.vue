@@ -16,7 +16,13 @@
       </template>
     </Header>
     <UserList v-if="showingUserList" :colors="colors" :participants="participants" />
-    <ChatList v-if="showingChatList" :colors="colors" :chatList="chatList" @showMessageList="handleShowMessageList" v-on="$listeners"/>
+    <ChatList
+      v-if="showingChatList"
+      :colors="colors"
+      :chatList="chatList"
+      @changeCurrentChat="(chatID) => { this.$emit('changeCurrentChat', chatID) }"
+      @showMessageList="handleShowMessageList"
+      />
     <MessageList
       v-if="showingMessageList"
       :messages="messages"
@@ -31,7 +37,7 @@
       :message-styling="messageStyling"
       @scrollToTop="$emit('scrollToTop')"
       @remove="$emit('remove', $event)"
-      v-on="$listeners"
+      @messageListMountedUpdated="$emit('messageListMountedUpdated')"
     >
       <template v-slot:user-avatar="scopedProps">
         <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message"> </slot>

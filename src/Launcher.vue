@@ -40,7 +40,8 @@
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
       @remove="$emit('remove', $event)"
-      v-on="$listeners"
+      @changeCurrentChat="(chatID) => { this.$emit('changeCurrentChat', chatID) }"
+      @messageListMountedUpdated="$emit('messageListMountedUpdated')"
     >
       <template v-slot:header>
         <slot name="header"> </slot>
