@@ -59,6 +59,7 @@ export default {
 .chat-element {
   font-size: 20px;
   vertical-align: middle;
+  text-align: left;
 }
 .chat-badge {
   font-size: 17px;
