@@ -35,6 +35,7 @@
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
       :message-styling="messageStyling"
+      :myId="myId"
       @scrollToTop="$emit('scrollToTop')"
       @remove="$emit('remove', $event)"
       @messageListMountedUpdated="$emit('messageListMountedUpdated')"
@@ -68,6 +69,7 @@
       :show-file="showFile"
       :placeholder="placeholder"
       :colors="colors"
+      :myId="myId"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
     />
@@ -173,6 +175,10 @@ export default {
       required: true
     },
     confirmationDeletionMessage: {
+      type: String,
+      required: true
+    },
+    myId: {
       type: String,
       required: true
     }

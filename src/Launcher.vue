@@ -36,6 +36,7 @@
       :multiple-chats-enabled="multipleChatsEnabled"
       :chat-list="chatList"
       :chat-list-title="chatListTitle"
+      :myId="myId"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
@@ -246,6 +247,10 @@ export default {
     chatListTitle: {
       type: String,
       default: () => ''
+    },
+    myId: {
+      type: String,
+      default: 'me'
     }
   },
   computed: {

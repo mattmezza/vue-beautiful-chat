@@ -147,10 +147,10 @@ export default {
       alwaysScrollToBottom: true,
       messageStyling: true,
       userIsTyping: false,
-      placeholder: "Write something...",
+      placeholder: 'Write something...',
       multipleChatsEnabled: true,
       currentChatID: Object.keys(chatHistory)[0],
-      chatListTitle: "My chats",
+      chatListTitle: 'My chats'
     }
   },
   created() {
@@ -174,7 +174,7 @@ export default {
           : ''
     },
     onMessageWasSent(message, chatID) {
-      const msg = Object.assign({}, message, {id: Math.random(), read: (message.author === 'me')})
+      const msg = Object.assign({}, message, {id: Math.random(), read: (message.author === this.myId)})
       if (chatID !== undefined) {
         this.chatMessageList(chatID).push(msg)
       } else {
@@ -242,7 +242,11 @@ export default {
       })
     },
     chatMessageList(chatID) {
-      return this.chatHistory[chatID]["messages"]
+      const chat = this.chatHistory[chatID];
+      if (chat === undefined) {
+        return [];
+      }
+      return chat["messages"];
     },
   },
   computed: {
@@ -255,10 +259,18 @@ export default {
       return this.chosenColor === 'dark' ? this.colors.messageList.bg : '#fff'
     },
     messageList() {
-        return this.chatHistory[this.currentChatID]["messages"]
+      const chat = this.chatHistory[this.currentChatID];
+      if (chat === undefined) {
+        return [];
+      }
+      return chat["messages"];
     },
     participants() {
-      return this.chatHistory[this.currentChatID]["participants"]
+      const chat = this.chatHistory[this.currentChatID];
+      if (chat === undefined) {
+        return [];
+      }
+      return chat["participants"];
     },
     chatList() {
       var chats = []

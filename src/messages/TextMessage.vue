@@ -85,6 +85,10 @@ export default {
     confirmationDeletionMessage: {
       type: String,
       required: true
+    },
+    myId: {
+      type: String,
+      required: true
     }
   },
   computed: {
@@ -97,7 +101,7 @@ export default {
       })
     },
     me() {
-      return this.message.author === 'me'
+      return this.message.author === this.myId
     },
     isEditing() {
       return (store.state.editMessage && store.state.editMessage.id) === this.message.id

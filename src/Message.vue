@@ -3,14 +3,14 @@
     <div
       class="sc-message--content"
       :class="{
-        sent: message.author === 'me',
-        received: message.author !== 'me' && message.type !== 'system',
+        sent: message.author === this.myId,
+        received: message.author !== this.myId && message.type !== 'system',
         system: message.type === 'system'
       }"
     >
       <slot name="user-avatar" :message="message" :user="user">
         <div
-          v-if="message.type !== 'system' && authorName && authorName !== 'me'"
+          v-if="message.type !== 'system' && authorName && authorName !== this.myId"
           v-tooltip="authorName"
           :title="authorName"
           class="sc-message--avatar"
@@ -29,6 +29,7 @@
         :show-deletion="showDeletion"
         :show-confirmation-deletion="showConfirmationDeletion"
         :confirmation-deletion-message="confirmationDeletionMessage"
+        :myId="myId"
         @remove="$emit('remove')"
       >
         <template v-slot:default="scopedProps">
@@ -112,6 +113,10 @@ export default {
     confirmationDeletionMessage: {
       type: String,
       required: true
+    },
+    myId: {
+      type: String,
+      required: true
     }
   },
   computed: {
@@ -122,7 +127,7 @@ export default {
       return (this.user && this.user.imageUrl) || chatIcon
     },
     messageColors() {
-      return this.message.author === 'me' ? this.sentColorsStyle : this.receivedColorsStyle
+      return this.message.author === this.myId ? this.sentColorsStyle : this.receivedColorsStyle
     },
     receivedColorsStyle() {
       return {

@@ -16,6 +16,7 @@
       :show-deletion="showDeletion"
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
+      :myId="myId"
       @remove="$emit('remove', message)"
     >
       <template v-slot:user-avatar="scopedProps">
@@ -49,6 +50,7 @@
       :show-deletion="showDeletion"
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
+      :myId="myId"
     />
   </div>
 </template>
@@ -99,6 +101,10 @@ export default {
       required: true
     },
     confirmationDeletionMessage: {
+      type: String,
+      required: true,
+    },
+    myId: {
       type: String,
       required: true
     }

@@ -86,6 +86,7 @@ export default {
   flex: 1;
   user-select: none;
   font-size: 20px;
+  text-align: left;
 }
 
 .sc-header--title.enabled {
