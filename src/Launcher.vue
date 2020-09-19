@@ -28,6 +28,7 @@
       :show-edition="showEdition"
       :show-deletion="showDeletion"
       :show-confirmation-deletion="showConfirmationDeletion"
+      :show-header="showHeader"
       :placeholder="placeholder"
       :show-typing-indicator="showTypingIndicator"
       :colors="colors"
@@ -132,6 +133,10 @@ export default {
       type: Boolean,
       default: true
     },
+    showHeader: {
+      type: Boolean,
+      default: true
+    },
     participants: {
       type: Array,
       required: true
@@ -228,7 +233,6 @@ export default {
       if (this.title !== '') {
         return this.title
       }
-
       if (this.participants.length === 0) {
         return 'You'
       } else if (this.participants.length > 1) {

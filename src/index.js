@@ -1,7 +1,7 @@
 import Launcher from './Launcher.vue'
 import VTooltip from 'v-tooltip'
 
-const defaultComponentName = 'beautiful-chat'
+const defaultComponentName = 'BeautifulChat'
 
 const Plugin = {
   install(Vue, options = {}) {
