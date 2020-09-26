@@ -1,10 +1,10 @@
 import Launcher from './Launcher.vue'
 import VTooltip from 'v-tooltip'
 
-const defaultComponentName = 'beautiful-chat'
+const defaultComponentName = 'BeautifulChat'
 
 const Plugin = {
-  install (Vue, options = {}) {
+  install(Vue, options = {}) {
     /**
      * Makes sure that plugin can be installed only once
      */
@@ -20,7 +20,7 @@ const Plugin = {
      * Plugin API
      */
     Vue.prototype.$chat = {
-      _setDynamicContainer (dynamicContainer) {
+      _setDynamicContainer(dynamicContainer) {
         Plugin.dynamicContainer = dynamicContainer
       }
     }

@@ -44,7 +44,6 @@
         {{humanReadableFileSize(data.file.size) || ''}}
       </div>
     </div>
-    <div class="sc-message--file-text" :style="messageColors">{{data.text}}<p v-if="data.meta" class='sc-message--meta' :style="messageColors">{{data.meta}}</p></div>
   </div>
 </template>
 
@@ -108,7 +107,8 @@ export default {
   font-weight: 300;
   font-size: 14px;
   line-height: 1.4;
-  -webkit-font-smoothing: subpixel-antialiased
+  /* white-space: pre-wrap; */
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .sc-message--content .sc-message--file {
@@ -133,7 +133,7 @@ export default {
   font-size: 14px;
   line-height: 1.4;
   white-space: pre-wrap;
-  -webkit-font-smoothing: subpixel-antialiased
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .sc-message--file-name {
