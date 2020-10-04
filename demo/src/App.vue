@@ -26,6 +26,7 @@
       :confirmationDeletionMessage="'Are you sure? (you can customize this message)'"
       :titleImageUrl="titleImageUrl"
       :disableUserListToggle="false"
+      :chatListImageUrl="chatListImageUrl"
       :placeholder="placeholder"
       :multipleChatsEnabled="multipleChatsEnabled"
       :chatList="chatList"
@@ -136,8 +137,8 @@ export default {
   },
   data() {
     return {
-      titleImageUrl:
-        'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
+      titleImageUrl: "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+      chatListImageUrl: "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
       chatHistory: chatHistory,
       isChatOpen: false,
       showTypingIndicator: '',
@@ -218,6 +219,9 @@ export default {
     handleChangeCurrentChat(newCurrentChatID) {
       this.showTypingIndicator = ''
       this.currentChatID = newCurrentChatID
+      const chat = this.chatHistory[this.currentChatID]
+      this.titleImageUrl = chat.imageUrl
+      this.title = chat.name
     },
     handleMultipleChatsEnabledChange(newMultipleChatsEnabled) {
       this.multipleChatsEnabled = newMultipleChatsEnabled

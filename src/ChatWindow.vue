@@ -4,7 +4,7 @@
       v-if="showHeader"
       :show-chat-list-button="multipleChatsEnabled && !showingChatList"
       :title="showingChatList ? chatListTitle : title"
-      :image-url="titleImageUrl"
+      :image-url="showingChatList ? chatListImageUrl : titleImageUrl"
       @close="$emit('close')"
       :colors="colors"
       :disable-user-list-toggle="disableUserListToggle || showingChatList"
@@ -20,7 +20,7 @@
       v-if="showingChatList"
       :colors="colors"
       :chatList="chatList"
-      @changeCurrentChat="(chatID) => { this.$emit('changeCurrentChat', chatID) }"
+      @changeCurrentChat="(chatID) => { $emit('changeCurrentChat', chatID) }"
       @showMessageList="handleShowMessageList"
       />
     <MessageList
@@ -129,6 +129,10 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    chatListImageUrl: {
+      type: String,
+      default: ''
     },
     onUserInputSubmit: {
       type: Function,

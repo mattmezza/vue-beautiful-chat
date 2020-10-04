@@ -36,6 +36,7 @@
       :multiple-chats-enabled="multipleChatsEnabled"
       :chat-list="chatList"
       :chat-list-title="chatListTitle"
+      :chat-list-image-url="chatListImageUrl"
       :myId="myId"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
@@ -245,6 +246,10 @@ export default {
       required: false
     },
     chatListTitle: {
+      type: String,
+      default: () => ''
+    },
+    chatListImageUrl: {
       type: String,
       default: () => ''
     },
