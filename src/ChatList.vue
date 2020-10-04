@@ -1,12 +1,12 @@
 <template>
   <div class="chat-list" :style="{background: colors.chatList.bg}">
-    <table style="padding-top: 5px;" width=100%>
+    <table>
       <tbody>
         <tr v-for="chat in chatList" :key="chat.id" @click="openChat(chat.id)">
-          <td style="text-align: center;">
+          <td class="chat-img-td">
             <img :src="chat.imageUrl" class="chat-img" />
           </td>
-          <td class="chat-element" :style="{color: colors.chatList.text}">
+          <td class="chat-name-td" :style="{color: colors.chatList.text}">
             {{ chat.name }}
           </td>
           <td>
@@ -51,17 +51,28 @@ export default {
   padding-left: 5px;
   padding-top: 8px;
 }
+.chat-img-td {
+  text-align: center;
+  width: 50px;
+}
 .chat-img {
   border-radius: 50%;
   width: 50px;
   margin-right: 5px;
+  display: block;
 }
-.chat-element {
+.chat-name-td {
   font-size: 20px;
   vertical-align: middle;
   text-align: left;
 }
 .chat-badge {
   font-size: 17px;
+}
+table {
+  width: 100%
+}
+tr>td {
+  padding-top: 5px;
 }
 </style>
