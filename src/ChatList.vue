@@ -49,8 +49,8 @@ export default {
   box-sizing: border-box;
   height: 100%;
   overflow: auto;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
   padding-top: 8px;
 }
 .chat-img-td {
@@ -84,8 +84,9 @@ export default {
 table {
   box-sizing: border-box;
   width: 100%;
+  border-collapse: collapse;
 }
 tr>td {
-  padding-top: 5px;
+  padding-top: 7px;
 }
 </style>
