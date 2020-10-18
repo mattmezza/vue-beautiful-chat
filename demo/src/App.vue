@@ -23,6 +23,7 @@
       :showEdition="true"
       :showDeletion="true"
       :showConfirmationDeletion="true"
+      :confirmationDeletionMessage="'Are you sure? (you can customize this message)'"
       :titleImageUrl="titleImageUrl"
       @onType="handleOnType"
       @edit="editMessage"

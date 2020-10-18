@@ -9,7 +9,7 @@
   "scripts": {
     "build": "vue-cli-service build --target lib --name vue-beautiful-chat --formats umd-min src/index.js",
     "lint": "vue-cli-service lint",
-    "watch": "npm run build -- --watch",
+    "watch": "npm run build -- --mode development --watch",
     "prepublishOnly": "npm run build"
   },
   "files": [

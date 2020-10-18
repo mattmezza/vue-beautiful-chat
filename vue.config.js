@@ -1,6 +1,8 @@
+ifProd = () => process.env.NODE_ENV === 'production'
+
 module.exports = {
   lintOnSave: false,
-  productionSourceMap: false,
+  productionSourceMap: ifProd(),
 
   chainWebpack: (config) => {
     // Inline images & svgs into build

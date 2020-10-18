@@ -25,6 +25,7 @@
       :show-edition="showEdition"
       :show-deletion="showDeletion"
       :show-confirmation-deletion="showConfirmationDeletion"
+      :confirmation-deletion-message="confirmationDeletionMessage"
       :message-styling="messageStyling"
       @scrollToTop="$emit('scrollToTop')"
       @remove="$emit('remove', $event)"
@@ -124,7 +125,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Write a message...'
+      required: true
     },
     showTypingIndicator: {
       type: String,
@@ -156,6 +157,10 @@ export default {
     },
     showConfirmationDeletion: {
       type: Boolean,
+      required: true
+    },
+    confirmationDeletionMessage: {
+      type: String,
       required: true
     }
   },

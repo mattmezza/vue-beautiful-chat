@@ -28,6 +28,7 @@
         :show-edition="showEdition"
         :show-deletion="showDeletion"
         :show-confirmation-deletion="showConfirmationDeletion"
+        :confirmation-deletion-message="confirmationDeletionMessage"
         @remove="$emit('remove')"
       >
         <template v-slot:default="scopedProps">
@@ -107,6 +108,10 @@ export default {
     },
     showConfirmationDeletion: {
       type: Boolean,
+      required: true
+    },
+    confirmationDeletionMessage: {
+      type: String,
       required: true
     }
   },

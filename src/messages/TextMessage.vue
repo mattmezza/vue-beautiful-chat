@@ -8,7 +8,7 @@
           </IconBase>
         </button>
         <div v-if="showDeletion">
-          <button v-if="me && message.id != null && message.id != undefined" @click="ifelse(showConfirmationDeletion, withConfirm('Do you really want to delete the message?', () => $emit('remove')), () => $emit('remove'))()">
+          <button v-if="me && message.id != null && message.id != undefined" @click="ifelse(showConfirmationDeletion, withConfirm(confirmationDeletionMessage, () => $emit('remove')), () => $emit('remove'))()">
             <IconBase :color="messageColors.color" width="10" icon-name="remove">
               <IconCross />
             </IconBase>
@@ -72,6 +72,10 @@ export default {
       type: Boolean,
       required: true
     },
+    confirmationDeletionMessage: {
+      type: String,
+      required: true
+    }
   },
   computed: {
     messageText() {
@@ -101,10 +105,7 @@ export default {
     },
     withConfirm(msg, func) {
       return () => {
-        if (confirm(msg)) {
-          console.log(func)
-          func()
-        }
+        if (confirm(msg)) func()
       }
     },
   },
