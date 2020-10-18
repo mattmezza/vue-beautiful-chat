@@ -2,23 +2,18 @@
   <div class="sc-message--text" :style="messageColors">
     <template>
       <div class="sc-message--toolbox" :style="{background: messageColors.backgroundColor}">
-        <button
-          v-if="showEdition && me && message.id != null && message.id != undefined"
-          :disabled="isEditing"
-          @click="edit"
-        >
-          <IconBase :color="isEditing ? 'black' : messageColors.color" width="10" icon-name="edit">
+        <button v-if="showEdition && me && message.id" @click="edit" :disabled="isEditing">
+          <IconBase :color="isEditing? 'black': messageColors.color" width="10" icon-name="edit">
             <IconEdit />
           </IconBase>
         </button>
-        <button
-          v-if="showDeletion && me && message.id != null && message.id != undefined"
-          @click="$emit('remove')"
-        >
-          <IconBase :color="messageColors.color" width="10" icon-name="remove">
-            <IconCross />
-          </IconBase>
-        </button>
+        <div v-if="showDeletion">
+          <button v-if="me && message.id != null && message.id != undefined" @click="ifelse(showConfirmationDeletion, withConfirm('Do you really want to delete the message?', () => $emit('remove')), () => $emit('remove'))()">
+            <IconBase :color="messageColors.color" width="10" icon-name="remove">
+              <IconCross />
+            </IconBase>
+          </button>
+        </div>
         <slot name="text-message-toolbox" :message="message" :me="me"> </slot>
       </div>
     </template>
@@ -47,10 +42,10 @@ import store from './../store/'
 const fmt = require('msgdown')
 
 export default {
-  components: {
-    IconBase,
-    IconCross,
-    IconEdit
+  data() {
+    return {
+      store
+    }
   },
   props: {
     message: {
@@ -72,12 +67,11 @@ export default {
     showDeletion: {
       type: Boolean,
       required: true
-    }
-  },
-  data() {
-    return {
-      store
-    }
+    },
+    showConfirmationDeletion: {
+      type: Boolean,
+      required: true
+    },
   },
   computed: {
     messageText() {
@@ -98,7 +92,26 @@ export default {
   methods: {
     edit() {
       this.store.editMessage = this.message
-    }
+    },
+    ifelse(cond, funcIf, funcElse) {
+      return () => {
+        if (funcIf && cond) funcIf()
+        else if (funcElse) funcElse()
+      }
+    },
+    withConfirm(msg, func) {
+      return () => {
+        if (confirm(msg)) {
+          console.log(func)
+          func()
+        }
+      }
+    },
+  },
+  components:{
+    IconBase,
+    IconCross,
+    IconEdit,
   }
 }
 </script>

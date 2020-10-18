@@ -27,6 +27,7 @@
         :message-styling="messageStyling"
         :show-edition="showEdition"
         :show-deletion="showDeletion"
+        :show-confirmation-deletion="showConfirmationDeletion"
         @remove="$emit('remove')"
       >
         <template v-slot:default="scopedProps">
@@ -101,6 +102,10 @@ export default {
       required: true
     },
     showDeletion: {
+      type: Boolean,
+      required: true
+    },
+    showConfirmationDeletion: {
       type: Boolean,
       required: true
     }
@@ -203,7 +208,13 @@ export default {
     left: -20px;
     opacity: 1;
   }
-  .sc-message--toolbox {
+  &.confirm-delete:hover .sc-message--toolbox {
+    left: -90px;
+  }
+  &.confirm-delete .sc-message--toolbox {
+    width: auto;
+  }
+  .sc-message--toolbox{
     transition: left 0.2s ease-out 0s;
     white-space: normal;
     opacity: 0;

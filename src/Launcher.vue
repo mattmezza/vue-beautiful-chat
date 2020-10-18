@@ -27,6 +27,7 @@
       :show-file="showFile"
       :show-edition="showEdition"
       :show-deletion="showDeletion"
+      :show-confirmation-deletion="showConfirmationDeletion"
       :show-header="showHeader"
       :placeholder="placeholder"
       :show-typing-indicator="showTypingIndicator"
@@ -101,6 +102,10 @@ export default {
       default: false
     },
     showDeletion: {
+      type: Boolean,
+      default: false
+    },
+    showConfirmationDeletion: {
       type: Boolean,
       default: false
     },

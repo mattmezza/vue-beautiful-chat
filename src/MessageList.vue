@@ -14,6 +14,7 @@
       :message-styling="messageStyling"
       :show-edition="showEdition"
       :show-deletion="showDeletion"
+      :show-confirmation-deletion="showConfirmationDeletion"
       @remove="$emit('remove', message)"
     >
       <template v-slot:user-avatar="scopedProps">
@@ -45,6 +46,7 @@
       :message-styling="messageStyling"
       :show-edition="showEdition"
       :show-deletion="showDeletion"
+      :show-confirmation-deletion="showConfirmationDeletion"
     />
   </div>
 </template>
@@ -87,6 +89,10 @@ export default {
       required: true
     },
     showDeletion: {
+      type: Boolean,
+      required: true
+    },
+    showConfirmationDeletion: {
       type: Boolean,
       required: true
     }
