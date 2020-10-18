@@ -171,7 +171,7 @@ For more detailed examples see the demo folder.
 |prop | type   | description |
 |-----|--------|---------------|
 | *participants | [agentProfile] | Represents your product or service's customer service agents. Fields for each agent: id, name, imageUrl|
-| *onMessageWasSent | function(message) | Called when a message a message is sent with a message object as an argument. |
+| *onMessageWasSent | function(message) | Called when a message is sent with the message object as an argument. |
 | *isOpen | Boolean | The bool indicating whether or not the chat window should be open. |
 | *open | Function | The function passed to the component that mutates the above mentioned bool toggle for opening the chat |
 | *close | Function | The function passed to the component that mutates the above mentioned bool toggle for closing the chat |
