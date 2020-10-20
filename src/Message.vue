@@ -47,12 +47,28 @@
         </template>
       </TextMessage>
       <EmojiMessage v-else-if="message.type === 'emoji'" :data="message.data" />
-      <FileMessage v-else-if="message.type === 'file' && message.data.file.mime" :data="message.data" :messageColors="determineMessageColors()" @download="$emit('download')"/>
-      <ImageMessage v-else-if="message.type === 'file' && message.data.file.url" :data="message.data" :messageColors="determineMessageColors()" />
-      <TypingMessage v-else-if="message.type === 'typing'" :messageColors="determineMessageColors()" />
-      <SystemMessage v-else-if="message.type === 'system'" :data="message.data" :messageColors="determineMessageColors()">
-          <slot name="system-message-body" :message="message.data">
-          </slot>
+      <FileMessage
+        v-else-if="message.type === 'file' && message.data.file.mime"
+        :data="message.data"
+        :message-colors="messageColors"
+        @download="$emit('download')"
+      />
+      <ImageMessage
+        v-else-if="message.type === 'file' && message.data.file.url"
+        :data="message.data"
+        :message-colors="messageColors"
+      />
+      <TypingMessage
+        v-else-if="message.type === 'typing'"
+        :message-colors="messageColors"
+      />
+      <SystemMessage
+        v-else-if="message.type === 'system'"
+        :data="message.data"
+        :message-colors="messageColors"
+      >
+        <slot name="system-message-body" :message="message.data">
+        </slot>
       </SystemMessage>
     </div>
   </div>

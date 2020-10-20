@@ -4,7 +4,7 @@
       :chosenColor="chosenColor"
       :colors="colors"
     />
-    <beautiful-chat 
+    <beautiful-chat
       :alwaysScrollToBottom="alwaysScrollToBottom"
       :close="closeChat"
       :colors="colors"
@@ -204,6 +204,7 @@ export default {
       m.type = 'system';
       m.data.text = 'This message has been removed';
     },
+    downloadMessage(message){},
     like(id){
       const m = this.messageList.findIndex(m => m.id === id);
       var msg = this.messageList[m];

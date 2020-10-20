@@ -23,6 +23,8 @@
     "kind-of": "6.0.3",
     "minimist": "1.2.3",
     "msgdown": "^1.0.2",
+    "pretty-bytes": "^5.4.1",
+    "smart-truncate": "^1.0.1",
     "v-tooltip": "^2.0.1"
   },
   "devDependencies": {
