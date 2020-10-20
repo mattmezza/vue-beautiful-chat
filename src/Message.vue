@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-message" :id="message.id">
+  <div class="sc-message" :id="message.type === 'file' ? message.data.file.id : message.id">
     <div
       class="sc-message--content"
       :class="{
