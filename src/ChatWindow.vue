@@ -193,7 +193,7 @@ export default {
     }
   },
   watch: {
-    multipleChatsEnabled: function(newMultipleChatsEnabled) {
+    multipleChatsEnabled(newMultipleChatsEnabled) {
       this.state = this.initialState()
     }
   },

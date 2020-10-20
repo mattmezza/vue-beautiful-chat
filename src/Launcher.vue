@@ -153,11 +153,11 @@ export default {
     },
     title: {
       type: String,
-      default: () => ''
+      default: ''
     },
     titleImageUrl: {
       type: String,
-      default: () => ''
+      default: ''
     },
     onMessageWasSent: {
       type: Function,
@@ -165,11 +165,11 @@ export default {
     },
     messageList: {
       type: Array,
-      default: () => []
+      default: []
     },
     newMessagesCount: {
       type: Number,
-      default: () => 0
+      default: 0
     },
     placeholder: {
       type: String,
@@ -177,7 +177,7 @@ export default {
     },
     showTypingIndicator: {
       type: String,
-      default: () => ''
+      default: ''
     },
     colors: {
       type: Object,
@@ -227,11 +227,11 @@ export default {
     },
     alwaysScrollToBottom: {
       type: Boolean,
-      default: () => false
+      default: false
     },
     messageStyling: {
       type: Boolean,
-      default: () => false
+      default: false
     },
     disableUserListToggle: {
       type: Boolean,
@@ -247,11 +247,11 @@ export default {
     },
     chatListTitle: {
       type: String,
-      default: () => ''
+      default: ''
     },
     chatListImageUrl: {
       type: String,
-      default: () => ''
+      default: ''
     },
     myId: {
       type: String,

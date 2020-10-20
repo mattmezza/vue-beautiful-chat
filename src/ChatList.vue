@@ -2,7 +2,7 @@
   <div class="chat-list" :style="{background: colors.chatList.bg}">
     <table>
       <tbody>
-        <tr v-for="chat in chatList" :key="chat.id" @click="openChat(chat.id)">
+        <tr class="chat-list-row" v-for="chat in chatList" :key="chat.id" @click="openChat(chat.id)">
           <td class="chat-img-td">
             <img :src="chat.imageUrl" class="chat-img" />
           </td>
@@ -52,6 +52,9 @@ export default {
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 8px;
+}
+.chat-list-row {
+  cursor: pointer;
 }
 .chat-img-td {
   box-sizing: border-box;
