@@ -14,6 +14,8 @@
       :message-styling="messageStyling"
       :show-edition="showEdition"
       :show-deletion="showDeletion"
+      :show-confirmation-deletion="showConfirmationDeletion"
+      :confirmation-deletion-message="confirmationDeletionMessage"
       @remove="$emit('remove', message)"
       @download="$emit('download', message)"
     >
@@ -46,6 +48,8 @@
       :message-styling="messageStyling"
       :show-edition="showEdition"
       :show-deletion="showDeletion"
+      :show-confirmation-deletion="showConfirmationDeletion"
+      :confirmation-deletion-message="confirmationDeletionMessage"
     />
   </div>
 </template>
@@ -90,6 +94,14 @@ export default {
     showDeletion: {
       type: Boolean,
       required: true
+    },
+    showConfirmationDeletion: {
+      type: Boolean,
+      required: true
+    },
+    confirmationDeletionMessage: {
+      type: String,
+      required: true,
     }
   },
   computed: {

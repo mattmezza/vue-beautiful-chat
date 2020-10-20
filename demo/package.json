@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "gh:publish": "yarn run build && gh-pages -d dist"
+    "gh:publish": "NODE_ENV=production yarn run build && gh-pages -d dist"
   },
   "dependencies": {
+    "node-forge": "^0.10.0",
     "vue": "^2.6.10",
     "vue-js-modal": "^1.3.26"
   },
