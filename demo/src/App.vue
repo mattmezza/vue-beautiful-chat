@@ -25,6 +25,7 @@
       :showConfirmationDeletion="true"
       :confirmationDeletionMessage="'Are you sure? (you can customize this message)'"
       :titleImageUrl="titleImageUrl"
+      :disableUserListToggle="false"
       @onType="handleOnType"
       @edit="editMessage"
       @remove="removeMessage"

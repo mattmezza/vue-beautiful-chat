@@ -63,6 +63,7 @@ Vue.use(Chat)
       :showCloseButton="true"
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
+      :disableUserListToggle="false"
       :messageStyling="messageStyling"
       @onType="handleOnType"
       @edit="editMessage" />
@@ -184,6 +185,7 @@ For more detailed examples see the demo folder.
 | showEdition | Boolean | A bool indicating whether or not to show the delete button for a message
 | showTypingIndicator | String | A string that can be set to a user's participant.id to show `typing` indicator for them
 | showHeader | Boolean | A bool indicating whether or not to show the header of chatwindow
+| disableUserListToggle | Boolean | A bool indicating whether or not to allow the user to toggle between message list and participants list
 | colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
 | messageStyling | Boolean | A bool indicating whether or not to enable `msgdown` support for message formatting in chat. [See here](#faq)
 
