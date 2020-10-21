@@ -395,6 +395,6 @@ Good news, message formatting is already added for you. You can enable it by set
 
 #### Contributors
 
-@a-kriya, @mattmezza
+[@a-kriya](https://github.com/a-kriya), [@mattmezza](https://github.com/mattmezza)
 
 _Please contact us if you would like to join as a contributor_.
