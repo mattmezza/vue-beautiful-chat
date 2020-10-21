@@ -7,7 +7,7 @@
       :image-url="showingChatList ? chatListImageUrl : titleImageUrl"
       @close="$emit('close')"
       :colors="colors"
-      :disable-user-list-toggle="disableUserListToggle || showingChatList"
+      :disable-list-toggle="disableUserListToggle || showingChatList"
       @toggleUserListMessageList="handleToggleUserListMessageList"
       @showChatList="handleShowChatList"
     >
@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import {mapState} from './store/'
 import Header from './Header.vue'
 import MessageList from './MessageList.vue'
 import UserInput from './UserInput.vue'
@@ -211,7 +212,8 @@ export default {
     },
     showingMessageList() {
       return this.state == uiState.MESSAGE_LIST
-    }
+    },
+    ...mapState(['titleImageUrl', 'disableUserListToggle'])
   },
   methods: {
     handleToggleUserListMessageList() {

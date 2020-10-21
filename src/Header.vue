@@ -7,7 +7,7 @@
     </div>
     <slot>
       <img v-if="titleImageUrl" class="sc-header--img" :src="titleImageUrl" alt="" />
-      <div v-if="!disableUserListToggle" class="sc-header--title enabled" @click="toggleUserListMessageList">
+      <div v-if="!disableListToggle" class="sc-header--title enabled" @click="toggleUserListMessageList">
         {{ title }}
       </div>
       <div v-else class="sc-header--title">{{ title }}</div>
@@ -47,9 +47,13 @@ export default {
       type: Boolean,
       default: false
     },
+    disableListToggle: {
+      type: Boolean,
+      required: true
+    },
   },
   computed: {
-    ...mapState(['disableUserListToggle', 'titleImageUrl', 'showCloseButton'])
+    ...mapState(['titleImageUrl', 'showCloseButton'])
   },
   methods: {
     toggleUserListMessageList() {
