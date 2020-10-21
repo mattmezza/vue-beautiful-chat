@@ -2,12 +2,9 @@
   <div class="sc-chat-window" :class="{opened: isOpen, closed: !isOpen}">
     <Header
       v-if="showHeader"
-      :show-close-button="showCloseButton"
       :title="title"
-      :image-url="titleImageUrl"
-      :on-close="onClose"
       :colors="colors"
-      :disable-user-list-toggle="disableUserListToggle"
+      @close="$emit('close')"
       @userList="handleUserListToggle"
     >
       <template>
@@ -83,10 +80,6 @@ export default {
       type: Boolean,
       default: false
     },
-    showCloseButton: {
-      type: Boolean,
-      default: true
-    },
     showFile: {
       type: Boolean,
       default: false
@@ -103,15 +96,7 @@ export default {
       type: String,
       required: true
     },
-    titleImageUrl: {
-      type: String,
-      default: ''
-    },
     onUserInputSubmit: {
-      type: Function,
-      required: true
-    },
-    onClose: {
       type: Function,
       required: true
     },
@@ -142,10 +127,6 @@ export default {
     messageStyling: {
       type: Boolean,
       required: true
-    },
-    disableUserListToggle: {
-      type: Boolean,
-      default: false
     },
     showEdition: {
       type: Boolean,
