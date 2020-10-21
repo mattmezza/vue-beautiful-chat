@@ -392,3 +392,9 @@ Good news, message formatting is already added for you. You can enable it by set
 
 </p>
 </details>
+
+#### Contributors
+
+@a-kriya, @mattmezza
+
+_Please contact us if you would like to join as a contributor_.
