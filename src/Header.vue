@@ -1,13 +1,30 @@
 <template>
   <div class="sc-header" :style="{background: colors.header.bg, color: colors.header.text}">
-    <div v-if="showChatListButton" class="bi bi-chevron-left sc-header--chat-list-button" @click="showChatList">
-      <svg class="sc-header--svg-button" height="15px" width="15px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" version="1.1">
-        <path d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
+    <div
+      v-if="showChatListButton"
+      class="bi bi-chevron-left sc-header--chat-list-button"
+      @click="showChatList"
+    >
+      <svg
+        class="sc-header--svg-button"
+        height="15px"
+        width="15px"
+        viewBox="0 0 16 16"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+      >
+        <path
+          d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+        ></path>
       </svg>
     </div>
     <slot>
       <img v-if="titleImageUrl" class="sc-header--img" :src="titleImageUrl" alt="" />
-      <div v-if="!disableListToggle" class="sc-header--title enabled" @click="toggleUserListMessageList">
+      <div
+        v-if="!disableListToggle"
+        class="sc-header--title enabled"
+        @click="toggleUserListMessageList"
+      >
         {{ title }}
       </div>
       <div v-else class="sc-header--title">{{ title }}</div>
@@ -50,7 +67,7 @@ export default {
     disableListToggle: {
       type: Boolean,
       required: true
-    },
+    }
   },
   computed: {
     ...mapState(['titleImageUrl', 'showCloseButton'])
@@ -83,8 +100,8 @@ export default {
   align-self: center;
   padding: 10px;
   box-sizing: border-box;
-  width:54px;
-  height:54px;
+  width: 54px;
+  height: 54px;
 }
 
 .sc-header--title {
@@ -146,7 +163,7 @@ export default {
 .sc-header--svg-button {
   margin: 0 auto;
   display: block;
-  fill: white
+  fill: white;
 }
 
 @media (max-width: 450px) {

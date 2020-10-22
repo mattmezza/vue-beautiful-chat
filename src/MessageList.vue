@@ -16,7 +16,7 @@
       :show-deletion="showDeletion"
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
-      :myId="myId"
+      :my-id="myId"
       @remove="$emit('remove', message)"
     >
       <template v-slot:user-avatar="scopedProps">
@@ -50,7 +50,7 @@
       :show-deletion="showDeletion"
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
-      :myId="myId"
+      :my-id="myId"
     />
   </div>
 </template>
@@ -102,7 +102,7 @@ export default {
     },
     confirmationDeletionMessage: {
       type: String,
-      required: true,
+      required: true
     },
     myId: {
       type: String,
@@ -143,7 +143,7 @@ export default {
       return profile || {imageUrl: '', name: ''}
     },
     onMessageListMountedUpdated() {
-      this.$emit("messageListMountedUpdated")
+      this.$emit('messageListMountedUpdated')
     }
   }
 }

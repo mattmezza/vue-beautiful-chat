@@ -2,7 +2,12 @@
   <div class="chat-list" :style="{background: colors.chatList.bg}">
     <table>
       <tbody>
-        <tr class="chat-list-row" v-for="chat in chatList" :key="chat.id" @click="openChat(chat.id)">
+        <tr
+          v-for="chat in chatList"
+          :key="chat.id"
+          class="chat-list-row"
+          @click="openChat(chat.id)"
+        >
           <td class="chat-img-td">
             <img :src="chat.imageUrl" class="chat-img" />
           </td>
@@ -10,9 +15,22 @@
             {{ chat.name }}
           </td>
           <td class="badge-td">
-            <svg width="22px" height="22px" viewBox="0 0 32 32" class="bi bi-circle-fill chat-badge" :fill="chat.unreadCount ? colors.chatListBadge.bg : colors.chatList.bg" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="16" cy="16" r="16"/>
-              <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" :fill="chat.unreadCount ? colors.chatListBadge.text : colors.chatList.bg">
+            <svg
+              width="22px"
+              height="22px"
+              viewBox="0 0 32 32"
+              class="bi bi-circle-fill chat-badge"
+              :fill="chat.unreadCount ? colors.chatListBadge.bg : colors.chatList.bg"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="16" cy="16" r="16" />
+              <text
+                x="50%"
+                y="55%"
+                dominant-baseline="middle"
+                text-anchor="middle"
+                :fill="chat.unreadCount ? colors.chatListBadge.text : colors.chatList.bg"
+              >
                 {{ chat.unreadCount }}
               </text>
             </svg>
@@ -28,12 +46,12 @@ export default {
   props: {
     chatList: {
       type: Array,
-      required: false
+      required: true
     },
     colors: {
       type: Object,
       required: true
-    },
+    }
   },
   methods: {
     openChat(chatID) {
@@ -89,7 +107,7 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
-tr>td {
+tr > td {
   padding-top: 7px;
 }
 </style>

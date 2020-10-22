@@ -3,14 +3,14 @@
     <div
       class="sc-message--content"
       :class="{
-        sent: message.author === this.myId,
-        received: message.author !== this.myId && message.type !== 'system',
+        sent: message.author === myId,
+        received: message.author !== myId && message.type !== 'system',
         system: message.type === 'system'
       }"
     >
       <slot name="user-avatar" :message="message" :user="user">
         <div
-          v-if="message.type !== 'system' && authorName && authorName !== this.myId"
+          v-if="message.type !== 'system' && authorName && authorName !== myId"
           v-tooltip="authorName"
           :title="authorName"
           class="sc-message--avatar"
@@ -29,7 +29,7 @@
         :show-deletion="showDeletion"
         :show-confirmation-deletion="showConfirmationDeletion"
         :confirmation-deletion-message="confirmationDeletionMessage"
-        :myId="myId"
+        :my-id="myId"
         @remove="$emit('remove')"
       >
         <template v-slot:default="scopedProps">

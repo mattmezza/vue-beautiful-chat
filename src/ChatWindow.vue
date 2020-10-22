@@ -5,9 +5,9 @@
       :show-chat-list-button="multipleChatsEnabled && !showingChatList"
       :title="showingChatList ? chatListTitle : title"
       :image-url="showingChatList ? chatListImageUrl : titleImageUrl"
-      @close="$emit('close')"
       :colors="colors"
       :disable-list-toggle="disableUserListToggle || showingChatList"
+      @close="$emit('close')"
       @toggleUserListMessageList="handleToggleUserListMessageList"
       @showChatList="handleShowChatList"
     >
@@ -19,10 +19,14 @@
     <ChatList
       v-if="showingChatList"
       :colors="colors"
-      :chatList="chatList"
-      @changeCurrentChat="(chatID) => { $emit('changeCurrentChat', chatID) }"
+      :chat-list="chatList"
+      @changeCurrentChat="
+        (chatID) => {
+          $emit('changeCurrentChat', chatID)
+        }
+      "
       @showMessageList="handleShowMessageList"
-      />
+    />
     <MessageList
       v-if="showingMessageList"
       :messages="messages"
@@ -35,7 +39,7 @@
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
       :message-styling="messageStyling"
-      :myId="myId"
+      :my-id="myId"
       @scrollToTop="$emit('scrollToTop')"
       @remove="$emit('remove', $event)"
       @messageListMountedUpdated="$emit('messageListMountedUpdated')"
@@ -69,7 +73,7 @@
       :show-file="showFile"
       :placeholder="placeholder"
       :colors="colors"
-      :myId="myId"
+      :my-id="myId"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
     />
@@ -85,9 +89,9 @@ import UserList from './UserList.vue'
 import ChatList from './ChatList.vue'
 
 const uiState = {
-    MESSAGE_LIST: 'message-list',
-    USER_LIST: 'user-list',
-    CHAT_LIST: 'chat-list'
+  MESSAGE_LIST: 'message-list',
+  USER_LIST: 'user-list',
+  CHAT_LIST: 'chat-list'
 }
 
 export default {
@@ -121,7 +125,7 @@ export default {
     },
     chatList: {
       type: Array,
-      required: false
+      required: true
     },
     chatListTitle: {
       type: String,
@@ -193,11 +197,6 @@ export default {
       windowState: this.initialState()
     }
   },
-  watch: {
-    multipleChatsEnabled(newMultipleChatsEnabled) {
-      this.windowState = this.initialState()
-    }
-  },
   computed: {
     messages() {
       let messages = this.messageList
@@ -215,9 +214,15 @@ export default {
     },
     ...mapState(['titleImageUrl', 'disableUserListToggle'])
   },
+  watch: {
+    multipleChatsEnabled(newMultipleChatsEnabled) {
+      this.windowState = this.initialState()
+    }
+  },
   methods: {
     handleToggleUserListMessageList() {
-      this.windowState = (this.windowState == uiState.USER_LIST) ? uiState.MESSAGE_LIST : uiState.USER_LIST
+      this.windowState =
+        this.windowState == uiState.USER_LIST ? uiState.MESSAGE_LIST : uiState.USER_LIST
     },
     handleShowChatList() {
       this.windowState = uiState.CHAT_LIST

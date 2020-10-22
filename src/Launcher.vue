@@ -31,17 +31,21 @@
       :colors="colors"
       :always-scroll-to-bottom="alwaysScrollToBottom"
       :message-styling="messageStyling"
-      @close="close"
       :multiple-chats-enabled="multipleChatsEnabled"
       :chat-list="chatList"
       :chat-list-title="chatListTitle"
       :chat-list-image-url="chatListImageUrl"
-      :myId="myId"
+      :my-id="myId"
+      @close="close"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
       @remove="$emit('remove', $event)"
-      @changeCurrentChat="(chatID) => { this.$emit('changeCurrentChat', chatID) }"
+      @changeCurrentChat="
+        (chatID) => {
+          this.$emit('changeCurrentChat', chatID)
+        }
+      "
       @messageListMountedUpdated="$emit('messageListMountedUpdated')"
     >
       <template v-slot:header>
@@ -164,7 +168,7 @@ export default {
     },
     messageList: {
       type: Array,
-      default: []
+      default: () => []
     },
     newMessagesCount: {
       type: Number,
@@ -242,7 +246,7 @@ export default {
     },
     chatList: {
       type: Array,
-      required: false
+      default: () => []
     },
     chatListTitle: {
       type: String,
