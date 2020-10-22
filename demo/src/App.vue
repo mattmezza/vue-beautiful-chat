@@ -250,7 +250,7 @@ export default {
       if (chat === undefined) {
         return [];
       }
-      return chat["messages"];
+      return chat.messages;
     },
   },
   computed: {
@@ -267,14 +267,14 @@ export default {
       if (chat === undefined) {
         return [];
       }
-      return chat["messages"];
+      return chat.messages;
     },
     participants() {
       const chat = this.chatHistory[this.currentChatID];
       if (chat === undefined) {
         return [];
       }
-      return chat["participants"];
+      return chat.participants;
     },
     chatList() {
       var chats = []
