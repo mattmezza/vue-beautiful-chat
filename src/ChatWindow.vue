@@ -190,12 +190,12 @@ export default {
   },
   data() {
     return {
-      state: this.initialState()
+      windowState: this.initialState()
     }
   },
   watch: {
     multipleChatsEnabled(newMultipleChatsEnabled) {
-      this.state = this.initialState()
+      this.windowState = this.initialState()
     }
   },
   computed: {
@@ -205,25 +205,25 @@ export default {
       return messages
     },
     showingUserList() {
-      return this.state == uiState.USER_LIST
+      return this.windowState == uiState.USER_LIST
     },
     showingChatList() {
-      return this.state == uiState.CHAT_LIST
+      return this.windowState == uiState.CHAT_LIST
     },
     showingMessageList() {
-      return this.state == uiState.MESSAGE_LIST
+      return this.windowState == uiState.MESSAGE_LIST
     },
     ...mapState(['titleImageUrl', 'disableUserListToggle'])
   },
   methods: {
     handleToggleUserListMessageList() {
-      this.state = (this.state == uiState.USER_LIST) ? uiState.MESSAGE_LIST : uiState.USER_LIST
+      this.windowState = (this.windowState == uiState.USER_LIST) ? uiState.MESSAGE_LIST : uiState.USER_LIST
     },
     handleShowChatList() {
-      this.state = uiState.CHAT_LIST
+      this.windowState = uiState.CHAT_LIST
     },
     handleShowMessageList() {
-      this.state = uiState.MESSAGE_LIST
+      this.windowState = uiState.MESSAGE_LIST
     },
     getSuggestions() {
       return this.messages.length > 0 ? this.messages[this.messages.length - 1].suggestions : []
