@@ -12,8 +12,6 @@
       :user="profile(message.author)"
       :colors="colors"
       :message-styling="messageStyling"
-      :show-edition="showEdition"
-      :show-deletion="showDeletion"
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
       @remove="$emit('remove', message)"
@@ -45,8 +43,6 @@
       :user="profile(showTypingIndicator)"
       :colors="colors"
       :message-styling="messageStyling"
-      :show-edition="showEdition"
-      :show-deletion="showDeletion"
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
     />
@@ -83,14 +79,6 @@ export default {
       required: true
     },
     messageStyling: {
-      type: Boolean,
-      required: true
-    },
-    showEdition: {
-      type: Boolean,
-      required: true
-    },
-    showDeletion: {
       type: Boolean,
       required: true
     },

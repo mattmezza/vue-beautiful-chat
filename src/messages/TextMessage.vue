@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import {mapState} from '../store/'
 import IconBase from './../components/IconBase.vue'
 import IconEdit from './../components/icons/IconEdit.vue'
 import IconCross from './../components/icons/IconCross.vue'
@@ -70,14 +71,6 @@ export default {
       type: Boolean,
       required: true
     },
-    showEdition: {
-      type: Boolean,
-      required: true
-    },
-    showDeletion: {
-      type: Boolean,
-      required: true
-    },
     showConfirmationDeletion: {
       type: Boolean,
       required: true
@@ -101,7 +94,8 @@ export default {
     },
     isEditing() {
       return (store.state.editMessage && store.state.editMessage.id) === this.message.id
-    }
+    },
+    ...mapState(['showDeletion', 'showEdition'])
   },
   methods: {
     edit() {

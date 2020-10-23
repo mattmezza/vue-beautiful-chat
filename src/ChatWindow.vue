@@ -19,8 +19,6 @@
       :show-typing-indicator="showTypingIndicator"
       :colors="colors"
       :always-scroll-to-bottom="alwaysScrollToBottom"
-      :show-edition="showEdition"
-      :show-deletion="showDeletion"
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
       :message-styling="messageStyling"
@@ -125,14 +123,6 @@ export default {
       required: true
     },
     messageStyling: {
-      type: Boolean,
-      required: true
-    },
-    showEdition: {
-      type: Boolean,
-      required: true
-    },
-    showDeletion: {
       type: Boolean,
       required: true
     },
