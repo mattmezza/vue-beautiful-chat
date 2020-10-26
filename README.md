@@ -306,7 +306,7 @@ Message objects are rendered differently depending on their type. Currently, onl
 ```
 ##### file message object
 
-different file type are represented in `vue-beautiful-chat`
+Custom file icons based on mime:
 
 WORD file <img src="https://user-images.githubusercontent.com/16837548/94787922-36f5e700-03d3-11eb-8e95-f468938d24c2.png">
 
@@ -326,12 +326,7 @@ SVG file <img src="https://user-images.githubusercontent.com/16837548/94788290-a
 
 CSV file <img src="https://user-images.githubusercontent.com/16837548/94788314-acfa4e00-03d3-11eb-8e69-835a699b7ea0.png">
 
-And if we have an other type file we will have this icon <img src="https://user-images.githubusercontent.com/16837548/94788364-be435a80-03d3-11eb-870a-f0defe70ef21.png">
-
-
-
-
-
+For file types other than the above, the default icon is displayed ... <img src="https://user-images.githubusercontent.com/16837548/94788364-be435a80-03d3-11eb-870a-f0defe70ef21.png">
 
 #### Quick replies
 

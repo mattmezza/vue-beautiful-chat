@@ -1,12 +1,12 @@
 <template>
-  <div class='sc-message--image' :style="messageColors">
+  <div class="sc-message--image" :style="messageColors">
     <div class="sc-message--image-icon">
       <img :src="data.file.url" class="sc-image">
     </div>
-    <div class='sc-message--image-name' :style="messageColors">
+    <div class="sc-message--image-name" :style="messageColors">
       <a :href="data.file.url ? data.file.url : '#'" target='_blank'>{{data.file.name || ''}}</a>
     </div>
-    <div class="sc-message--file-text" :style="messageColors">{{data.text}}<p v-if="data.meta" class='sc-message--meta' :style="messageColors">{{data.meta}}</p></div>
+    <div class="sc-message--image-text" :style="messageColors">{{data.text}}<p v-if="data.meta" class="sc-message--meta" :style="messageColors">{{data.meta}}</p></div>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.sc-message--file {
+.sc-message--image {
   border-radius: 6px;
   font-weight: 300;
   font-size: 14px;
@@ -35,11 +35,11 @@ export default {
   -webkit-font-smoothing: subpixel-antialiased
 }
 
-.sc-message--content.sent .sc-message--file {
+.sc-message--content.sent .sc-message--image {
   word-wrap: break-word;
 }
 
-.sc-message--file-icon {
+.sc-message--image-icon {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
@@ -52,7 +52,7 @@ export default {
   min-width: 100%;
 }
 
-.sc-message--file-text {
+.sc-message--image-text {
   padding: 17px 20px;
   border-radius: 6px;
   font-weight: 300;
@@ -62,7 +62,7 @@ export default {
   -webkit-font-smoothing: subpixel-antialiased
 }
 
-.sc-message--file-name {
+.sc-message--image-name {
   color: white;
   padding-left: 15px;
   padding-right: 15px;
@@ -71,36 +71,36 @@ export default {
   text-align: center;
 }
 
-.sc-message--file-name a {
+.sc-message--image-name a {
   text-decoration: none;
   color: #ece7e7;
 }
 
-.sc-message--file-name a:hover {
+.sc-message--image-name a:hover {
   color: white;
 }
 
-.sc-message--content.sent .sc-message--file-text {
+.sc-message--content.sent .sc-message--image-text {
   color: white;
   background-color: #4e8cff;
   word-wrap: break-word;
 }
 
-.sc-message--content.received .sc-message--file {
+.sc-message--content.received .sc-message--image {
   color: #263238;
   background-color: #f4f7f9;
   margin-right: 40px;
 }
 
-.sc-message--content.received .sc-message--file-name {
+.sc-message--content.received .sc-message--image-name {
   color: #000;
 }
 
-.sc-message--content.received .sc-message--file a {
+.sc-message--content.received .sc-message--image a {
   color: rgba(43, 40, 40, 0.7);
 }
 
-.sc-message--content.received .sc-message--file a:hover {
+.sc-message--content.received .sc-message--image a:hover {
   color: #0c0c0c;
 }
 </style>
