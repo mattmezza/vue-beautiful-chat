@@ -1,49 +1,29 @@
 <template>
   <div class="sc-message--file" :style="messageColors" :id="data.file.id">
-    <div class="sc-message--file-icon" v-if="data.file.mime == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'">
-      <ApplicationWord />
-    </div>
-    <div class="sc-message--file-icon" v-else-if="data.file.mime == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'">
-      <ApplicationExcel />
-    </div>
-    <div class="sc-message--file-icon" v-else-if="data.file.mime == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'">
-      <ApplicationPowerPoint />
-    </div>
-    <div class="sc-message--file-icon" v-else-if="data.file.mime == 'application/zip'">
-      <ApplicationZip />
-    </div>
-    <div class="sc-message--file-icon" v-else-if="data.file.mime == 'image/jpeg'">
-      <ApplicationJpg />
-    </div>
-    <div class="sc-message--file-icon" v-else-if="data.file.mime == 'image/svg+xml'">
-      <ApplicationSvg />
-    </div>
-    <div class="sc-message--file-icon" v-else-if="data.file.mime == 'text/csv'">
-      <ApplicationCsv />
-    </div>
-    <div class="sc-message--file-icon" v-else-if="data.file.mime == 'application/pdf'">
-      <ApplicationPdf />
-    </div>
-    <div class="sc-message--file-icon" v-else-if="data.file.mime == 'image/png'">
-      <ApplicationPng />
-    </div>
-    <div class="sc-message--file-icon" v-else="">
-      <ApplicationDefault />
+    <div class="sc-message--file-icon" :style="messageColors">
+      <component :is="`Application${someMethodThatMapsMimeToIconSuffix(data.file.mime)}`" />
     </div>
     <div class="sc-message--file-content">
       <div class="sc-message--file-name" :style="messageColors">
-        {{truncateFilename(data.file.name, 20) || ''}}
+        {{data.file && smartTruncate(data.file.name || '', 20)}}
       </div>
-      <DownloadIcon />
+      <!-- <svg class="sc-message--file-download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="30px" height="30px" @click="$emit('download')">
+       <path fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M31 28L25 34 19 28"/>
+       <path fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" d="M31 28L25 34 19 28"/>
+       <path fill="none" stroke="#000000" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="M25 20L25 34"/>
+       <path fill="none" stroke="#000000" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M43,24.3c0-0.1,0-0.2,0-0.3c0-5.5-4.5-10-10-10c-1.2,0-2.3,0.2-3.4,0.6C27.7,11.3,24.1,9,20,9C13.9,9,9,13.9,9,20c0,0.1,0,0.1,0,0.2c-4.6,0.9-8,5-8,9.8c0,5.5,4.5,10,10,10c5.2,0,26.3,0,30,0c4.4,0,8-3.6,8-8C49,28.3,46.4,25.1,43,24.3z"/>
+     </svg> -->
+      <div class="sc-message--file-download-icon" :style="messageColors" @click="$emit('download')">
+        <DownloadIcon />
+      </div>
       <div class="sc-message--file-size" :style="messageColors">
-        {{humanReadableFileSize(data.file.size) || ''}}
+        {{data.file && humanReadableFileSize(data.file.size || 0)}}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 import ApplicationWord from '../assets/mimes/application_msword.svg.vue'
 import ApplicationPdf from '../assets/mimes/application_pdf.svg.vue'
 import ApplicationPng from '../assets/mimes/image_png.svg.vue'
@@ -55,6 +35,8 @@ import ApplicationJpg from '../assets/mimes/image_jpeg.svg.vue'
 import ApplicationSvg from '../assets/mimes/image_svg.svg.vue'
 import ApplicationCsv from '../assets/mimes/text_csv.svg.vue'
 import DownloadIcon from '../assets/download-icon.svg.vue'
+import prettyBytes from 'pretty-bytes'
+import smartTruncate from 'smart-truncate'
 export default {
   props: {
     data: {
@@ -68,16 +50,35 @@ export default {
   },
   methods:{
     humanReadableFileSize(aSize) {
-      const prettyBytes = require('pretty-bytes');
       return prettyBytes(aSize);
     },
-    truncateFilename(filename, maxLength) {
-      if(filename.length > maxLength) {
-        const smartTruncate = require('smart-truncate');
-        return smartTruncate(string, maxLength, {position: 10});
+    smartTruncate(str, len) {
+      return smartTruncate(str, len, {position: 10})
+    },
+    someMethodThatMapsMimeToIconSuffix(type) {
+      let suffix = ''
+      if (type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'){
+        suffix = 'Word';
+      } else if (type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+        suffix = 'Excel';
+      } else if (type === 'application/vnd.openxmlformats-officedocument.presentationml.presentation') {
+        suffix = 'PowerPoint';
+      } else if (type === 'application/zip') {
+        suffix = 'Zip';
+      } else if (type === 'image/jpeg') {
+        suffix = 'Jpg';
+      } else if (type === 'image/svg+xml') {
+        suffix = 'Svg';
+      } else if (type === 'text/csv') {
+        suffix = 'Csv';
+      } else if (type === 'application/pdf') {
+        suffix = 'Pdf';
+      } else if (type === 'image/png') {
+        suffix = 'Png';
       } else {
-        return filename
+        suffix = 'Default';
       }
+      return suffix;
     }
   },
   components:{
@@ -96,7 +97,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped>
 .sc-message--file {
   border-radius: 6px;
   font-weight: 300;
@@ -180,17 +181,13 @@ export default {
   width: 60px;
 }
 
-.sc-message--content.sent {
-  .sc-message--file-icon svg {
-    fill: #ffffff;
-  }
-
-  .sc-message--file-download-icon {
-    fill: #ffffff;
-    path {
-      stroke: #ffffff;
-    }
-  }
+.sc-message--file-download-icon svg {
+  fill: #000000;
+  stroke: #000000;
 }
 
+.sc-message--content.sent svg {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class='sc-message--image' :style="messageColors">
-    <div class='sc-message--image-icon'>
+    <div class="sc-message--image-icon">
       <img :src="data.file.url" class="sc-image">
     </div>
     <div class='sc-message--image-name' :style="messageColors">

@@ -146,6 +146,9 @@ export default {
       // called when the user scrolls message list to top
       // leverage pagination for loading another page of messages
     },
+    downloadMessage(message) {
+      console.log('Try to download the file')
+    },
     handleOnType () {
       console.log('Emit typing event')
     },
@@ -193,6 +196,7 @@ For more detailed examples see the demo folder.
 |-----|--------|---------------|
 | onType | undefined | Fires when user types on the message input |
 | edit | `message` | Fires after user edited message |
+| download | `message` | Download file only if document type is file |
 
 #### Slots
 
@@ -282,7 +286,51 @@ Message objects are rendered differently depending on their type. Currently, onl
     }
   }
 }
+
+{
+  author: 'me',
+  type: 'file',
+  id: 1, // or text '1'
+  isEdited: false,
+  data: {
+    file: {
+      id: 1,
+      mime: 'image/png',
+      name: 'test.png',
+      size: 588147,
+      meta: '06-16-2019 12:45'
+    }
+  }
+}
+
 ```
+##### file message object
+
+different file type are represented in `vue-beautiful-chat`
+
+WORD file <img src="https://user-images.githubusercontent.com/16837548/94787922-36f5e700-03d3-11eb-8e95-f468938d24c2.png">
+
+PDF file <img src="https://user-images.githubusercontent.com/16837548/94788088-66a4ef00-03d3-11eb-9907-b380a6bb1907.png">
+
+EXCEL file <img src="https://user-images.githubusercontent.com/16837548/94788119-70c6ed80-03d3-11eb-9031-ce46131e0b06.png">
+
+POWER POINT file <img src="https://user-images.githubusercontent.com/16837548/94788155-7cb2af80-03d3-11eb-80dc-bb77a4a0d429.png">
+
+ZIP file <img src="https://user-images.githubusercontent.com/16837548/94788179-850aea80-03d3-11eb-8b5a-8945e2232c2c.png">
+
+JPG/JPEG file <img src="https://user-images.githubusercontent.com/16837548/94788216-918f4300-03d3-11eb-9778-a148828fba8d.png">
+
+PNG file <img src="https://user-images.githubusercontent.com/16837548/94788250-9b18ab00-03d3-11eb-91be-4af48dea21eb.png">
+
+SVG file <img src="https://user-images.githubusercontent.com/16837548/94788290-a53aa980-03d3-11eb-9c37-936f1c5ac53f.png">
+
+CSV file <img src="https://user-images.githubusercontent.com/16837548/94788314-acfa4e00-03d3-11eb-8e69-835a699b7ea0.png">
+
+And if we have an other type file we will have this icon <img src="https://user-images.githubusercontent.com/16837548/94788364-be435a80-03d3-11eb-870a-f0defe70ef21.png">
+
+
+
+
 
 
 #### Quick replies
