@@ -82,7 +82,6 @@ import EmojiMessage from './messages/EmojiMessage.vue'
 import TypingMessage from './messages/TypingMessage.vue'
 import SystemMessage from './messages/SystemMessage.vue'
 import chatIcon from './assets/chat-icon.svg'
-import store from './store/'
 
 export default {
   components: {
@@ -230,7 +229,7 @@ export default {
   &.confirm-delete .sc-message--toolbox {
     width: auto;
   }
-  .sc-message--toolbox{
+  .sc-message--toolbox {
     transition: left 0.2s ease-out 0s;
     white-space: normal;
     opacity: 0;

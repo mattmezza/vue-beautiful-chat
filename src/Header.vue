@@ -1,19 +1,20 @@
 <template>
   <div class="sc-header" :style="{background: colors.header.bg, color: colors.header.text}">
     <slot>
-      <img v-if="imageUrl" class="sc-header--img" :src="imageUrl" alt="" />
+      <img v-if="titleImageUrl" class="sc-header--img" :src="titleImageUrl" alt="" />
       <div v-if="!disableUserListToggle" class="sc-header--title enabled" @click="toggleUserList">
         {{ title }}
       </div>
       <div v-else class="sc-header--title">{{ title }}</div>
     </slot>
-    <div v-if="showCloseButton" class="sc-header--close-button" @click="onClose">
+    <div v-if="showCloseButton" class="sc-header--close-button" @click="$emit('close')">
       <img :src="icons.close.img" :alt="icons.close.name" />
     </div>
   </div>
 </template>
 
 <script>
+import {mapState} from './store/'
 import CloseIcon from './assets/close-icon-big.png'
 
 export default {
@@ -29,35 +30,22 @@ export default {
         }
       }
     },
-    imageUrl: {
-      type: String,
-      required: true
-    },
     title: {
       type: String,
-      required: true
-    },
-    onClose: {
-      type: Function,
       required: true
     },
     colors: {
       type: Object,
       required: true
-    },
-    disableUserListToggle: {
-      type: Boolean,
-      default: false
-    },
-    showCloseButton: {
-      type: Boolean,
-      default: false
     }
   },
   data() {
     return {
       inUserList: false
     }
+  },
+  computed: {
+    ...mapState(['disableUserListToggle', 'titleImageUrl', 'showCloseButton'])
   },
   methods: {
     toggleUserList() {

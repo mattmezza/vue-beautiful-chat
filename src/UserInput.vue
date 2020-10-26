@@ -145,23 +145,22 @@ export default {
   data() {
     return {
       file: null,
-      inputActive: false,
-      store
+      inputActive: false
     }
   },
   computed: {
     editMessageId() {
-      return this.isEditing && store.editMessage.id
+      return this.isEditing && store.state.editMessage.id
     },
     isEditing() {
-      return store.editMessage && store.editMessage.id
+      return store.state.editMessage && store.state.editMessage.id
     }
   },
   watch: {
     editMessageId(m) {
-      if (store.editMessage != null && store.editMessage != undefined) {
+      if (store.state.editMessage != null && store.state.editMessage != undefined) {
         this.$refs.userInput.focus()
-        this.$refs.userInput.textContent = store.editMessage.data.text
+        this.$refs.userInput.textContent = store.state.editMessage.data.text
       } else {
         this.$refs.userInput.textContent = ''
       }
@@ -262,7 +261,7 @@ export default {
         this.$emit('edit', {
           author: 'me',
           type: 'text',
-          id: store.editMessage.id,
+          id: store.state.editMessage.id,
           data: {text}
         })
         this._editFinish()
@@ -281,7 +280,7 @@ export default {
       this.file = file
     },
     _editFinish() {
-      this.store.editMessage = null
+      store.setState('editMessage', null)
     }
   }
 }

@@ -101,7 +101,7 @@ export default {
     },
     confirmationDeletionMessage: {
       type: String,
-      required: true,
+      required: true
     }
   },
   computed: {
