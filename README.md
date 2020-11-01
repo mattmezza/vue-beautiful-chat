@@ -306,7 +306,7 @@ Message objects are rendered differently depending on their type. Currently, onl
 }
 
 ```
-##### file message object
+##### File type messages
 
 Custom file icons based on mime:
 
