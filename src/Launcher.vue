@@ -21,8 +21,6 @@
       :is-open="isOpen"
       :show-emoji="showEmoji"
       :show-file="showFile"
-      :show-edition="showEdition"
-      :show-deletion="showDeletion"
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
       :show-header="showHeader"
@@ -245,7 +243,6 @@ export default {
       deep: true,
       immediate: true,
       handler(props) {
-        // TODO: optimize
         for (const prop in props) {
           store.setState(prop, props[prop])
         }

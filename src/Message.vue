@@ -25,8 +25,6 @@
         :message="message"
         :message-colors="messageColors"
         :message-styling="messageStyling"
-        :show-edition="showEdition"
-        :show-deletion="showDeletion"
         :show-confirmation-deletion="showConfirmationDeletion"
         :confirmation-deletion-message="confirmationDeletionMessage"
         @remove="$emit('remove')"
@@ -95,14 +93,6 @@ export default {
     },
     user: {
       type: Object,
-      required: true
-    },
-    showEdition: {
-      type: Boolean,
-      required: true
-    },
-    showDeletion: {
-      type: Boolean,
       required: true
     },
     showConfirmationDeletion: {
