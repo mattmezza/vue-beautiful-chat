@@ -241,9 +241,9 @@ export default {
     chatListHeaderTitleClicked() {
       console.log("chatListHeaderTitleClicked")
     },
-    messageIconClicked(param) {
-      console.log("messageIconClicked param:")
-      console.log(param)
+    messageIconClicked(user) {
+      console.log("messageIconClicked user:")
+      console.log(user)
     },
     like(id){
       const m = this.messageList.findIndex(m => m.id === id);
