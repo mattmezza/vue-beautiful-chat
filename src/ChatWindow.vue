@@ -147,7 +147,7 @@ export default {
     },
     messageList: {
       type: Array,
-      default: () => []
+      default: undefined
     },
     isOpen: {
       type: Boolean,
@@ -201,9 +201,7 @@ export default {
   },
   computed: {
     messages() {
-      let messages = this.messageList
-
-      return messages
+      return this.messageList || []
     },
     showingUserList() {
       return this.windowState == uiState.USER_LIST
@@ -219,6 +217,11 @@ export default {
   watch: {
     multipleChatsEnabled(newMultipleChatsEnabled) {
       this.windowState = this.initialState()
+    },
+    messageList(newValue) {
+      if (newValue === undefined && this.multipleChatsEnabled) {
+        this.handleShowChatList()
+      }
     }
   },
   methods: {

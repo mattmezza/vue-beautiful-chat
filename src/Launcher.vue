@@ -171,7 +171,7 @@ export default {
     },
     messageList: {
       type: Array,
-      default: () => []
+      default: undefined
     },
     newMessagesCount: {
       type: Number,
