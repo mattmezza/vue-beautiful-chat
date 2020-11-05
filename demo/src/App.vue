@@ -278,7 +278,7 @@ export default {
     messageList() {
       const chat = this.chatHistory[this.currentChatID];
       if (chat === undefined) {
-        return [];
+        return undefined;
       }
       return chat.messages;
     },
