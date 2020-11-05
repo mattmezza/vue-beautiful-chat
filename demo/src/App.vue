@@ -36,6 +36,9 @@
       @remove="removeMessage"
       @changeCurrentChat="handleChangeCurrentChat"
       @messageListMountedUpdated="handleMessageListMountedUpdated"
+      @messageListHeaderTitleClicked="messageListHeaderTitleClicked"
+      @chatListHeaderTitleClicked="chatListHeaderTitleClicked"
+      @messageIconClicked="messageIconClicked"
     >
       <template v-slot:text-message-toolbox="scopedProps">
         <button v-if="!scopedProps.me && scopedProps.message.type==='text'" @click.prevent="like(scopedProps.message.id)">
@@ -231,6 +234,16 @@ export default {
       if (this.isChatOpen) {
         this.markCurrentChatRead()
       }
+    },
+    messageListHeaderTitleClicked() {
+      console.log("messageListHeaderTitleClicked")
+    },
+    chatListHeaderTitleClicked() {
+      console.log("chatListHeaderTitleClicked")
+    },
+    messageIconClicked(param) {
+      console.log("messageIconClicked param:")
+      console.log(param)
     },
     like(id){
       const m = this.messageList.findIndex(m => m.id === id);

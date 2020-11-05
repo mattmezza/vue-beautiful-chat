@@ -18,6 +18,7 @@
       :confirmation-deletion-message="confirmationDeletionMessage"
       :my-id="myId"
       @remove="$emit('remove', message)"
+      @messageIconClicked="$emit('messageIconClicked', $event)"
     >
       <template v-slot:user-avatar="scopedProps">
         <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message"> </slot>

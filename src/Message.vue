@@ -17,6 +17,7 @@
           :style="{
             backgroundImage: `url(${chatImageUrl})`
           }"
+          @click="$emit('messageIconClicked', user)"
         ></div>
       </slot>
 

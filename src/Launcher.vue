@@ -47,6 +47,9 @@
         }
       "
       @messageListMountedUpdated="$emit('messageListMountedUpdated')"
+      @messageListHeaderTitleClicked="$emit('messageListHeaderTitleClicked')"
+      @chatListHeaderTitleClicked="$emit('chatListHeaderTitleClicked')"
+      @messageIconClicked="$emit('messageIconClicked', $event)"
     >
       <template v-slot:header>
         <slot name="header"> </slot>

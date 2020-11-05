@@ -19,7 +19,7 @@
       </svg>
     </div>
     <slot>
-      <img v-if="titleImageUrl" class="sc-header--img" :src="titleImageUrl" alt="" />
+      <img v-if="titleImageUrl" class="sc-header--img" :src="titleImageUrl" alt="" @click="$emit('headerTitleClicked')" />
       <div
         v-if="!disableListToggle"
         class="sc-header--title enabled"
@@ -27,7 +27,12 @@
       >
         {{ title }}
       </div>
-      <div v-else class="sc-header--title">{{ title }}</div>
+      <div
+        v-else class="sc-header--title"
+        @click="$emit('headerTitleClicked')"
+      >
+        {{ title }}
+      </div>
     </slot>
     <div v-if="showCloseButton" class="sc-header--close-button" @click="$emit('close')">
       <img :src="icons.close.img" :alt="icons.close.name" />

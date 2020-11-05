@@ -10,6 +10,7 @@
       @close="$emit('close')"
       @toggleUserListMessageList="handleToggleUserListMessageList"
       @showChatList="handleShowChatList"
+      @headerTitleClicked="headerTitleClicked"
     >
       <template>
         <slot name="header"> </slot>
@@ -43,6 +44,7 @@
       @scrollToTop="$emit('scrollToTop')"
       @remove="$emit('remove', $event)"
       @messageListMountedUpdated="$emit('messageListMountedUpdated')"
+      @messageIconClicked="$emit('messageIconClicked', $event)"
     >
       <template v-slot:user-avatar="scopedProps">
         <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message"> </slot>
@@ -229,6 +231,13 @@ export default {
     },
     handleShowMessageList() {
       this.windowState = uiState.MESSAGE_LIST
+    },
+    headerTitleClicked() {
+      if (this.showingMessageList) {
+        this.$emit('messageListHeaderTitleClicked')
+      } else if (this.showingChatList) {
+        this.$emit('chatListHeaderTitleClicked')
+      }
     },
     getSuggestions() {
       return this.messages.length > 0 ? this.messages[this.messages.length - 1].suggestions : []
