@@ -14,6 +14,9 @@
         {{data.file && prettyBytes(data.file.size || 0)}}
       </div>
     </div>
+    <div class="sc-message--file-meta" :style="messageColors">
+      <p v-if="data.meta" class='sc-message--meta' :style="messageColors">{{data.meta}}</p>
+    </div>
   </div>
 </template>
 
