@@ -21,5 +21,15 @@ export default [
   { type: 'text', author: `me`, id: 18, data: { text: `Do you read me...`, meta: '✓✓ Read' } },
   { type: 'text', author: `me`, id: 19, data: { text: `...or not?`, meta: '✓ Delivered' } },
   { type: 'system', id: 20, data: { text: 'User changed security key', meta: '04-08-2018 15:57' } },
-  { type: 'text', author: `support`, id: 21, data: { text: `What about suggestions?` }, suggestions: ["Looks good!", "It's OK.", "Uhh.. Do I really have to say something?", "This suggestion is way too long for css purpose. Let's make it long... Longer, and more and more.. Never ending."] }
+  { type: 'text', author: `support`, id: 21, data: { text: `What about suggestions?` }, suggestions: ["Looks good!", "It's OK.", "Uhh.. Do I really have to say something?", "This suggestion is way too long for css purpose. Let's make it long... Longer, and more and more.. Never ending."] },
+  { type: 'file', author: `me`, id: 22, data: { meta: '12-11-2020 15:57', file: {id:"122134", mime:"application/vnd.openxmlformats-officedocument.wordprocessingml.document", size:"108604", name: "ScreenShot 2020-10-21 à 21.38.52.docx"} } },
+  { type: 'file', author: `me`, id: 23, data: { meta: '12-11-2020 15:57', file: {id:"122135", mime:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", size:"108604", name: "ScreenShot 2020-10-21 à 21.38.52.xlsx"} } },
+  { type: 'file', author: `me`, id: 24, data: { meta: '12-11-2020 15:57', file: {id:"122136", mime:"application/vnd.openxmlformats-officedocument.presentationml.presentation", size:"108604", name: "ScreenShot 2020-10-21 à 21.38.52.pptx"} } },
+  { type: 'file', author: `me`, id: 25, data: { meta: '12-11-2020 15:57', file: {id:"122137", mime:"application/zip", size:"108604", name: "ScreenShot 2020-10-21 à 21.38.52.zip"} } },
+  { type: 'file', author: `me`, id: 26, data: { meta: '12-11-2020 15:57', file: {id:"122138", mime:"image/jpeg", size:"108604", name: "ScreenShot 2020-10-21 à 21.38.52.jpg"} } },
+  { type: 'file', author: `me`, id: 27, data: { meta: '12-11-2020 15:57', file: {id:"122139", mime:"image/svg+xml", size:"108604", name: "ScreenShot 2020-10-21 à 21.38.52.svg"} } },
+  { type: 'file', author: `me`, id: 28, data: { meta: '12-11-2020 15:57', file: {id:"1221310", mime:"text/csv", size:"108604", name: "ScreenShot 2020-10-21 à 21.38.52.csv"} } },
+  { type: 'file', author: `me`, id: 29, data: { meta: '12-11-2020 15:57', file: {id:"1221311", mime:"image/png", size:"108604", name: "ScreenShot 2020-10-21 à 21.38.52.png"} } },
+  { type: 'file', author: `me`, id: 30, data: { meta: '12-11-2020 15:57', file: {id:"1221312", mime:"application/pdf", size:"108604", name: "ScreenShot 2020-10-21 à 21.38.52.pdf"} } },
+  { type: 'file', author: `me`, id: 30, data: { meta: '12-11-2020 15:57', file: {id:"1221312", mime:"text/html", size:"108604", name: "ScreenShot 2020-10-21 à 21.38.52.html"} } }
 ]
