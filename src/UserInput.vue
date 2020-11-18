@@ -181,6 +181,7 @@ export default {
     document.addEventListener('selectionchange', () => {
       var selection = document.getSelection()
       if (
+        selection.anchorNode &&
         selection.anchorNode != this.$refs.userInput &&
         selection.anchorNode.parentNode != this.$refs.userInput
       ) {
@@ -307,7 +308,9 @@ export default {
     _insertEmoji(emoji) {
       var range = this.previousSelectionRange
       if (!range) {
-        console.log('First child: ' + this.$refs.userInput.firstChild)
+        if (!this.$refs.userInput.firstChild) {
+          this.$refs.userInput.append(document.createTextNode(''))
+        }
         range = document.createRange()
         range.setStart(this.$refs.userInput.firstChild, this.$refs.userInput.textContent.length)
         range.collapse(true)
