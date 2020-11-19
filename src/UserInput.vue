@@ -181,9 +181,10 @@ export default {
     document.addEventListener('selectionchange', () => {
       var selection = document.getSelection()
       if (
-        selection.anchorNode &&
-        selection.anchorNode != this.$refs.userInput &&
-        selection.anchorNode.parentNode != this.$refs.userInput
+        !selection ||
+        !selection.anchorNode ||
+        (selection.anchorNode != this.$refs.userInput &&
+          selection.anchorNode.parentNode != this.$refs.userInput)
       ) {
         return
       }
