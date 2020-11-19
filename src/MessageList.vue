@@ -17,6 +17,7 @@
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
       :my-id="myId"
+      :message-icon-clickable="messageIconClickable"
       @remove="$emit('remove', message)"
       @messageIconClicked="$emit('messageIconClicked', $event)"
     >
@@ -52,6 +53,7 @@
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
       :my-id="myId"
+      :message-icon-clickable="false"
     />
   </div>
 </template>
@@ -107,6 +109,10 @@ export default {
     },
     myId: {
       type: String,
+      required: true
+    },
+    messageIconClickable: {
+      type: Boolean,
       required: true
     }
   },

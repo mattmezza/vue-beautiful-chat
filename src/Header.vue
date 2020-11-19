@@ -22,9 +22,10 @@
       <img
         v-if="titleImageUrl"
         class="sc-header--img"
+        :class="{clickable: headerTitleClickable}"
         :src="titleImageUrl"
         alt=""
-        @click="$emit('headerTitleClicked')"
+        @click="headerTitleClickable ? $emit('headerTitleClicked') : null"
       />
       <div
         v-if="!disableListToggle"
@@ -33,7 +34,12 @@
       >
         {{ title }}
       </div>
-      <div v-else class="sc-header--title" @click="$emit('headerTitleClicked')">
+      <div
+        v-else
+        class="sc-header--title"
+        :class="{clickable: headerTitleClickable}"
+        @click="headerTitleClickable ? $emit('headerTitleClicked') : null"
+      >
         {{ title }}
       </div>
     </slot>
@@ -73,6 +79,10 @@ export default {
       default: false
     },
     disableListToggle: {
+      type: Boolean,
+      required: true
+    },
+    headerTitleClickable: {
       type: Boolean,
       required: true
     }
@@ -172,6 +182,10 @@ export default {
   margin: 0 auto;
   display: block;
   fill: white;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 @media (max-width: 450px) {

@@ -7,6 +7,10 @@
       :image-url="showingChatList ? chatListImageUrl : titleImageUrl"
       :colors="colors"
       :disable-list-toggle="disableUserListToggle || showingChatList"
+      :header-title-clickable="
+        (showingMessageList && messageListHeaderTitleClickable) ||
+        (showingChatList && chatListHeaderTitleClickable)
+      "
       @close="$emit('close')"
       @toggleUserListMessageList="handleToggleUserListMessageList"
       @showChatList="handleShowChatList"
@@ -41,6 +45,7 @@
       :confirmation-deletion-message="confirmationDeletionMessage"
       :message-styling="messageStyling"
       :my-id="myId"
+      :message-icon-clickable="messageIconClickable"
       @scrollToTop="$emit('scrollToTop')"
       @remove="$emit('remove', $event)"
       @messageListMountedUpdated="$emit('messageListMountedUpdated')"
@@ -191,6 +196,18 @@ export default {
     },
     myId: {
       type: String,
+      required: true
+    },
+    messageListHeaderTitleClickable: {
+      type: Boolean,
+      required: true
+    },
+    chatListHeaderTitleClickable: {
+      type: Boolean,
+      required: true
+    },
+    messageIconClickable: {
+      type: Boolean,
       required: true
     }
   },

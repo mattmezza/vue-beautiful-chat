@@ -14,10 +14,11 @@
           v-tooltip="authorName"
           :title="authorName"
           class="sc-message--avatar"
+          :class="{clickable: messageIconClickable}"
           :style="{
             backgroundImage: `url(${chatImageUrl})`
           }"
-          @click="$emit('messageIconClicked', user)"
+          @click="messageIconClickable ? $emit('messageIconClicked', user) : null"
         ></div>
       </slot>
 
@@ -117,6 +118,10 @@ export default {
     },
     myId: {
       type: String,
+      required: true
+    },
+    messageIconClickable: {
+      type: Boolean,
       required: true
     }
   },
@@ -370,5 +375,9 @@ export default {
       border-color: $color;
     }
   }
+}
+
+.clickable {
+  cursor: pointer;
 }
 </style>

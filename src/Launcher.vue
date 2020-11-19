@@ -36,6 +36,9 @@
       :chat-list-title="chatListTitle"
       :chat-list-image-url="chatListImageUrl"
       :my-id="myId"
+      :message-list-header-title-clickable="messageListHeaderTitleClickable"
+      :chat-list-header-title-clickable="chatListHeaderTitleClickable"
+      :message-icon-clickable="messageIconClickable"
       @close="close"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
@@ -262,6 +265,18 @@ export default {
     myId: {
       type: String,
       default: 'me'
+    },
+    messageListHeaderTitleClickable: {
+      type: Boolean,
+      default: false
+    },
+    chatListHeaderTitleClickable: {
+      type: Boolean,
+      default: false
+    },
+    messageIconClickable: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
