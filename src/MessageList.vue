@@ -41,6 +41,14 @@
         <slot name="text-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
         </slot>
       </template>
+      <template v-slot:file-message-toolbox="scopedProps">
+        <slot name="file-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
+        </slot>
+      </template>
+      <template v-slot:emoji-message-toolbox="scopedProps">
+        <slot name="emoji-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
+        </slot>
+      </template>
     </Message>
     <Message
       v-show="showTypingIndicator !== ''"
