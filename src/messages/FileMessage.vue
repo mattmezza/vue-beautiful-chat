@@ -45,7 +45,7 @@ import IconCross from './../components/icons/IconCross.vue'
 export default {
   components: {
     IconBase,
-    IconCross,
+    IconCross
   },
   props: {
     message: {
@@ -68,7 +68,7 @@ export default {
     },
     confirmationDeletionMessage: {
       type: String,
-      default: false,
+      default: '',
       required: false
     },
     myId: {
@@ -77,18 +77,18 @@ export default {
     }
   },
   computed: {
-    me () {
+    me() {
       return this.message.author === this.myId
     }
   },
   methods: {
-    ifelse (cond, funcIf, funcElse) {
+    ifelse(cond, funcIf, funcElse) {
       return () => {
         if (funcIf && cond) funcIf()
         else if (funcElse) funcElse()
       }
     },
-    withConfirm (msg, func) {
+    withConfirm(msg, func) {
       return () => {
         if (confirm(msg)) func()
       }

@@ -7,7 +7,8 @@
             <IconEdit />
           </IconBase>
         </button>
-        <button v-if="showDeletion && me && message.id != null && message.id != undefined"
+        <button
+          v-if="showDeletion && me && message.id != null && message.id != undefined"
           @click="
             ifelse(
               showConfirmationDeletion,
@@ -89,7 +90,7 @@ export default {
     }
   },
   computed: {
-    messageText () {
+    messageText() {
       const escaped = escapeGoat.escape(this.message.data.text)
 
       return Autolinker.link(this.messageStyling ? fmt(escaped) : escaped, {
@@ -97,24 +98,24 @@ export default {
         truncate: {length: 50, location: 'smart'}
       })
     },
-    me () {
+    me() {
       return this.message.author === this.myId
     },
-    isEditing () {
+    isEditing() {
       return (store.state.editMessage && store.state.editMessage.id) === this.message.id
     }
   },
   methods: {
-    edit () {
+    edit() {
       store.setState('editMessage', this.message)
     },
-    ifelse (cond, funcIf, funcElse) {
+    ifelse(cond, funcIf, funcElse) {
       return () => {
         if (funcIf && cond) funcIf()
         else if (funcElse) funcElse()
       }
     },
-    withConfirm (msg, func) {
+    withConfirm(msg, func) {
       return () => {
         if (confirm(msg)) func()
       }
