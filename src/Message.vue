@@ -307,6 +307,25 @@ export default {
   }
 }
 
+.sc-message--emoji {
+  .sc-message--toolbox {
+    background: transparent!important;
+
+    button {
+      vertical-align: top;
+      background: rgb(78, 140, 255) none repeat scroll 0% 0%;
+
+      svg {
+        width: 100%;
+        padding: 3px;
+        display: block;
+        //vertical-align: top;
+        margin-bottom: auto;
+      }
+    }
+  }
+}
+
 .sc-message--content.sent .sc-message--text {
   color: white;
   background-color: #4e8cff;
