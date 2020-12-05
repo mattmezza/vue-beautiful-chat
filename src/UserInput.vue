@@ -297,6 +297,7 @@ export default {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  border-top: 2px solid #ffffff;
 }
 
 .sc-user-input--text {
@@ -357,6 +358,7 @@ export default {
   box-shadow: none;
   background-color: white;
   box-shadow: 0px -5px 20px 0px rgba(150, 165, 190, 0.2);
+  border-top: 2px solid #4e8cff;
 }
 
 .sc-user-input--button label {

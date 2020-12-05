@@ -236,6 +236,7 @@ export default {
   background-color: #4e8cff;
   max-width: calc(100% - 120px);
   word-wrap: break-word;
+  border-radius: 10px 10px 0px 10px;
 }
 
 .sc-message--text code {
@@ -245,7 +246,8 @@ export default {
 .sc-message--content.received .sc-message--text {
   color: #263238;
   background-color: #f4f7f9;
-  margin-right: 40px;
+  margin-right: 20px;
+  border-radius: 10px 10px 10px 0px;
 }
 
 .tooltip {
