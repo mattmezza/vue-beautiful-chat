@@ -67,7 +67,8 @@ import store from './store/'
 import ChatWindow from './ChatWindow.vue'
 
 import CloseIcon from './assets/close-icon.png'
-import OpenIcon from './assets/logo-no-bg.svg'
+// import OpenIcon from './assets/logo-no-bg.svg'
+import OpenIcon from './assets/ask-panda-logo.svg'
 
 export default {
   components: {
@@ -290,6 +291,15 @@ export default {
   position: fixed;
   right: 25px;
   bottom: 25px;
+  transition: opacity 100ms ease-in-out, transform 100ms ease-in-out;
+}
+
+.sc-launcher .sc-open-icon {
+  width: 87px;
+  height: 87px;
+  position: fixed;
+  right: 8px;
+  bottom: 12px;
   transition: opacity 100ms ease-in-out, transform 100ms ease-in-out;
 }
 
