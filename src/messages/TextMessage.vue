@@ -1,5 +1,6 @@
 <template>
-  <div class="sc-message--text" :style="messageColors">
+  <!--<div class="sc-message&#45;&#45;text" :style="messageColors">-->
+  <div class="sc-message--text">
     <template>
       <div class="sc-message--toolbox" :style="{background: messageColors.backgroundColor}">
         <button v-if="showEdition && me && message.id" :disabled="isEditing" @click="edit">
