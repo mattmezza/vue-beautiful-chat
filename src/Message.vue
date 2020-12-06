@@ -132,7 +132,7 @@ export default {
 
 <style lang="scss">
 .sc-message {
-  width: 300px;
+  width: 330px;
   margin: auto;
   padding-bottom: 10px;
   display: flex;
@@ -188,7 +188,7 @@ export default {
 .sc-message--text {
   padding: 5px 20px;
   border-radius: 6px;
-  font-weight: 300;
+  //font-weight: 300;
   font-size: 14px;
   line-height: 1.4;
   position: relative;
@@ -232,8 +232,10 @@ export default {
   }
 }
 .sc-message--content.sent .sc-message--text {
-  color: white;
-  background-color: #4e8cff;
+  //color: white;
+  //background-color: #4e8cff;
+  color: #424c56;
+  background-color: #e4e7ec;
   max-width: calc(100% - 120px);
   word-wrap: break-word;
   border-radius: 10px 10px 0px 10px;
@@ -244,10 +246,13 @@ export default {
 }
 
 .sc-message--content.received .sc-message--text {
-  color: #263238;
-  background-color: #f4f7f9;
+  //color: #263238;
+  //background-color: #f4f7f9;
   margin-right: 20px;
   border-radius: 10px 10px 10px 0px;
+  border: 2px solid #e6e9ee;
+  background-color: #ffffff;
+  color: #606266;
 }
 
 .tooltip {
