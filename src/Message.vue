@@ -1,8 +1,8 @@
 <template>
   <div :id="message.id" class="sc-message">
     <div
-        class="sc-message--content"
-        :class="{
+      class="sc-message--content"
+      :class="{
         sent: message.author === myId,
         received: message.author !== myId && message.type !== 'system',
         system: message.type === 'system'
@@ -10,37 +10,37 @@
     >
       <slot name="user-avatar" :message="message" :user="user">
         <div
-            v-if="message.type !== 'system' && authorName && authorName !== myId"
-            v-tooltip="authorName"
-            :title="authorName"
-            class="sc-message--avatar"
-            :class="{clickable: messageIconClickable}"
-            :style="{
+          v-if="message.type !== 'system' && authorName && authorName !== myId"
+          v-tooltip="authorName"
+          :title="authorName"
+          class="sc-message--avatar"
+          :class="{clickable: messageIconClickable}"
+          :style="{
             backgroundImage: `url(${chatImageUrl})`
           }"
-            @click="messageIconClickable ? $emit('messageIconClicked', user) : null"
+          @click="messageIconClickable ? $emit('messageIconClicked', user) : null"
         ></div>
       </slot>
 
       <TextMessage
-          v-if="message.type === 'text'"
-          :message="message"
-          :message-colors="messageColors"
-          :message-styling="messageStyling"
-          :show-edition="showEdition"
-          :show-deletion="showDeletion"
-          :show-confirmation-deletion="showConfirmationDeletion"
-          :confirmation-deletion-message="confirmationDeletionMessage"
-          :my-id="myId"
-          @remove="$emit('remove')"
+        v-if="message.type === 'text'"
+        :message="message"
+        :message-colors="messageColors"
+        :message-styling="messageStyling"
+        :show-edition="showEdition"
+        :show-deletion="showDeletion"
+        :show-confirmation-deletion="showConfirmationDeletion"
+        :confirmation-deletion-message="confirmationDeletionMessage"
+        :my-id="myId"
+        @remove="$emit('remove')"
       >
         <template v-slot:default="scopedProps">
           <slot
-              name="text-message-body"
-              :message="scopedProps.message"
-              :messageText="scopedProps.messageText"
-              :messageColors="scopedProps.messageColors"
-              :me="scopedProps.me"
+            name="text-message-body"
+            :message="scopedProps.message"
+            :messageText="scopedProps.messageText"
+            :messageColors="scopedProps.messageColors"
+            :me="scopedProps.me"
           >
           </slot>
         </template>
@@ -50,22 +50,23 @@
         </template>
       </TextMessage>
       <EmojiMessage
-          v-else-if="message.type === 'emoji'"
-          :message="message"
-          :message-colors="messageColors"
-          :message-styling="messageStyling"
-          :show-edition="showEdition"
-          :show-deletion="showDeletion"
-          :show-confirmation-deletion="showConfirmationDeletion"
-          :confirmation-deletion-message="confirmationDeletionMessage"
-          :my-id="myId"
-          @remove="$emit('remove')">
+        v-else-if="message.type === 'emoji'"
+        :message="message"
+        :message-colors="messageColors"
+        :message-styling="messageStyling"
+        :show-edition="showEdition"
+        :show-deletion="showDeletion"
+        :show-confirmation-deletion="showConfirmationDeletion"
+        :confirmation-deletion-message="confirmationDeletionMessage"
+        :my-id="myId"
+        @remove="$emit('remove')"
+      >
         <template v-slot:default="scopedProps">
           <slot
-              name="emoji-message-body"
-              :message="scopedProps.message"
-              :messageColors="scopedProps.messageColors"
-              :me="scopedProps.me"
+            name="emoji-message-body"
+            :message="scopedProps.message"
+            :messageColors="scopedProps.messageColors"
+            :me="scopedProps.me"
           >
           </slot>
         </template>
@@ -75,21 +76,21 @@
         </template>
       </EmojiMessage>
       <FileMessage
-          v-else-if="message.type === 'file'"
-          :message="message"
-          :message-colors="messageColors"
-          :show-deletion="showDeletion"
-          :show-confirmation-deletion="showConfirmationDeletion"
-          :confirmation-deletion-message="confirmationDeletionMessage"
-          :my-id="myId"
-          @remove="$emit('remove')"
+        v-else-if="message.type === 'file'"
+        :message="message"
+        :message-colors="messageColors"
+        :show-deletion="showDeletion"
+        :show-confirmation-deletion="showConfirmationDeletion"
+        :confirmation-deletion-message="confirmationDeletionMessage"
+        :my-id="myId"
+        @remove="$emit('remove')"
       >
         <template v-slot:default="scopedProps">
           <slot
-              name="file-message-body"
-              :message="scopedProps.message"
-              :messageColors="scopedProps.messageColors"
-              :me="scopedProps.me"
+            name="file-message-body"
+            :message="scopedProps.message"
+            :messageColors="scopedProps.messageColors"
+            :me="scopedProps.me"
           >
           </slot>
         </template>
@@ -100,9 +101,9 @@
       </FileMessage>
       <TypingMessage v-else-if="message.type === 'typing'" :message-colors="messageColors" />
       <SystemMessage
-          v-else-if="message.type === 'system'"
-          :data="message.data"
-          :message-colors="messageColors"
+        v-else-if="message.type === 'system'"
+        :data="message.data"
+        :message-colors="messageColors"
       >
         <slot name="system-message-body" :message="message.data"></slot>
       </SystemMessage>
@@ -169,22 +170,22 @@ export default {
     }
   },
   computed: {
-    authorName () {
+    authorName() {
       return this.user && this.user.name
     },
-    chatImageUrl () {
+    chatImageUrl() {
       return (this.user && this.user.imageUrl) || chatIcon
     },
-    messageColors () {
+    messageColors() {
       return this.message.author === this.myId ? this.sentColorsStyle : this.receivedColorsStyle
     },
-    receivedColorsStyle () {
+    receivedColorsStyle() {
       return {
         color: this.colors.receivedMessage.text,
         backgroundColor: this.colors.receivedMessage.bg
       }
     },
-    sentColorsStyle () {
+    sentColorsStyle() {
       return {
         color: this.colors.sentMessage.text,
         backgroundColor: this.colors.sentMessage.bg
@@ -250,7 +251,9 @@ export default {
   }
 }
 
-.sc-message--text, .sc-message--file, .sc-message--emoji {
+.sc-message--text,
+.sc-message--file,
+.sc-message--emoji {
   padding: 5px 20px;
   border-radius: 6px;
   font-weight: 300;
@@ -299,6 +302,25 @@ export default {
 
       &:focus {
         outline: none;
+      }
+    }
+  }
+}
+
+.sc-message--emoji {
+  .sc-message--toolbox {
+    background: transparent!important;
+
+    button {
+      vertical-align: top;
+      background: rgb(78, 140, 255) none repeat scroll 0% 0%;
+
+      svg {
+        width: 100%;
+        padding: 3px;
+        display: block;
+        //vertical-align: top;
+        margin-bottom: auto;
       }
     }
   }
