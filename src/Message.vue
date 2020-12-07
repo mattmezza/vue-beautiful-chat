@@ -309,7 +309,7 @@ export default {
 
 .sc-message--emoji {
   .sc-message--toolbox {
-    background: transparent!important;
+    background: transparent !important;
 
     button {
       vertical-align: top;
