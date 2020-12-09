@@ -12,8 +12,6 @@
       :user="profile(message.author)"
       :colors="colors"
       :message-styling="messageStyling"
-      :show-confirmation-deletion="showConfirmationDeletion"
-      :confirmation-deletion-message="confirmationDeletionMessage"
       @remove="$emit('remove', message)"
     >
       <template v-slot:user-avatar="scopedProps">
@@ -43,8 +41,6 @@
       :user="profile(showTypingIndicator)"
       :colors="colors"
       :message-styling="messageStyling"
-      :show-confirmation-deletion="showConfirmationDeletion"
-      :confirmation-deletion-message="confirmationDeletionMessage"
     />
   </div>
 </template>
@@ -80,14 +76,6 @@ export default {
     },
     messageStyling: {
       type: Boolean,
-      required: true
-    },
-    showConfirmationDeletion: {
-      type: Boolean,
-      required: true
-    },
-    confirmationDeletionMessage: {
-      type: String,
       required: true
     }
   },

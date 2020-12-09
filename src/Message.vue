@@ -25,8 +25,6 @@
         :message="message"
         :message-colors="messageColors"
         :message-styling="messageStyling"
-        :show-confirmation-deletion="showConfirmationDeletion"
-        :confirmation-deletion-message="confirmationDeletionMessage"
         @remove="$emit('remove')"
       >
         <template v-slot:default="scopedProps">
@@ -93,14 +91,6 @@ export default {
     },
     user: {
       type: Object,
-      required: true
-    },
-    showConfirmationDeletion: {
-      type: Boolean,
-      required: true
-    },
-    confirmationDeletionMessage: {
-      type: String,
       required: true
     }
   },
@@ -201,12 +191,6 @@ export default {
   &:hover .sc-message--toolbox {
     left: -20px;
     opacity: 1;
-  }
-  &.confirm-delete:hover .sc-message--toolbox {
-    left: -90px;
-  }
-  &.confirm-delete .sc-message--toolbox {
-    width: auto;
   }
   .sc-message--toolbox {
     transition: left 0.2s ease-out 0s;

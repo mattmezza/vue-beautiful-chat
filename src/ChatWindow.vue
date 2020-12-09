@@ -19,8 +19,6 @@
       :show-typing-indicator="showTypingIndicator"
       :colors="colors"
       :always-scroll-to-bottom="alwaysScrollToBottom"
-      :show-confirmation-deletion="showConfirmationDeletion"
-      :confirmation-deletion-message="confirmationDeletionMessage"
       :message-styling="messageStyling"
       @scrollToTop="$emit('scrollToTop')"
       @remove="$emit('remove', $event)"
@@ -124,14 +122,6 @@ export default {
     },
     messageStyling: {
       type: Boolean,
-      required: true
-    },
-    showConfirmationDeletion: {
-      type: Boolean,
-      required: true
-    },
-    confirmationDeletionMessage: {
-      type: String,
       required: true
     }
   },
