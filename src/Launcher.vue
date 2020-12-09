@@ -21,8 +21,6 @@
       :is-open="isOpen"
       :show-emoji="showEmoji"
       :show-file="showFile"
-      :show-confirmation-deletion="showConfirmationDeletion"
-      :confirmation-deletion-message="confirmationDeletionMessage"
       :show-header="showHeader"
       :placeholder="placeholder"
       :show-typing-indicator="showTypingIndicator"
@@ -100,14 +98,6 @@ export default {
     showDeletion: {
       type: Boolean,
       default: false
-    },
-    showConfirmationDeletion: {
-      type: Boolean,
-      default: false
-    },
-    confirmationDeletionMessage: {
-      type: String,
-      default: 'Do you really want to delete the message?'
     },
     isOpen: {
       type: Boolean,

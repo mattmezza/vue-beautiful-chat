@@ -7,22 +7,11 @@
             <IconEdit />
           </IconBase>
         </button>
-        <div v-if="showDeletion">
-          <button
-            v-if="me && message.id != null && message.id != undefined"
-            @click="
-              ifelse(
-                showConfirmationDeletion,
-                withConfirm(confirmationDeletionMessage, () => $emit('remove')),
-                () => $emit('remove')
-              )()
-            "
-          >
-            <IconBase :color="messageColors.color" width="10" icon-name="remove">
-              <IconCross />
-            </IconBase>
-          </button>
-        </div>
+        <button v-if="showDeletion && me && message.id" @click="$emit('remove')">
+          <IconBase :color="messageColors.color" width="10" icon-name="remove">
+            <IconCross />
+          </IconBase>
+        </button>
         <slot name="text-message-toolbox" :message="message" :me="me"> </slot>
       </div>
     </template>
@@ -70,14 +59,6 @@ export default {
     messageStyling: {
       type: Boolean,
       required: true
-    },
-    showConfirmationDeletion: {
-      type: Boolean,
-      required: true
-    },
-    confirmationDeletionMessage: {
-      type: String,
-      required: true
     }
   },
   computed: {
@@ -100,17 +81,6 @@ export default {
   methods: {
     edit() {
       store.setState('editMessage', this.message)
-    },
-    ifelse(cond, funcIf, funcElse) {
-      return () => {
-        if (funcIf && cond) funcIf()
-        else if (funcElse) funcElse()
-      }
-    },
-    withConfirm(msg, func) {
-      return () => {
-        if (confirm(msg)) func()
-      }
     }
   }
 }

@@ -57,7 +57,6 @@ Vue.use(Chat)
       :showFile="true"
       :showEdition="true"
       :showDeletion="true"
-      :deletionConfirmation="true"
       :showTypingIndicator="showTypingIndicator"
       :showLauncher="true"
       :showCloseButton="true"
@@ -180,8 +179,6 @@ For more detailed examples see the demo folder.
 | showEmoji | Boolean | A bool indicating whether or not to show the emoji button
 | showFile | Boolean | A bool indicating whether or not to show the file chooser button
 | showDeletion | Boolean | A bool indicating whether or not to show the edit button for a message
-| showConfirmationDeletion | Boolean | A bool indicating whether or not to show the confirmation text when we remove a message
-| confirmationDeletionMessage | String | The message you want to show when confirming the deletion
 | showEdition | Boolean | A bool indicating whether or not to show the delete button for a message
 | showTypingIndicator | String | A string that can be set to a user's participant.id to show `typing` indicator for them
 | showHeader | Boolean | A bool indicating whether or not to show the header of chatwindow
