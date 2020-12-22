@@ -83,6 +83,7 @@ export default {
   box-sizing: border-box;
   border-radius: 50%;
   width: 50px;
+  height: 50px;
   margin-right: 5px;
   display: block;
 }
