@@ -14,7 +14,10 @@
       :message-styling="messageStyling"
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
+      :my-id="myId"
+      :message-icon-clickable="messageIconClickable"
       @remove="$emit('remove', message)"
+      @messageIconClicked="$emit('messageIconClicked', $event)"
     >
       <template v-slot:user-avatar="scopedProps">
         <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message"> </slot>
@@ -36,6 +39,14 @@
         <slot name="text-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
         </slot>
       </template>
+      <template v-slot:file-message-toolbox="scopedProps">
+        <slot name="file-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
+        </slot>
+      </template>
+      <template v-slot:emoji-message-toolbox="scopedProps">
+        <slot name="emoji-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
+        </slot>
+      </template>
     </Message>
     <Message
       v-show="showTypingIndicator !== ''"
@@ -45,6 +56,8 @@
       :message-styling="messageStyling"
       :show-confirmation-deletion="showConfirmationDeletion"
       :confirmation-deletion-message="confirmationDeletionMessage"
+      :my-id="myId"
+      :message-icon-clickable="false"
     />
   </div>
 </template>
@@ -89,6 +102,14 @@ export default {
     confirmationDeletionMessage: {
       type: String,
       required: true
+    },
+    myId: {
+      type: String,
+      required: true
+    },
+    messageIconClickable: {
+      type: Boolean,
+      required: true
     }
   },
   computed: {
@@ -97,9 +118,11 @@ export default {
     }
   },
   mounted() {
+    this.onMessageListMountedUpdated()
     this.$nextTick(this._scrollDown())
   },
   updated() {
+    this.onMessageListMountedUpdated()
     if (this.shouldScrollToBottom()) this.$nextTick(this._scrollDown())
   },
   methods: {
@@ -121,6 +144,9 @@ export default {
 
       // A profile may not be found for system messages or messages by 'me'
       return profile || {imageUrl: '', name: ''}
+    },
+    onMessageListMountedUpdated() {
+      this.$emit('messageListMountedUpdated')
     }
   }
 }

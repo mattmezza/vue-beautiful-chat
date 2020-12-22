@@ -7,23 +7,21 @@
             <IconEdit />
           </IconBase>
         </button>
-        <div v-if="showDeletion">
-          <button
-            v-if="me && message.id != null && message.id != undefined"
-            @click="
-              ifelse(
-                showConfirmationDeletion,
-                withConfirm(confirmationDeletionMessage, () => $emit('remove')),
-                () => $emit('remove')
-              )()
-            "
-          >
-            <IconBase :color="messageColors.color" width="10" icon-name="remove">
-              <IconCross />
-            </IconBase>
-          </button>
-        </div>
-        <slot name="text-message-toolbox" :message="message" :me="me"> </slot>
+        <button
+          v-if="showDeletion && me && message.id != null && message.id != undefined"
+          @click="
+            ifelse(
+              showConfirmationDeletion,
+              withConfirm(confirmationDeletionMessage, () => $emit('remove')),
+              () => $emit('remove')
+            )()
+          "
+        >
+          <IconBase :color="messageColors.color" width="10" icon-name="remove">
+            <IconCross />
+          </IconBase>
+        </button>
+        <slot name="text-message-toolbox" :message="message" :me="me"></slot>
       </div>
     </template>
     <slot :message="message" :messageText="messageText" :messageColors="messageColors" :me="me">
@@ -78,6 +76,10 @@ export default {
     confirmationDeletionMessage: {
       type: String,
       required: true
+    },
+    myId: {
+      type: String,
+      required: true
     }
   },
   computed: {
@@ -90,7 +92,7 @@ export default {
       })
     },
     me() {
-      return this.message.author === 'me'
+      return this.message.author === this.myId
     },
     isEditing() {
       return (store.state.editMessage && store.state.editMessage.id) === this.message.id

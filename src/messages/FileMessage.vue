@@ -1,30 +1,97 @@
 <template>
   <div class="sc-message--file" :style="messageColors">
-    <div class="sc-message--file-icon">
-      <img :src="data.file.url" class="sc-image" />
-    </div>
-    <div class="sc-message--file-name" :style="messageColors">
-      <a :href="data.file.url ? data.file.url : '#'" target="_blank">{{ data.file.name || '' }}</a>
-    </div>
-    <div class="sc-message--file-text" :style="messageColors">
-      {{ data.text }}
-      <p v-if="data.meta" class="sc-message--meta" :style="messageColors">
-        {{ data.meta }}
-      </p>
-    </div>
+    <template>
+      <div class="sc-message--toolbox" :style="{background: messageColors.backgroundColor}">
+        <button
+          v-if="showDeletion && me && message.id != null && message.id != undefined"
+          @click="
+            ifelse(
+              showConfirmationDeletion,
+              withConfirm(confirmationDeletionMessage, () => $emit('remove')),
+              () => $emit('remove')
+            )()
+          "
+        >
+          <IconBase :color="messageColors.color" width="10" icon-name="remove">
+            <IconCross />
+          </IconBase>
+        </button>
+        <slot name="file-message-toolbox" :message="message" :me="me"></slot>
+      </div>
+    </template>
+    <slot :message="message" :messageColors="messageColors" :me="me">
+      <div class="sc-message--file-icon">
+        <img :src="message.data.file.url" class="sc-image" />
+      </div>
+      <div class="sc-message--file-name" :style="messageColors">
+        <a :href="message.data.file.url ? message.data.file.url : '#'" target="_blank">
+          {{ message.data.file.name || '' }}
+        </a>
+      </div>
+      <div class="sc-message--file-text" :style="messageColors">
+        {{ message.data.text }}
+        <p v-if="message.data.meta" class="sc-message--meta" :style="messageColors">
+          {{ message.data.meta }}
+        </p>
+      </div>
+    </slot>
   </div>
 </template>
 
 <script>
+import IconBase from './../components/IconBase.vue'
+import IconCross from './../components/icons/IconCross.vue'
+
 export default {
+  components: {
+    IconBase,
+    IconCross
+  },
   props: {
-    data: {
+    message: {
       type: Object,
       required: true
     },
     messageColors: {
       type: Object,
       required: true
+    },
+    showDeletion: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    showConfirmationDeletion: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    confirmationDeletionMessage: {
+      type: String,
+      default: '',
+      required: false
+    },
+    myId: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    me() {
+      return this.message.author === this.myId
+    }
+  },
+  methods: {
+    ifelse(cond, funcIf, funcElse) {
+      return () => {
+        if (funcIf && cond) funcIf()
+        else if (funcElse) funcElse()
+      }
+    },
+    withConfirm(msg, func) {
+      return () => {
+        if (confirm(msg)) func()
+      }
     }
   }
 }

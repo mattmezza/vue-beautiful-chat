@@ -25,6 +25,14 @@ export default {
     userList: {
       bg: '#fff',
       text: '#212121'
+    },
+    chatList: {
+      bg: '#fff',
+      text: '#212121'
+    },
+    chatListBadge: {
+      bg: '#D32F2F',
+      text: '#fff'
     }
   },
   green: {
@@ -53,7 +61,15 @@ export default {
     userList: {
       bg: '#fff',
       text: '#212121'
-    }
+    },
+    chatList: {
+      bg: '#fff',
+      text: '#212121'
+    },
+    chatListBadge: {
+      bg: '#388E3C',
+      text: '#fff'
+    },
   },
   blue: {
     header: {
@@ -81,7 +97,15 @@ export default {
     userList: {
       bg: '#fff',
       text: '#212121'
-    }
+    },
+    chatList: {
+      bg: '#fff',
+      text: '#212121'
+    },
+    chatListBadge: {
+      bg: '#4e8cff',
+      text: '#ffffff'
+    },
   },
   dark: {
     header: {
@@ -108,6 +132,14 @@ export default {
     },
     userList: {
       bg: '#2c3e50',
+      text: '#ecf0f1'
+    },
+    chatList: {
+      bg: '#2c3e50',
+      text: '#ecf0f1'
+    },
+    chatListBadge: {
+      bg: '#95a5a6',
       text: '#ecf0f1'
     }
   }

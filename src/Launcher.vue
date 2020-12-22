@@ -7,7 +7,7 @@
       :style="{backgroundColor: colors.launcher.bg}"
       @click.prevent="isOpen ? close() : openAndFocus()"
     >
-      <div v-if="newMessagesCount > 0 && !isOpen" class="sc-new-messsages-count">
+      <div v-if="newMessagesCount > 0" class="sc-new-messsages-count">
         {{ newMessagesCount }}
       </div>
       <img v-if="isOpen" class="sc-closed-icon" :src="icons.close.img" :alt="icons.close.name" />
@@ -29,11 +29,28 @@
       :colors="colors"
       :always-scroll-to-bottom="alwaysScrollToBottom"
       :message-styling="messageStyling"
+      :multiple-chats-enabled="multipleChatsEnabled"
+      :chat-list="chatList"
+      :chat-list-title="chatListTitle"
+      :chat-list-image-url="chatListImageUrl"
+      :my-id="myId"
+      :message-list-header-title-clickable="messageListHeaderTitleClickable"
+      :chat-list-header-title-clickable="chatListHeaderTitleClickable"
+      :message-icon-clickable="messageIconClickable"
       @close="close"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
       @remove="$emit('remove', $event)"
+      @changeCurrentChat="
+        (chatID) => {
+          this.$emit('changeCurrentChat', chatID)
+        }
+      "
+      @messageListMountedUpdated="$emit('messageListMountedUpdated')"
+      @messageListHeaderTitleClicked="$emit('messageListHeaderTitleClicked')"
+      @chatListHeaderTitleClicked="$emit('chatListHeaderTitleClicked')"
+      @messageIconClicked="$emit('messageIconClicked', $event)"
     >
       <template v-slot:header>
         <slot name="header"> </slot>
@@ -56,6 +73,14 @@
       </template>
       <template v-slot:text-message-toolbox="scopedProps">
         <slot name="text-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
+        </slot>
+      </template>
+      <template v-slot:file-message-toolbox="scopedProps">
+        <slot name="file-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
+        </slot>
+      </template>
+      <template v-slot:emoji-message-toolbox="scopedProps">
+        <slot name="emoji-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
         </slot>
       </template>
     </ChatWindow>
@@ -143,11 +168,11 @@ export default {
     },
     title: {
       type: String,
-      default: () => ''
+      default: ''
     },
     titleImageUrl: {
       type: String,
-      default: () => ''
+      default: ''
     },
     onMessageWasSent: {
       type: Function,
@@ -155,11 +180,11 @@ export default {
     },
     messageList: {
       type: Array,
-      default: () => []
+      default: undefined
     },
     newMessagesCount: {
       type: Number,
-      default: () => 0
+      default: 0
     },
     placeholder: {
       type: String,
@@ -167,7 +192,7 @@ export default {
     },
     showTypingIndicator: {
       type: String,
-      default: () => ''
+      default: ''
     },
     colors: {
       type: Object,
@@ -217,13 +242,45 @@ export default {
     },
     alwaysScrollToBottom: {
       type: Boolean,
-      default: () => false
+      default: false
     },
     messageStyling: {
       type: Boolean,
-      default: () => false
+      default: false
     },
     disableUserListToggle: {
+      type: Boolean,
+      default: false
+    },
+    multipleChatsEnabled: {
+      type: Boolean,
+      default: false
+    },
+    chatList: {
+      type: Array,
+      default: () => []
+    },
+    chatListTitle: {
+      type: String,
+      default: ''
+    },
+    chatListImageUrl: {
+      type: String,
+      default: ''
+    },
+    myId: {
+      type: String,
+      default: 'me'
+    },
+    messageListHeaderTitleClickable: {
+      type: Boolean,
+      default: false
+    },
+    chatListHeaderTitleClickable: {
+      type: Boolean,
+      default: false
+    },
+    messageIconClickable: {
       type: Boolean,
       default: false
     }

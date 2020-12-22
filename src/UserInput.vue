@@ -37,7 +37,6 @@
         @focus="setInputActive(true)"
         @blur="setInputActive(false)"
         @keydown="handleKey"
-        @focusUserInput="focusUserInput()"
       ></div>
       <div class="sc-user-input--buttons">
         <div class="sc-user-input--button"></div>
@@ -140,6 +139,10 @@ export default {
     colors: {
       type: Object,
       required: true
+    },
+    myId: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -167,6 +170,7 @@ export default {
     }
   },
   mounted() {
+    this.focusUserInput()
     this.$root.$on('focusUserInput', () => {
       if (this.$refs.userInput) {
         this.focusUserInput()
@@ -202,7 +206,7 @@ export default {
       })
     },
     _submitSuggestion(suggestion) {
-      this.onSubmit({author: 'me', type: 'text', data: {text: suggestion}})
+      this.onSubmit({author: this.myId, type: 'text', data: {text: suggestion}})
     },
     _checkSubmitSuccess(success) {
       if (Promise !== undefined) {
@@ -228,7 +232,7 @@ export default {
         if (text && text.length > 0) {
           this._checkSubmitSuccess(
             this.onSubmit({
-              author: 'me',
+              author: this.myId,
               type: 'text',
               data: {text}
             })
@@ -240,7 +244,7 @@ export default {
       if (text && text.length > 0) {
         this._checkSubmitSuccess(
           this.onSubmit({
-            author: 'me',
+            author: this.myId,
             type: 'file',
             data: {text, file}
           })
@@ -248,7 +252,7 @@ export default {
       } else {
         this._checkSubmitSuccess(
           this.onSubmit({
-            author: 'me',
+            author: this.myId,
             type: 'file',
             data: {file}
           })
@@ -259,7 +263,7 @@ export default {
       const text = this.$refs.userInput.textContent
       if (text && text.length) {
         this.$emit('edit', {
-          author: 'me',
+          author: this.myId,
           type: 'text',
           id: store.state.editMessage.id,
           data: {text}
@@ -270,7 +274,7 @@ export default {
     _handleEmojiPicked(emoji) {
       this._checkSubmitSuccess(
         this.onSubmit({
-          author: 'me',
+          author: this.myId,
           type: 'emoji',
           data: {emoji}
         })
@@ -319,6 +323,7 @@ export default {
   bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
+  text-align: left;
 }
 
 .sc-user-input--text:empty:before {

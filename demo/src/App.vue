@@ -26,9 +26,22 @@
       :confirmationDeletionMessage="'Are you sure? (you can customize this message)'"
       :titleImageUrl="titleImageUrl"
       :disableUserListToggle="false"
+      :chatListImageUrl="chatListImageUrl"
+      :placeholder="placeholder"
+      :multipleChatsEnabled="multipleChatsEnabled"
+      :chatList="chatList"
+      :chatListTitle="chatListTitle"
+      :messageListHeaderTitleClickable="false"
+      :chatListHeaderTitleClickable="true"
+      :messageIconClickable="true"
       @onType="handleOnType"
       @edit="editMessage"
       @remove="removeMessage"
+      @changeCurrentChat="handleChangeCurrentChat"
+      @messageListMountedUpdated="handleMessageListMountedUpdated"
+      @messageListHeaderTitleClicked="messageListHeaderTitleClicked"
+      @chatListHeaderTitleClicked="chatListHeaderTitleClicked"
+      @messageIconClicked="messageIconClicked"
     >
       <template v-slot:text-message-toolbox="scopedProps">
         <button v-if="!scopedProps.me && scopedProps.message.type==='text'" @click.prevent="like(scopedProps.message.id)">
@@ -103,6 +116,9 @@
       :messageStyling="messageStyling"
       :onMessage="sendMessage"
       :onTyping="handleTyping"
+      :multipleChatsEnabled="multipleChatsEnabled"
+      :chatList="chatList"
+      @multipleChatsEnabledChange="handleMultipleChatsEnabledChange"
     />
     <Footer
       :chosenColor="chosenColor"
@@ -112,8 +128,7 @@
 </template>
 
 <script>
-import messageHistory from './messageHistory'
-import chatParticipants from './chatProfiles'
+import chatHistory from './messageHistory'
 import Header from './Header.vue'
 import Footer from './Footer.vue'
 import TestArea from './TestArea.vue'
@@ -128,11 +143,9 @@ export default {
   },
   data() {
     return {
-      participants: chatParticipants,
-      titleImageUrl:
-        'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
-      messageList: messageHistory,
-      newMessagesCount: 0,
+      titleImageUrl: "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+      chatListImageUrl: "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+      chatHistory: chatHistory,
       isChatOpen: false,
       showTypingIndicator: '',
       colors: null,
@@ -140,38 +153,43 @@ export default {
       chosenColor: null,
       alwaysScrollToBottom: true,
       messageStyling: true,
-      userIsTyping: false
+      userIsTyping: false,
+      placeholder: 'Write something...',
+      multipleChatsEnabled: true,
+      currentChatID: Object.keys(chatHistory)[0],
+      chatListTitle: 'My chats'
     }
   },
   created() {
     this.setColor('blue')
   },
   methods: {
-    sendMessage(text) {
+    sendMessage(text, chatID) {
       if (text.length > 0) {
-        this.newMessagesCount = this.isChatOpen
-          ? this.newMessagesCount
-          : this.newMessagesCount + 1
         this.onMessageWasSent({
           author: 'support',
           type: 'text',
           id: Math.random(),
           data: { text }
-        })
+        }, chatID)
       }
     },
-    handleTyping(text) {
+    handleTyping(text, chatID) {
       this.showTypingIndicator =
-        text.length > 0
+        text.length > 0 && (chatID === undefined || this.currentChatID == chatID)
           ? this.participants[this.participants.length - 1].id
           : ''
     },
-    onMessageWasSent(message) {
-      this.messageList = [...this.messageList, Object.assign({}, message, {id: Math.random()})]
+    onMessageWasSent(message, chatID) {
+      const msg = Object.assign({}, message, {id: Math.random(), read: (message.author === this.myId)})
+      if (chatID !== undefined) {
+        this.chatMessageList(chatID).push(msg)
+      } else {
+        this.messageList.push(msg)
+      }
     },
     openChat() {
       this.isChatOpen = true
-      this.newMessagesCount = 0
     },
     closeChat() {
       this.isChatOpen = false
@@ -204,12 +222,52 @@ export default {
       m.type = 'system';
       m.data.text = 'This message has been removed';
     },
+    handleChangeCurrentChat(newCurrentChatID) {
+      this.showTypingIndicator = ''
+      this.currentChatID = newCurrentChatID
+      const chat = this.chatHistory[this.currentChatID]
+      this.titleImageUrl = chat.imageUrl
+      this.title = chat.name
+    },
+    handleMultipleChatsEnabledChange(newMultipleChatsEnabled) {
+      this.multipleChatsEnabled = newMultipleChatsEnabled
+      this.currentChatID = Object.keys(this.chatHistory)[0]
+    },
+    handleMessageListMountedUpdated() {
+      if (this.isChatOpen) {
+        this.markCurrentChatRead()
+      }
+    },
+    messageListHeaderTitleClicked() {
+      console.log("messageListHeaderTitleClicked")
+    },
+    chatListHeaderTitleClicked() {
+      console.log("chatListHeaderTitleClicked")
+    },
+    messageIconClicked(user) {
+      console.log("messageIconClicked user:")
+      console.log(user)
+    },
     like(id){
       const m = this.messageList.findIndex(m => m.id === id);
       var msg = this.messageList[m];
       msg.liked = !msg.liked;
       this.$set(this.messageList, m, msg);
-    }
+    },
+    markCurrentChatRead() {
+      this.messageList.forEach((msg) => {
+        if (!msg.read) {
+          msg.read = true
+        }
+      })
+    },
+    chatMessageList(chatID) {
+      const chat = this.chatHistory[chatID];
+      if (chat === undefined) {
+        return undefined;
+      }
+      return chat.messages;
+    },
   },
   computed: {
     linkColor() {
@@ -219,10 +277,53 @@ export default {
     },
     backgroundColor() {
       return this.chosenColor === 'dark' ? this.colors.messageList.bg : '#fff'
+    },
+    messageList() {
+      const chat = this.chatHistory[this.currentChatID];
+      if (chat === undefined) {
+        return undefined;
+      }
+      return chat.messages;
+    },
+    participants() {
+      const chat = this.chatHistory[this.currentChatID];
+      if (chat === undefined) {
+        return [];
+      }
+      return chat.participants;
+    },
+    chatList() {
+      var chats = []
+      Object.entries(this.chatHistory).forEach(([chatKey, chat]) => {
+        var unreadCount = 0
+        chat.messages.forEach((msg) => {
+          if (!msg.read) {
+            unreadCount++
+          }
+        })
+        chats.push(
+          {
+            id: chatKey,
+            name: chat.name,
+            imageUrl: chat.imageUrl,
+            unreadCount: unreadCount
+          }
+        )
+      })
+      return chats
+    },
+    newMessagesCount() {
+      var totalUnreadCount = 0
+      this.chatList.forEach((chat) => {
+        totalUnreadCount += chat.unreadCount
+      })
+      return totalUnreadCount
     }
   },
   mounted(){
-    this.messageList.forEach(x=>x.liked = false);
+    Object.entries(this.chatHistory).forEach(([_, chat]) => {
+      chat.messages.forEach(msg => msg.liked = false)
+    })
   }
 }
 </script>

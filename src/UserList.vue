@@ -56,5 +56,6 @@ export default {
 .user-element {
   font-size: 20px;
   vertical-align: middle;
+  text-align: left;
 }
 </style>
