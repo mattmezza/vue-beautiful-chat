@@ -60,7 +60,7 @@ export default {
 .sc-emoji-picker {
   position: absolute;
   bottom: 50px;
-  right: 0px;
+  right: 12px;
   width: 330px;
   max-height: 215px;
   box-shadow: 0px 7px 40px 2px rgba(148, 149, 150, 0.3);
@@ -99,7 +99,6 @@ export default {
 .sc-emoji-picker--category-title {
   min-width: 100%;
   color: #b8c3ca;
-  font-weight: 200;
   font-size: 13px;
   margin: 5px;
   letter-spacing: 1px;

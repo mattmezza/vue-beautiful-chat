@@ -36,7 +36,6 @@ export default {
   font-weight: 300;
   font-size: 14px;
   line-height: 1.4;
-  /* white-space: pre-wrap; */
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
