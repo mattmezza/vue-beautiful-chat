@@ -1,76 +1,68 @@
 <template>
   <div class="sc-header" :style="{background: colors.header.bg, color: colors.header.text}">
     <slot>
-      <img class="sc-header--img" :src="imageUrl" alt="" v-if="imageUrl" />
-      <div v-if="!disableUserListToggle" class="sc-header--title enabled" @click="toggleUserList"> {{title}} </div>
-      <div v-else class="sc-header--title"> {{title}} </div>
-    </slot>
-      <div v-if="showCloseButton" class="sc-header--close-button" @click="onClose">
-        <img :src="icons.close.img" :alt="icons.close.name" />
+      <img v-if="titleImageUrl" class="sc-header--img" :src="titleImageUrl" alt="" />
+      <div v-if="!disableUserListToggle" class="sc-header--title enabled" @click="toggleUserList">
+        {{ title }}
       </div>
+      <div v-else class="sc-header--title">{{ title }}</div>
+    </slot>
+    <div v-if="showCloseButton" class="sc-header--close-button" @click="$emit('close')">
+      <img :src="icons.close.img" :alt="icons.close.name" />
+    </div>
   </div>
 </template>
-<script>
 
+<script>
+import {mapState} from './store/'
 import CloseIcon from './assets/close-icon-big.png'
 
 export default {
   props: {
-    icons:{
+    icons: {
       type: Object,
       default: function () {
         return {
-          close:{
+          close: {
             img: CloseIcon,
-            name: 'default',
-          },
+            name: 'default'
+          }
         }
       }
     },
-    imageUrl: {
-      type: String,
-      required: true
-    },
     title: {
-      type: String
-    },
-    onClose: {
-      type: Function,
+      type: String,
       required: true
     },
     colors: {
       type: Object,
       required: true
-    },
-    disableUserListToggle: {
-      type: Boolean,
-      default: false
-    },
-    showCloseButton: {
-      type: Boolean,
-      default: false
-    }
-  },
-  methods: {
-    toggleUserList() {
-      this.inUserList = !this.inUserList
-      this.$emit("userList", this.inUserList)
     }
   },
   data() {
     return {
       inUserList: false
     }
+  },
+  computed: {
+    ...mapState(['disableUserListToggle', 'titleImageUrl', 'showCloseButton'])
+  },
+  methods: {
+    toggleUserList() {
+      this.inUserList = !this.inUserList
+      this.$emit('userList', this.inUserList)
+    }
   }
 }
 </script>
+
 <style scoped>
 .sc-header {
   min-height: 75px;
   border-top-left-radius: 9px;
   border-top-right-radius: 9px;
   padding: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,.2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -96,7 +88,7 @@ export default {
 }
 
 .sc-header--title.enabled:hover {
-  box-shadow: 0px 2px 5px rgba(0.2, 0.2, 0.5, .1);
+  box-shadow: 0px 2px 5px rgba(0.2, 0.2, 0.5, 0.1);
 }
 
 .sc-header--close-button {
@@ -111,7 +103,7 @@ export default {
 }
 
 .sc-header--close-button:hover {
-  box-shadow: 0px 2px 5px rgba(0.2, 0.2, 0.5, .1);
+  box-shadow: 0px 2px 5px rgba(0.2, 0.2, 0.5, 0.1);
 }
 
 .sc-header--close-button img {

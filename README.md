@@ -40,7 +40,7 @@ import Chat from 'vue-beautiful-chat'
 Vue.use(Chat)
 ```
 
-```html
+```vue
 <template>
   <div>
     <beautiful-chat
@@ -55,11 +55,14 @@ Vue.use(Chat)
       :open="openChat"
       :showEmoji="true"
       :showFile="true"
+      :showEdition="true"
+      :showDeletion="true"
       :showTypingIndicator="showTypingIndicator"
-	  :showLauncher="true"
-	  :showCloseButton="true"
+      :showLauncher="true"
+      :showCloseButton="true"
       :colors="colors"
       :alwaysScrollToBottom="alwaysScrollToBottom"
+      :disableUserListToggle="false"
       :messageStyling="messageStyling"
       @onType="handleOnType"
       @edit="editMessage" />
@@ -67,33 +70,10 @@ Vue.use(Chat)
 </template>
 ```
 ```javascript
-import CloseIcon from 'vue-beautiful-chat/src/assets/close-icon.png'
-import OpenIcon from 'vue-beautiful-chat/src/assets/logo-no-bg.svg'
-import FileIcon from 'vue-beautiful-chat/src/assets/file.svg'
-import CloseIconSvg from 'vue-beautiful-chat/src/assets/close.svg'
-
 export default {
   name: 'app',
   data() {
     return {
-      icons:{
-        open:{
-          img: OpenIcon,
-          name: 'default',
-        },
-        close:{
-          img: CloseIcon,
-          name: 'default',
-        },
-        file:{
-          img: FileIcon,
-          name: 'default',
-        },
-        closeSvg:{
-          img: CloseIconSvg,
-          name: 'default',
-        },
-      },
       participants: [
         {
           id: 'user1',
@@ -165,7 +145,7 @@ export default {
     handleScrollToTop () {
       // called when the user scrolls message list to top
       // leverage pagination for loading another page of messages
-  	},
+    },
     handleOnType () {
       console.log('Emit typing event')
     },
@@ -174,6 +154,7 @@ export default {
       m.isEdited = true;
       m.data.text = message.data.text;
     }
+  }
 }
 ```
 
@@ -190,14 +171,18 @@ For more detailed examples see the demo folder.
 |prop | type   | description |
 |-----|--------|---------------|
 | *participants | [agentProfile] | Represents your product or service's customer service agents. Fields for each agent: id, name, imageUrl|
-| *onMessageWasSent | function(message) | Called when a message a message is sent with a message object as an argument. |
+| *onMessageWasSent | function(message) | Called when a message is sent with the message object as an argument. |
 | *isOpen | Boolean | The bool indicating whether or not the chat window should be open. |
 | *open | Function | The function passed to the component that mutates the above mentioned bool toggle for opening the chat |
 | *close | Function | The function passed to the component that mutates the above mentioned bool toggle for closing the chat |
 | messageList | [message] | An array of message objects to be rendered as a conversation. |
 | showEmoji | Boolean | A bool indicating whether or not to show the emoji button
 | showFile | Boolean | A bool indicating whether or not to show the file chooser button
-| showTypingIndicator | Boolean | A bool indicating whether or not to show the `typing` indicator
+| showDeletion | Boolean | A bool indicating whether or not to show the edit button for a message
+| showEdition | Boolean | A bool indicating whether or not to show the delete button for a message
+| showTypingIndicator | String | A string that can be set to a user's participant.id to show `typing` indicator for them
+| showHeader | Boolean | A bool indicating whether or not to show the header of chatwindow
+| disableUserListToggle | Boolean | A bool indicating whether or not to allow the user to toggle between message list and participants list
 | colors | Object | An object containing the specs of the colors used to paint the component. [See here](#faq)
 | messageStyling | Boolean | A bool indicating whether or not to enable `msgdown` support for message formatting in chat. [See here](#faq)
 
@@ -214,9 +199,9 @@ For more detailed examples see the demo folder.
 
 Replacing default header.
 
-``` html
-<template v-slot:header> 
-  🤔 Good chat between {{participants.map(m=>m.name).join(' & ')}} 
+```vue
+<template v-slot:header>
+  🤔 Good chat between {{participants.map(m=>m.name).join(' & ')}}
 </template>
 ```
 
@@ -225,7 +210,7 @@ Replacing default header.
 Replacing user avatar.
 Params: `message`, `user`
 
-``` html
+```vue
 <template v-slot:user-avatar="{ message, user }">
   <div style="border-radius:50%; color: pink; font-size: 15px; line-height:25px; text-align:center;background: tomato; width: 25px !important; height: 25px !important; min-width: 30px;min-height: 30px;margin: 5px; font-weight:bold" v-if="message.type === 'text' && user && user.name">
     {{user.name.toUpperCase()[0]}}
@@ -238,7 +223,7 @@ Params: `message`, `user`
 Change markdown for text message.
 Params: `message`
 
-``` html
+```vue
 <template v-slot:text-message-body="{ message }">
   <small style="background:red" v-if="message.meta">
     {{message.meta}}
@@ -252,7 +237,7 @@ Params: `message`
 Change markdown for system message.
 Params: `message`
 
-``` html
+```vue
 <template v-slot:system-message-body="{ message }">
   [System]: {{message.text}}
 </template>
@@ -262,7 +247,7 @@ Params: `message`
 
 Message objects are rendered differently depending on their type. Currently, only text, emoji and file types are supported. Each message object has an `author` field which can have the value 'me' or the id of the corresponding agent.
 
-``` javascript
+```javascript
 {
   author: 'support',
   type: 'text',
@@ -290,13 +275,12 @@ Message objects are rendered differently depending on their type. Currently, onl
   id: 1, // or text '1'
   isEdited: false,
   data: {
-	file: {
-		name: 'file.mp3',
-		url: 'https:123.rf/file.mp3'
-	  }
-	}
+    file: {
+      name: 'file.mp3',
+      url: 'https:123.rf/file.mp3'
+    }
+  }
 }
-
 ```
 
 
@@ -322,10 +306,20 @@ When sending a message, you can provide a set of sentences that will be displaye
 <details><summary>How to get the demo working?</summary>
 <p>
 
-- `cd vue-beautiful-chat`
-- `yarn watch` # this starts the compiler so everytime you edit files they get compiled
-- `cd demo`
-- `yarn dev` # this starts a web server on localhost:8080 so the demo shows up - it also watches for the demo files changes
+```
+git clone git@github.com:mattmezza/vue-beautiful-chat.git
+cd vue-beautiful-chat
+yarn install  # this installs the package dependencies
+yarn watch  # this watches files to continuously compile them
+```
+
+Open a new shell in the same folder
+
+```
+cd demo
+yarn install # this installs the demo dependencies
+yarn dev # this starts the dev server at http://localhost:8080
+```
 
 </p>
 </details>
@@ -350,7 +344,6 @@ When sending a message, you can provide a set of sentences that will be displaye
 - When initializing the component, pass an object specifying the colors used:
 
 ```javascript
-
 let redColors = {
   header: {
     bg: '#D32F2F',
@@ -375,10 +368,12 @@ let redColors = {
     text: '#212121'
   }
 }
+```
 
+```vue
 <beautiful-chat
-      ...
-      :colors="redColors" />
+  ...
+  :colors="redColors" />
 ```
 
 This is the red variant. Please check [this file](https://github.com/mattmezza/vue-beautiful-chat/tree/master/demo/src/colors.js) for the list of variants shown in the demo page online.
@@ -395,5 +390,8 @@ Good news, message formatting is already added for you. You can enable it by set
 </p>
 </details>
 
- # Join the team 
- Do you want to collaborate? Join the project at https://crowdforge.io/projects/581
+#### Contributors
+
+[@a-kriya](https://github.com/a-kriya), [@mattmezza](https://github.com/mattmezza)
+
+_Please contact us if you would like to join as a contributor_.

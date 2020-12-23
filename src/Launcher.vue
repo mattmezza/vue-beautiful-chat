@@ -1,50 +1,56 @@
 <template>
   <div>
-    <div v-if="showLauncher" class="sc-launcher" :class="{opened: isOpen}" @click.prevent="isOpen ? close() : openAndFocus()" :style="{backgroundColor: colors.launcher.bg}">
+    <div
+      v-if="showLauncher"
+      class="sc-launcher"
+      :class="{opened: isOpen}"
+      :style="{backgroundColor: colors.launcher.bg}"
+      @click.prevent="isOpen ? close() : openAndFocus()"
+    >
       <div v-if="newMessagesCount > 0 && !isOpen" class="sc-new-messsages-count">
-        {{newMessagesCount}}
+        {{ newMessagesCount }}
       </div>
-      <img v-if="isOpen" class="sc-closed-icon" :src="icons.close.img"  :alt="icons.close.name" />
-      <img v-else class="sc-open-icon" :src="icons.open.img"  :alt="icons.open.name" />
+      <img v-if="isOpen" class="sc-closed-icon" :src="icons.close.img" :alt="icons.close.name" />
+      <img v-else class="sc-open-icon" :src="icons.open.img" :alt="icons.open.name" />
     </div>
     <ChatWindow
-      :showLauncher="showLauncher"
-      :showCloseButton="showCloseButton"
-      :messageList="messageList"
-      :onUserInputSubmit="onMessageWasSent"
+      :message-list="messageList"
+      :on-user-input-submit="onMessageWasSent"
       :participants="participants"
       :title="chatWindowTitle"
-      :titleImageUrl="titleImageUrl"
-      :isOpen="isOpen"
-      :onClose="close"
-      :showEmoji="showEmoji"
-      :showFile="showFile"
+      :is-open="isOpen"
+      :show-emoji="showEmoji"
+      :show-file="showFile"
+      :show-header="showHeader"
       :placeholder="placeholder"
-      :showTypingIndicator="showTypingIndicator"
+      :show-typing-indicator="showTypingIndicator"
       :colors="colors"
-      :alwaysScrollToBottom="alwaysScrollToBottom"
-      :messageStyling="messageStyling"
-      :disableUserListToggle="disableUserListToggle"
+      :always-scroll-to-bottom="alwaysScrollToBottom"
+      :message-styling="messageStyling"
+      @close="close"
       @scrollToTop="$emit('scrollToTop')"
       @onType="$emit('onType')"
       @edit="$emit('edit', $event)"
       @remove="$emit('remove', $event)"
     >
       <template v-slot:header>
-        <slot name="header">
-        </slot>
+        <slot name="header"> </slot>
       </template>
       <template v-slot:user-avatar="scopedProps">
-        <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message">
-        </slot>
+        <slot name="user-avatar" :user="scopedProps.user" :message="scopedProps.message"> </slot>
       </template>
       <template v-slot:text-message-body="scopedProps">
-        <slot name="text-message-body" :message="scopedProps.message" :messageText="scopedProps.messageText" :messageColors="scopedProps.messageColors" :me="scopedProps.me">
+        <slot
+          name="text-message-body"
+          :message="scopedProps.message"
+          :messageText="scopedProps.messageText"
+          :messageColors="scopedProps.messageColors"
+          :me="scopedProps.me"
+        >
         </slot>
       </template>
       <template v-slot:system-message-body="scopedProps">
-        <slot name="system-message-body" :message="scopedProps.message">
-        </slot>
+        <slot name="system-message-body" :message="scopedProps.message"> </slot>
       </template>
       <template v-slot:text-message-toolbox="scopedProps">
         <slot name="text-message-toolbox" :message="scopedProps.message" :me="scopedProps.me">
@@ -53,31 +59,43 @@
     </ChatWindow>
   </div>
 </template>
+
 <script>
+import store from './store/'
 import ChatWindow from './ChatWindow.vue'
 
 import CloseIcon from './assets/close-icon.png'
 import OpenIcon from './assets/logo-no-bg.svg'
 
 export default {
+  components: {
+    ChatWindow
+  },
   props: {
-    icons:{
+    icons: {
       type: Object,
-      required: false,
       default: function () {
         return {
-            open: {
-              img: OpenIcon,
-              name: 'default',
-            },
-            close: {
-              img: CloseIcon,
-              name: 'default',
-            },
+          open: {
+            img: OpenIcon,
+            name: 'default'
+          },
+          close: {
+            img: CloseIcon,
+            name: 'default'
+          }
         }
       }
     },
     showEmoji: {
+      type: Boolean,
+      default: false
+    },
+    showEdition: {
+      type: Boolean,
+      default: false
+    },
+    showDeletion: {
       type: Boolean,
       default: false
     },
@@ -102,6 +120,10 @@ export default {
       default: true
     },
     showCloseButton: {
+      type: Boolean,
+      default: true
+    },
+    showHeader: {
       type: Boolean,
       default: true
     },
@@ -139,24 +161,23 @@ export default {
     },
     colors: {
       type: Object,
-      required: false,
-      validator: c =>
-        'header' in c
-        && 'bg' in c.header
-        && 'text' in c.header
-        && 'launcher' in c
-        && 'bg' in c.launcher
-        && 'messageList' in c
-        && 'bg' in c.messageList
-        && 'sentMessage' in c
-        && 'bg' in c.sentMessage
-        && 'text' in c.sentMessage
-        && 'receivedMessage' in c
-        && 'bg' in c.receivedMessage
-        && 'text' in c.receivedMessage
-        && 'userInput' in c
-        && 'bg' in c.userInput
-        && 'text' in c.userInput,
+      validator: (c) =>
+        'header' in c &&
+        'bg' in c.header &&
+        'text' in c.header &&
+        'launcher' in c &&
+        'bg' in c.launcher &&
+        'messageList' in c &&
+        'bg' in c.messageList &&
+        'sentMessage' in c &&
+        'bg' in c.sentMessage &&
+        'text' in c.sentMessage &&
+        'receivedMessage' in c &&
+        'bg' in c.receivedMessage &&
+        'text' in c.receivedMessage &&
+        'userInput' in c &&
+        'bg' in c.userInput &&
+        'text' in c.userInput,
       default: function () {
         return {
           header: {
@@ -195,34 +216,38 @@ export default {
     disableUserListToggle: {
       type: Boolean,
       default: false
-    },
-  },
-  methods: {
-    openAndFocus() {
-      this.open();
-      this.$root.$emit('focusUserInput');
     }
   },
   computed: {
     chatWindowTitle() {
-      if (this.title !== '') {
-        return this.title
-      }
+      if (this.title !== '') return this.title
 
-      if (this.participants.length === 0) {
-        return 'You'
-      } else if (this.participants.length > 1) {
-        return 'You, ' + this.participants[0].name + ' & others'
-      } else {
-        return 'You & ' + this.participants[0].name
+      if (this.participants.length === 0) return 'You'
+      if (this.participants.length > 1) return 'You, ' + this.participants[0].name + ' & others'
+
+      return 'You & ' + this.participants[0].name
+    }
+  },
+  watch: {
+    $props: {
+      deep: true,
+      immediate: true,
+      handler(props) {
+        for (const prop in props) {
+          store.setState(prop, props[prop])
+        }
       }
     }
   },
-  components: {
-    ChatWindow
+  methods: {
+    openAndFocus() {
+      this.open()
+      this.$root.$emit('focusUserInput')
+    }
   }
 }
 </script>
+
 <style scoped>
 .sc-launcher {
   width: 60px;
@@ -285,7 +310,7 @@ export default {
 }
 
 .sc-launcher:hover {
-  box-shadow: 0 0px 27px 1.5px rgba(0,0,0,0.2);
+  box-shadow: 0 0px 27px 1.5px rgba(0, 0, 0, 0.2);
 }
 
 .sc-new-messsages-count {
@@ -296,7 +321,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   border-radius: 50%;
-	width: 22px;
+  width: 22px;
   height: 22px;
   background: #ff4646;
   color: white;
