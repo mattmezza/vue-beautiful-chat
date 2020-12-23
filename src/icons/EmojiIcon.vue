@@ -3,40 +3,23 @@
     <EmojiPicker v-if="isActive" :on-emoji-picked="onEmojiPicked" :on-blur="_handlePickerBlur" />
     <button class="sc-user-input--emoji-icon-wrapper" @click.prevent="_openPicker">
       <svg
-        id="Layer_2"
         class="sc-user-input--emoji-icon"
         :class="{active: isActive}"
-        version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        x="0px"
-        y="0px"
-        width="37.393px"
-        height="37.393px"
-        viewBox="0 0 37.393 37.393"
-        enableBackground="new 0 0 37.393 37.393"
+        width="20"
+        height="20"
+        viewBox="0 0 37.4 37.4"
       >
-        <g>
-          <path
-            :style="{fill: color}"
-            d="M18.696,37.393C8.387,37.393,0,29.006,0,18.696C0,8.387,8.387,0,18.696,0c10.31,0,18.696,8.387,18.696,18.696
-              C37.393,29.006,29.006,37.393,18.696,37.393z M18.696,2C9.49,2,2,9.49,2,18.696c0,9.206,7.49,16.696,16.696,16.696
-              c9.206,0,16.696-7.49,16.696-16.696C35.393,9.49,27.902,2,18.696,2z"
-          />
-        </g>
-        <g>
-          <circle cx="12.379" cy="14.359" r="1.938" :style="{fill: color}" />
-        </g>
-        <g>
-          <circle cx="24.371" cy="14.414" r="1.992" :style="{fill: color}" />
-        </g>
-        <g>
-          <path
-            :style="{fill: color}"
-            d="M18.035,27.453c-5.748,0-8.342-4.18-8.449-4.357c-0.286-0.473-0.135-1.087,0.338-1.373
-              c0.471-0.286,1.084-0.136,1.372,0.335c0.094,0.151,2.161,3.396,6.74,3.396c4.713,0,7.518-3.462,7.545-3.497
-              c0.343-0.432,0.973-0.504,1.405-0.161c0.433,0.344,0.505,0.973,0.161,1.405C27.009,23.374,23.703,27.453,18.035,27.453z"
-          />
-        </g>
+        <path
+          :style="{fill: color}"
+          d="M18.7 37.4C8.39 37.4 0 29 0 18.7 0 8.39 8.39 0 18.7 0 29 0 37.4 8.39 37.4 18.7c0 10.3-8.4 18.7-18.7 18.7zm0-35.4C9.49 2 2 9.49 2 18.7c0 9.2 7.49 16.7 16.7 16.7 9.2 0 16.7-7.5 16.7-16.7C35.4 9.49 27.9 2 18.7 2z"
+        />
+        <circle :style="{fill: color}" cx="12.38" cy="14.36" r="1.94" />
+        <circle :style="{fill: color}" cx="24.37" cy="14.41" r="1.99" />
+        <path
+          :style="{fill: color}"
+          d="M18.04 27.45a10 10 0 01-8.45-4.35 1 1 0 011.7-1.04c.1.15 2.17 3.4 6.75 3.4 4.7 0 7.51-3.47 7.54-3.5a1 1 0 011.57 1.24c-.14.17-3.45 4.25-9.11 4.25z"
+        />
       </svg>
     </button>
   </div>
@@ -77,6 +60,7 @@ export default {
 
 <style scoped>
 .sc-user-input--emoji-icon-wrapper {
+  display: block;
   background: none;
   border: none;
   padding: 0px;
@@ -89,17 +73,7 @@ export default {
 }
 
 .sc-user-input--emoji-icon {
-  height: 18px;
+  display: block;
   cursor: pointer;
-  align-self: center;
-}
-
-.sc-user-input--emoji-icon-wrapper:focus .sc-user-input--emoji-icon path,
-.sc-user-input--emoji-icon-wrapper:focus .sc-user-input--emoji-icon circle,
-.sc-user-input--emoji-icon.active path,
-.sc-user-input--emoji-icon.active circle,
-.sc-user-input--emoji-icon:hover path,
-.sc-user-input--emoji-icon:hover circle {
-  filter: contrast(15%);
 }
 </style>

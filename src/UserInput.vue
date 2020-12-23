@@ -40,7 +40,6 @@
         @focusUserInput="focusUserInput()"
       ></div>
       <div class="sc-user-input--buttons">
-        <div class="sc-user-input--button"></div>
         <div v-if="showEmoji && !isEditing" class="sc-user-input--button">
           <EmojiIcon :on-emoji-picked="_handleEmojiPicked" :color="colors.userInput.text" />
         </div>
@@ -50,7 +49,7 @@
         <div v-if="isEditing" class="sc-user-input--button">
           <UserInputButton
             :color="colors.userInput.text"
-            tooltip="cancel"
+            tooltip="Cancel"
             @click.native.prevent="_editFinish"
           >
             <IconCross />
@@ -286,7 +285,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .sc-user-input {
   min-height: 55px;
   margin: 0px;
@@ -300,23 +299,18 @@ export default {
 }
 
 .sc-user-input--text {
-  width: 300px;
-  resize: none;
-  border: none;
+  flex-grow: 1;
   outline: none;
   border-bottom-left-radius: 10px;
   box-sizing: border-box;
   padding: 18px;
   font-size: 15px;
-  font-weight: 400;
   line-height: 1.33;
   white-space: pre-wrap;
   word-wrap: break-word;
   color: #565867;
   -webkit-font-smoothing: antialiased;
   max-height: 200px;
-  overflow: scroll;
-  bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -324,62 +318,25 @@ export default {
 .sc-user-input--text:empty:before {
   content: attr(placeholder);
   display: block; /* For Firefox */
-  /* color: rgba(86, 88, 103, 0.3); */
   filter: contrast(15%);
   outline: none;
   cursor: text;
 }
 
 .sc-user-input--buttons {
-  width: 100px;
-  position: absolute;
-  right: 30px;
-  height: 100%;
   display: flex;
-  justify-content: flex-end;
-}
-
-.sc-user-input--button:first-of-type {
-  width: 40px;
+  align-items: center;
+  padding: 0 4px;
 }
 
 .sc-user-input--button {
-  width: 30px;
-  height: 55px;
-  margin-left: 2px;
-  margin-right: 2px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  margin: 0 4px;
 }
 
 .sc-user-input.active {
   box-shadow: none;
   background-color: white;
   box-shadow: 0px -5px 20px 0px rgba(150, 165, 190, 0.2);
-}
-
-.sc-user-input--button label {
-  position: relative;
-  height: 24px;
-  padding-left: 3px;
-  cursor: pointer;
-}
-
-.sc-user-input--button label:hover path {
-  fill: rgba(86, 88, 103, 1);
-}
-
-.sc-user-input--button input {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  z-index: 99999;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-  overflow: hidden;
 }
 
 .file-container {

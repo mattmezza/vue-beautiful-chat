@@ -121,10 +121,10 @@ export default {
 </script>
 
 <style lang="scss">
+/* TODO: re-org and scope this style block */
+
 .sc-message {
-  width: 300px;
-  margin: auto;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
   display: flex;
   .sc-message--edited {
     opacity: 0.7;
@@ -173,63 +173,6 @@ export default {
   .sc-message {
     width: 80%;
   }
-}
-
-.sc-message--text {
-  padding: 5px 20px;
-  border-radius: 6px;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 1.4;
-  position: relative;
-  -webkit-font-smoothing: subpixel-antialiased;
-  .sc-message--text-body {
-    .sc-message--text-content {
-      white-space: pre-wrap;
-    }
-  }
-  &:hover .sc-message--toolbox {
-    left: -20px;
-    opacity: 1;
-  }
-  .sc-message--toolbox {
-    transition: left 0.2s ease-out 0s;
-    white-space: normal;
-    opacity: 0;
-    position: absolute;
-    left: 0px;
-    width: 25px;
-    top: 0;
-    button {
-      background: none;
-      border: none;
-      padding: 0px;
-      margin: 0px;
-      outline: none;
-      width: 100%;
-      text-align: center;
-      cursor: pointer;
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-}
-.sc-message--content.sent .sc-message--text {
-  color: white;
-  background-color: #4e8cff;
-  max-width: calc(100% - 120px);
-  word-wrap: break-word;
-}
-
-.sc-message--text code {
-  font-family: 'Courier New', Courier, monospace !important;
-}
-
-.sc-message--content.received .sc-message--text {
-  color: #263238;
-  background-color: #f4f7f9;
-  margin-right: 40px;
 }
 
 .tooltip {
