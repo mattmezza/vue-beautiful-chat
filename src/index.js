@@ -1,3 +1,4 @@
+import Device from '@/device.js'
 import Launcher from './Launcher.vue'
 import VTooltip from 'v-tooltip'
 
@@ -29,6 +30,8 @@ const Plugin = {
      */
     Vue.component(this.componentName, Launcher)
     Vue.use(VTooltip)
+
+    Vue.prototype.$isMobile = Device.mobile()
   }
 }
 

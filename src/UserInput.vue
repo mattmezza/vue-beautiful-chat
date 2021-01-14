@@ -202,7 +202,14 @@ export default {
     },
     focusUserInput() {
       this.$nextTick(() => {
-        this.$refs.userInput.focus()
+        if (this.$isMobile) {
+          // On mobile device, just scroll to the bottom to show the new message control, don't move
+          // focus there, because it would show keyboard. This is how other chat apps do it.
+          window.scrollTo(0, document.body.scrollHeight)
+        } else {
+          // On desktop or tablet, move focus to the new message control, so user can start typing a message right away.
+          this.$refs.userInput.focus()
+        }
       })
     },
     _submitSuggestion(suggestion) {
