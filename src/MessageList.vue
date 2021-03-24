@@ -103,6 +103,10 @@ export default {
       return this.alwaysScrollToBottom || this.canScrollDown(this.$refs.scrollList)
     },
     canScrollDown(element) {
+      if (!element.clientHeight) {
+        return false
+      }
+
       return element.scrollHeight - Math.abs(element.scrollTop) !== element.clientHeight
     },
     profile(author) {
