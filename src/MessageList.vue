@@ -100,9 +100,10 @@ export default {
       }
     },
     shouldScrollToBottom() {
-      const scrollTop = this.$refs.scrollList.scrollTop
-      const scrollable = scrollTop > this.$refs.scrollList.scrollHeight - 600
-      return this.alwaysScrollToBottom || scrollable
+      return this.alwaysScrollToBottom || this.canScrollDown(this.$refs.scrollList)
+    },
+    canScrollDown(element) {
+      return element.scrollHeight - Math.abs(element.scrollTop) !== element.clientHeight
     },
     profile(author) {
       const profile = this.participants.find((profile) => profile.id === author)
