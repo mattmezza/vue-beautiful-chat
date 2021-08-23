@@ -1,13 +1,13 @@
 {
-  "name": "vue-beautiful-chat",
+  "name": "imp-vue-beautiful-chat",
   "version": "2.5.0",
-  "description": "A simple and beautiful Vue chat component backend agnostic.",
-  "main": "./dist/vue-beautiful-chat.umd.min.js",
-  "repository": "https://github.com/mattmezza/vue-beautiful-chat.git",
-  "author": "Matteo Merola <mattmezza@gmail.com>",
+  "description": "A simple and beautiful Vue chat component backend agnostic. (Forked from https://github.com/mattmezza/vue-beautiful-chat.git)",
+  "main": "./dist/imp-vue-beautiful-chat.umd.min.js",
+  "repository": "https://github.com/kzhang-dsg/imp-vue-beautiful-chat.git",
+  "author": "Matteo Merola <mattmezza@gmail.com>, Kan Zhang",
   "license": "MIT",
   "scripts": {
-    "build": "vue-cli-service build --target lib --name vue-beautiful-chat --formats umd-min src/index.js",
+    "build": "vue-cli-service build --target lib --name imp-vue-beautiful-chat --formats umd-min src/index.js",
     "lint": "vue-cli-service lint",
     "watch": "npm run build -- --mode development --watch",
     "prepublishOnly": "npm run build"
@@ -53,7 +53,7 @@
     "vue-js-chat"
   ],
   "bugs": {
-    "url": "https://github.com/mattmezza/vue-beautiful-chat/issues"
+    "url": "https://github.com/kzhang-dsg/imp-vue-beautiful-chat/issues"
   },
   "husky": {
     "hooks": {
