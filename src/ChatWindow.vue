@@ -46,6 +46,7 @@
     </MessageList>
     <UserInput
       v-if="!showUserList"
+      :icons="icons"
       :show-emoji="showEmoji"
       :on-submit="onUserInputSubmit"
       :suggestions="getSuggestions()"
@@ -63,6 +64,11 @@ import Header from './Header.vue'
 import MessageList from './MessageList.vue'
 import UserInput from './UserInput.vue'
 import UserList from './UserList.vue'
+
+import CloseIcon from './assets/close-icon.png'
+import OpenIcon from './assets/logo-no-bg.svg'
+import FileIcon from './assets/file.svg'
+import CloseIconSvg from './assets/close.svg'
 
 export default {
   components: {
@@ -103,6 +109,29 @@ export default {
     isOpen: {
       type: Boolean,
       default: () => false
+    },
+    icons: {
+      type: Object,
+      default: function () {
+        return {
+          open: {
+            img: OpenIcon,
+            name: 'default'
+          },
+          close: {
+            img: CloseIcon,
+            name: 'default'
+          },
+          file: {
+            img: FileIcon,
+            name: 'default'
+          },
+          deleteFile: {
+            img: CloseIconSvg,
+            name: 'default'
+          }
+        }
+      }
     },
     placeholder: {
       type: String,

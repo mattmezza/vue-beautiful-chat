@@ -15,8 +15,8 @@
       {{ file.name }}
       <span class="delete-file-message" @click="cancelFile()"
         ><img
-          :src="icons.closeSvg.img"
-          :alt="icons.closeSvg.name"
+          :src="icons.deleteFile.img"
+          :alt="icons.deleteFile.name"
           height="10"
           title="Remove the file"
       /></span>
@@ -83,6 +83,8 @@ import EmojiIcon from './icons/EmojiIcon.vue'
 import FileIcons from './icons/FileIcons.vue'
 import UserInputButton from './UserInputButton.vue'
 import Suggestions from './Suggestions.vue'
+import CloseIcon from './assets/close-icon.png'
+import OpenIcon from './assets/logo-no-bg.svg'
 import FileIcon from './assets/file.svg'
 import CloseIconSvg from './assets/close.svg'
 import store from './store/'
@@ -105,11 +107,19 @@ export default {
       type: Object,
       default: function () {
         return {
+          open: {
+            img: OpenIcon,
+            name: 'default'
+          },
+          close: {
+            img: CloseIcon,
+            name: 'default'
+          },
           file: {
             img: FileIcon,
             name: 'default'
           },
-          closeSvg: {
+          deleteFile: {
             img: CloseIconSvg,
             name: 'default'
           }

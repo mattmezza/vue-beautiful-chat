@@ -5,6 +5,7 @@
       :always-scroll-to-bottom="alwaysScrollToBottom"
       :close="closeChat"
       :colors="colors"
+      :icons="icons"
       :is-open="isChatOpen"
       :message-list="messageList"
       :message-styling="messageStyling"
@@ -126,6 +127,24 @@ export default {
       titleImageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
       messageList: messageHistory,
       newMessagesCount: 0,
+      icons: {
+        open: {
+          img: 'https://akveo.github.io/eva-icons/outline/svg/message-circle-outline.svg',
+          name: 'Open Chat'
+        },
+        close: {
+          img: 'https://akveo.github.io/eva-icons/outline/svg/close-circle-outline.svg',
+          name: 'Close Chat'
+        },
+        file: {
+          img: 'https://akveo.github.io/eva-icons/outline/svg/file-text-outline.svg',
+          name: 'File'
+        },
+        deleteFile: {
+          img: 'https://akveo.github.io/eva-icons/outline/svg/trash-2-outline.svg',
+          name: 'Delete'
+        }
+      },
       isChatOpen: false,
       showTypingIndicator: '',
       colors: null,

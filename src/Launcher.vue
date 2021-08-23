@@ -19,6 +19,7 @@
       :participants="participants"
       :title="chatWindowTitle"
       :is-open="isOpen"
+      :icons="icons"
       :show-emoji="showEmoji"
       :show-file="showFile"
       :show-header="showHeader"
@@ -66,6 +67,8 @@ import ChatWindow from './ChatWindow.vue'
 
 import CloseIcon from './assets/close-icon.png'
 import OpenIcon from './assets/logo-no-bg.svg'
+import FileIcon from './assets/file.svg'
+import CloseIconSvg from './assets/close.svg'
 
 export default {
   components: {
@@ -82,6 +85,14 @@ export default {
           },
           close: {
             img: CloseIcon,
+            name: 'default'
+          },
+          file: {
+            img: FileIcon,
+            name: 'default'
+          },
+          deleteFile: {
+            img: CloseIconSvg,
             name: 'default'
           }
         }
