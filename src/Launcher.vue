@@ -20,6 +20,7 @@
       :title="chatWindowTitle"
       :is-open="isOpen"
       :show-emoji="showEmoji"
+      :send-emojis-directly="sendEmojisDirectly"
       :show-file="showFile"
       :show-header="showHeader"
       :placeholder="placeholder"
@@ -89,7 +90,11 @@ export default {
     },
     showEmoji: {
       type: Boolean,
-      default: false
+      default: () => false
+    },
+    sendEmojisDirectly: {
+      type: Boolean,
+      default: () => true
     },
     showEdition: {
       type: Boolean,

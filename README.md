@@ -177,6 +177,7 @@ For more detailed examples see the demo folder.
 | *close | Function | The function passed to the component that mutates the above mentioned bool toggle for closing the chat |
 | messageList | [message] | An array of message objects to be rendered as a conversation. |
 | showEmoji | Boolean | A bool indicating whether or not to show the emoji button
+| sendEmojisDirectly | Boolean | A bool indicating whether or not to send emojis directly as a message as opposed to inserting them into the user input
 | showFile | Boolean | A bool indicating whether or not to show the file chooser button
 | showDeletion | Boolean | A bool indicating whether or not to show the edit button for a message
 | showEdition | Boolean | A bool indicating whether or not to show the delete button for a message
