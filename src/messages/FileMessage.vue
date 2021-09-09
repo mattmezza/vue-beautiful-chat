@@ -1,7 +1,7 @@
 <template>
-  <div class="sc-message--file" :style="messageColors">
-    <div class="sc-message--file-icon">
-      <img :src="data.file.url" class="sc-image" />
+  <div class='sc-message--file' :style="messageColors">
+    <div class='sc-message--file-icon'>
+      <a :href="data.file.url ? data.file.url : '#'"><img v-if="data.file.type" :src="data.file.type.includes('image') ? data.file.url : getNonImageFileIcon(data.file.type)" :class="{ 'sc-image': true, 'sc-file-icon': !data.file.type.includes('image') }"></a>
     </div>
     <div class="sc-message--file-name" :style="messageColors">
       <a :href="data.file.url ? data.file.url : '#'" target="_blank">{{ data.file.name || '' }}</a>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import mime from 'mime-types'
+
 export default {
   props: {
     data: {
@@ -25,6 +27,27 @@ export default {
     messageColors: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    getNonImageFileIcon (contentType) {
+      let fileExtension = mime.extension(contentType);
+      try {
+        switch (fileExtension) {
+          case 'docx':
+            fileExtension = 'doc'
+            break
+          case 'mpga':
+            fileExtension = 'mp3'
+            break
+          default:
+            break
+        }
+        return require('vue-beautiful-chat/src/assets/file_icons/' + fileExtension + '.svg')
+      } catch (e) {
+        return require('vue-beautiful-chat/src/assets/file_icons/file.svg')
+      }
+      
     }
   }
 }
@@ -54,6 +77,11 @@ export default {
 .sc-image {
   max-width: 100%;
   min-width: 100%;
+}
+
+.sc-file-icon {
+  min-width: 50%;
+  max-width: 50%;
 }
 
 .sc-message--file-text {
