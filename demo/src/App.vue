@@ -3,6 +3,7 @@
     <Header :chosen-color="chosenColor" :colors="colors" />
     <beautiful-chat
       :always-scroll-to-bottom="alwaysScrollToBottom"
+      :title="'客服'"
       :close="closeChat"
       :colors="colors"
       :is-open="isChatOpen"
@@ -14,13 +15,14 @@
       :participants="participants"
       :show-close-button="true"
       :show-launcher="true"
+      :show-header="true"
       :show-emoji="true"
       :show-file="true"
       :show-typing-indicator="showTypingIndicator"
       :show-edition="true"
       :show-deletion="true"
       :title-image-url="titleImageUrl"
-      :disable-user-list-toggle="false"
+      :disable-user-list-toggle="true"
       @onType="handleOnType"
       @edit="editMessage"
       @remove="removeMessage"
@@ -50,7 +52,7 @@
           <template v-if="scopedProps.message.liked">👍</template>
         </p>
       </template>
-      <template v-slot:system-message-body="{message}"> [System]: {{ message.text }} </template>
+      <template v-slot:system-message-body="{message}"> {{ message.text }} </template>
     </beautiful-chat>
     <p class="text-center toggle">
       <a v-if="!isChatOpen" :style="{color: linkColor}" href="#" @click.prevent="openChat()"
@@ -183,8 +185,7 @@ export default {
     showStylingInfo() {
       this.$modal.show('dialog', {
         title: 'Info',
-        text:
-          'You can use *word* to <strong>boldify</strong>, /word/ to <em>emphasize</em>, _word_ to <u>underline</u>, `code` to <code>write = code;</code>, ~this~ to <del>delete</del> and ^sup^ or ¡sub¡ to write <sup>sup</sup> and <sub>sub</sub>'
+        text: 'You can use *word* to <strong>boldify</strong>, /word/ to <em>emphasize</em>, _word_ to <u>underline</u>, `code` to <code>write = code;</code>, ~this~ to <del>delete</del> and ^sup^ or ¡sub¡ to write <sup>sup</sup> and <sub>sub</sub>'
       })
     },
     messageStylingToggled(e) {
