@@ -21,3 +21,5 @@ yarn-error.log*
 
 # Misc
 .ghnpmpkgtoken
+package-lock.json
+yarn.lock
