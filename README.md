@@ -65,6 +65,7 @@ Vue.use(Chat)
       :disableUserListToggle="false"
       :messageStyling="messageStyling"
       @onType="handleOnType"
+      @scrollToTop="handleScrollToTop"
       @edit="editMessage" />
   </div>
 </template>
@@ -144,9 +145,12 @@ export default {
     },
     handleScrollToTop () {
       // called when the user scrolls message list to top
+      // you have to capture this event through the component
       // leverage pagination for loading another page of messages
+      console.log('Chat screen top')
     },
     handleOnType () {
+     // you have to capture this event through the component
       console.log('Emit typing event')
     },
     editMessage(message){
