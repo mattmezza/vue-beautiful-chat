@@ -16,10 +16,10 @@
     "dist/*"
   ],
   "dependencies": {
-    "autolinker": "^1.8.3",
+    "autolinker": "^3.14.0",
     "emoji-js": "^3.4.0",
     "escape-goat": "^1.3.0",
-    "imagemin": "^6.1.0",
+    "imagemin": "^8.0.1",
     "kind-of": "6.0.3",
     "minimist": "1.2.3",
     "msgdown": "^1.0.2",
