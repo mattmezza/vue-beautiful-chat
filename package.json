@@ -41,7 +41,7 @@
     "husky": "^4.3.0",
     "lint-staged": "^10.4.2",
     "node-forge": "^0.10.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "prettier": "^2.0.2",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
