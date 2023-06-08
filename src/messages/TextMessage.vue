@@ -123,7 +123,7 @@ export default {
         outline: none;
       }
     }
-    & /deep/ svg {
+    ::v-deep svg {
       margin-left: 5px;
     }
   }
